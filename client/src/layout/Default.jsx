@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/index.jsx";
 import Sidebar from "../components/sidebar/index.jsx";
 import Footer from "../components/footer/Footer.jsx";
-import routes from "routes.js";
+import routes from "../routes.jsx";
 
 export default function Default(props) {
   const { ...rest } = props;
