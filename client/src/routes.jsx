@@ -1,7 +1,9 @@
 import React from "react";
+import {MdPointOfSale} from 'react-icons/md'
 
 // Admin Imports
 import MainDashboard from "./pages/admin/default";
+import POS from "./pages/pos";
 // import NFTMarketplace from "views/admin/marketplace";
 // import Profile from "views/admin/profile";
 // import DataTables from "views/admin/tables";
@@ -26,6 +28,13 @@ const routes = [
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
+  },
+  {
+    name: "POS",
+    layout: "/admin",
+    path: "pos",
+    icon: <MdPointOfSale className="h-6 w-6" />,
+    component: <POS />,
   },
   // {
   //   name: "NFT Marketplace",

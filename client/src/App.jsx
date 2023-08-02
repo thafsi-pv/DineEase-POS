@@ -6,12 +6,12 @@ import LockScreen from "./pages/lockscreen/LockScreen.jsx";
 const App = () => {
   return (
     <>
-      <LockScreen>
+      {/* <LockScreen> */}
         <Routes>
           <Route path="admin/*" element={<AdminLayout />} />
           {/* <Route path="/" element={<Navigate to="/admin" replace />} /> */}
         </Routes>
-      </LockScreen>
+      {/* </LockScreen> */}
     </>
     // <AdminLayout />
   );
