@@ -58,7 +58,7 @@ export default function Default(props) {
 
   document.documentElement.dir = "ltr";
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full max-h-screen">
      <div className="flex-0 w-16"> <Sidebar open={open} onClose={() => setOpen(false)} /></div>
       {/* Navbar & Main Content */}
       <div className="h-full  bg-lightPrimary dark:!bg-navy-900 flex-1 ">

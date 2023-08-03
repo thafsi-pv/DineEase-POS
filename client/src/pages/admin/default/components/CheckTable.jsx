@@ -40,13 +40,13 @@ const CheckTable = (props) => {
     <Card extra={"w-full h-full sm:overflow-auto px-6"}>
       <header className="relative flex items-center justify-between pt-4">
         <div className="text-xl font-bold text-navy-700 dark:text-white">
-          Check Table
+          Selected Items
         </div>
 
         <CardMenu />
       </header>
 
-      <div className="mt-8 overflow-x-scroll xl:overflow-x-hidden">
+      <div className="mt-8 overflow-x-scroll overflow-y-scroll h-full">
         <table
           {...getTableProps()}
           className="w-full"
