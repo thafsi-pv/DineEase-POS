@@ -5,6 +5,9 @@ import CheckTable from "../admin/default/components/CheckTable";
 import { columnsDataCheck } from "../admin/default/variables/columnsData";
 import tableDataCheck from "../admin/tables/variables/tableDataCheck.json";
 import Card from "../../components/card";
+import { handlePayment } from "../../utils/payment";
+import { BsFillCreditCardFill } from "react-icons/bs";
+import { FaRupeeSign } from "react-icons/fa";
 
 function index() {
   return (
@@ -18,6 +21,9 @@ function index() {
               </div>
               <div className="flex w-full">
                 <DropDownReactSelect ph="Select Category" />
+              </div>
+              <div className="flex w-full">
+                <DropDownReactSelect ph="Select Customer" />
               </div>
             </div>
             <div className="w-full flex flex-wrap  h-full">
@@ -152,13 +158,16 @@ function index() {
             </header>
             <div className="flex justify-center w-full gap-2 pt-3">
               <div className="flex-1">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
+                <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2">
+                  <FaRupeeSign />
                   Cash
                 </button>
               </div>
               <div className="flex-1">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full ">
-                  Online
+                <button
+                  class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2"
+                  onClick={() => handlePayment(280.5)}>
+                  <BsFillCreditCardFill /> <p>Card</p>
                 </button>
               </div>
             </div>
