@@ -1,0 +1,155 @@
+{
+  "hotel_name": "Delicious Delights Hotel",
+  "menu": {
+    "vegetarian": [
+      {
+        "id": 1,
+        "name": "Veggie Burger",
+        "image_url": "https://assets.epicurious.com/photos/5e4c65cfd57b3b000872c652/4:3/w_3604,h_2703,c_limit/VeggieBurger_RECIPE_IG_021320_516_VOG_final.jpg",
+        "category": "Burgers",
+        "sub_items": [
+          {
+            "id": 101,
+            "name": "Veggie Patty",
+            "image_url": "https://example.com/images/veggie_patty.jpg",
+            "category": "Patties",
+            "sub_items": null
+          },
+          {
+            "id": 102,
+            "name": "Whole Wheat Bun",
+            "image_url": "https://example.com/images/whole_wheat_bun.jpg",
+            "category": "Buns",
+            "sub_items": null
+          },
+          {
+            "id": 103,
+            "name": "Lettuce",
+            "image_url": "https://example.com/images/lettuce.jpg",
+            "category": "Vegetables",
+            "sub_items": null
+          },
+          {
+            "id": 104,
+            "name": "Tomato",
+            "image_url": "https://example.com/images/tomato.jpg",
+            "category": "Vegetables",
+            "sub_items": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Margherita Pizza",
+        "image_url": "https://example.com/images/margherita_pizza.jpg",
+        "category": "Pizzas",
+        "sub_items": [
+          {
+            "id": 201,
+            "name": "Pizza Dough",
+            "image_url": "https://example.com/images/pizza_dough.jpg",
+            "category": "Dough",
+            "sub_items": null
+          },
+          {
+            "id": 202,
+            "name": "Tomato Sauce",
+            "image_url": "https://example.com/images/tomato_sauce.jpg",
+            "category": "Sauces",
+            "sub_items": null
+          },
+          {
+            "id": 203,
+            "name": "Mozzarella Cheese",
+            "image_url": "https://example.com/images/mozzarella_cheese.jpg",
+            "category": "Cheese",
+            "sub_items": null
+          },
+          {
+            "id": 204,
+            "name": "Basil Leaves",
+            "image_url": "https://example.com/images/basil_leaves.jpg",
+            "category": "Herbs",
+            "sub_items": null
+          }
+        ]
+      }
+    ],
+    "non_vegetarian": [
+      {
+        "id": 201,
+        "name": "Chicken Sandwich",
+        "image_url": "https://cdn.cdnparenting.com/articles/2020/02/25180347/175320194-1024x700.webp",
+        "category": "Sandwiches",
+        "sub_items": [
+          {
+            "id": 301,
+            "name": "Grilled Chicken",
+            "image_url": "https://example.com/images/grilled_chicken.jpg",
+            "category": "Meat",
+            "sub_items": null
+          },
+          {
+            "id": 302,
+            "name": "Burger Bun",
+            "image_url": "https://example.com/images/burger_bun.jpg",
+            "category": "Buns",
+            "sub_items": null
+          },
+          {
+            "id": 303,
+            "name": "Lettuce",
+            "image_url": "https://example.com/images/lettuce.jpg",
+            "category": "Vegetables",
+            "sub_items": null
+          },
+          {
+            "id": 304,
+            "name": "Mayonnaise",
+            "image_url": "https://example.com/images/mayonnaise.jpg",
+            "category": "Condiments",
+            "sub_items": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Fish Tacos",
+        "image_url": "https://example.com/images/fish_tacos.jpg",
+        "category": "Tacos",
+        "sub_items": [
+          {
+            "id": 401,
+            "name": "Grilled Fish",
+            "image_url": "https://example.com/images/grilled_fish.jpg",
+            "category": "Seafood",
+            "sub_items": null
+          },
+          {
+            "id": 402,
+            "name": "Corn Tortilla",
+            "image_url": "https://example.com/images/corn_tortilla.jpg",
+            "category": "Tortillas",
+            "sub_items": null
+          },
+          {
+            "id": 403,
+            "name": "Cabbage Slaw",
+            "image_url": "https://example.com/images/cabbage_slaw.jpg",
+            "category": "Salads",
+            "sub_items": null
+          },
+          {
+            "id": 404,
+            "name": "Avocado Slices",
+            "image_url": "https://example.com/images/avocado_slices.jpg",
+            "category": "Vegetables",
+            "sub_items": null
+          }
+        ]
+      }
+    ]
+  }
+}
+
+  

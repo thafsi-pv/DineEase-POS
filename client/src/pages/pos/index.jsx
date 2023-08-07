@@ -8,8 +8,10 @@ import Card from "../../components/card";
 import { handlePayment } from "../../utils/payment";
 import { BsFillCreditCardFill } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
+//import menu from "../../const/menu.json";
 
 function index() {
+  //console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu)
   return (
     <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[700px] 3xl:h-[700px]  overflow-hidden mt-5">
       <div class="grid grid-cols-5 gap-4 relative h-full  dark:!bg-navy-900 ">
