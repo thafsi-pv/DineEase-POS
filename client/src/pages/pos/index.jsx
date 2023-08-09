@@ -11,7 +11,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import menu from "../../const/menu.json";
 
 function index() {
-  //console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu)
+  console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu.restaurant_items);
   return (
     <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[700px] 3xl:h-[700px]  overflow-hidden mt-5">
       <div class="grid grid-cols-5 gap-4 relative h-full  dark:!bg-navy-900 ">
@@ -29,99 +29,17 @@ function index() {
               </div>
             </div>
             <div className="w-full flex flex-wrap  h-full">
-              <div className="w-1/6 p-2">
+              {menu.restaurant_items.map((item) => {
+                return (
+                  <div key={item.id} className="w-1/6 p-2">
+                    <ImageCard item={item}/>
+                  </div>
+                );
+              })}
+
+              {/* <div className="w-1/6 p-2">
                 <ImageCard />
-              </div>
-              <div className="w-1/6 p-2 ">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
-              <div className="w-1/6 p-2">
-                <ImageCard />
-              </div>
+              </div> */}
             </div>
           </div>
         </Card>

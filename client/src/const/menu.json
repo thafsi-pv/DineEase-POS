@@ -1,155 +1,394 @@
 {
-  "hotel_name": "Delicious Delights Hotel",
-  "menu": {
-    "vegetarian": [
-      {
-        "id": 1,
-        "name": "Veggie Burger",
-        "image_url": "https://assets.epicurious.com/photos/5e4c65cfd57b3b000872c652/4:3/w_3604,h_2703,c_limit/VeggieBurger_RECIPE_IG_021320_516_VOG_final.jpg",
-        "category": "Burgers",
-        "sub_items": [
-          {
-            "id": 101,
-            "name": "Veggie Patty",
-            "image_url": "https://example.com/images/veggie_patty.jpg",
-            "category": "Patties",
-            "sub_items": null
-          },
-          {
-            "id": 102,
-            "name": "Whole Wheat Bun",
-            "image_url": "https://example.com/images/whole_wheat_bun.jpg",
-            "category": "Buns",
-            "sub_items": null
-          },
-          {
-            "id": 103,
-            "name": "Lettuce",
-            "image_url": "https://example.com/images/lettuce.jpg",
-            "category": "Vegetables",
-            "sub_items": null
-          },
-          {
-            "id": 104,
-            "name": "Tomato",
-            "image_url": "https://example.com/images/tomato.jpg",
-            "category": "Vegetables",
-            "sub_items": null
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "Margherita Pizza",
-        "image_url": "https://example.com/images/margherita_pizza.jpg",
-        "category": "Pizzas",
-        "sub_items": [
-          {
-            "id": 201,
-            "name": "Pizza Dough",
-            "image_url": "https://example.com/images/pizza_dough.jpg",
-            "category": "Dough",
-            "sub_items": null
-          },
-          {
-            "id": 202,
-            "name": "Tomato Sauce",
-            "image_url": "https://example.com/images/tomato_sauce.jpg",
-            "category": "Sauces",
-            "sub_items": null
-          },
-          {
-            "id": 203,
-            "name": "Mozzarella Cheese",
-            "image_url": "https://example.com/images/mozzarella_cheese.jpg",
-            "category": "Cheese",
-            "sub_items": null
-          },
-          {
-            "id": 204,
-            "name": "Basil Leaves",
-            "image_url": "https://example.com/images/basil_leaves.jpg",
-            "category": "Herbs",
-            "sub_items": null
-          }
-        ]
-      }
-    ],
-    "non_vegetarian": [
-      {
-        "id": 201,
-        "name": "Chicken Sandwich",
-        "image_url": "https://cdn.cdnparenting.com/articles/2020/02/25180347/175320194-1024x700.webp",
-        "category": "Sandwiches",
-        "sub_items": [
-          {
-            "id": 301,
-            "name": "Grilled Chicken",
-            "image_url": "https://example.com/images/grilled_chicken.jpg",
-            "category": "Meat",
-            "sub_items": null
-          },
-          {
-            "id": 302,
-            "name": "Burger Bun",
-            "image_url": "https://example.com/images/burger_bun.jpg",
-            "category": "Buns",
-            "sub_items": null
-          },
-          {
-            "id": 303,
-            "name": "Lettuce",
-            "image_url": "https://example.com/images/lettuce.jpg",
-            "category": "Vegetables",
-            "sub_items": null
-          },
-          {
-            "id": 304,
-            "name": "Mayonnaise",
-            "image_url": "https://example.com/images/mayonnaise.jpg",
-            "category": "Condiments",
-            "sub_items": null
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "Fish Tacos",
-        "image_url": "https://example.com/images/fish_tacos.jpg",
-        "category": "Tacos",
-        "sub_items": [
-          {
-            "id": 401,
-            "name": "Grilled Fish",
-            "image_url": "https://example.com/images/grilled_fish.jpg",
-            "category": "Seafood",
-            "sub_items": null
-          },
-          {
-            "id": 402,
-            "name": "Corn Tortilla",
-            "image_url": "https://example.com/images/corn_tortilla.jpg",
-            "category": "Tortillas",
-            "sub_items": null
-          },
-          {
-            "id": 403,
-            "name": "Cabbage Slaw",
-            "image_url": "https://example.com/images/cabbage_slaw.jpg",
-            "category": "Salads",
-            "sub_items": null
-          },
-          {
-            "id": 404,
-            "name": "Avocado Slices",
-            "image_url": "https://example.com/images/avocado_slices.jpg",
-            "category": "Vegetables",
-            "sub_items": null
-          }
-        ]
-      }
-    ]
-  }
+  "restaurant_items": [
+    {
+      "id": 1,
+      "name": "Margherita Pizza",
+      "unit_rate": 12.99,
+      "image_url": "https://simplyhomecooked.com/wp-content/uploads/2023/04/Margherita-Pizza-3.jpg",
+      "main_category_name": "Pizzas",
+      "sub_category_name": "Classic",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Chicken Alfredo Pasta",
+      "unit_rate": 14.99,
+      "image_url": "https://thefoodcharlatan.com/wp-content/uploads/2020/08/Homemade-Chicken-Fettuccine-Alfredo-10.jpg",
+      "main_category_name": "Pasta",
+      "sub_category_name": "Chicken",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Grilled Salmon",
+      "unit_rate": 18.99,
+      "image_url": "https://hips.hearstapps.com/hmg-prod/images/how-to-grill-salmon-recipe1-1655870645.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*",
+      "main_category_name": "Seafood",
+      "sub_category_name": "Grilled",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Vegetable Stir-Fry",
+      "unit_rate": 10.99,
+      "image_url": "https://www.thecookierookie.com/wp-content/uploads/2023/02/featured-vegetable-stir-fry-recipe.jpg",
+      "main_category_name": "Vegetarian",
+      "sub_category_name": "Stir-Fry",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Cheeseburger",
+      "unit_rate": 8.99,
+      "image_url": "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42.jpg",
+      "main_category_name": "Burgers",
+      "sub_category_name": "Classic",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Caesar Salad",
+      "unit_rate": 7.99,
+      "image_url": "https://natashaskitchen.com/wp-content/uploads/2019/01/Caesar-Salad-Recipe-3.jpg",
+      "main_category_name": "Salads",
+      "sub_category_name": "Green",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Mango Smoothie",
+      "unit_rate": 4.49,
+      "image_url": "https://www.cubesnjuliennes.com/wp-content/uploads/2022/09/Strawberry-Mango-Smoothie-Recipe.jpg",
+      "main_category_name": "Beverages",
+      "sub_category_name": "Smoothies",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Chocolate Brownie",
+      "unit_rate": 5.99,
+      "image_url": "https://www.recipetineats.com/wp-content/uploads/2016/08/Brownies_0.jpg",
+      "main_category_name": "Desserts",
+      "sub_category_name": "Sweet",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Beef Tacos",
+      "unit_rate": 9.99,
+      "image_url": "https://joyfoodsunshine.com/wp-content/uploads/2022/04/mexian-ground-beef-tacos-recipe-9.jpg",
+      "main_category_name": "Mexican",
+      "sub_category_name": "Tacos",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Chicken Biryani",
+      "unit_rate": 12.99,
+      "image_url": "https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg",
+      "main_category_name": "Rice Dishes",
+      "sub_category_name": "Spicy",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Fresh Fruit Platter",
+      "unit_rate": 9.99,
+      "image_url": "https://quichemygrits.com/wp-content/uploads/2021/10/Fresh-Fruit-Platter.jpg",
+      "main_category_name": "Appetizers",
+      "sub_category_name": "Fruit",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Classic Pancakes",
+      "unit_rate": 6.99,
+      "image_url": "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/c3235163-5697-4911-84e9-633c78c9a35b/Derivates/c15df8ba-50ba-4d77-8292-bac5014b9cb0.jpg",
+      "main_category_name": "Breakfast",
+      "sub_category_name": "Pancakes",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Spaghetti Carbonara",
+      "unit_rate": 11.99,
+      "image_url": "https://www.modernhoney.com/wp-content/uploads/2023/02/Spaghetti-Carbonara-3-crop-scaled.jpg",
+      "main_category_name": "Pasta",
+      "sub_category_name": "Creamy",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Hawaiian Pizza",
+      "unit_rate": 13.99,
+      "image_url": "https://www.bowlofdelicious.com/wp-content/uploads/2020/01/Hawaiian-Pizza-3.jpg",
+      "main_category_name": "Pizzas",
+      "sub_category_name": "Specialty",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Grilled Vegetable Platter",
+      "unit_rate": 10.99,
+      "image_url": "https://realfoodbydad.com/wp-content/uploads/2019/05/Grilled-Veggie-Platter-Real-Food-by-Dad-683x1024.jpg",
+      "main_category_name": "Appetizers",
+      "sub_category_name": "Vegetable",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Iced Coffee",
+      "unit_rate": 3.99,
+      "image_url": "https://www.whiskaffair.com/wp-content/uploads/2020/12/Iced-Vanilla-Latte-2-3-500x500.jpg",
+      "main_category_name": "Beverages",
+      "sub_category_name": "Cold Drinks",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Mushroom Risotto",
+      "unit_rate": 10.99,
+      "image_url": "https://www.smalltownwoman.com/wp-content/uploads/2020/08/Mushroom-Risotto-DSC_2603-Recipe-Card.jpg",
+      "main_category_name": "Rice Dishes",
+      "sub_category_name": "Creamy",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Chicken Quesadilla",
+      "unit_rate": 8.99,
+      "image_url": "https://www.spendwithpennies.com/wp-content/uploads/2020/01/Chicken-Quesadillas-1.jpg",
+      "main_category_name": "Mexican",
+      "sub_category_name": "Appetizers",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Cheesecake",
+      "unit_rate": 6.99,
+      "image_url": "https://baranbakery.com/wp-content/uploads/2022/09/Biscoff-Cheesecake-17-720x720.jpg",
+      "main_category_name": "Desserts",
+      "sub_category_name": "Sweet",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Club Sandwich",
+      "unit_rate": 10.99,
+      "image_url": "https://realfood.tesco.com/media/images/RFO-1400x919-ChickenClubSandwich-0ee77c05-5a77-49ac-a3bd-4d45e3b4dca7-0-1400x919.jpg",
+      "main_category_name": "Sandwiches",
+      "sub_category_name": "Classic",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Veggie Wrap",
+      "unit_rate": 9.99,
+      "image_url": "https://eatplant-based.com/wp-content/uploads/2014/12/Veggie-Wraps.jpg",
+      "main_category_name": "Sandwiches",
+      "sub_category_name": "Vegetarian",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Tofu Stir-Fry",
+      "unit_rate": 11.99,
+      "image_url": "https://rainbowplantlife.com/wp-content/uploads/2023/01/tofu-stir-fry-cover-photo-1-of-1.jpg",
+      "main_category_name": "Vegetarian",
+      "sub_category_name": "Stir-Fry",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Pepperoni Pizza",
+      "unit_rate": 14.99,
+      "image_url": "https://media.istockphoto.com/id/521403691/pl/zdj%C4%99cie/hot-pyszne-pizza-pepperoni.jpg?s=1024x1024&w=is&k=20&c=mKy3BuLLsTrz7v_WOqhGiJnmCxHqLjqxQDo-yHbPfB0=",
+      "main_category_name": "Pizzas",
+      "sub_category_name": "Meat",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Chocolate Milkshake",
+      "unit_rate": 5.49,
+      "image_url": "https://bakingmischief.com/wp-content/uploads/2019/07/chocolate-milkshake-square.jpg",
+      "main_category_name": "Beverages",
+      "sub_category_name": "Shakes",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Lemon Garlic Shrimp",
+      "unit_rate": 16.99,
+      "image_url": "https://www.wellplated.com/wp-content/uploads/2019/05/Garlic-Butter-Shrimp-recipe.jpg",
+      "main_category_name": "Seafood",
+      "sub_category_name": "Grilled",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Greek Salad",
+      "unit_rate": 8.99,
+      "image_url": "https://www.modernhoney.com/wp-content/uploads/2023/03/Greek-Salad-2-scaled.jpg",
+      "main_category_name": "Salads",
+      "sub_category_name": "Mediterranean",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Caramel Flan",
+      "unit_rate": 6.99,
+      "image_url": "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/32121D5E-D3DF-4FD9-BE6E-7EB53562A1DE/Derivates/02DCA6F3-23D3-4F25-92B2-EAEF2A6606F3.jpg",
+      "main_category_name": "Desserts",
+      "sub_category_name": "Sweet",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Spicy Buffalo Wings",
+      "unit_rate": 9.99,
+      "image_url": "https://www.allrecipes.com/thmb/GwdML2o-xsFGnHTEp-uy7RWMEOc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/166638-baked-buffalo-wings-ddmfs-beauty-3x4-90787930d20b402e9dde79c22fced332.jpg",
+      "main_category_name": "Appetizers",
+      "sub_category_name": "Chicken",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Veggie Biryani",
+      "unit_rate": 11.99,
+      "image_url": "https://thebellyrulesthemind.net/wp-content/uploads/2018/09/Instant-pot-vegan-vegetable-biryani-recipe-5-720x720.png",
+      "main_category_name": "Rice Dishes",
+      "sub_category_name": "Vegetarian",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Pineapple Upside-Down Cake",
+      "unit_rate": 7.99,
+      "image_url": "https://www.cookwithmanali.com/wp-content/uploads/2014/04/Pineapple-Upside-Down-Cake-notitle-cwm-500x375.jpg",
+      "main_category_name": "Desserts",
+      "sub_category_name": "Sweet",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    }
+  ]
 }
-
-  
