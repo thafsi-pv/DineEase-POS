@@ -8,7 +8,7 @@ import Card from "../../components/card";
 import { handlePayment } from "../../utils/payment";
 import { BsFillCreditCardFill } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
-//import menu from "../../const/menu.json";
+import menu from "../../const/menu.json";
 
 function index() {
   //console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu)
