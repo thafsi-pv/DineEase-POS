@@ -39,3 +39,10 @@ input:checked.defaultCheckbox::before {
 	  opacity: 1;
 	}
   }
+
+  /* Global styles or your component's CSS */
+.modal-open {
+	overflow: hidden;
+  }
+  
+  

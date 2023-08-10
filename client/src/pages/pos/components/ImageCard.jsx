@@ -12,7 +12,7 @@ function ImageCard({item}) {
           </div> */}
 
           <img
-            className="object-fill rounded-t-2xl h-28 w-50"
+            className="object-fill rounded-t-2xl h-24 w-50"
             src={item.image_url}
             alt=""
           />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageCard from "./components/ImageCard";
 import DropDownReactSelect from "../../components/dropdown/DropDownReactSelect";
 import CheckTable from "../admin/default/components/CheckTable";
@@ -9,9 +9,26 @@ import { handlePayment } from "../../utils/payment";
 import { BsFillCreditCardFill } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
 import menu from "../../const/menu.json";
+import Modal from "../../components/modal/Modal";
 
 function index() {
   console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu.restaurant_items);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalItem, setModalItem] = useState(null);
+  console.log("🚀 ~ file: index.jsx:19 ~ index ~ modalItem:", modalItem)
+
+  const openModal = (item) => {
+    setIsModalOpen(true);
+    setModalItem(item);
+    document.body.classList.add("modal-open"); // Add class to body
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.classList.remove("modal-open"); // Remove class from body
+  };
+
   return (
     <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[700px] 3xl:h-[700px]  overflow-hidden mt-5">
       <div class="grid grid-cols-5 gap-4 relative h-full  dark:!bg-navy-900 ">
@@ -31,8 +48,11 @@ function index() {
             <div className="w-full flex flex-wrap  h-full">
               {menu.restaurant_items.map((item) => {
                 return (
-                  <div key={item.id} className="w-1/6 p-2">
-                    <ImageCard item={item}/>
+                  <div
+                    key={item.id}
+                    className="w-1/6 p-2"
+                    onClick={() => openModal(item)}>
+                    <ImageCard item={item} />
                   </div>
                 );
               })}
@@ -94,6 +114,8 @@ function index() {
           </Card>
         </div>
       </div>
+      {/* Render the modal component */}
+      <Modal isOpen={isModalOpen} onClose={closeModal} item={modalItem} />
     </div>
   );
 }

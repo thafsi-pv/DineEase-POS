@@ -8,9 +8,9 @@
       "main_category_name": "Pizzas",
       "sub_category_name": "Classic",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "mini", "name": "Mini", "rate": 10.99 },
+        { "id": "half", "name": "Half", "rate": 14.99 },
+        { "id": "full", "name": "Full", "rate": 22.99 }
       ]
     },
     {
@@ -21,7 +21,7 @@
       "main_category_name": "Pasta",
       "sub_category_name": "Chicken",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "qtr", "name": "Mini", "rate": 6.99 },
         { "id": "half", "name": "Half", "rate": 9.99 },
         { "id": "full", "name": "Full", "rate": 12.99 }
       ]
