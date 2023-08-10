@@ -1,7 +1,7 @@
 import { IoAddCircleOutline } from "react-icons/io5";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { FiCheckCircle } from "react-icons/fi";
-import { CgCloseO } from "react-icons/cg";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import React from "react";
 
 const Modal = ({ isOpen, onClose, item }) => {
@@ -14,12 +14,17 @@ const Modal = ({ isOpen, onClose, item }) => {
         {/* Modal content */}
         <div className="w-full h-96 rounded-3xl">
           <img
-            className="object-fill h-full w-90p rounded-l-3xl"
+            className="object-fill h-full w-full rounded-l-3xl"
             src={item.image_url}
             alt=""
           />
+          <div className="relative bottom-[76px] rounded-bl-xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
+            <p className="relative p-6 text-lg font-bold">
+              {item.name}
+            </p>
+          </div>
         </div>
-        <div className="py-6">
+        <div className="p-6">
           <p>Select required portion</p>
           <div className="w-full">
             <table className="w-full bg-white border  rounded-lg overflow-hidden">
@@ -68,9 +73,9 @@ const Modal = ({ isOpen, onClose, item }) => {
             Close
           </button> */}
         </div>
-        <div className="relative -top-2 -right-2 h-fit bg-white p-1 rounded-full shadow-lg">
+        <div className="relative -top-2 -right-2 h-fit bg-white rounded-full shadow-lg">
           <a href="#" onClick={onClose}>
-            <CgCloseO className="h-5 w-5 text-gray-800"/>
+            <IoIosCloseCircleOutline className="h-7 w-7 text-gray-800" />
           </a>
         </div>
       </div>

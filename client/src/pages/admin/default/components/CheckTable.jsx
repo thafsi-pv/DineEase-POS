@@ -34,7 +34,7 @@ const CheckTable = (props) => {
     prepareRow,
     initialState,
   } = tableInstance;
-  initialState.pageSize = 11;
+  initialState.pageSize = 20;
 
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6"}>
