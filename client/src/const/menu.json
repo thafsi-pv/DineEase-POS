@@ -2,80 +2,80 @@
   "restaurant_items": [
     {
       "id": 1,
-      "name": "Margherita Pizza",
-      "unit_rate": 12.99,
-      "image_url": "https://simplyhomecooked.com/wp-content/uploads/2023/04/Margherita-Pizza-3.jpg",
-      "main_category_name": "Pizzas",
-      "sub_category_name": "Classic",
+      "name": "Kerala Sadya",
+      "unit_rate": 15.99,
+      "image_url": "https://media.istockphoto.com/id/1329663291/photo/onam-sadhya-traditional-kerala-food-and-culture.jpg?s=612x612&w=0&k=20&c=TkUgy721R_I0c7b_24wwaTdMPkgDr0DcAsbmou8CQJA=",
+      "main_category_name": "Traditional",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "mini", "name": "Mini", "rate": 10.99 },
-        { "id": "half", "name": "Half", "rate": 14.99 },
-        { "id": "full", "name": "Full", "rate": 22.99 }
+        { "id": "small", "name": "Small", "rate": 12.99 },
+        { "id": "regular", "name": "Regular", "rate": 15.99 },
+        { "id": "large", "name": "Large", "rate": 19.99 }
       ]
     },
     {
       "id": 2,
-      "name": "Chicken Alfredo Pasta",
-      "unit_rate": 14.99,
-      "image_url": "https://thefoodcharlatan.com/wp-content/uploads/2020/08/Homemade-Chicken-Fettuccine-Alfredo-10.jpg",
-      "main_category_name": "Pasta",
-      "sub_category_name": "Chicken",
+      "name": "Appam with Stew",
+      "unit_rate": 8.99,
+      "image_url": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/201604/appam-with-veg-stew-story_647_042216063314.jpg?VersionId=FiSsTFEt00qlFun1WRmCwgeKZU_OZgvu",
+      "main_category_name": "Traditional",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "qtr", "name": "Mini", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "small", "name": "Small", "rate": 6.99 },
+        { "id": "regular", "name": "Regular", "rate": 8.99 },
+        { "id": "large", "name": "Large", "rate": 11.99 }
       ]
     },
     {
       "id": 3,
-      "name": "Grilled Salmon",
-      "unit_rate": 18.99,
-      "image_url": "https://hips.hearstapps.com/hmg-prod/images/how-to-grill-salmon-recipe1-1655870645.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*",
-      "main_category_name": "Seafood",
-      "sub_category_name": "Grilled",
+      "name": "Puttu with Kadala Curry",
+      "unit_rate": 9.99,
+      "image_url": "https://weekendersworld.com/wp-content/uploads/2023/02/puttu-kadala.jpg",
+      "main_category_name": "Traditional",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "small", "name": "Small", "rate": 7.99 },
+        { "id": "regular", "name": "Regular", "rate": 9.99 },
+        { "id": "large", "name": "Large", "rate": 12.99 }
       ]
     },
     {
       "id": 4,
-      "name": "Vegetable Stir-Fry",
-      "unit_rate": 10.99,
-      "image_url": "https://www.thecookierookie.com/wp-content/uploads/2023/02/featured-vegetable-stir-fry-recipe.jpg",
-      "main_category_name": "Vegetarian",
-      "sub_category_name": "Stir-Fry",
+      "name": "Karimeen Pollichathu",
+      "unit_rate": 14.99,
+      "image_url": "https://yellowchilis.com/wp-content/uploads/2021/01/kerala-meen-polichathu-in-banana-leaf-with-coconut-milk.jpg",
+      "main_category_name": "Seafood",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "small", "name": "Small", "rate": 12.99 },
+        { "id": "regular", "name": "Regular", "rate": 14.99 },
+        { "id": "large", "name": "Large", "rate": 17.99 }
       ]
     },
     {
       "id": 5,
-      "name": "Cheeseburger",
-      "unit_rate": 8.99,
-      "image_url": "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42.jpg",
-      "main_category_name": "Burgers",
-      "sub_category_name": "Classic",
+      "name": "Kerala Parotta with Chicken Curry",
+      "unit_rate": 11.99,
+      "image_url": "https://i.ytimg.com/vi/fI_b0Ssg0OU/maxresdefault.jpg",
+      "main_category_name": "Traditional",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "small", "name": "Small", "rate": 9.99 },
+        { "id": "regular", "name": "Regular", "rate": 11.99 },
+        { "id": "large", "name": "Large", "rate": 14.99 }
       ]
     },
     {
       "id": 6,
-      "name": "Caesar Salad",
-      "unit_rate": 7.99,
-      "image_url": "https://natashaskitchen.com/wp-content/uploads/2019/01/Caesar-Salad-Recipe-3.jpg",
-      "main_category_name": "Salads",
-      "sub_category_name": "Green",
+      "name": "Kerala Banana Chips",
+      "unit_rate": 4.99,
+      "image_url": "data:image/jpeg;base64,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",
+      "main_category_name": "Snacks",
+      "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
-        { "id": "half", "name": "Half", "rate": 9.99 },
-        { "id": "full", "name": "Full", "rate": 12.99 }
+        { "id": "small", "name": "Small", "rate": 3.99 },
+        { "id": "regular", "name": "Regular", "rate": 4.99 },
+        { "id": "large", "name": "Large", "rate": 6.99 }
       ]
     },
     {
@@ -384,6 +384,84 @@
       "image_url": "https://www.cookwithmanali.com/wp-content/uploads/2014/04/Pineapple-Upside-Down-Cake-notitle-cwm-500x375.jpg",
       "main_category_name": "Desserts",
       "sub_category_name": "Sweet",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Margherita Pizza",
+      "unit_rate": 12.99,
+      "image_url": "https://simplyhomecooked.com/wp-content/uploads/2023/04/Margherita-Pizza-3.jpg",
+      "main_category_name": "Pizzas",
+      "sub_category_name": "Classic",
+      "portions": [
+        { "id": "mini", "name": "Mini", "rate": 10.99 },
+        { "id": "half", "name": "Half", "rate": 14.99 },
+        { "id": "full", "name": "Full", "rate": 22.99 }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Chicken Alfredo Pasta",
+      "unit_rate": 14.99,
+      "image_url": "https://thefoodcharlatan.com/wp-content/uploads/2020/08/Homemade-Chicken-Fettuccine-Alfredo-10.jpg",
+      "main_category_name": "Pasta",
+      "sub_category_name": "Chicken",
+      "portions": [
+        { "id": "qtr", "name": "Mini", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Grilled Salmon",
+      "unit_rate": 18.99,
+      "image_url": "https://hips.hearstapps.com/hmg-prod/images/how-to-grill-salmon-recipe1-1655870645.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*",
+      "main_category_name": "Seafood",
+      "sub_category_name": "Grilled",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Vegetable Stir-Fry",
+      "unit_rate": 10.99,
+      "image_url": "https://www.thecookierookie.com/wp-content/uploads/2023/02/featured-vegetable-stir-fry-recipe.jpg",
+      "main_category_name": "Vegetarian",
+      "sub_category_name": "Stir-Fry",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Cheeseburger",
+      "unit_rate": 8.99,
+      "image_url": "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42.jpg",
+      "main_category_name": "Burgers",
+      "sub_category_name": "Classic",
+      "portions": [
+        { "id": "qtr", "name": "Quarter", "rate": 6.99 },
+        { "id": "half", "name": "Half", "rate": 9.99 },
+        { "id": "full", "name": "Full", "rate": 12.99 }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Caesar Salad",
+      "unit_rate": 7.99,
+      "image_url": "https://natashaskitchen.com/wp-content/uploads/2019/01/Caesar-Salad-Recipe-3.jpg",
+      "main_category_name": "Salads",
+      "sub_category_name": "Green",
       "portions": [
         { "id": "qtr", "name": "Quarter", "rate": 6.99 },
         { "id": "half", "name": "Half", "rate": 9.99 },

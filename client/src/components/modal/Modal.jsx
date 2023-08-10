@@ -10,16 +10,16 @@ const Modal = ({ isOpen, onClose, item }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000059] overflow-hidden ">
-      <div className="bg-white rounded-3xl shadow-xl flex absolute">
+      <div className="bg-white dark:!bg-navy-900 dark:text-white rounded-3xl shadow-xl flex absolute">
         {/* Modal content */}
         <div className="w-full h-96 rounded-3xl">
           <img
-            className="object-fill h-full w-full rounded-l-3xl"
+            className="object-cover h-full w-full max-w-md rounded-l-3xl"
             src={item.image_url}
             alt=""
           />
-          <div className="relative bottom-[76px] rounded-bl-3xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
-            <p className="relative p-6 text-lg font-bold">
+          <div className="relative bottom-[72px] rounded-bl-3xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
+            <p className="relative p-5 text-2xl font-bold">
               {item.name}
             </p>
           </div>
@@ -27,8 +27,8 @@ const Modal = ({ isOpen, onClose, item }) => {
         <div className="p-6">
           <p>Select required portion</p>
           <div className="w-full">
-            <table className="w-full bg-white border  rounded-lg overflow-hidden">
-              <thead className="bg-gray-100">
+            <table className="w-full bg-gray-50 dark:!bg-navy-700 border  rounded-lg overflow-hidden">
+              <thead className="bg-gray-200 dark:!bg-gray-700">
                 <tr>
                   <th className="py-2 px-4 border text-left">Portion</th>
                   <th className="py-2 px-4 border text-left">Quantity</th>
