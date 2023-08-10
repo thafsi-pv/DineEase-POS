@@ -10,7 +10,7 @@ const Modal = ({ isOpen, onClose, item }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000059] overflow-hidden ">
-      <div className="bg-white rounded-3xl shadow-lg flex absolute">
+      <div className="bg-white rounded-3xl shadow-xl flex absolute">
         {/* Modal content */}
         <div className="w-full h-96 rounded-3xl">
           <img
@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onClose, item }) => {
             src={item.image_url}
             alt=""
           />
-          <div className="relative bottom-[76px] rounded-bl-xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
+          <div className="relative bottom-[76px] rounded-bl-3xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
             <p className="relative p-6 text-lg font-bold">
               {item.name}
             </p>
