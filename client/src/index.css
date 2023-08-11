@@ -45,4 +45,12 @@ input:checked.defaultCheckbox::before {
 	overflow: hidden;
   }
   
+  .modal {
+    transition: opacity 0.8s, visibility 0.8s;
+  }
+
+  .modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
   

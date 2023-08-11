@@ -10,6 +10,7 @@ import { BsFillCreditCardFill } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
 import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
+import SelectedItemsTable from "./components/SelectedItemsTable";
 
 function index() {
   console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu.restaurant_items);
@@ -50,7 +51,7 @@ function index() {
                 return (
                   <div
                     key={item.id}
-                    className="w-1/6 p-2"
+                    className="w-1/6 p-2 cursor-pointer"
                     onClick={() => openModal(item)}>
                     <ImageCard item={item} />
                   </div>
@@ -64,10 +65,11 @@ function index() {
           </div>
         </Card>
         <div class="col-span-2 overflow-y-scroll">
-          <CheckTable
+          {/* <CheckTable
             columnsData={columnsDataCheck}
             tableData={tableDataCheck}
-          />
+          /> */}
+          <SelectedItemsTable/>
         </div>
         <div className="col-span-3"></div>
         <div className="col-span-2">

@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, item }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000059] overflow-hidden ">
+    <div className=" fixed inset-0 flex items-center justify-center z-50 bg-[#00000059] overflow-hidden ">
       <div className="bg-white dark:!bg-navy-900 dark:text-white rounded-3xl shadow-xl flex absolute">
         {/* Modal content */}
         <div className="w-full h-96 rounded-3xl">
