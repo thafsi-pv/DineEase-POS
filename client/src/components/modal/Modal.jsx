@@ -3,10 +3,26 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { FiCheckCircle } from "react-icons/fi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 const Modal = ({ isOpen, onClose, item }) => {
   console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ item:", item);
   if (!isOpen) return null;
+
+  const dispath = useDispatch();
+
+  const handleAddItem = (i) => {
+    console.log("🚀 ~ file: Modal.jsx:16 ~ handleAddItem ~ i:", i)
+    const obj = {
+      name: item.name,
+      portion: i.portion,
+      quatity: i.quatity,
+      rate: i.rate,
+    };
+    console.log("🚀 ~ file: Modal.jsx:23 ~ handleAddItem ~ obj:", obj)
+    dispath(addToCart(obj));
+  };
 
   return (
     <div className=" fixed inset-0 flex items-center justify-center z-50 bg-[#00000059] overflow-hidden ">
@@ -19,9 +35,7 @@ const Modal = ({ isOpen, onClose, item }) => {
             alt=""
           />
           <div className="relative bottom-[72px] rounded-bl-3xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
-            <p className="relative p-5 text-2xl font-bold">
-              {item.name}
-            </p>
+            <p className="relative p-5 text-2xl font-bold">{item.name}</p>
           </div>
         </div>
         <div className="p-6">
@@ -56,7 +70,9 @@ const Modal = ({ isOpen, onClose, item }) => {
                       {item.rate}
                     </td>
                     <td className="py-2 px-4 border">
-                      <button className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded flex items-center gap-1">
+                      <button
+                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded flex items-center gap-1"
+                        onClick={() => handleAddItem(item)}>
                         <FiCheckCircle />
                         Add
                       </button>

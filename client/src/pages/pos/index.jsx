@@ -11,13 +11,17 @@ import { FaRupeeSign } from "react-icons/fa";
 import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
+import { useSelector } from "react-redux";
 
 function index() {
   console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu.restaurant_items);
 
+  const cartItems = useSelector((store) => store.cart);
+  console.log("🚀 ~ file: index.jsx:20 ~ index ~ cartItems:", cartItems);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
-  console.log("🚀 ~ file: index.jsx:19 ~ index ~ modalItem:", modalItem)
+  console.log("🚀 ~ file: index.jsx:19 ~ index ~ modalItem:", modalItem);
 
   const openModal = (item) => {
     setIsModalOpen(true);
@@ -69,7 +73,7 @@ function index() {
             columnsData={columnsDataCheck}
             tableData={tableDataCheck}
           /> */}
-          <SelectedItemsTable/>
+          <SelectedItemsTable cartItems={cartItems} />
         </div>
         <div className="col-span-3"></div>
         <div className="col-span-2">
