@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ImageCard from "./components/ImageCard";
 import DropDownReactSelect from "../../components/dropdown/DropDownReactSelect";
 import CheckTable from "../admin/default/components/CheckTable";
@@ -14,14 +14,10 @@ import SelectedItemsTable from "./components/SelectedItemsTable";
 import { useSelector } from "react-redux";
 
 function index() {
-  console.log("🚀 ~ file: index.jsx:12 ~ menu:", menu.restaurant_items);
-
+  const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
-  console.log("🚀 ~ file: index.jsx:20 ~ index ~ cartItems:", cartItems);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
-  console.log("🚀 ~ file: index.jsx:19 ~ index ~ modalItem:", modalItem);
 
   const openModal = (item) => {
     setIsModalOpen(true);
@@ -73,7 +69,10 @@ function index() {
             columnsData={columnsDataCheck}
             tableData={tableDataCheck}
           /> */}
-          <SelectedItemsTable cartItems={cartItems} />
+          <SelectedItemsTable
+            cartItems={cartItems}
+            selectedItemListRef={selectedItemListRef}
+          />
         </div>
         <div className="col-span-3"></div>
         <div className="col-span-2">
@@ -121,7 +120,12 @@ function index() {
         </div>
       </div>
       {/* Render the modal component */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} item={modalItem} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        item={modalItem}
+        selectedItemListRef={selectedItemListRef}
+      />
     </div>
   );
 }

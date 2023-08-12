@@ -22,7 +22,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       let newItem = {
         name: action.payload.name,
-        quatity: action.payload.quatity,
+        quantity: action.payload.quantity,
         portion: action.payload.portion,
         rate: action.payload.rate,
       };

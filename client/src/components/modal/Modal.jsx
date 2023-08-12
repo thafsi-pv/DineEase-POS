@@ -5,23 +5,30 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+import { toast } from "react-hot-toast";
 
-const Modal = ({ isOpen, onClose, item }) => {
+const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
   console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ item:", item);
   if (!isOpen) return null;
 
   const dispath = useDispatch();
 
   const handleAddItem = (i) => {
-    console.log("🚀 ~ file: Modal.jsx:16 ~ handleAddItem ~ i:", i)
     const obj = {
       name: item.name,
-      portion: i.portion,
-      quatity: i.quatity,
+      portion: i.name,
+      quantity: 1,
       rate: i.rate,
     };
-    console.log("🚀 ~ file: Modal.jsx:23 ~ handleAddItem ~ obj:", obj)
     dispath(addToCart(obj));
+    toast.success("Item added to list 👍🏻");
+    if (selectedItemListRef && selectedItemListRef.current) {
+      selectedItemListRef.current.scrollTo({
+        top: selectedItemListRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    onClose();
   };
 
   return (

@@ -5,10 +5,10 @@ import Checkbox from "../../../components/checkbox";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-function SelectedItemsTable({ cartItems }) {
+function SelectedItemsTable({ cartItems, selectedItemListRef }) {
   return (
     <div className="h-full">
-      <Card extra={"w-full h-full sm:overflow-auto px-6"}>
+      <Card extra={"w-full h-full px-6"}>
         <header className="relative flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
             Selected Items
@@ -17,9 +17,9 @@ function SelectedItemsTable({ cartItems }) {
           <CardMenu />
         </header>
 
-        <div className="mt-8  h-full">
+        <div className="mt-8  h-full overflow-y-scroll pb-16" ref={selectedItemListRef} >
           <table className="w-full" variant="simple" color="gray-500" mb="24px">
-            <thead>
+            <thead className="sticky top-0 bg-white z-10 w-full">
               <tr className="">
                 <th className="border-b border-gray-200 pr-16 pb-[10px]  dark:!border-navy-700">
                   <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs text-center w-full">
