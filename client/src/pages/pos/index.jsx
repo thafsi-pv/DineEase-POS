@@ -31,7 +31,7 @@ function index() {
   };
 
   return (
-    <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[700px] 3xl:h-[700px]  overflow-hidden mt-5">
+    <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[650px] 3xl:h-[700px]  overflow-hidden mt-5">
       <div class="grid grid-cols-5 gap-4 relative h-full  dark:!bg-navy-900 ">
         <Card extra={"w-full h-full sm:overflow-auto p-6 col-span-3"}>
           <div class=" overflow-y-scroll">

@@ -21,23 +21,23 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
           <table className="w-full" variant="simple" color="gray-500" mb="24px">
             <thead className="sticky top-0 bg-white z-10 w-full">
               <tr className="">
-                <th className="border-b border-gray-200 pr-16 pb-[10px]  dark:!border-navy-700">
-                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs text-center w-full">
+                <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700">
+                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">
                     Name
                   </div>
                 </th>
-                <th className="border-b border-gray-200 pr-16 pb-[10px]  dark:!border-navy-700">
-                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs text-center w-full">
+                <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700">
+                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">
                     Portion
                   </div>
                 </th>
-                <th className="border-b border-gray-200 pr-16 pb-[10px]  dark:!border-navy-700">
-                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs text-center w-full">
+                <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700">
+                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">
                     Quatity
                   </div>
                 </th>
-                <th className="border-b border-gray-200 pr-16 pb-[10px]  dark:!border-navy-700">
-                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs text-center w-full">
+                <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700">
+                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">
                     Rate
                   </div>
                 </th>
@@ -52,12 +52,12 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                       {item.name}
                     </p>
                   </div>
-                  <td className="">
+                  <td className="text-center">
                     <p className="text-sm font-bold text-navy-700 dark:text-white">
                       {item.portion}
                     </p>
                   </td>
-                  <td className="py-2">
+                  <td className="py-2 flex justify-center">
                     <div className="flex items-center space-x-2">
                       <AiOutlineMinusCircle className="w-8 h-7" />
                       <input
