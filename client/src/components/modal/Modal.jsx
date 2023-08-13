@@ -2,13 +2,14 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { FiCheckCircle } from "react-icons/fi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-hot-toast";
 
 const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
   console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ item:", item);
+  const [quantity, setQuantity] = useState(1);
   if (!isOpen) return null;
 
   const dispath = useDispatch();
@@ -17,8 +18,9 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
     const obj = {
       name: item.name,
       portion: i.name,
-      quantity: 1,
-      rate: i.rate,
+      quantity: quantity,
+      unitRate: i.rate,
+      totalRate: quantity * i.rate,
     };
     dispath(addToCart(obj));
     toast.success("Item added to list 👍🏻");
@@ -29,6 +31,10 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
       });
     }
     onClose();
+  };
+
+  const handleQuantity = (val) => {
+    setQuantity((prev) => prev + val);
   };
 
   return (
@@ -65,12 +71,19 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
                     </td>
                     <td className="py-2 px-4 border">
                       <div className="flex items-center space-x-2">
-                        <AiOutlineMinusCircle className="w-8 h-7" />
+                        <AiOutlineMinusCircle
+                          className="w-8 h-7"
+                          onClick={() => handleQuantity(-1)}
+                        />
                         <input
                           type="number"
                           className="rounded-lg w-20 p-2 font-bold text-lg border text-center"
+                          value={quantity}
                         />
-                        <IoAddCircleOutline className="w-8 h-7" />
+                        <IoAddCircleOutline
+                          className="w-8 h-7"
+                          onClick={() => handleQuantity(1)}
+                        />
                       </div>
                     </td>
                     <td className="py-2 px-4 border font-semibold">

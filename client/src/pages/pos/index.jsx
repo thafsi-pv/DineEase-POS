@@ -42,7 +42,16 @@ function index() {
 
   const openCalculator = () => {
     // Open the system calculator on macOS
-    window.open('x-apple.systempreferences:com.apple.preference.security?Calc', '_blank');
+    window.open(
+      "x-apple.systempreferences:com.apple.preference.security?Calc",
+      "_blank"
+    );
+  };
+
+  const subTotal = () => {
+    return Math.round(
+      cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
+    ).toFixed(2);
   };
 
   return (
@@ -88,36 +97,36 @@ function index() {
               <Card extra={"w-full h-full p-3 pt-4"}>
                 <div className="flex flex-row-reverse w-full gap-3 items-center align-middle">
                   <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl">
-                    <CiCircleRemove className="h-10 w-10" />
+                    <CiCircleRemove className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">Close</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <TfiHandStop className="h-10 w-10" />
+                    <TfiHandStop className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">Hold</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <CiCalculator1
-                      className="h-10 w-10"
+                      className="h-10 w-10 text-gray-400 hover:text-gray-800"
                       onClick={openCalculator}
                     />
                     <p className="p-0 m-0 text-xs text-gray-600">Calculator</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <CiDiscount1 className="h-10 w-10" />
+                    <CiDiscount1 className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">Discount</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <CiUser className="h-10 w-10" />
+                    <CiUser className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">
                       Add Customer
                     </p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <BsBoxSeam className="h-10 w-10" />
+                    <BsBoxSeam className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">Add Product</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <MdOutlineLoyalty className="h-10 w-10" />
+                    <MdOutlineLoyalty className="h-10 w-10 text-gray-400 hover:text-gray-800" />
                     <p className="p-0 m-0 text-xs text-gray-600">
                       Loayalty Card
                     </p>
@@ -157,7 +166,7 @@ function index() {
                       <tfoot className="border-t">
                         <tr>
                           <td>Total Payable:</td>
-                          <td>258.00</td>
+                          <td>{subTotal()}</td>
                         </tr>
                       </tfoot>
                     </table>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 const initialState = [];
 
@@ -6,33 +7,36 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
     addToCart: (state, action) => {
       let newItem = {
         name: action.payload.name,
         quantity: action.payload.quantity,
         portion: action.payload.portion,
-        rate: action.payload.rate,
+        unitRate: action.payload.unitRate,
+        totalRate: action.payload.totalRate,
       };
       state.push(newItem);
+    },
+    alterItemQuantity: (state, action) => {
+      const { index, type } = action.payload;
+      if (type === "-" && state[index].quantity == 1) {
+        toast.error("Required minimum quantity is 1 😟");
+      }
+      if (type === "+") {
+        state[index].quantity = state[index].quantity + 1;
+      }
+      if (type === "-" && state[index].quantity > 1) {
+        state[index].quantity = state[index].quantity - 1;
+        // state[index].totalRate = state[index].quantity * state[index].unitRate;
+      }
+      state[index].totalRate = Math.round(
+        parseFloat(state[index].quantity) * parseFloat(state[index].unitRate)
+      ).toFixed(2);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, addToCart } =
-  cartSlice.actions;
+export const { addToCart, alterItemQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
