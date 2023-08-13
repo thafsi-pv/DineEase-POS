@@ -12,6 +12,16 @@ import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
 import { useSelector } from "react-redux";
+import { BsBoxSeam } from "react-icons/bs";
+import { TfiHandStop } from "react-icons/tfi";
+import { MdOutlineLoyalty } from "react-icons/md";
+import {
+  CiCalculator1,
+  CiDiscount1,
+  CiUser,
+  CiCircleRemove,
+  CiPercent,
+} from "react-icons/ci";
 
 function index() {
   const selectedItemListRef = useRef(null);
@@ -30,44 +40,91 @@ function index() {
     document.body.classList.remove("modal-open"); // Remove className from body
   };
 
+  const openCalculator = () => {
+    // Open the system calculator on macOS
+    window.open('x-apple.systempreferences:com.apple.preference.security?Calc', '_blank');
+  };
+
   return (
     <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[650px] 3xl:h-[700px]  overflow-hidden mt-5">
       <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
         <div className="w-full h-full  col-span-3 row-span-6">
-          <div className="grid grid-rows-6">
-            <Card extra={"w-full h-full sm:overflow-auto p-6 row-span-6"}>
-              {/*product list div */}
-              <div className=" overflow-y-scroll">
-                <div className="w-full gap-2 flex sticky top-0 z-10 bg-white dark:!bg-navy-900  pb-3 rounded-xl">
-                  <div className="flex w-full">
-                    <DropDownReactSelect ph="Select Table" />
+          <div className="h-full grid grid-rows-6 gap-4">
+            <div className=" row-span-5">
+              <Card extra={"w-full h-full sm:overflow-auto p-6"}>
+                {/*product list div */}
+                <div className=" overflow-y-scroll">
+                  <div className="w-full gap-2 flex sticky top-0 z-10 bg-white dark:!bg-navy-900  pb-3 rounded-xl">
+                    <div className="flex w-full">
+                      <DropDownReactSelect ph="Select Table" />
+                    </div>
+                    <div className="flex w-full">
+                      <DropDownReactSelect ph="Select Category" />
+                    </div>
+                    <div className="flex w-full">
+                      <DropDownReactSelect ph="Select Customer" />
+                    </div>
                   </div>
-                  <div className="flex w-full">
-                    <DropDownReactSelect ph="Select Category" />
-                  </div>
-                  <div className="flex w-full">
-                    <DropDownReactSelect ph="Select Customer" />
-                  </div>
-                </div>
-                <div className="w-full flex flex-wrap  h-full">
-                  {menu.restaurant_items.map((item) => {
-                    return (
-                      <div
-                        key={item.id}
-                        className="w-1/6 p-2 cursor-pointer"
-                        onClick={() => openModal(item)}>
-                        <ImageCard item={item} />
-                      </div>
-                    );
-                  })}
+                  <div className="w-full flex flex-wrap  h-full">
+                    {menu.restaurant_items.map((item) => {
+                      return (
+                        <div
+                          key={item.id}
+                          className="w-1/6 p-2 cursor-pointer"
+                          onClick={() => openModal(item)}>
+                          <ImageCard item={item} />
+                        </div>
+                      );
+                    })}
 
-                  {/* <div className="w-1/6 p-2">
+                    {/* <div className="w-1/6 p-2">
                 <ImageCard />
               </div> */}
+                  </div>
                 </div>
-              </div>
-            </Card>
-            <div className=" row-span-1">action div</div>
+              </Card>
+            </div>
+            <div className=" row-span-1">
+              <Card extra={"w-full h-full p-6"}>
+                <div className="flex flex-row-reverse w-full gap-2">
+                  <div className=" flex flex-col justify-center items-center">
+                    <CiCircleRemove className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">Close</p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <TfiHandStop className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">Hold</p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <CiCalculator1
+                      className="h-10 w-10"
+                      onClick={openCalculator}
+                    />
+                    <p className="p-0 m-0 text-xs text-gray-600">Calculator</p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <CiDiscount1 className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">Discount</p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <CiUser className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">
+                      Add Customer
+                    </p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <BsBoxSeam className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">Add Product</p>
+                  </div>
+                  <div className=" flex flex-col justify-center items-center">
+                    <MdOutlineLoyalty className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs text-gray-600">
+                      Loayalty Card
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
         <div className=" col-span-2 row-span-6 h-full">
