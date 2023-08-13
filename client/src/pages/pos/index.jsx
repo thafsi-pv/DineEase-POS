@@ -85,38 +85,38 @@ function index() {
               </Card>
             </div>
             <div className=" row-span-1">
-              <Card extra={"w-full h-full p-6"}>
-                <div className="flex flex-row-reverse w-full gap-2">
-                  <div className=" flex flex-col justify-center items-center">
+              <Card extra={"w-full h-full p-3 pt-4"}>
+                <div className="flex flex-row-reverse w-full gap-3 items-center align-middle">
+                  <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl">
                     <CiCircleRemove className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">Close</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <TfiHandStop className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">Hold</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <CiCalculator1
                       className="h-10 w-10"
                       onClick={openCalculator}
                     />
                     <p className="p-0 m-0 text-xs text-gray-600">Calculator</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <CiDiscount1 className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">Discount</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <CiUser className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">
                       Add Customer
                     </p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <BsBoxSeam className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">Add Product</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
                     <MdOutlineLoyalty className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs text-gray-600">
                       Loayalty Card
