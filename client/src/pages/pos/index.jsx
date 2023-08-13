@@ -22,8 +22,15 @@ import {
   CiCircleRemove,
   CiPercent,
 } from "react-icons/ci";
+import InvoicePrint1 from "./printFormats/InvoicePrint1";
+import { useReactToPrint } from "react-to-print";
 
 function index() {
+  const printRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  });
+
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,40 +103,36 @@ function index() {
             <div className=" row-span-1">
               <Card extra={"w-full h-full p-3 pt-4"}>
                 <div className="flex flex-row-reverse w-full gap-3 items-center align-middle">
-                  <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl">
-                    <CiCircleRemove className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">Close</p>
+                  <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <CiCircleRemove className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Close</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <TfiHandStop className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">Hold</p>
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <TfiHandStop className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Hold</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
                     <CiCalculator1
-                      className="h-10 w-10 text-gray-400 hover:text-gray-800"
+                      className="h-10 w-10"
                       onClick={openCalculator}
                     />
-                    <p className="p-0 m-0 text-xs text-gray-600">Calculator</p>
+                    <p className="p-0 m-0 text-xs">Calculator</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <CiDiscount1 className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">Discount</p>
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <CiDiscount1 className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Discount</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <CiUser className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">
-                      Add Customer
-                    </p>
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <CiUser className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Add Customer</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <BsBoxSeam className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">Add Product</p>
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <BsBoxSeam className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Add Product</p>
                   </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl">
-                    <MdOutlineLoyalty className="h-10 w-10 text-gray-400 hover:text-gray-800" />
-                    <p className="p-0 m-0 text-xs text-gray-600">
-                      Loayalty Card
-                    </p>
+                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800">
+                    <MdOutlineLoyalty className="h-10 w-10" />
+                    <p className="p-0 m-0 text-xs">Loayalty Card</p>
                   </div>
                 </div>
               </Card>
@@ -174,7 +177,9 @@ function index() {
                 </header>
                 <div className="flex justify-center w-full gap-2 pt-3">
                   <div className="flex-1">
-                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2">
+                    <button
+                      onClick={handlePrint}
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2">
                       <FaRupeeSign />
                       Cash
                     </button>
@@ -182,7 +187,7 @@ function index() {
                   <div className="flex-1">
                     <button
                       className="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2"
-                      onClick={() => handlePayment(280.5)}>
+                      onClick={() => handlePayment(subTotal())}>
                       <BsFillCreditCardFill /> <p>Card</p>
                     </button>
                   </div>
@@ -199,6 +204,7 @@ function index() {
         item={modalItem}
         selectedItemListRef={selectedItemListRef}
       />
+      <InvoicePrint1 printRef={printRef} />
     </div>
   );
 }

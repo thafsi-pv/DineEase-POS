@@ -8,9 +8,9 @@
       "main_category_name": "Traditional",
       "sub_category_name": "Kerala Cuisine",
       "portions": [
-        { "id": "small", "name": "Small", "rate": 12.99 },
-        { "id": "regular", "name": "Regular", "rate": 15.99 },
-        { "id": "large", "name": "Large", "rate": 19.99 }
+        { "id": "small", "name": "Small", "rate": 12.59 },
+        { "id": "regular", "name": "Regular", "rate": 15.49 },
+        { "id": "large", "name": "Large", "rate": 19.09 }
       ]
     },
     {
