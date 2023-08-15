@@ -6,6 +6,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { alterItemQuantity } from "../../../redux/cartSlice";
+import { CiTrash } from "react-icons/ci";
 
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
   const dispath = useDispatch();
@@ -52,6 +53,11 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                     Rate
                   </div>
                 </th>
+                <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700 w-15p">
+                  <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">
+                    Remove
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -89,6 +95,9 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                     <p className="text-sm font-bold text-right text-navy-700 dark:text-white">
                       {item.totalRate}
                     </p>
+                  </td>
+                  <td className="flex justify-end">
+                    <CiTrash className="hover:text-red-500 cursor-pointer"/>
                   </td>
                 </tr>
               ))}

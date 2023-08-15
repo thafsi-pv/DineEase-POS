@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 function InvoicePrint1({ printRef }) {
   const cartItems = useSelector((store) => store.cart);
 
+  const totalItems = () => {
+    return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  };
   const subTotal = () => {
     return Math.round(
       cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
@@ -24,7 +27,9 @@ function InvoicePrint1({ printRef }) {
               <div className="mt-1 ml-1 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
                 Dine<span className="text-green-600">Ease</span>
               </div>
-              <p className="text-gray-600 p-0 w-ful text-right text-[10px]">POS</p>
+              <p className="text-gray-600 p-0 w-ful text-right text-[10px]">
+                POS
+              </p>
             </div>
           </div>
         </div>
@@ -38,14 +43,9 @@ function InvoicePrint1({ printRef }) {
         <table className="w-full" variant="simple" color="gray-500" mb="24px">
           <thead className="sticky top-0 bg-white z-10 w-full">
             <tr className="">
-              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-50p">
+              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-40p">
                 <div className="text-[10px] font-bold tracking-wide text-gray-600 lg:text-[10px] w-full">
                   Name
-                </div>
-              </th>
-              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-15p">
-                <div className="text-[10px] font-bold tracking-wide text-gray-600 lg:text-[10px] w-full">
-                  Portion
                 </div>
               </th>
               <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-20p">
@@ -53,9 +53,14 @@ function InvoicePrint1({ printRef }) {
                   Quatity
                 </div>
               </th>
-              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-15p">
+              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-10p">
                 <div className="text-[10px] font-bold tracking-wide text-gray-600 lg:text-[10px] w-full">
                   Rate
+                </div>
+              </th>
+              <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-15p">
+                <div className="text-[10px] font-bold tracking-wide text-gray-600 lg:text-[10px] w-full">
+                  Total
                 </div>
               </th>
             </tr>
@@ -63,21 +68,20 @@ function InvoicePrint1({ printRef }) {
           <tbody>
             {cartItems.map((item, index) => (
               <tr className=" border-b" key={item.id}>
-                <div className="flex items-center gap-2">
+                <td className="flex items-center gap-2">
                   <p className="text-[10px] text-navy-700 dark:text-white">
                     {item.name}
-                  </p>
-                </div>
-                <td className="text-center">
-                  <p className="text-[10px] text-navy-700 dark:text-white">
-                    {item.portion}
+                    <span className="text-[8px]"> ({item.portion})</span>
                   </p>
                 </td>
-                <td className=" flex justify-center">
+                <td className="">
                   <p className=" text-[10px]  text-center">{item.quantity}</p>
                 </td>
                 <td className="">
-                  <p className="text-[10px] text-right text-navy-700 dark:text-white">
+                  <p className=" text-[10px]  text-center">{item.unitRate}</p>
+                </td>
+                <td className=" !text-right">
+                  <p className="text-[10px] !text-right w-full text-navy-700 dark:text-white">
                     {item.totalRate}
                   </p>
                 </td>
@@ -87,9 +91,35 @@ function InvoicePrint1({ printRef }) {
         </table>
       </div>
 
-      <div className="mt-6 text-right">
+      <div className="mt-6 flex justify-end  text-[8px] font-semibold">
+        <table>
+          <tr>
+            <td>Total Items</td>
+            <td className="text-right">{totalItems()}</td>
+          </tr>
+          <tr>
+            <td>Total Discount</td>
+            <td className="text-right">00.00</td>
+          </tr>
+          <tr>
+            <td>Total Tax</td>
+            <td className="text-right">00.00</td>
+          </tr>
+          <tr>
+            <td>Total Amount</td>
+            <td className="text-right">{subTotal()}</td>
+          </tr>
+          <tr>
+            <td>Loyalty Points Earned</td>
+            <td className="text-right">50</td>
+          </tr>
+        </table>
+
+        {/* <p>:</p>
+        <p>Total :00.000</p>
+        <p>Total Tax:00.000</p>
         <p>Total Amount: ${subTotal()}</p>
-        <p>Loyalty Points Earned: 50</p>
+        <p>Loyalty Points Earned: 50</p> */}
       </div>
     </div>
   );

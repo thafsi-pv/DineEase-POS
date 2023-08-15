@@ -61,3 +61,11 @@ input:checked.defaultCheckbox::before {
     padding: 10mm; /* Adjust as needed for margins */
   }
 }
+
+@layer base {
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+  }
