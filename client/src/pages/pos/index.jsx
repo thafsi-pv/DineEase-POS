@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ImageCard from "./components/ImageCard";
 import DropDownReactSelect from "../../components/dropdown/DropDownReactSelect";
 import CheckTable from "../admin/default/components/CheckTable";
@@ -37,8 +37,44 @@ function index() {
 
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
+  console.log("🚀 ~ file: index.jsx:40 ~ index ~ cartItems:", cartItems);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
+  const [subTotalVal, setsubTotalVal] = useState(0);
+  console.log("🚀 ~ file: index.jsx:44 ~ index ~ subTotalVal-main:", subTotalVal)
+
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeyDown, true);
+    return () => {
+      document.removeEventListener("keydown", detectKeyDown, true);
+    };
+  }, []);
+
+  useEffect(() => {
+    const subtot = Math.round(
+      cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
+    ).toFixed(2);
+    setsubTotalVal(subtot);
+  }, [cartItems]);
+
+  const detectKeyDown = (e) => {
+    if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      console.log("🚀 ~ file: index.jsx:63 ~ detectKeyDown ~ subTotalVal:", subTotalVal)
+     // paymentbutton(subTotalVal);
+
+      // Use the callback form of setsubTotalVal to access the latest state
+    setsubTotalVal((prevSubTotal) => {
+      paymentbutton(prevSubTotal);
+      return prevSubTotal;
+    });
+      
+    }
+    if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      handlePrint();
+    }
+  };
 
   const openModal = (item) => {
     setIsModalOpen(true);
@@ -59,13 +95,9 @@ function index() {
     );
   };
 
-  const subTotal = () => {
-    return Math.round(
-      cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
-    ).toFixed(2);
-  };
+  const subTotal = () => {};
 
-  const paymentbutton = async () => {
+  const paymentbutton = async (payableAmount) => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -74,9 +106,13 @@ function index() {
       toast.error("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    const subtot = subTotal();
+
+    console.log(
+      "🚀 ~ file: index.jsx:96 ~ paymentbutton ~ subtot:",
+      payableAmount
+    );
     // const res = await handlePayment(subtot);
-    if (subtot==0) {
+    if (payableAmount == 0) {
       return toast.error("Total payable amount is 0");
     }
 
@@ -109,29 +145,19 @@ function index() {
       rzp1.open();
     };
 
-    const handlePayment = async (subtot) => {
+    const handlePayment = async () => {
       try {
-        console.log("Start handlePayment");
-
         const orderUrl = "http://localhost:8080/api/payment/orders";
-        const { data } = await axios.post(orderUrl, { amount: subtot });
-        console.log("Order data:", data);
-
+        const { data } = await axios.post(orderUrl, { amount: payableAmount });
         data.data.name = "DineEase POS";
-
-        console.log("Before calling initPayment");
         const res = await initPayment(data.data);
-        console.log("After calling initPayment");
-
-        console.log("Payment result:", res);
-
         return res;
       } catch (error) {
         console.log(error);
         throw error; // Rethrow the error to propagate it further
       }
     };
-    handlePayment(subtot);
+    handlePayment();
   };
 
   return (
@@ -179,20 +205,24 @@ function index() {
                   <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <CiCircleRemove className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Close</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+c</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <CiLock className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Screen Lock</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+l</p>
                   </div>
                   <div
                     className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer"
                     onClick={handlePrint}>
                     <BsPrinter className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Print Order</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+p</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <TfiHandStop className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Hold</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+h</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <CiCalculator1
@@ -200,22 +230,27 @@ function index() {
                       onClick={openCalculator}
                     />
                     <p className="p-0 m-0 text-xs">Calculator</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+x</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <CiDiscount1 className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Discount</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+d</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <CiUser className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Add Customer</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+r</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <BsBoxSeam className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Add Product</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+p</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <MdOutlineLoyalty className="h-10 w-10" />
                     <p className="p-0 m-0 text-xs">Loayalty Card</p>
+                    <p className="m-0 text-[9px]">Ctlr+l</p>
                   </div>
                 </div>
               </Card>
@@ -252,7 +287,7 @@ function index() {
                       <tfoot className="border-t">
                         <tr>
                           <td>Total Payable:</td>
-                          <td>{subTotal()}</td>
+                          <td>{subTotalVal}</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -265,13 +300,15 @@ function index() {
                       className="bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2">
                       <FaRupeeSign />
                       Cash
+                      <p className="text-xs text-gray-300">Ctrl+c</p>
                     </button>
                   </div>
                   <div className="flex-1">
                     <button
                       className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2"
-                      onClick={paymentbutton}>
+                      onClick={() => paymentbutton(subTotalVal)}>
                       <BsFillCreditCardFill /> <p>Card</p>
+                      <p className="text-xs text-gray-300">Ctrl+b</p>
                     </button>
                   </div>
                 </div>
