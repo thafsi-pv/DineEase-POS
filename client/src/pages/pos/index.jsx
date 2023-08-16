@@ -41,7 +41,10 @@ function index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [subTotalVal, setsubTotalVal] = useState(0);
-  console.log("🚀 ~ file: index.jsx:44 ~ index ~ subTotalVal-main:", subTotalVal)
+  console.log(
+    "🚀 ~ file: index.jsx:44 ~ index ~ subTotalVal-main:",
+    subTotalVal
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
@@ -60,15 +63,17 @@ function index() {
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
-      console.log("🚀 ~ file: index.jsx:63 ~ detectKeyDown ~ subTotalVal:", subTotalVal)
-     // paymentbutton(subTotalVal);
+      console.log(
+        "🚀 ~ file: index.jsx:63 ~ detectKeyDown ~ subTotalVal:",
+        subTotalVal
+      );
+      // paymentbutton(subTotalVal);
 
       // Use the callback form of setsubTotalVal to access the latest state
-    setsubTotalVal((prevSubTotal) => {
-      paymentbutton(prevSubTotal);
-      return prevSubTotal;
-    });
-      
+      setsubTotalVal((prevSubTotal) => {
+        paymentbutton(prevSubTotal);
+        return prevSubTotal;
+      });
     }
     if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
@@ -161,7 +166,7 @@ function index() {
   };
 
   return (
-    <div className="w-full md:h-[500px] sm:h-[100px] lg:h-[700px] 2xl:h-[650px] 3xl:h-[700px]  overflow-hidden mt-5">
+    <div className="w-full h-[85vh]  overflow-hidden py-5">
       <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
         <div className="w-full h-full  col-span-3 row-span-6">
           <div className="h-full grid grid-rows-6 gap-4">
@@ -324,7 +329,9 @@ function index() {
         item={modalItem}
         selectedItemListRef={selectedItemListRef}
       />
-      <InvoicePrint1 printRef={printRef} />
+      <div className="hidden">
+        <InvoicePrint1 printRef={printRef} />
+      </div>
     </div>
   );
 }

@@ -17,12 +17,12 @@ const Sidebar = () => {
     <div
       className={`${
         open ? "w-64" : "w-16" // Adjust the width of the sidebar based on the open state
-      } duration-175 linear fixed h-screen !z-50 flex flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0`}>
+      } duration-175 linear fixed h-screen !z-50 flex flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 rounded-md mb-10 items-center`}>
       {/* Hamburger menu icon */}
       <span
-        className="absolute top-4 right-4 block cursor-pointer "
+        className="absolute top-4  block cursor-pointer "
         onClick={toggleSidebar}>
-        {open ? <HiMenu /> : <HiMenu />}
+        {open ? <HiMenu className="h-6 w-6" /> : <HiMenu className="h-6 w-6"/>}
       </span>
 
       {open ? (
@@ -35,8 +35,9 @@ const Sidebar = () => {
       ) : (
         <div className={`mx-[6px] mt-[50px] flex items-center leading-4`}>
           <div className="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white p-0 m-0">
-            D<span className="text-green-600 p-0 m-0">E</span>{" "}
-            <span className="font-light text-sm p-0 m-0">POS</span>
+            {/* D<span className="text-green-600 p-0 m-0">E</span>{" "}
+            <span className="font-light text-sm p-0 m-0">POS</span> */}
+            <img src="https://blog.resellerspanel.com/wp-content/uploads/2011/05/tld-de.png" alt="" />
           </div>
         </div>
       )}
