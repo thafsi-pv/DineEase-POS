@@ -221,8 +221,8 @@ function index() {
                     className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer"
                     onClick={handlePrint}>
                     <BsPrinter className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Print Order</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+p</p>
+                    <p className="p-0 m-0 text-xs">KOT</p>
+                    <p className="p-0 m-0 text-[9px]">Ctlr+k</p>
                   </div>
                   <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
                     <TfiHandStop className="h-10 w-10" />
