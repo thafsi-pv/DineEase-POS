@@ -67,7 +67,7 @@ export default function Default(props) {
           className={`mx-[12px] h-full  transition-all md:pr-2 `}
         >
           {/* Routes */}
-          <div className="h-full">
+          <div className="max-h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
               logoText={"Horizon UI Tailwind React"}
@@ -75,7 +75,7 @@ export default function Default(props) {
               secondary={getActiveNavbar(routes)}
               {...rest}
             />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
+            <div className="pt-5s mx-auto mb-auto h-full min-h-[78vh] p-2 md:pr-2">
               <Routes>
                 {getRoutes(routes)}
 
