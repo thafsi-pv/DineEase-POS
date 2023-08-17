@@ -63,9 +63,16 @@ input:checked.defaultCheckbox::before {
 }
 
 @layer base {
-	input[type="number"]::-webkit-inner-spin-button,
-	input[type="number"]::-webkit-outer-spin-button {
-	  -webkit-appearance: none;
-	  margin: 0;
-	}
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
+}
+
+.bgGreenColor {
+  background-color: #068e77c9;
+}
+.txtGreenColor {
+  color: #068e77c9;
+}

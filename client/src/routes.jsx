@@ -1,5 +1,7 @@
 import React from "react";
-import {MdPointOfSale} from 'react-icons/md'
+import {MdPointOfSale,MdOutlineCategory} from 'react-icons/md'
+import {GiTable} from 'react-icons/gi'
+import {IoFastFood} from 'react-icons/io5'
 
 // Admin Imports
 import MainDashboard from "./pages/admin/default";
@@ -20,6 +22,7 @@ import {
   MdPerson,
   MdLock,
 } from "react-icons/md";
+import ListTable from "./pages/table/ListTable";
 
 const routes = [
   {
@@ -35,6 +38,27 @@ const routes = [
     path: "pos",
     icon: <MdPointOfSale className="h-6 w-6" />,
     component: <POS />,
+  },
+  {
+    name: "Tables",
+    layout: "/admin",
+    path: "tables",
+    icon: <GiTable className="h-6 w-6" />,
+    component: <ListTable />,
+  },
+  {
+    name: "Category",
+    layout: "/admin",
+    path: "category",
+    icon: <MdOutlineCategory className="h-6 w-6" />,
+    component: <ListTable />,
+  },
+  {
+    name: "Product",
+    layout: "/admin",
+    path: "product",
+    icon: <IoFastFood className="h-6 w-6" />,
+    component: <ListTable />,
   },
   // {
   //   name: "NFT Marketplace",
