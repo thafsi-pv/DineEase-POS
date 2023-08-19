@@ -2,6 +2,7 @@ import React from "react";
 import {MdPointOfSale,MdOutlineCategory} from 'react-icons/md'
 import {GiTable} from 'react-icons/gi'
 import {IoFastFood} from 'react-icons/io5'
+import {HiOutlineChatBubbleBottomCenterText} from 'react-icons/hi2'
 
 // Admin Imports
 import MainDashboard from "./pages/admin/default";
@@ -58,6 +59,13 @@ const routes = [
     layout: "/admin",
     path: "product",
     icon: <IoFastFood className="h-6 w-6" />,
+    component: <ListTable />,
+  },
+  {
+    name: "Chat",
+    layout: "/admin",
+    path: "chat",
+    icon: <HiOutlineChatBubbleBottomCenterText className="h-6 w-6" />,
     component: <ListTable />,
   },
   // {
