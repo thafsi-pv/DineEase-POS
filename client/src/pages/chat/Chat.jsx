@@ -2,7 +2,7 @@ import React from "react";
 
 function chat() {
   return (
-    <div className="w-full h-screen flex bg-gray-100">
+    <div className=" h-screen flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList />
       <div className="flex-grow flex flex-col">
         <div className="overflow-y-auto p-4">
