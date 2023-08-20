@@ -24,6 +24,7 @@ import {
   MdLock,
 } from "react-icons/md";
 import ListTable from "./pages/table/ListTable";
+import Chat from "./pages/chat/Chat";
 
 const routes = [
   {
@@ -66,7 +67,7 @@ const routes = [
     layout: "/admin",
     path: "chat",
     icon: <HiOutlineChatBubbleBottomCenterText className="h-6 w-6" />,
-    component: <ListTable />,
+    component: <Chat />,
   },
   // {
   //   name: "NFT Marketplace",
