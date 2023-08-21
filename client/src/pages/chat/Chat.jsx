@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import io from 'socket.io-client';
+const socket = io('http://localhost:8080');
 
 function chat() {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    socket.on("chat message", (msg) => {
+      setMessages([...messages, msg]);
+    });
+  }, [messages]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    socket.emit("chat message", message);
+    setMessage("");
+  };
+
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList />
@@ -12,10 +28,7 @@ function chat() {
             isMine={true}
           />
           <ChatMessage message="OKAY" isMine={false} />
-          <ChatMessage
-            message="thanks! "
-            isMine={true}
-          />
+          <ChatMessage message="thanks! " isMine={true} />
           {/* Add more messages here */}
         </div>
         <div className="bg-white p-4 border-t">
@@ -23,7 +36,12 @@ function chat() {
             type="text"
             placeholder="Type a message..."
             className="w-full p-2 border rounded-md"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
+          <button type="button" onClick={handleSubmit}>
+            Send
+          </button>
         </div>
       </div>
     </div>
