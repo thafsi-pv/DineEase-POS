@@ -11,6 +11,11 @@ function chat() {
             message="I'm good, thanks! How about you?"
             isMine={true}
           />
+          <ChatMessage message="OKAY" isMine={false} />
+          <ChatMessage
+            message="thanks! "
+            isMine={true}
+          />
           {/* Add more messages here */}
         </div>
         <div className="bg-white p-4 border-t">
