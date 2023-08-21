@@ -2,10 +2,10 @@ import React from "react";
 
 function chat() {
   return (
-    <div className=" h-screen flex bg-gray-100 rounded-lg mt-10 justify-center">
+    <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList />
-      <div className="flex-grow flex flex-col">
-        <div className="overflow-y-auto p-4">
+      <div className="flex-grow flex flex-col bg-green-200">
+        <div className="overflow-y-auto p-4 flex-1">
           <ChatMessage message="Hey, how's it going?" isMine={false} />
           <ChatMessage
             message="I'm good, thanks! How about you?"
