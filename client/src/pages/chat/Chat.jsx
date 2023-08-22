@@ -23,7 +23,7 @@ function chat() {
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList />
       <div className="flex-grow flex flex-col  items-center">
-        <div className="flex-grow w-2/3 flex  flex-col  ">
+        <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
           <div className="overflow-y-auto p-4 flex-1">
             <ChatMessage message="Hey, how's it going?" isMine={false} />
             <ChatMessage
@@ -45,9 +45,9 @@ function chat() {
             />
             <button
               type="button"
-              className="p-2 rounded-md border"
+              className="p-4 rounded-full border bg-white hover:bg-gray-400"
               onClick={handleSubmit}>
-              {RiSendPlaneFill} se
+              <RiSendPlaneFill className="h-7 w-7 txtGreenColor" />
             </button>
           </div>
         </div>
