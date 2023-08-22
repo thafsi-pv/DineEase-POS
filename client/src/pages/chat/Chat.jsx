@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import io from 'socket.io-client';
-const socket = io('http://localhost:8080');
+import io from "socket.io-client";
+const socket = io("http://localhost:8080");
+import { RiSendPlaneFill } from "react-icons/ri";
 
 function chat() {
   const [messages, setMessages] = useState([]);
+  console.log("🚀 ~ file: chat.jsx:7 ~ chat ~ messages:", messages);
   const [message, setMessage] = useState("");
   useEffect(() => {
     socket.on("chat message", (msg) => {
@@ -20,28 +22,34 @@ function chat() {
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList />
-      <div className="flex-grow flex flex-col bg-green-200">
-        <div className="overflow-y-auto p-4 flex-1">
-          <ChatMessage message="Hey, how's it going?" isMine={false} />
-          <ChatMessage
-            message="I'm good, thanks! How about you?"
-            isMine={true}
-          />
-          <ChatMessage message="OKAY" isMine={false} />
-          <ChatMessage message="thanks! " isMine={true} />
-          {/* Add more messages here */}
-        </div>
-        <div className="bg-white p-4 border-t">
-          <input
-            type="text"
-            placeholder="Type a message..."
-            className="w-full p-2 border rounded-md"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button type="button" onClick={handleSubmit}>
-            Send
-          </button>
+      <div className="flex-grow flex flex-col  items-center">
+        <div className="flex-grow w-2/3 flex  flex-col  ">
+          <div className="overflow-y-auto p-4 flex-1">
+            <ChatMessage message="Hey, how's it going?" isMine={false} />
+            <ChatMessage
+              message="I'm good, thanks! How about you?"
+              isMine={true}
+            />
+            {messages.map((msg) => (
+              <ChatMessage message={msg} isMine={true} />
+            ))}
+            {/* Add more messages here */}
+          </div>
+          <div className="p-4 border-t flex gap-2">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              className="w-full p-2 border rounded-md"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button
+              type="button"
+              className="p-2 rounded-md border"
+              onClick={handleSubmit}>
+              {RiSendPlaneFill} se
+            </button>
+          </div>
         </div>
       </div>
     </div>
