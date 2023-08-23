@@ -76,3 +76,8 @@ input:checked.defaultCheckbox::before {
 .txtGreenColor {
   color: #068e77c9;
 }
+
+body {
+  max-height: 100vh;
+  overflow: hidden;
+}

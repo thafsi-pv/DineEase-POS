@@ -1,8 +1,8 @@
 import React from "react";
-import {MdPointOfSale,MdOutlineCategory} from 'react-icons/md'
-import {GiTable} from 'react-icons/gi'
-import {IoFastFood} from 'react-icons/io5'
-import {HiOutlineChatBubbleBottomCenterText} from 'react-icons/hi2'
+import { MdPointOfSale, MdOutlineCategory } from "react-icons/md";
+import { GiTable } from "react-icons/gi";
+import { IoFastFood } from "react-icons/io5";
+import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 
 // Admin Imports
 import MainDashboard from "./pages/admin/default";
@@ -13,7 +13,7 @@ import POS from "./pages/pos";
 // import RTLDefault from "views/rtl/default";
 
 // Auth Imports
-//import SignIn from "views/auth/SignIn";
+import SignIn from "./pages/auth/SignIn";
 
 // Icon Imports
 import {
@@ -91,13 +91,13 @@ const routes = [
   //   icon: <MdPerson className="h-6 w-6" />,
   //   component: <Profile />,
   // },
-  // {
-  //   name: "Sign In",
-  //   layout: "/auth",
-  //   path: "sign-in",
-  //   icon: <MdLock className="h-6 w-6" />,
-  //   component: <SignIn />,
-  // },
+  {
+    name: "Sign In",
+    layout: "/auth",
+    path: "sign-in",
+    icon: <MdLock className="h-6 w-6" />,
+    component: <SignIn />,
+  },
   // {
   //   name: "RTL Admin",
   //   layout: "/rtl",
