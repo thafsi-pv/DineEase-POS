@@ -2,8 +2,19 @@
 import React from "react";
 
 function InputField(props) {
-  const { label, id, extra, type, placeholder, variant, state, disabled } =
-    props;
+  const {
+    label,
+    id,
+    extra,
+    type,
+    placeholder,
+    variant,
+    state,
+    disabled,
+    onChange,
+    onBlur,
+    value,
+  } = props;
 
   return (
     <div className={`${extra}`}>
@@ -11,11 +22,13 @@ function InputField(props) {
         htmlFor={id}
         className={`text-sm text-navy-700 dark:text-white ${
           variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
-        }`}
-      >
+        }`}>
         {label}
       </label>
       <input
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
         disabled={disabled}
         type={type}
         id={id}
