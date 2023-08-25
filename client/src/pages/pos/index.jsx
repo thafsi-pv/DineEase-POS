@@ -29,6 +29,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { loadScript } from "../../utils/utils";
 import usePayment from "../../hooks/usePayment";
+import { motion, AnimatePresence } from "framer-motion";
 
 function index() {
   const printRef = useRef(null);
@@ -104,7 +105,7 @@ function index() {
   //   setPayAmount(payableAmount);
   //   console.log("🚀 ~ file: index.jsx:105 ~ paymentbutton ~ subTotalVal:", payableAmount)
   //   paymentProcess(payableAmount);
-    
+
   //   //   const res = await loadScript(
   //   //     "https://checkout.razorpay.com/v1/checkout.js"
   //   //   );
@@ -289,7 +290,19 @@ function index() {
                       <tfoot className="border-t">
                         <tr>
                           <td>Total Payable:</td>
-                          <td>{subTotalVal}</td>
+                          <td>
+                            <AnimatePresence wait>
+                              <motion.span
+                                key={subTotalVal}
+                                className="text-xl font-semibold"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 1 }}>
+                                Total: {subTotalVal}
+                              </motion.span>
+                            </AnimatePresence>
+                          </td>
                         </tr>
                       </tfoot>
                     </table>

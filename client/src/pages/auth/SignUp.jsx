@@ -45,6 +45,7 @@ function SignUp() {
       lastName: "",
       email: "",
       password: "",
+      tandc: false,
     },
     validate,
     onSubmit: (values) => {
@@ -71,18 +72,19 @@ function SignUp() {
                       Enter your email your details to sign up!
                     </p>
                     <form onSubmit={formik.handleSubmit}>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mb-3">
                         {/* First Name */}
                         <div className="flex flex-col flex-1">
                           <InputField
                             variant="auth"
                             extra=" "
                             state={
-                                formik.touched.firstName && formik.errors.firstName
-                                  ? "error"
-                                  : ""
-                              }
-                            label="First Name*"
+                              formik.touched.firstName &&
+                              formik.errors.firstName
+                                ? "error"
+                                : ""
+                            }
+                            label="First Name"
                             placeholder="First Name"
                             id="firstName"
                             type="text"
@@ -90,14 +92,6 @@ function SignUp() {
                             onBlur={formik.handleBlur}
                             value={formik.values.firstName}
                           />
-                          {formik.touched.firstName &&
-                          formik.errors.firstName ? (
-                            <div>
-                              <span className="text-xs text-red-500">
-                                {formik.errors.firstName}
-                              </span>
-                            </div>
-                          ) : null}
                         </div>
                         {/* Last Name */}
                         <div className="flex flex-col flex-1">
@@ -117,25 +111,18 @@ function SignUp() {
                             onBlur={formik.handleBlur}
                             value={formik.values.lastName}
                           />
-                          {formik.touched.lastName && formik.errors.lastName ? (
-                            <div>
-                              <span className="text-xs text-red-500">
-                                {formik.errors.lastName}
-                              </span>
-                            </div>
-                          ) : null}
                         </div>
                       </div>
                       {/* Email */}
                       <InputField
                         variant="auth"
                         extra="mb-3"
-                        label="Email*"
+                        label="Email"
                         state={
-                            formik.touched.email && formik.errors.email
-                              ? "error"
-                              : ""
-                          }
+                          formik.touched.email && formik.errors.email
+                            ? "error"
+                            : ""
+                        }
                         placeholder="mail@simmmple.com"
                         id="email"
                         type="text"
@@ -148,16 +135,24 @@ function SignUp() {
                       <InputField
                         variant="auth"
                         extra="mb-3"
-                        label="Password*"
+                        label="Password"
                         placeholder="Min. 8 characters"
                         id="password"
                         type="password"
+                        state={
+                          formik.touched.password && formik.errors.password
+                            ? "error"
+                            : ""
+                        }
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                       />
                       {/* Confirm Password */}
                       <InputField
                         variant="auth"
                         extra="mb-3"
-                        label="Password*"
+                        label="Confirm Password"
                         placeholder="Confirm password"
                         id="password"
                         type="password"
