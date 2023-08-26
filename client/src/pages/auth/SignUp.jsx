@@ -1,5 +1,4 @@
 import InputField from "../../components/fields/InputField";
-import { FcGoogle } from "react-icons/fc";
 import Checkbox from "../../components/checkbox";
 import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
 import Footer from "../../components/footer/FooterAuthDefault";
@@ -33,7 +32,14 @@ const validate = (values) => {
   } else if (values.password.length < 8) {
     errors.password = "Must be 8 characters or more";
   }
-  console.log("🚀 ~ file: SignUp.jsx:35 ~ validate ~ errors:", errors);
+  if (!values.cpassword) {
+    errors.cpassword = "Required";
+  } else if (values.password !== values.cpassword) {
+    errors.cpassword = "Not match with password";
+  }
+  if (!values.tandc) {
+    errors.tandc = "Accept terms and condition";
+  }
 
   return errors;
 };
@@ -45,14 +51,18 @@ function SignUp() {
       lastName: "",
       email: "",
       password: "",
+      cpassword: "",
       tandc: false,
     },
     validate,
     onSubmit: (values) => {
+      console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
+      //   if (!values.tandc) {
+      //     toast.error("Accept terms and condition is required!");
+      //   }
       alert(JSON.stringify(values, null, 2));
     },
   });
-  console.log("🚀 ~ file: SignUp.jsx:53 ~ SignUp ~ formik:", formik);
 
   return (
     <div>
@@ -69,7 +79,7 @@ function SignUp() {
                       Sign Up
                     </h4>
                     <p className="mb-9 ml-1 text-base text-gray-600">
-                      Enter your email your details to sign up!
+                      Enter your details to sign up!
                     </p>
                     <form onSubmit={formik.handleSubmit}>
                       <div className="flex gap-2 mb-3">
@@ -149,21 +159,53 @@ function SignUp() {
                         value={formik.values.password}
                       />
                       {/* Confirm Password */}
-                      <InputField
-                        variant="auth"
-                        extra="mb-3"
-                        label="Confirm Password"
-                        placeholder="Confirm password"
-                        id="password"
-                        type="password"
-                      />
+                      <div className="mb-3">
+                        <InputField
+                          variant="auth"
+                          extra=""
+                          label="Confirm Password"
+                          placeholder="Confirm password"
+                          id="cpassword"
+                          type="text"
+                          state={
+                            formik.touched.cpassword && formik.errors.cpassword
+                              ? "error"
+                              : ""
+                          }
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.cpassword}
+                        />
+                        {formik.touched.cpassword && formik.errors.cpassword ? (
+                          <div className="pl-3">
+                            <span className="text-red-500 text-xs">
+                              {formik.errors.cpassword}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
                       {/* Checkbox */}
                       <div className="mb-4 flex items-center justify-between px-2">
-                        <div className="flex items-center">
-                          <Checkbox />
-                          <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
-                            Accept terms and conditions
-                          </p>
+                        <div className="flex flex-col">
+                          <div className="flex items-center">
+                            <Checkbox
+                              state="error"
+                              name="tandc"
+                              value={formik.values.tandc}
+                              onChange={formik.handleChange}
+                              onBlur={formik.handleBlur}
+                            />
+                            <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
+                              Accept terms and conditions
+                            </p>
+                          </div>
+                          {formik.touched.tandc && formik.errors.tandc ? (
+                            <div>
+                              <span className="text-red-500 text-xs">
+                                {formik.errors.tandc}
+                              </span>
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                       <button
