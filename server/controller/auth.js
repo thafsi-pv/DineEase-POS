@@ -4,6 +4,7 @@ const { generateHashPassword } = require("../utils/bcrypt");
 const signUp = async (req, res) => {
   try {
     const data = req.body;
+    console.log("🚀 ~ file: auth.js:7 ~ signUp ~ data:", data)
     const isExist = await userModal.findOne({ email: data.email });
     if (isExist) {
       return res

@@ -5,44 +5,8 @@ import Footer from "../../components/footer/FooterAuthDefault";
 import { Link } from "react-router-dom";
 import authImg from "../../assets/img/auth/2252808.jpg";
 import { useFormik } from "formik";
-
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  } else if (values.firstName.length > 15) {
-    errors.firstName = "Must be 15 characters or less";
-  }
-
-  if (!values.lastName) {
-    errors.lastName = "Required";
-  } else if (values.lastName.length > 20) {
-    errors.lastName = "Must be 20 characters or less";
-  }
-
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
-
-  if (!values.password) {
-    errors.password = "Required";
-  } else if (values.password.length < 8) {
-    errors.password = "Must be 8 characters or more";
-  }
-  if (!values.cpassword) {
-    errors.cpassword = "Required";
-  } else if (values.password !== values.cpassword) {
-    errors.cpassword = "Not match with password";
-  }
-  if (!values.tandc) {
-    errors.tandc = "Accept terms and condition";
-  }
-
-  return errors;
-};
+import { validate } from "../../utils/validate";
+import axios from "axios";
 
 function SignUp() {
   const formik = useFormik({
@@ -55,12 +19,15 @@ function SignUp() {
       tandc: false,
     },
     validate,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
       //   if (!values.tandc) {
       //     toast.error("Accept terms and condition is required!");
       //   }
-      alert(JSON.stringify(values, null, 2));
+      const signUpUrl = "http://localhost:8080/api/auth/signUp";
+      const response = await axios.post(signUpUrl, values);
+      console.log("🚀 ~ file: SignUp.jsx:29 ~ onSubmit: ~ response:", response);
+      alert(response);
     },
   });
 
