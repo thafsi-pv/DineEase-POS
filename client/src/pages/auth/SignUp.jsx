@@ -2,13 +2,16 @@ import InputField from "../../components/fields/InputField";
 import Checkbox from "../../components/checkbox";
 import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
 import Footer from "../../components/footer/FooterAuthDefault";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authImg from "../../assets/img/auth/2252808.jpg";
 import { useFormik } from "formik";
 import { validate } from "../../utils/validate";
 import axios from "axios";
+import { genricError } from "../../utils/genricError";
+import { toast } from "react-hot-toast";
 
 function SignUp() {
+  const navigate = useNavigate(null);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -20,14 +23,17 @@ function SignUp() {
     },
     validate,
     onSubmit: async (values) => {
-      console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
-      //   if (!values.tandc) {
-      //     toast.error("Accept terms and condition is required!");
-      //   }
-      const signUpUrl = "http://localhost:8080/api/auth/signUp";
-      const response = await axios.post(signUpUrl, values);
-      console.log("🚀 ~ file: SignUp.jsx:29 ~ onSubmit: ~ response:", response);
-      alert(response);
+      try {
+        console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
+        const signUpUrl = "http://localhost:8080/api/auth/signUp";
+        const response = await axios.post(signUpUrl, values);
+        if ((response.status = 200)) {
+          toast.success("Successfully registered, SignIn now 🤝");
+          navigate("/auth/sign-in");
+        }
+      } catch (error) {
+        genricError(error);
+      }
     },
   });
 

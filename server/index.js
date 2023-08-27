@@ -8,11 +8,13 @@ const socketIo = require("socket.io");
 const { authRouter } = require("./router/auth");
 const server = http.createServer(app);
 const io = socketIo(server);
+const connectDb = require("./config/db");
 
 dotenv.config();
 
 app.use(express.json());
 app.use(cors());
+connectDb();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
