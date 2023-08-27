@@ -5,6 +5,7 @@ const paymentRoutes = require("./router/payment");
 const app = express();
 const http = require("http");
 const socketIo = require("socket.io");
+const { authRouter } = require("./router/auth");
 const server = http.createServer(app);
 const io = socketIo(server);
 
@@ -17,7 +18,7 @@ io.on("connection", (socket) => {
   console.log("A user connected");
 
   socket.on("chat message", (msg) => {
-    console.log("🚀 ~ file: index.js:20 ~ socket.on ~ msg:", msg)
+    console.log("🚀 ~ file: index.js:20 ~ socket.on ~ msg:", msg);
     io.emit("chat message", msg);
   });
 
@@ -25,6 +26,8 @@ io.on("connection", (socket) => {
     console.log("User disconnected");
   });
 });
+
+app.use("/api/auth", authRouter);
 
 app.use("/api/payment/", paymentRoutes);
 
