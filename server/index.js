@@ -25,13 +25,12 @@ io.on("connection", (socket) => {
     connectedUsers[username] = socket.id;
   });
 
-  socket.on("connected UsersList", () => {
-    console.log("🚀 ~ file: index.js:31 ~ socket.on ~ connectedUserslist:", connectedUsers)
-    io.emit("connectedUsers", Object.values(connectedUsers));
-  });
-
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
+  });
+
+  socket.on("userList", () => {
+    io.emit("userList", connectedUsers);
   });
 
   socket.on("disconnect", () => {

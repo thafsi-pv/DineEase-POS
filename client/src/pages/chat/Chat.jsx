@@ -6,18 +6,13 @@ import { RiSendPlaneFill } from "react-icons/ri";
 function chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+  console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ currentUser:", currentUser)
   useEffect(() => {
     socket.on("chat message", (msg) => {
       setMessages([...messages, msg]);
     });
   }, [messages]);
-
-  useEffect(() => {
-    console.log('userlist useeffect')
-    socket.on("connected UsersList", (list) => {
-      console.log("🚀 ~ file: chat.jsx:15 ~ socket.on ~ list:", list);
-    });
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +22,7 @@ function chat() {
 
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
-      <ContactList />
+      <ContactList currentUser={setCurrentUser} />
       <div className="flex-grow flex flex-col  items-center">
         <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
           <div className="overflow-y-auto p-4 flex-1">
@@ -80,23 +75,33 @@ const ChatMessage = ({ message, isMine }) => {
   );
 };
 
-const ContactList = () => {
+const ContactList = ({ currentUser }) => {
   const contacts = [
     { id: 1, name: "John Doe" },
     { id: 2, name: "Jane Smith" },
     { id: 3, name: "Michael Johnson" },
     // Add more contacts
   ];
+  const [userList, setuserList] = useState([]);
+
+  useEffect(() => {
+    socket.emit("userList");
+    socket.on("userList", (list) => {
+      console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ list:", list);
+      setuserList(list);
+    });
+  }, []);
 
   return (
     <div className="w-1/4 bg-gray-200 p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold mb-2">Contacts</h2>
       <ul>
-        {contacts.map((contact) => (
+        {Object.keys(userList).map((contact) => (
           <li
+            onClick={currentUser(userList[contact])}
             key={contact.id}
             className="cursor-pointer py-2 hover:bg-gray-300">
-            {contact.name}
+            {contact}
           </li>
         ))}
       </ul>
