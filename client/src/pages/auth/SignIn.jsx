@@ -25,11 +25,22 @@ export default function SignIn() {
         const signInUrl = "http://localhost:8080/api/auth/signIn";
         const response = await axios.post(signInUrl, values);
         if ((response.status = 200)) {
+          console.log(
+            "🚀 ~ file: SignIn.jsx:28 ~ onSubmit: ~ response:",
+            response
+          );
           toast.success("SignIn successfull, 👍🏻");
+          var dataToStore = {
+            DET: response.data.accesstoken,
+            email: response.data.email
+          };
+          
+          localStorage.setItem('DEPOS', JSON.stringify(dataToStore));
+        
           navigate("/admin");
         }
       } catch (error) {
-        console.log("🚀 ~ file: SignIn.jsx:30 ~ onSubmit: ~ error:", error)
+        console.log("🚀 ~ file: SignIn.jsx:30 ~ onSubmit: ~ error:", error);
         genricError(error);
       }
     },
