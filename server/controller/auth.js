@@ -25,14 +25,14 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const isUserExist = await userModel.findOne({ email });
+    const isUserExist = await userModal.findOne({ email });
     if (!isUserExist) {
       return res.status(400).json({ message: "Incorrect email/password" });
     }
 
     const validPassword = await comparePassword(password, isUserExist.password);
     if (!validPassword) {
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "Incorrect email/password" });
     }
 
     //generate access token
