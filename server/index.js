@@ -16,11 +16,21 @@ app.use(express.json());
 app.use(cors());
 connectDb();
 
+const connectedUsers = {};
 io.on("connection", (socket) => {
-  console.log("A user connected");
+  console.log(`User connected: ${socket.id}`);
+
+  // Store user's socket ID
+  socket.on("login", (username) => {
+    connectedUsers[username] = socket.id;
+  });
+
+  socket.on("connected UsersList", () => {
+    console.log("🚀 ~ file: index.js:31 ~ socket.on ~ connectedUserslist:", connectedUsers)
+    io.emit("connectedUsers", Object.values(connectedUsers));
+  });
 
   socket.on("chat message", (msg) => {
-    console.log("🚀 ~ file: index.js:20 ~ socket.on ~ msg:", msg);
     io.emit("chat message", msg);
   });
 

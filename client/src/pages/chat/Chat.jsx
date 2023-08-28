@@ -5,13 +5,19 @@ import { RiSendPlaneFill } from "react-icons/ri";
 
 function chat() {
   const [messages, setMessages] = useState([]);
-  console.log("🚀 ~ file: chat.jsx:7 ~ chat ~ messages:", messages);
   const [message, setMessage] = useState("");
   useEffect(() => {
     socket.on("chat message", (msg) => {
       setMessages([...messages, msg]);
     });
   }, [messages]);
+
+  useEffect(() => {
+    console.log('userlist useeffect')
+    socket.on("connected UsersList", (list) => {
+      console.log("🚀 ~ file: chat.jsx:15 ~ socket.on ~ list:", list);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

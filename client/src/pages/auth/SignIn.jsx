@@ -10,6 +10,8 @@ import { validateSignIn } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import io from "socket.io-client";
+const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {
   const navigate = useNavigate(null);
@@ -25,18 +27,15 @@ export default function SignIn() {
         const signInUrl = "http://localhost:8080/api/auth/signIn";
         const response = await axios.post(signInUrl, values);
         if ((response.status = 200)) {
-          console.log(
-            "🚀 ~ file: SignIn.jsx:28 ~ onSubmit: ~ response:",
-            response
-          );
+          socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");
           var dataToStore = {
             DET: response.data.accesstoken,
-            email: response.data.email
+            email: response.data.email,
           };
-          
-          localStorage.setItem('DEPOS', JSON.stringify(dataToStore));
-        
+
+          localStorage.setItem("DEPOS", JSON.stringify(dataToStore));
+
           navigate("/admin");
         }
       } catch (error) {
