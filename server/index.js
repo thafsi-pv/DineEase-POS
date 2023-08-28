@@ -42,9 +42,10 @@ io.on("connection", (socket) => {
       connectedUsers
     );
     const recipientSocketId = connectedUsers[recipient];
+    console.log("🚀 ~ file: index.js:45 ~ socket.on ~ recipientSocketId:", recipientSocketId)
     if (recipientSocketId) {
       socket.to(recipientSocketId).emit("private message", {
-        sender: socket.id,
+        //sender: socket.id,
         message,
       });
     }

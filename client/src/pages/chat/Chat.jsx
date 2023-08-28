@@ -7,10 +7,15 @@ function chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [recipient, setRecipient] = useState("");
+  console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ recipient:", recipient);
   useEffect(() => {
-    socket.on("chat message", (msg) => {
-      setMessages([...messages, msg]);
-    });
+    // socket.on("private message", ({ sender, message }) => {
+    //   console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
+    //   console.log(`Private message from ${sender}: ${message}`);
+    // });
+    // socket.on("private message", (msg) => {
+    //   setMessages([...messages, msg]);
+    // });
   }, [messages]);
 
   const handleSubmit = (e) => {
@@ -102,8 +107,8 @@ const ContactList = ({ recipient }) => {
       <ul>
         {Object.keys(userList).map((contact) => (
           <li
-            onClick={recipient(contact)}
-            key={contact.id}
+            onClick={() => recipient(contact)}
+            key={contact}
             className="cursor-pointer py-2 hover:bg-gray-300">
             {contact}
           </li>
