@@ -23,7 +23,6 @@ export default function SignIn() {
     validate: validateSignIn,
     onSubmit: async (values) => {
       try {
-        console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
         const signInUrl = "http://localhost:8080/api/auth/signIn";
         const response = await axios.post(signInUrl, values);
         if ((response.status = 200)) {
@@ -39,7 +38,6 @@ export default function SignIn() {
           navigate("/admin");
         }
       } catch (error) {
-        console.log("🚀 ~ file: SignIn.jsx:30 ~ onSubmit: ~ error:", error);
         genricError(error);
       }
     },

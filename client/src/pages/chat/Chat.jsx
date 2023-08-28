@@ -6,8 +6,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 function chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [currentUser, setCurrentUser] = useState("");
-  console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ currentUser:", currentUser)
+  const [recipient, setRecipient] = useState("");
   useEffect(() => {
     socket.on("chat message", (msg) => {
       setMessages([...messages, msg]);
@@ -16,13 +15,19 @@ function chat() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit("chat message", message);
+    // socket.emit("chat message", message);
+    socket.emit("private message", { recipient, message });
     setMessage("");
   };
 
+  socket.on("private message", ({ sender, message }) => {
+    console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
+    console.log(`Private message from ${sender}: ${message}`);
+  });
+
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
-      <ContactList currentUser={setCurrentUser} />
+      <ContactList recipient={setRecipient} />
       <div className="flex-grow flex flex-col  items-center">
         <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
           <div className="overflow-y-auto p-4 flex-1">
@@ -75,7 +80,7 @@ const ChatMessage = ({ message, isMine }) => {
   );
 };
 
-const ContactList = ({ currentUser }) => {
+const ContactList = ({ recipient }) => {
   const contacts = [
     { id: 1, name: "John Doe" },
     { id: 2, name: "Jane Smith" },
@@ -87,7 +92,6 @@ const ContactList = ({ currentUser }) => {
   useEffect(() => {
     socket.emit("userList");
     socket.on("userList", (list) => {
-      console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ list:", list);
       setuserList(list);
     });
   }, []);
@@ -98,7 +102,7 @@ const ContactList = ({ currentUser }) => {
       <ul>
         {Object.keys(userList).map((contact) => (
           <li
-            onClick={currentUser(userList[contact])}
+            onClick={recipient(contact)}
             key={contact.id}
             className="cursor-pointer py-2 hover:bg-gray-300">
             {contact}

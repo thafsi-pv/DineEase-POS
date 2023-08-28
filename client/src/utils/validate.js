@@ -37,7 +37,6 @@ export const validate = (values) => {
 };
 
 export const validateSignIn = (values) => {
-  console.log("🚀 ~ file: validate.js:40 ~ validateSignIn ~ values:", values)
   const errors = {};
   if (!values.email) {
     errors.email = "Required";

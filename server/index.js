@@ -33,6 +33,23 @@ io.on("connection", (socket) => {
     io.emit("userList", connectedUsers);
   });
 
+  socket.on("private message", ({ recipient, message }) => {
+    console.log("🚀 ~ file: index.js:46 ~ socket.on ~ recipient:", recipient);
+    console.log("🚀 ~ file: index.js:47 ~ socket.on ~ message:", message);
+
+    console.log(
+      "🚀 ~ file: index.js:41 ~ socket.on ~ connectedUsers:",
+      connectedUsers
+    );
+    const recipientSocketId = connectedUsers[recipient];
+    if (recipientSocketId) {
+      socket.to(recipientSocketId).emit("private message", {
+        sender: socket.id,
+        message,
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
