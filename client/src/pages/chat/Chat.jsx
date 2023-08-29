@@ -5,30 +5,34 @@ import { RiSendPlaneFill } from "react-icons/ri";
 
 function chat() {
   const [messages, setMessages] = useState([]);
+  console.log("🚀 ~ file: chat.jsx:8 ~ chat ~ messages:", messages);
   const [message, setMessage] = useState("");
   const [recipient, setRecipient] = useState("");
   console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ recipient:", recipient);
   useEffect(() => {
-    socket.on("private message", ({  message }) => {
+    console.log("socketid", socket.id);
+    socket.on("private message", ({ sender, message }) => {
       console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
       console.log(`Private message from : ${message}`);
+      setMessages((prevMessages) => [...prevMessages, message]);
     });
     // socket.on("private message", (msg) => {
     //   setMessages([...messages, msg]);
     // });
-  }, [messages]);
+  }, [message]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // socket.emit("chat message", message);
-    socket.emit("private message", { recipient, message });
+    socket.emit("private message", { recipientt: socket.id, message });
     setMessage("");
   };
 
-  // socket.on("private message", ({ sender, message }) => {
-  //   console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
-  //   console.log(`Private message from ${sender}: ${message}`);
-  // });
+  socket.on("private message", ({ sender, message }) => {
+    console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
+    console.log(`Private message from ${sender}: ${message}`);
+    setMessages((prevMessages) => [...prevMessages, message]);
+  });
 
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
