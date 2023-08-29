@@ -9,10 +9,10 @@ function chat() {
   const [recipient, setRecipient] = useState("");
   console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ recipient:", recipient);
   useEffect(() => {
-    // socket.on("private message", ({ sender, message }) => {
-    //   console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
-    //   console.log(`Private message from ${sender}: ${message}`);
-    // });
+    socket.on("private message", ({  message }) => {
+      console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
+      console.log(`Private message from : ${message}`);
+    });
     // socket.on("private message", (msg) => {
     //   setMessages([...messages, msg]);
     // });
@@ -25,10 +25,10 @@ function chat() {
     setMessage("");
   };
 
-  socket.on("private message", ({ sender, message }) => {
-    console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
-    console.log(`Private message from ${sender}: ${message}`);
-  });
+  // socket.on("private message", ({ sender, message }) => {
+  //   console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
+  //   console.log(`Private message from ${sender}: ${message}`);
+  // });
 
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
