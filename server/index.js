@@ -3,19 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const paymentRoutes = require("./router/payment");
 const app = express();
-const http = require("http");
-const socketIo = require("socket.io");
 const { authRouter } = require("./router/auth");
-const { Server } = require("socket.io");
-const server = http.createServer(app);
-//const io = socketIo(server);
 const connectDb = require("./config/db");
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
-  },
-});
 
 dotenv.config();
 
@@ -23,62 +12,9 @@ app.use(express.json());
 app.use(cors());
 connectDb();
 
-const connectedUsers = {};
-io.on("connection", (socket) => {
-  console.log(`User connected: ${socket.id}`);
-
-  // Store user's socket ID
-  socket.on("login", (username) => {
-    connectedUsers[username] = socket.id;
-  });
-
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-  });
-
-  socket.on("userList", () => {
-    io.emit("userList", connectedUsers);
-  });
-
-  // socket.on("private message", ({ recipient, message }) => {
-  //   console.log("🚀 ~ file: index.js:46 ~ socket.on ~ recipient:", recipient);
-  //   console.log("🚀 ~ file: index.js:47 ~ socket.on ~ message:", message);
-
-  //   console.log(
-  //     "🚀 ~ file: index.js:41 ~ socket.on ~ connectedUsers:",
-  //     connectedUsers
-  //   );
-  //   const recipientSocketId = connectedUsers[recipient];
-  //   console.log("🚀 ~ file: index.js:45 ~ socket.on ~ recipientSocketId:", recipientSocketId)
-  //   if (recipientSocketId) {
-  //     socket.to(recipientSocketId).emit("private message", {
-  //       sender: socket.id,
-  //       message,
-  //     });
-  //   }
-  // });
-
-  socket.on("private message", ({ recipientt, message }) => {
-    console.log("🚀 ~ file: index.js:69 ~ socket.on ~ recipient:", recipientt);
-    console.log("🚀 ~ file: index.js:71 ~ socket.on ~ message:", message);
-
-    const messages = {
-      message,
-      from: socket.userID,
-      to: recipientt,
-    };
-    console.log("🚀 ~ file: index.js:71 ~ socket.on ~ recipientSocketId:", recipientt)
-    socket.to(recipientt).emit("private message", messages);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
-});
-
 app.use("/api/auth", authRouter);
 
 app.use("/api/payment/", paymentRoutes);
 
 const port = process.env.PORT || 8080;
-server.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
