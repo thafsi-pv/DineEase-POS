@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/auth/sign-in" element={<SignIn />} />
           <Route path="/auth/sign-up" element={<SignUp />} />
         </Routes>
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} />
       </Provider>
       {/* </LockScreen> */}
     </>
