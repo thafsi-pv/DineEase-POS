@@ -4,38 +4,34 @@ const io = require("socket.io")(8800, {
   },
 });
 
-let activeUsers = [];
+const connectedUsers = {};
 
 io.on("connection", (socket) => {
-  console.log("user connected", socket.id);
-  // add new User
-  socket.on("new-user-add", (newUserId) => {
-    console.log("🚀 ~ file: index.js:13 ~ socket.on ~ newUserId:", newUserId)
-    // if user is not added previously
-    if (!activeUsers.some((user) => user.userId === newUserId)) {
-      activeUsers.push({ userId: newUserId, socketId: socket.id });
-      console.log("New User Connected", activeUsers);
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("login", (username) => {
+    connectedUsers[username] = socket.id;
+    io.emit("userList", Object.keys(connectedUsers));
+  });
+
+  socket.on("private message", ({ recipient, message }) => {
+    const recipientSocketId = connectedUsers[recipient];
+    if (recipientSocketId) {
+      socket.to(recipientSocketId).emit("private message", {
+        sender: socket.id,
+        message,
+      });
     }
-    // send all active users to new user
-    io.emit("get-users", activeUsers);
   });
 
   socket.on("disconnect", () => {
-    // remove user from active users
-    activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-    console.log("User Disconnected", activeUsers);
-    // send all active users to all users
-    io.emit("get-users", activeUsers);
-  });
-
-  // send message to a specific user
-  socket.on("send-message", (data) => {
-    const { receiverId } = data;
-    const user = activeUsers.find((user) => user.userId === receiverId);
-    console.log("Sending from socket to :", receiverId);
-    console.log("Data: ", data);
-    if (user) {
-      io.to(user.socketId).emit("recieve-message", data);
+    console.log(`User disconnected: ${socket.id}`);
+    const username = Object.keys(connectedUsers).find(
+      (key) => connectedUsers[key] === socket.id
+    );
+    if (username) {
+      delete connectedUsers[username];
+      io.emit("userList", Object.keys(connectedUsers));
     }
   });
 });

@@ -1,47 +1,86 @@
 import React, { useEffect, useRef, useState } from "react";
-import io from "socket.io-client";
 import { RiSendPlaneFill } from "react-icons/ri";
 
-function chat() {
-  
+import io from "socket.io-client";
 
+const socket = io("http://localhost:8080");
+
+function chat() {
+  const [username, setUsername] = useState("");
+  const [userList, setUserList] = useState([]);
+  const [selectedRecipient, setSelectedRecipient] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on("userList", (list) => {
+      setUserList(list);
+    });
+
+    socket.on("private message", ({ sender, message }) => {
+      setMessages((prevMessages) => [...prevMessages, `${sender}: ${message}`]);
+    });
+  }, []);
+
+  const handleLogin = () => {
+    socket.emit("login", username);
+  };
+
+  const handleSendMessage = () => {
+    if (selectedRecipient && message) {
+      socket.emit("private message", { recipient: selectedRecipient, message });
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        `You to ${selectedRecipient}: ${message}`,
+      ]);
+      setMessage("");
+    }
+  };
   return (
-    <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
-      <ContactList recipient={setOnlineUsers} />
-      <div className="flex-grow flex flex-col  items-center">
-        <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
-          <div className="overflow-y-auto p-4 flex-1">
-            <ChatMessage message="Hey, how's it going?" isMine={false} />
-            <ChatMessage
-              message="I'm good, thanks! How about you?"
-              isMine={true}
-            />
-            {chats.map((msg) => (
-              <ChatMessage message={msg} isMine={true} />
-            ))}
-            {/* Add more messages here */}
-          </div>
-          <div className="p-4 border-t flex gap-2">
-            <input
-              type="text"
-              placeholder="Type a message..."
-              className="w-full p-2 border rounded-md"
-              value={currentChat}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-            <button
-              type="button"
-              className="p-4 rounded-full border bg-white hover:bg-gray-400"
-              onClick={sendMessage}>
-              <RiSendPlaneFill className="h-7 w-7 txtGreenColor" />
-            </button>
-          </div>
+    <div>
+      <h1>Private Chat</h1>
+      <div>
+        <label>Username: </label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button onClick={handleLogin}>Login</button>
+      </div>
+      <div>
+        <h2>Online Users</h2>
+        <ul>
+          {userList.map((user) => (
+            <li
+              key={user}
+              onClick={() => setSelectedRecipient(user)}
+              style={{
+                cursor: "pointer",
+                fontWeight: selectedRecipient === user ? "bold" : "normal",
+              }}>
+              {user}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Chat</h2>
+        <div style={{ border: "1px solid #ccc", padding: "10px" }}>
+          {messages.map((msg, index) => (
+            <div key={index}>{msg}</div>
+          ))}
         </div>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );
 }
-
 export default chat;
 
 const ChatMessage = ({ message, isMine }) => {
