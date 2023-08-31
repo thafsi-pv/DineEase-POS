@@ -10,7 +10,7 @@ import { validateSignIn } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import io from "socket.io-client";
+//import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {

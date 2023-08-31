@@ -10,6 +10,7 @@ io.on("connection", (socket) => {
   console.log("user connected", socket.id);
   // add new User
   socket.on("new-user-add", (newUserId) => {
+    console.log("🚀 ~ file: index.js:13 ~ socket.on ~ newUserId:", newUserId)
     // if user is not added previously
     if (!activeUsers.some((user) => user.userId === newUserId)) {
       activeUsers.push({ userId: newUserId, socketId: socket.id });
