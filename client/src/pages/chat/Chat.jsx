@@ -1,42 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
-const socket = io("http://localhost:8080");
 import { RiSendPlaneFill } from "react-icons/ri";
 
 function chat() {
-  const [messages, setMessages] = useState([]);
-  console.log("🚀 ~ file: chat.jsx:8 ~ chat ~ messages:", messages);
-  const [message, setMessage] = useState("");
-  const [recipient, setRecipient] = useState("");
-  console.log("🚀 ~ file: chat.jsx:10 ~ chat ~ recipient:", recipient);
+  const [chats, setChats] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [sendMessage, setSendMessage] = useState(null);
+  const [receivedMessage, setReceivedMessage] = useState(null);
+  const socket = useRef();
+
+  // Connect to Socket.io
   useEffect(() => {
-    console.log("socketid", socket.id);
-    socket.on("private message", ({ sender, message }) => {
-      console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
-      console.log(`Private message from : ${message}`);
-      setMessages((prevMessages) => [...prevMessages, message]);
+    console.log("useeffect running");
+    socket.current = io("ws://localhost:8800");
+    socket.current.emit("new-user-add", "123User");
+    socket.current.on("get-users", (users) => {
+      console.log("🚀 ~ file: chat.jsx:18 ~ socket.current.on ~ users:", users);
+      setOnlineUsers(users);
     });
-    // socket.on("private message", (msg) => {
-    //   setMessages([...messages, msg]);
-    // });
-  }, [message]);
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // socket.emit("chat message", message);
-    socket.emit("private message", { recipientt: socket.id, message });
-    setMessage("");
-  };
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.current.emit("send-message", sendMessage);
+    }
+  }, [sendMessage]);
 
-  socket.on("private message", ({ sender, message }) => {
-    console.log("🚀 ~ file: chat.jsx:26 ~ socket.on ~ message:", message);
-    console.log(`Private message from ${sender}: ${message}`);
-    setMessages((prevMessages) => [...prevMessages, message]);
-  });
+  // Get the message from socket server
+  useEffect(() => {
+    socket.current.on("recieve-message", (data) => {
+      console.log(data);
+      setReceivedMessage(data);
+    });
+  }, []);
 
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
-      <ContactList recipient={setRecipient} />
+      <ContactList recipient={setOnlineUsers} />
       <div className="flex-grow flex flex-col  items-center">
         <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
           <div className="overflow-y-auto p-4 flex-1">
@@ -45,7 +46,7 @@ function chat() {
               message="I'm good, thanks! How about you?"
               isMine={true}
             />
-            {messages.map((msg) => (
+            {chats.map((msg) => (
               <ChatMessage message={msg} isMine={true} />
             ))}
             {/* Add more messages here */}
@@ -55,13 +56,13 @@ function chat() {
               type="text"
               placeholder="Type a message..."
               className="w-full p-2 border rounded-md"
-              value={message}
+              value={currentChat}
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
               type="button"
               className="p-4 rounded-full border bg-white hover:bg-gray-400"
-              onClick={handleSubmit}>
+              onClick={sendMessage}>
               <RiSendPlaneFill className="h-7 w-7 txtGreenColor" />
             </button>
           </div>
@@ -97,13 +98,6 @@ const ContactList = ({ recipient }) => {
     // Add more contacts
   ];
   const [userList, setuserList] = useState([]);
-
-  useEffect(() => {
-    socket.emit("userList");
-    socket.on("userList", (list) => {
-      setuserList(list);
-    });
-  }, []);
 
   return (
     <div className="w-1/4 bg-gray-200 p-4 overflow-y-auto">

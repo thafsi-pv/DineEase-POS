@@ -11,7 +11,7 @@ import { genricError } from "../../utils/genricError";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import io from "socket.io-client";
-const socket = io("http://localhost:8080"); // Replace with your server URL
+//const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {
   const navigate = useNavigate(null);
@@ -26,7 +26,7 @@ export default function SignIn() {
         const signInUrl = "http://localhost:8080/api/auth/signIn";
         const response = await axios.post(signInUrl, values);
         if ((response.status = 200)) {
-          socket.emit("login", response.data.email);
+          //socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");
           var dataToStore = {
             DET: response.data.accesstoken,
