@@ -110,12 +110,12 @@ const ChatMessage = ({ message, isMine }) => {
 
 const ContactList = ({ userList, recipient }) => {
   //const [userList, setuserList] = useState([]);
-
+  const list = userList.filter((item) => item != myUserName);
   return (
     <div className="w-1/4 bg-gray-200 p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold mb-2">Contacts</h2>
       <ul>
-        {userList.map((user) => (
+        {list.map((user) => (
           <li
             onClick={() => recipient(user)}
             key={user}
@@ -128,80 +128,4 @@ const ContactList = ({ userList, recipient }) => {
   );
 };
 
-// function chat() {
-//   const [username, setUsername] = useState("");
-//   const [userList, setUserList] = useState([]);
-//   const [selectedRecipient, setSelectedRecipient] = useState("");
-//   const [message, setMessage] = useState("");
-//   const [messages, setMessages] = useState([]);
 
-//   useEffect(() => {
-//     socket.on("userList", (list) => {
-//       setUserList(list);
-//     });
-
-//     socket.on("private message", ({ sender, message }) => {
-//       setMessages((prevMessages) => [...prevMessages, `${sender}: ${message}`]);
-//     });
-//   }, []);
-
-//   const handleLogin = () => {
-//     socket.emit("login", username);
-//   };
-
-//   const handleSendMessage = () => {
-//     if (selectedRecipient && message) {
-//       socket.emit("private message", { recipient: selectedRecipient, message });
-//       setMessages((prevMessages) => [
-//         ...prevMessages,
-//         `You to ${selectedRecipient}: ${message}`,
-//       ]);
-//       setMessage("");
-//     }
-//   };
-//   return (
-//     <div>
-//       <h1>Private Chat</h1>
-//       <div>
-//         <label>Username: </label>
-//         <input
-//           type="text"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <button onClick={handleLogin}>Login</button>
-//       </div>
-//       <div>
-//         <h2>Online Users</h2>
-//         <ul>
-//           {userList.map((user) => (
-//             <li
-//               key={user}
-//               onClick={() => setSelectedRecipient(user)}
-//               style={{
-//                 cursor: "pointer",
-//                 fontWeight: selectedRecipient === user ? "bold" : "normal",
-//               }}>
-//               {user}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//       <div>
-//         <h2>Chat</h2>
-//         <div style={{ border: "1px solid #ccc", padding: "10px" }}>
-//           {messages.map((msg, index) => (
-//             <div key={index}>{msg}</div>
-//           ))}
-//         </div>
-//         <input
-//           type="text"
-//           value={message}
-//           onChange={(e) => setMessage(e.target.value)}
-//         />
-//         <button onClick={handleSendMessage}>Send</button>
-//       </div>
-//     </div>
-//   );
-// }
-// export default chat;
