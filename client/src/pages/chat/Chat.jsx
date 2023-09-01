@@ -3,25 +3,29 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:8080");
-
+let myUserName = "";
 function chat() {
   const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  console.log("🚀 ~ file: chat.jsx:13 ~ chat ~ messages:", messages);
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("DEPOS"));
     console.log("🚀 ~ file: chat.jsx:16 ~ useEffect ~ data:", data);
-
+    myUserName = data.email;
     socket.emit("login", data.email);
     socket.on("userList", (list) => {
       setUserList(list);
     });
 
     socket.on("private message", ({ sender, message }) => {
-      setMessages((prevMessages) => [...prevMessages, `${sender}: ${message}`]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: sender, message: message },
+      ]);
     });
   }, []);
 
@@ -31,11 +35,18 @@ function chat() {
 
   const handleSendMessage = () => {
     if (selectedRecipient && message) {
-      socket.emit("private message", { recipient: selectedRecipient, message });
+      socket.emit("private message", {
+        sender: myUserName,
+        recipient: selectedRecipient,
+        message,
+      });
       setMessages((prevMessages) => [
+        // ...prevMessages,
+        // `You to ${selectedRecipient}: ${message}`,
         ...prevMessages,
-        `You to ${selectedRecipient}: ${message}`,
+        { sender: myUserName, recipient: selectedRecipient, message: message },
       ]);
+
       setMessage("");
     }
   };
@@ -51,7 +62,10 @@ function chat() {
               isMine={true}
             />
             {messages.map((msg) => (
-              <ChatMessage message={msg} isMine={true} />
+              <ChatMessage
+                message={msg.message}
+                isMine={msg.sender == myUserName ? true : false}
+              />
             ))}
             {/* Add more messages here */}
           </div>
@@ -95,7 +109,6 @@ const ChatMessage = ({ message, isMine }) => {
 };
 
 const ContactList = ({ userList, recipient }) => {
-  
   //const [userList, setuserList] = useState([]);
 
   return (
@@ -104,7 +117,7 @@ const ContactList = ({ userList, recipient }) => {
       <ul>
         {userList.map((user) => (
           <li
-          onClick={() => recipient(user)}
+            onClick={() => recipient(user)}
             key={user}
             className="cursor-pointer py-2 hover:bg-gray-300">
             {user}

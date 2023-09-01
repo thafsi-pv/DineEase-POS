@@ -12,14 +12,14 @@ const server = http.createServer(app);
 //const io = socketIo(server);
 
 const io = require("socket.io")(server, {
-    cors: {
-      origin: "http://localhost:5173",
-      methods: ["GET", "POST"]
-    }
-  });
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
 
 // Configure CORS to allow requests from http://localhost:5173
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: "http://localhost:5173" }));
 dotenv.config();
 app.use(express.json());
 // app.use(cors());
@@ -31,13 +31,8 @@ app.use("/api/payment/", paymentRoutes);
 
 //socket
 
-
 const connectedUsers = {};
 // const io = socketIo(server);
-
-
-
-
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
@@ -47,11 +42,12 @@ io.on("connection", (socket) => {
     io.emit("userList", Object.keys(connectedUsers));
   });
 
-  socket.on("private message", ({ recipient, message }) => {
+  socket.on("private message", ({ sender, recipient, message }) => {
     const recipientSocketId = connectedUsers[recipient];
     if (recipientSocketId) {
       socket.to(recipientSocketId).emit("private message", {
-        sender: socket.id,
+        //sender: socket.id,
+        sender,
         message,
       });
     }
