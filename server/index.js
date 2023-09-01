@@ -5,27 +5,39 @@ const paymentRoutes = require("./router/payment");
 const app = express();
 const { authRouter } = require("./router/auth");
 const connectDb = require("./config/db");
+
 const socketIo = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
+//const io = socketIo(server);
 
+const io = require("socket.io")(server, {
+    cors: {
+      origin: "http://localhost:5173",
+      methods: ["GET", "POST"]
+    }
+  });
+
+// Configure CORS to allow requests from http://localhost:5173
+app.use(cors({ origin: 'http://localhost:5173' }));
 dotenv.config();
-
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 connectDb();
 
 app.use("/api/auth", authRouter);
 
 app.use("/api/payment/", paymentRoutes);
 
+//socket
 
-
-//socket 
-
-const io = socketIo(server);
 
 const connectedUsers = {};
+// const io = socketIo(server);
+
+
+
+
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);

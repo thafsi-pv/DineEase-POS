@@ -25,9 +25,9 @@ function chat() {
     });
   }, []);
 
-  const handleLogin = () => {
-    socket.emit("login", username);
-  };
+  // const handleLogin = () => {
+  //   socket.emit("login", username);
+  // };
 
   const handleSendMessage = () => {
     if (selectedRecipient && message) {
