@@ -1,6 +1,6 @@
 const userModal = require("../model/userModal");
 const { generateHashPassword, comparePassword } = require("../utils/bcrypt");
-const generateJWTToken = require("../utils/jwt");
+const { generateJWTToken } = require("../utils/jwt");
 
 const signUp = async (req, res) => {
   try {
@@ -47,4 +47,4 @@ const signIn = async (req, res) => {
   }
 };
 
-module.exports = { signUp,signIn };
+module.exports = { signUp, signIn };

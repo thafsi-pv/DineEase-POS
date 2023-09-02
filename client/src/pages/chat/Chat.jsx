@@ -3,13 +3,13 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import io from "socket.io-client";
 
 let data = JSON.parse(localStorage.getItem("DEPOS"));
-let myUserName = data.email;
-const token = data.DET;
+let myUserName = data?.email;
+const token = data?.DET;
 const socket = io(`http://localhost:8080/?token=${token}`);
 function chat() {
   const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
-  console.log("🚀 ~ file: chat.jsx:12 ~ chat ~ userList:", userList)
+  console.log("🚀 ~ file: chat.jsx:12 ~ chat ~ userList:", userList);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -120,17 +120,17 @@ const ChatMessage = ({ message, isMine }) => {
 
 const ContactList = ({ userList, recipient }) => {
   //const [userList, setuserList] = useState([]);
-  const list = userList.filter((item) => item != myUserName);
+  const list = userList.filter((item) => item.username != myUserName);
   return (
     <div className="w-1/4 bg-gray-200 p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold mb-2">Contacts</h2>
       <ul>
         {list.map((user) => (
           <li
-            onClick={() => recipient(user)}
-            key={user}
+            onClick={() => recipient(user.username)}
+            key={user.userId}
             className="cursor-pointer py-2 hover:bg-gray-300">
-            {user}
+            {user.username}
           </li>
         ))}
       </ul>

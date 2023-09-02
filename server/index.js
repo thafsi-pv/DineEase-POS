@@ -41,22 +41,17 @@ io.on("connection", (socket) => {
   socket.on("login", async (username) => {
     const token = socket.handshake.query.token;
     const verify = verifyToken(token);
-    console.log("🚀 ~ file: index.js:44 ~ socket.on ~ verify:", verify);
     const user = { username, soketid: socket.id, userId: verify._id };
+    console.log("🚀 ~ file: index.js:45 ~ socket.on ~ verify:", verify)
     connectedUsers.push(user);
-    console.log("🚀 ~ file: index.js:47 ~ socket.on ~ user:", user);
-    console.log(
-      "🚀 ~ file: index.js:46 ~ socket.on ~ connectedUsers:",
-      connectedUsers
-    );
 
     io.emit("userList", connectedUsers);
   });
 
-  socket.on("private message", ({ sender, recipient, message }) => {
-    const recipientSocketId = connectedUsers[recipient];
-    if (recipientSocketId) {
-      socket.to(recipientSocketId).emit("private message", {
+  socket.on("private message", ({ sender, recipientusername, message }) => {
+    const recipient = connectedUsers.find((user) => user.username == recipientusername);
+    if (recipient) {
+      socket.to(recipient.soketid).emit("private message", {
         //sender: socket.id,
         sender,
         message,
