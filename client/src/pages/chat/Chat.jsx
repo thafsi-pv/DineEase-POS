@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import io from "socket.io-client";
+import incomingNotificationSound from "../../assets/sounds/incomingNotification.mp3";
+import { Howl, Howler } from "howler";
+Howler.volume(1);
 
 let data = JSON.parse(localStorage.getItem("DEPOS"));
 let myUserName = data?.email;
 const token = data?.DET;
 const socket = io(`http://localhost:8080/?token=${token}`);
+const sound = new Howl({
+  src: [incomingNotificationSound],
+});
+
 function chat() {
   const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
@@ -26,6 +33,7 @@ function chat() {
         ...prevMessages,
         { sender: sender, message: message },
       ]);
+      sound.play();
     });
   }, []);
 
@@ -50,6 +58,7 @@ function chat() {
       setMessage("");
     }
   };
+
   return (
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-5 justify-center">
       <ContactList userList={userList} recipient={setSelectedRecipient} />

@@ -39,19 +39,47 @@ io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
   socket.on("login", async (username) => {
+    console.log(
+      "🚀 ~ file: index.js:36 ~ login-connectedUsers:",
+      connectedUsers
+    );
+
     const token = socket.handshake.query.token;
     const verify = verifyToken(token);
-    const user = { username, soketid: socket.id, userId: verify._id };
-    console.log("🚀 ~ file: index.js:45 ~ socket.on ~ verify:", verify)
-    connectedUsers.push(user);
+    const recipientIndex = connectedUsers.findIndex(
+      (user) => user.username == username
+    );
+
+    console.log(
+      "🚀 ~ file: index.js:53 ~ socket.on ~ recipientIndex:",
+      recipientIndex
+    );
+
+    if (recipientIndex >= 0) {
+      connectedUsers[recipientIndex].soketid = socket.id;
+    } else {
+      const user = { username, soketid: socket.id, userId: verify._id };
+      console.log("🚀 ~ file: index.js:45 ~ socket.on ~ verify:", verify);
+      connectedUsers.push(user);
+    }
 
     io.emit("userList", connectedUsers);
   });
 
-  socket.on("private message", ({ sender, recipientusername, message }) => {
-    const recipient = connectedUsers.find((user) => user.username == recipientusername);
-    if (recipient) {
-      socket.to(recipient.soketid).emit("private message", {
+  socket.on("private message", ({ sender, recipient, message }) => {
+    console.log(
+      "🚀 ~ file: index.js:52 ~ socket.on ~ recipientusername:",
+      recipient
+    );
+    const recipientdata = connectedUsers.find(
+      (user) => user.username == recipient
+    );
+    console.log(
+      "🚀 ~ file: index.js:53 ~ socket.on ~ recipient:",
+      recipientdata
+    );
+    if (recipientdata) {
+      socket.to(recipientdata.soketid).emit("private message", {
         //sender: socket.id,
         sender,
         message,
