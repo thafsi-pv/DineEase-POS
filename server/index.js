@@ -8,6 +8,7 @@ const connectDb = require("./config/db");
 
 const socketIo = require("socket.io");
 const http = require("http");
+const { verifyToken } = require("./utils/jwt");
 const server = http.createServer(app);
 //const io = socketIo(server);
 
@@ -31,15 +32,25 @@ app.use("/api/payment/", paymentRoutes);
 
 //socket
 
-const connectedUsers = {};
+const connectedUsers = [];
 // const io = socketIo(server);
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
-  socket.on("login", (username) => {
-    connectedUsers[username] = socket.id;
-    io.emit("userList", Object.keys(connectedUsers));
+  socket.on("login", async (username) => {
+    const token = socket.handshake.query.token;
+    const verify = verifyToken(token);
+    console.log("🚀 ~ file: index.js:44 ~ socket.on ~ verify:", verify);
+    const user = { username, soketid: socket.id, userId: verify._id };
+    connectedUsers.push(user);
+    console.log("🚀 ~ file: index.js:47 ~ socket.on ~ user:", user);
+    console.log(
+      "🚀 ~ file: index.js:46 ~ socket.on ~ connectedUsers:",
+      connectedUsers
+    );
+
+    io.emit("userList", connectedUsers);
   });
 
   socket.on("private message", ({ sender, recipient, message }) => {

@@ -2,21 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:8080");
-let myUserName = "";
+let data = JSON.parse(localStorage.getItem("DEPOS"));
+let myUserName = data.email;
+const token = data.DET;
+const socket = io(`http://localhost:8080/?token=${token}`);
 function chat() {
   const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
+  console.log("🚀 ~ file: chat.jsx:12 ~ chat ~ userList:", userList)
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   console.log("🚀 ~ file: chat.jsx:13 ~ chat ~ messages:", messages);
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("DEPOS"));
-    console.log("🚀 ~ file: chat.jsx:16 ~ useEffect ~ data:", data);
-    myUserName = data.email;
-    socket.emit("login", data.email);
+    socket.emit("login", myUserName);
     socket.on("userList", (list) => {
       setUserList(list);
     });
@@ -56,7 +56,11 @@ function chat() {
       <div className="flex-grow flex flex-col  items-center">
         <div className="bg-green-200 w-full p-3 flex">
           <div className="flex items-center">
-            <img className="w-10 h-10 rounded-full" src="/src/assets/img/avatars/avatar4.png" alt="" />
+            <img
+              className="w-10 h-10 rounded-full"
+              src="/src/assets/img/avatars/avatar4.png"
+              alt=""
+            />
             <p className="p-2 font-semibold">{selectedRecipient}</p>
           </div>
         </div>

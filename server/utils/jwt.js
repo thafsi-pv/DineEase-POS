@@ -4,4 +4,8 @@ const generateJWTToken = (userId) => {
   return jwt.sign({ _id: userId }, process.env.JWT_SECRET_KEY);
 };
 
-module.exports = generateJWTToken;
+const verifyToken = (token) => {
+  return jwt.verify(token, process.env.JWT_SECRET_KEY);
+};
+
+module.exports = { generateJWTToken, verifyToken };
