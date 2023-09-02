@@ -51,7 +51,7 @@ function chat() {
     }
   };
   return (
-    <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
+    <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-5 justify-center">
       <ContactList userList={userList} recipient={setSelectedRecipient} />
       <div className="flex-grow flex flex-col  items-center">
         <div className="bg-green-200 w-full p-3 flex">
@@ -105,7 +105,7 @@ const ChatMessage = ({ message, isMine }) => {
         isMine ? "justify-end" : "justify-start"
       } mb-4 items-end`}>
       <div
-        className={`max-w-xs p-3 rounded-lg ${
+        className={`max-w-xs p-3 rounded-lg whitespace-normal break-all ${
           isMine ? "bg-blue-500 text-white" : "bg-gray-200"
         }`}>
         {message}
