@@ -54,6 +54,12 @@ function chat() {
     <div className=" h-[75vh] flex bg-gray-100 rounded-lg mt-10 justify-center">
       <ContactList userList={userList} recipient={setSelectedRecipient} />
       <div className="flex-grow flex flex-col  items-center">
+        <div className="bg-green-200 w-full p-3 flex">
+          <div className="flex items-center">
+            <img className="w-10 h-10 rounded-full" src="/src/assets/img/avatars/avatar4.png" alt="" />
+            <p className="p-2 font-semibold">{selectedRecipient}</p>
+          </div>
+        </div>
         <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
           <div className="overflow-y-auto p-4 flex-1">
             <ChatMessage message="Hey, how's it going?" isMine={false} />
@@ -127,5 +133,3 @@ const ContactList = ({ userList, recipient }) => {
     </div>
   );
 };
-
-
