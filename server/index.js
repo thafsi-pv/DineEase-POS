@@ -4,22 +4,14 @@ const dotenv = require("dotenv");
 const paymentRoutes = require("./router/payment");
 const app = express();
 const { authRouter } = require("./router/auth");
+const chatRouter = require("./router/chat");
 const connectDb = require("./config/db");
 
-const socketIo = require("socket.io");
+//const socketIo = require("socket.io");
 const http = require("http");
 const { verifyToken } = require("./utils/jwt");
 const server = http.createServer(app);
-//const io = socketIo(server);
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
-  },
-});
-
-// Configure CORS to allow requests from http://localhost:5173
 app.use(cors({ origin: "http://localhost:5173" }));
 dotenv.config();
 app.use(express.json());
@@ -30,10 +22,17 @@ app.use("/api/auth", authRouter);
 
 app.use("/api/payment/", paymentRoutes);
 
+app.use("/api/createChat", chatRouter);
+
 //socket
 
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
 const connectedUsers = [];
-// const io = socketIo(server);
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
