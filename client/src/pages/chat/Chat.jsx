@@ -82,8 +82,11 @@ function chat() {
   }, [selectedRecipient]);
 
   useEffect(() => {
-    if (chatListRef.current) {
-      chatListRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    if (chatListRef && chatListRef.current) {
+      chatListRef.current.scrollTo({
+        top: chatListRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [messages]);
 
