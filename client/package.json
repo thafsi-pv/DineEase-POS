@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "emoji-picker-react": "^4.4.12",
     "formik": "^2.4.3",
     "framer-motion": "^10.16.1",
     "howler": "^2.2.3",

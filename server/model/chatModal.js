@@ -3,8 +3,8 @@ const userModal = require("./userModal");
 
 const chatSchema = mongoose.Schema(
   {
-    sender: { type: mongoose.Schema.Types.ObjectId, ref: user },
-    recipient: { type: mongoose.Schema.Types.ObjectId, ref: user },
+    sender: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+    recipient: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     message: { type: String },
   },
   { timestamps: true, strict: false }

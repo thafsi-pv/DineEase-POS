@@ -62,10 +62,7 @@ function index() {
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
-      console.log(
-        "🚀 ~ file: index.jsx:63 ~ detectKeyDown ~ subTotalVal:",
-        subTotalVal
-      );
+     
       // paymentbutton(subTotalVal);
 
       // Use the callback form of setsubTotalVal to access the latest state

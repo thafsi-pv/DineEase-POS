@@ -63,3 +63,10 @@
 	margin-top: 10px;
 }
 
+.App .EmojiPickerReact {
+	--epr-picker-height: 300px;
+  }
+  
+  .show-emoji {
+	padding-bottom: 150px;
+  }
