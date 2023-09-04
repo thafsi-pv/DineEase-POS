@@ -6,8 +6,8 @@ import { Howl, Howler } from "howler";
 import Card from "../../components/card";
 Howler.volume(1);
 import axios from "axios";
-import EmojiPicker from 'emoji-picker-react';
-
+import EmojiPicker from "emoji-picker-react";
+import { BsFillEmojiSmileFill } from "react-icons/bs";
 let data = JSON.parse(localStorage.getItem("DEPOS"));
 let myUserName = data?.email;
 const token = data?.DET;
@@ -17,11 +17,13 @@ const sound = new Howl({
 });
 
 function chat() {
+  const chatListRef = useRef(null);
   const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showEmoji, setshowEmoji] = useState(false);
 
   useEffect(() => {
     socket.emit("login", myUserName);
@@ -79,6 +81,12 @@ function chat() {
     getChats();
   }, [selectedRecipient]);
 
+  useEffect(() => {
+    if (chatListRef.current) {
+      chatListRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }
+  }, [messages]);
+
   const getChats = async () => {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
@@ -101,11 +109,10 @@ function chat() {
       console.log("🚀 ~ file: Chat.jsx:89 ~ getChats ~ error:", error);
     }
   };
-  const [chosenEmoji, setChosenEmoji] = useState(null);
 
-  const onEmojiClick = (event, emojiObject) => {
-    console.log("🚀 ~ file: Chat.jsx:108 ~ onEmojiClick ~ emojiObject:", emojiObject)
-    setChosenEmoji(emojiObject);
+  const onEmojiClick = (event) => {
+    setMessage((prev) => prev + event.emoji);
+    setshowEmoji(false);
   };
 
   return (
@@ -123,8 +130,8 @@ function chat() {
               <p className="p-2 font-semibold">{selectedRecipient}</p>
             </div>
           </div>
-          <div className="h-full flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
-            <div className="overflow-y-auto p-4 flex-1">
+          <div className=" h-1/3 flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
+            <div className="overflow-y-scroll p-4 flex-1" ref={chatListRef}>
               {/* <ChatMessage message="Hey, how's it going?" isMine={false} />
               <ChatMessage
                 message="I'm good, thanks! How about you?"
@@ -138,20 +145,24 @@ function chat() {
               ))}
               {/* Add more messages here */}
             </div>
-            <div className="p-4 border-t flex gap-2">
-              Your selected Emoji is:
-              <div>
-                <EmojiPicker
-                  onEmojiClick={onEmojiClick}
-                  disableAutoFocus={true}
-                  native
-                />
-                {chosenEmoji && <EmojiData chosenEmoji={chosenEmoji} />}
-              </div>
+            <div className=" p-4 border-t flex items-center gap-2">
+              {showEmoji && (
+                <div className="absolute bottom-24">
+                  <EmojiPicker
+                    onEmojiClick={onEmojiClick}
+                    disableAutoFocus={true}
+                    native
+                  />
+                </div>
+              )}
+              <BsFillEmojiSmileFill
+                className="h-7 w-7 txtGreenColor"
+                onClick={() => setshowEmoji(true)}
+              />
               <input
                 type="text"
                 placeholder="Type a message..."
-                className="w-full p-2 border rounded-md"
+                className="w-full p-4 border rounded-md flex-1"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
@@ -170,24 +181,6 @@ function chat() {
 }
 
 export default chat;
-
-const EmojiData = ({ chosenEmoji }) => {
-  console.log(
-    "🚀 ~ file: Chat.jsx:175 ~ EmojiData ~ chosenEmoji:",
-    chosenEmoji
-  );
-  return (
-    <div>
-      <strong>Unified:</strong> {chosenEmoji.unified}
-      <br />
-      {/* <strong>Names:</strong> {chosenEmoji.names.join(", ")} */}
-      <br />
-      {/* <strong>Symbol:</strong> {chosenEmoji.emoji}
-      <br />
-      <strong>ActiveSkinTone:</strong> {chosenEmoji.activeSkinTone} */}
-    </div>
-  );
-};
 
 const ChatMessage = ({ message, isMine }) => {
   return (
