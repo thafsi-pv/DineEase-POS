@@ -122,7 +122,6 @@ function chat() {
     <Card extra={"w-full h-full p-3 pt-4"}>
       <div className=" h-[75vh] flex bg-gray-100 rounded-lg  justify-center">
         <ContactList userList={userList} recipient={setSelectedRecipient} />
-
         <div className="flex-grow flex">
           {selectedRecipient && (
             <div className="w-full flex-grow flex flex-col  items-center">
