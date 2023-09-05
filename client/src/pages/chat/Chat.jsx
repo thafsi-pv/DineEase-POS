@@ -234,7 +234,7 @@ const ContactList = ({ userList, recipient }) => {
   //const [userList, setuserList] = useState([]);
   const list = userList.filter((item) => item.username != myUserName);
   return (
-    <div className="w-1/4 bg-white">
+    <div className="w-1/4 bg-white dark:bg-navy-900">
       <div className=" border-gray-400 bg-[#068e774d] rounded-tl-lg ">
         <p className="text-left p-4 text-lg font-semibold">DE Chats</p>
       </div>
