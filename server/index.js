@@ -44,9 +44,7 @@ io.on("connection", (socket) => {
     const recipientIndex = connectedUsers.findIndex(
       (user) => user.username == username
     );
-
     const userdata = await userModal.find({ email: username });
-
     if (recipientIndex >= 0) {
       connectedUsers[recipientIndex].soketid = socket.id;
     } else {

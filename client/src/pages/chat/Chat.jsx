@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import io from "socket.io-client";
 import incomingNotificationSound from "../../assets/sounds/incomingNotification.mp3";
@@ -7,6 +7,7 @@ import Card from "../../components/card";
 Howler.volume(1);
 import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
+import chatbg from "../../assets/img/profile/chatbg.png";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 let data = JSON.parse(localStorage.getItem("DEPOS"));
 let myUserName = data?.email;
@@ -87,6 +88,15 @@ function chat() {
     }
   }, [messages]);
 
+  useLayoutEffect(() => {
+    if (chatListRef && chatListRef.current) {
+      chatListRef.current.scrollTo({
+        top: chatListRef.current.scrollHeight,
+        behavior: "",
+      });
+    }
+  }, []);
+
   const getChats = async () => {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
@@ -119,25 +129,33 @@ function chat() {
     const user = userList.find((user) => {
       return user.username == selectedRecipient;
     });
-    console.log("🚀 ~ file: Chat.jsx:120 ~ getUserFirstName ~ user:", user);
     return user.firstName + " " + user.lastName;
   };
 
   return (
-    <Card extra={"w-full h-full p-3 pt-4"}>
-      <div className=" h-[75vh] flex bg-gray-100 rounded-lg  justify-center">
+    <Card extra={"w-full h-full mt-3"}>
+      <div
+        className={`h-[75vh] flex bg-gray-200 dark:bg-navy-900 bg-cover bg-center  rounded-lg  justify-center`}
+        style={{
+          backgroundImage: `url(${chatbg})`,
+          backgroundSize: "650px auto",
+          backgroundRepeat: "repeat",
+        }}>
         <ContactList userList={userList} recipient={setSelectedRecipient} />
         <div className="flex-grow flex">
           {selectedRecipient && (
             <div className="w-full flex-grow flex flex-col  items-center">
-              <div className="bg-green-200 w-full p-3 flex">
-                <div className="flex items-center">
+              <div className="bg-[#068e777f] w-full p-3 flex rounded-tr-lg bg-blend">
+                <div className="flex items-center gap-2">
                   <img
                     className="w-10 h-10 rounded-full"
                     src="/src/assets/img/avatars/avatar4.png"
                     alt=""
                   />
-                  <p className="p-2 font-semibold">{getUserFirstName()}</p>
+                  <div className="flex flex-col  align-middle space-y-0">
+                    <p className="font-semibold p-0">{getUserFirstName()}</p>
+                    <p className="p-0 text-xs">Online</p>
+                  </div>
                 </div>
               </div>
               <div className=" h-1/3 flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
@@ -199,10 +217,12 @@ const ChatMessage = ({ message, isMine }) => {
     <div
       className={`flex ${
         isMine ? "justify-end" : "justify-start"
-      } mb-4 items-end`}>
+      } mb-4 items-end `}>
       <div
-        className={`max-w-xs p-3 rounded-lg whitespace-normal break-all ${
-          isMine ? "bg-blue-500 text-white" : "bg-gray-200"
+        className={`max-w-xs p-3  whitespace-normal break-all ${
+          isMine
+            ? "bg-blue-500 text-white rounded-l-lg rounded-tr-lg"
+            : "bg-gray-300 rounded-r-lg rounded-tl-lg"
         }`}>
         {message}
       </div>
@@ -213,20 +233,39 @@ const ChatMessage = ({ message, isMine }) => {
 const ContactList = ({ userList, recipient }) => {
   //const [userList, setuserList] = useState([]);
   const list = userList.filter((item) => item.username != myUserName);
-  console.log("🚀 ~ file: Chat.jsx:207 ~ ContactList ~ list:", list);
   return (
-    <div className="w-1/4 bg-gray-200  p-4 overflow-y-auto">
-      <h2 className="text-lg font-semibold mb-2">Contacts</h2>
-      <ul>
-        {list.map((user) => (
-          <li
-            onClick={() => recipient(user.username)}
-            key={user.userId}
-            className="cursor-pointer py-2 hover:bg-gray-300">
-            {user.firstName + " " + user.lastName}
-          </li>
-        ))}
-      </ul>
+    <div className="w-1/4 bg-white">
+      <div className=" border-gray-400 bg-[#068e774d] rounded-tl-lg ">
+        <p className="text-left p-4 text-lg font-semibold">DE Chats</p>
+      </div>
+      <div className="  p-4 overflow-y-auto">
+        <h2 className="text-lg font-semibold mb-2">Contacts</h2>
+        <ul>
+          {list.map((user) => (
+            <li
+              onClick={() => recipient(user.username)}
+              key={user.userId}
+              className="cursor-pointer py-2 hover:bg-gray-300 hover:rounded-lg">
+              <div className="">
+                <div className="flex items-center p-1">
+                  <div className="relative">
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src="/src/assets/img/avatars/avatar4.png"
+                      alt=""
+                    />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border shadow-lg">
+                    </span>
+                  </div>
+                  <p className="p-2 font-semibold">
+                    {user.firstName + " " + user.lastName}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
