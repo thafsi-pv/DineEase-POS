@@ -46,21 +46,19 @@ io.on("connection", (socket) => {
     );
 
     const userdata = await userModal.find({ email: username });
-    console.log("🚀 ~ file: index.js:49 ~ socket.on ~ userdata:", userdata);
 
     if (recipientIndex >= 0) {
       connectedUsers[recipientIndex].soketid = socket.id;
     } else {
       const user = {
-        firstName: userdata.firstName,
-        lastName: userdata.lastName,
+        firstName: userdata[0].firstName,
+        lastName: userdata[0].lastName,
         username,
         soketid: socket.id,
         userId: verify._id,
       };
       connectedUsers.push(user);
     }
-
     io.emit("userList", connectedUsers);
   });
 

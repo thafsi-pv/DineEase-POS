@@ -20,6 +20,7 @@ function chat() {
   const chatListRef = useRef(null);
   //const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
+  console.log("🚀 ~ file: Chat.jsx:23 ~ chat ~ userList:", userList);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -114,6 +115,14 @@ function chat() {
     setshowEmoji(false);
   };
 
+  const getUserFirstName = () => {
+    const user = userList.find((user) => {
+      return user.username == selectedRecipient;
+    });
+    console.log("🚀 ~ file: Chat.jsx:120 ~ getUserFirstName ~ user:", user);
+    return user.firstName + " " + user.lastName;
+  };
+
   return (
     <Card extra={"w-full h-full p-3 pt-4"}>
       <div className=" h-[75vh] flex bg-gray-100 rounded-lg  justify-center">
@@ -128,7 +137,7 @@ function chat() {
                     src="/src/assets/img/avatars/avatar4.png"
                     alt=""
                   />
-                  <p className="p-2 font-semibold">{selectedRecipient}</p>
+                  <p className="p-2 font-semibold">{getUserFirstName()}</p>
                 </div>
               </div>
               <div className=" h-1/3 flex-grow md:w-2/3 sm:w-full flex  flex-col  ">
@@ -204,6 +213,7 @@ const ChatMessage = ({ message, isMine }) => {
 const ContactList = ({ userList, recipient }) => {
   //const [userList, setuserList] = useState([]);
   const list = userList.filter((item) => item.username != myUserName);
+  console.log("🚀 ~ file: Chat.jsx:207 ~ ContactList ~ list:", list);
   return (
     <div className="w-1/4 bg-gray-200  p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold mb-2">Contacts</h2>
@@ -213,7 +223,7 @@ const ContactList = ({ userList, recipient }) => {
             onClick={() => recipient(user.username)}
             key={user.userId}
             className="cursor-pointer py-2 hover:bg-gray-300">
-            {user.username}
+            {user.firstName + " " + user.lastName}
           </li>
         ))}
       </ul>
