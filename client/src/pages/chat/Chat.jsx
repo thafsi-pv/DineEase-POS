@@ -18,7 +18,7 @@ const sound = new Howl({
 
 function chat() {
   const chatListRef = useRef(null);
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
@@ -39,10 +39,6 @@ function chat() {
       sound.play();
     });
   }, []);
-
-  // const handleLogin = () => {
-  //   socket.emit("login", username);
-  // };
 
   const handleSendMessage = () => {
     if (selectedRecipient && message) {

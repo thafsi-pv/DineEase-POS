@@ -10,6 +10,7 @@ const connectDb = require("./config/db");
 //const socketIo = require("socket.io");
 const http = require("http");
 const { verifyToken } = require("./utils/jwt");
+const userModal = require("./model/userModal");
 const server = http.createServer(app);
 
 app.use(cors({ origin: "http://localhost:5173" }));
@@ -44,10 +45,19 @@ io.on("connection", (socket) => {
       (user) => user.username == username
     );
 
+    const userdata = await userModal.find({ email: username });
+    console.log("🚀 ~ file: index.js:49 ~ socket.on ~ userdata:", userdata);
+
     if (recipientIndex >= 0) {
       connectedUsers[recipientIndex].soketid = socket.id;
     } else {
-      const user = { username, soketid: socket.id, userId: verify._id };
+      const user = {
+        firstName: userdata.firstName,
+        lastName: userdata.lastName,
+        username,
+        soketid: socket.id,
+        userId: verify._id,
+      };
       connectedUsers.push(user);
     }
 
