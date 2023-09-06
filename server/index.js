@@ -34,7 +34,7 @@ const io = require("socket.io")(server, {
   },
 });
 const connectedUsers = [];
-
+var allUsersList =[];
 io.on("connection", (socket) => {
   //console.log(`User connected: ${socket.id}`);
 
@@ -58,25 +58,34 @@ io.on("connection", (socket) => {
       };
       connectedUsers.push(user);
     }
-   // io.emit("userList", connectedUsers);
+    // io.emit("userList", connectedUsers);
 
     const allUsers = await userModal
       .find()
       .select("-password -tandc -createdAt -updatedAt -__v")
       .lean();
-    const newdata = allUsers.map((user) => {
-      if (user.email === username) {
-        user.soketid = socket.id;
-        user.userId = verify._id;
-        user.isOnline = true;
-        user.username = username;
 
+    if (allUsersList.length == 0) {
+     allUsersList = allUsers.map((user) => {
+        if (user.email === username) {
+          user.soketid = socket.id;
+          user.userId = verify._id;
+          user.isOnline = true;
+          user.username = username;
+        }
+        return user; // Always return the user object, whether it's updated or not
+      });
+    } else {
+      const index = allUsers.findIndex((user) => user.email === username);
+
+      if (index != -1) {
+        allUsers[index].soketid = socket.id;
+        allUsers[index].isOnline = true;
       }
-      return user; // Always return the user object, whether it's updated or not
-    });
-    console.log("🚀 ~ file: index.js:63 ~ socket.on ~ allUsers:", newdata);
-    io.emit("userList", newdata);
-    
+    }
+
+    console.log("🚀 ~ file: index.js:63 ~ socket.on ~ allUsers:", allUsersList);
+    io.emit("userList", allUsersList);
   });
 
   socket.on("private message", ({ sender, recipient, message }) => {
