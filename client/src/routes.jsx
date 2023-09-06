@@ -25,6 +25,7 @@ import {
 } from "react-icons/md";
 import ListTable from "./pages/table/ListTable";
 import Chat from "./pages/chat/Chat";
+import Products from "./pages/products/Products";
 
 const routes = [
   {
@@ -60,7 +61,7 @@ const routes = [
     layout: "/admin",
     path: "product",
     icon: <IoFastFood className="h-6 w-6" />,
-    component: <ListTable />,
+    component: <Products />,
   },
   {
     name: "Chat",

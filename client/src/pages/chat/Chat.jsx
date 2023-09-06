@@ -254,7 +254,7 @@ const ContactList = ({ userList, recipient }) => {
                       src="/src/assets/img/avatars/avatar4.png"
                       alt=""
                     />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border shadow-lg">
+                    <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${user.isOnline?'bg-green-500':'bg-red-500'} bg-green-500 border shadow-lg`}>
                     </span>
                   </div>
                   <p className="p-2 font-semibold">

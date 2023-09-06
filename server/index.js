@@ -39,6 +39,7 @@ io.on("connection", (socket) => {
   //console.log(`User connected: ${socket.id}`);
 
   socket.on("login", async (username) => {
+    console.log("🚀 ~ file: index.js:42 ~ socket.on ~ username:", username);
     const token = socket.handshake.query.token;
     const verify = verifyToken(token);
     const recipientIndex = connectedUsers.findIndex(
@@ -57,7 +58,25 @@ io.on("connection", (socket) => {
       };
       connectedUsers.push(user);
     }
-    io.emit("userList", connectedUsers);
+   // io.emit("userList", connectedUsers);
+
+    const allUsers = await userModal
+      .find()
+      .select("-password -tandc -createdAt -updatedAt -__v")
+      .lean();
+    const newdata = allUsers.map((user) => {
+      if (user.email === username) {
+        user.soketid = socket.id;
+        user.userId = verify._id;
+        user.isOnline = true;
+        user.username = username;
+
+      }
+      return user; // Always return the user object, whether it's updated or not
+    });
+    console.log("🚀 ~ file: index.js:63 ~ socket.on ~ allUsers:", newdata);
+    io.emit("userList", newdata);
+    
   });
 
   socket.on("private message", ({ sender, recipient, message }) => {
