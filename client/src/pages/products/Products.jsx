@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FormModal from "../../components/modal/FormModal";
 import AddProductsModal from "./components/AddProductsModal";
 import ComplexTable from "../admin/default/components/ComplexTable";
-import { columnsDataComplex } from "../admin/default/variables/columnsData";
 import tableDataComplex from "../admin/default/variables/tableDataComplex.json";
 
 function Products() {
@@ -15,6 +14,33 @@ function Products() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+   const columnsDataComplex = [
+    {
+      Header: "NAME",
+      accessor: "name",
+    },
+    {
+      Header: "IMAGE",
+      accessor: "image",
+    },
+    {
+      Header: "PRICE",
+      accessor: "price",
+    },
+    {
+      Header: "CATEGORY",
+      accessor: "category",
+    },
+    {
+      Header: "STATUS",
+      accessor: "status",
+    },
+    {
+      Header: "ACTION",
+      accessor: "action",
+    },
+  ];
 
   return (
     <div className=" mx-auto bg-white shadow-md p-6 rounded-md mt-6">
