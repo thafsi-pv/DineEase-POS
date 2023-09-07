@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-function FormModal() {
+function FormModal({ isOpen, onClose, children }) {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
+  console.log("🚀 ~ file: FormModal.jsx:5 ~ FormModal ~ isModalOpen:", isModalOpen)
 
   // Function to close the modal
   const closeModal = () => {
