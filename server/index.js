@@ -34,7 +34,7 @@ const io = require("socket.io")(server, {
   },
 });
 const connectedUsers = [];
-var allUsersList =[];
+var allUsersList = [];
 io.on("connection", (socket) => {
   //console.log(`User connected: ${socket.id}`);
 
@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
       .lean();
 
     if (allUsersList.length == 0) {
-     allUsersList = allUsers.map((user) => {
+      allUsersList = allUsers.map((user) => {
         if (user.email === username) {
           user.soketid = socket.id;
           user.userId = verify._id;
@@ -76,11 +76,14 @@ io.on("connection", (socket) => {
         return user; // Always return the user object, whether it's updated or not
       });
     } else {
-      const index = allUsers.findIndex((user) => user.email === username);
+      const index = allUsersList.findIndex((user) => user.email === username);
+      console.log("🚀 ~ file: index.js:80 ~ socket.on ~ index:", index);
 
       if (index != -1) {
-        allUsers[index].soketid = socket.id;
-        allUsers[index].isOnline = true;
+        allUsersList[index].soketid = socket.id;
+        allUsersList[index].isOnline = true;
+        allUsersList[index].username = username;
+        allUsersList[index].userId = verify._id;
       }
     }
 

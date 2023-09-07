@@ -100,9 +100,11 @@ function chat() {
   const getChats = async () => {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
+      console.log("🚀 ~ file: Chat.jsx:103 ~ getChats ~ senderData:", senderData)
       const recipientData = userList.find(
         (user) => user.username == selectedRecipient
       );
+      console.log("🚀 ~ file: Chat.jsx:107 ~ getChats ~ recipientData:", recipientData)
       const dt = { sender: senderData.userId, recipient: recipientData.userId };
       const data = await axios.post(
         "http://localhost:8080/api/chat/getChats",
