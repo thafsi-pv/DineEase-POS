@@ -1,25 +1,22 @@
 import React, { useState } from "react";
 
 function FormModal({ isOpen, onClose, children }) {
-  const [isModalOpen, setIsModalOpen] = useState(isOpen);
-  console.log("🚀 ~ file: FormModal.jsx:5 ~ FormModal ~ isModalOpen:", isModalOpen)
-
   // Function to close the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-    onClose();
-  };
+//   const closeModal = () => {
+//     setIsModalOpen(false);
+//     onClose();
+//   };
 
   return (
     <>
-      {isModalOpen && (
+      {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 bg-white p-6 rounded-lg shadow-md">
             <div className="flex justify-end">
               <button
                 className="text-gray-600 hover:text-gray-800"
-                onClick={closeModal}>
+                onClick={onClose}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
