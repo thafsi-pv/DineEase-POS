@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 
 function AddProductsModal() {
-    const [itemName, setItemName] = useState("");
+  const [itemName, setItemName] = useState("");
   const [price, setPrice] = useState("");
   const [portions, setPortions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -114,6 +115,7 @@ function AddProductsModal() {
           <option value="category1">Category 1</option>
           <option value="category2">Category 2</option>
         </select>
+        <DropDownReactSelect />
       </div>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-600">
@@ -139,6 +141,23 @@ function AddProductsModal() {
           checked={isActive}
           onChange={() => setIsActive(!isActive)}
         />
+      </div>
+      <div className="flex items-center space-x-2">
+        <label htmlFor="toggle" className="text-gray-600">
+          Toggle Switch:
+        </label>
+        <div className="relative">
+          <input
+            type="checkbox"
+            id="toggle"
+            className="sr-only form-checkbox h-5 w-10 text-indigo-600 transition duration-150 ease-in-out rounded-full bg-gray-300 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300"
+          />
+          <div className="w-10 h-5 bg-gray-200 rounded-full shadow-inner"></div>
+          <div className="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition duration-150 ease-in-out"></div>
+        </div>
+      </div>
+      <div>
+        <DropDownReactSelect />
       </div>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-600">
