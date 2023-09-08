@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import FormModal from "../../components/modal/FormModal";
 import AddProductsModal from "./components/AddProductsModal";
-import ComplexTable from "../admin/default/components/ComplexTable";
-import tableDataComplex from "../admin/default/variables/tableDataComplex.json";
+
 import ProductListTable from "./components/ProductListTable";
 
 function Products() {
@@ -42,6 +41,59 @@ function Products() {
       accessor: "action",
     },
   ];
+
+  const tableDataComplex = [
+    {
+      "name": "Kerala Sadya",
+      "price":12.00,
+      "status": "Active",
+      "category": "Veg",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Disable",
+      "date": "30.Dec.2021",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Error",
+      "date": "20.May.2021",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Inactive",
+      "date": "12.Jul.2021",
+      "progress": 30
+    },
+    {
+      "name": "Kerala Sadya",
+      "price":12.00,
+      "status": "Active",
+      "category": "Veg",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Disable",
+      "date": "30.Dec.2021",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Error",
+      "date": "20.May.2021",
+      "progress": 30
+    },
+    {
+      "name": "Marketplace",
+      "status": "Inactive",
+      "date": "12.Jul.2021",
+      "progress": 30
+    }
+  ]
 
   return (
     <div className=" mx-auto bg-white shadow-md p-6 rounded-md mt-6">
