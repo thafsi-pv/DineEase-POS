@@ -1,11 +1,16 @@
 import React, { useMemo } from "react";
-import { useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
+import {
+  useGlobalFilter,
+  usePagination,
+  useSortBy,
+  useTable,
+} from "react-table";
 import Card from "../../../components/card";
 import CardMenu from "../../../components/card/CardMenu";
 import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
 
 const ProductListTable = (props) => {
-  const { columnsData, tableData } = props;
+  const { columnsData, tableData,openModal } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -32,8 +37,14 @@ const ProductListTable = (props) => {
   return (
     <Card extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto"}>
       <div class="relative flex items-center justify-between pt-4">
-        <div class="text-xl font-bold text-navy-700 dark:text-white">
-          Product List
+        <div class="text-xl font-bold text-navy-700 dark:text-white flex-grow">
+        </div>
+        <div className="flex justify-end p-6">
+          <button
+            onClick={() => openModal()}
+            className="bg-blue-500 text-white px-4 py-2 rounded">
+            Add New Item
+          </button>
         </div>
         <CardMenu />
       </div>
@@ -86,6 +97,15 @@ const ProductListTable = (props) => {
                           </p>
                         </div>
                       );
+                    } else if (cell.column.Header === "IMAGE") {
+                      data = (
+                        <img
+                          src={cell.value}
+                          className="h-14 w-14 rounded-full"
+                          alt=""
+                          srcset=""
+                        />
+                      );
                     } else if (cell.column.Header === "CATEGORY") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
@@ -93,9 +113,28 @@ const ProductListTable = (props) => {
                         </p>
                       );
                     } else if (cell.column.Header === "PRICE") {
+                      data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
                           {cell.value}
                         </p>
+                      );
+                    } else if (cell.column.Header === "ACTION") {
+                      data = (
+                        <div className="flex items-center gap-2">
+                          <div className={`rounded-full text-xl`}>
+                            {cell.value === "Active" ? (
+                              <MdCheckCircle className="text-green-500" />
+                            ) : cell.value === "Disable" ? (
+                              <MdCancel className="text-red-500" />
+                            ) : cell.value === "Inactive" ? (
+                              <MdOutlineError className="text-orange-500" />
+                            ) : null}
+                          </div>
+                          <p className="text-sm font-bold text-navy-700 dark:text-white">
+                            {cell.value}
+                          </p>
+                        </div>
+                      );
                     }
                     return (
                       <td

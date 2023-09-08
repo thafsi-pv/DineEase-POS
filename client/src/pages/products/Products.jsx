@@ -17,12 +17,12 @@ function Products() {
 
   const columnsDataComplex = [
     {
-      Header: "NAME",
-      accessor: "name",
-    },
-    {
       Header: "IMAGE",
       accessor: "image",
+    },
+    {
+      Header: "NAME",
+      accessor: "name",
     },
     {
       Header: "PRICE",
@@ -44,71 +44,67 @@ function Products() {
 
   const tableDataComplex = [
     {
-      "name": "Kerala Sadya",
-      "price":12.00,
-      "status": "Active",
-      "category": "Veg",
-      "progress": 30
+      image:
+        "https://media.istockphoto.com/id/1329663291/photo/onam-sadhya-traditional-kerala-food-and-culture.jpg?s=612x612&w=0&k=20&c=TkUgy721R_I0c7b_24wwaTdMPkgDr0DcAsbmou8CQJA=",
+      name: "Kerala Sadya",
+      price: "12.00",
+      status: "Active",
+      category: "Veg",
+      action: "Active",
     },
     {
-      "name": "Marketplace",
-      "status": "Disable",
-      "date": "30.Dec.2021",
-      "progress": 30
+      name: "Marketplace",
+      price: 12.0,
+      status: "Disable",
+      category: "30.Dec.2021",
+      progress: 30,
     },
     {
-      "name": "Marketplace",
-      "status": "Error",
-      "date": "20.May.2021",
-      "progress": 30
+      name: "Marketplace",
+      status: "Error",
+      date: "20.May.2021",
+      progress: 30,
     },
     {
-      "name": "Marketplace",
-      "status": "Inactive",
-      "date": "12.Jul.2021",
-      "progress": 30
+      name: "Marketplace",
+      status: "Inactive",
+      date: "12.Jul.2021",
+      progress: 30,
     },
     {
-      "name": "Kerala Sadya",
-      "price":12.00,
-      "status": "Active",
-      "category": "Veg",
-      "progress": 30
+      name: "Kerala Sadya",
+      price: 12.0,
+      status: "Active",
+      category: "Veg",
+      progress: 30,
     },
     {
-      "name": "Marketplace",
-      "status": "Disable",
-      "date": "30.Dec.2021",
-      "progress": 30
+      name: "Marketplace",
+      status: "Disable",
+      date: "30.Dec.2021",
+      progress: 30,
     },
     {
-      "name": "Marketplace",
-      "status": "Error",
-      "date": "20.May.2021",
-      "progress": 30
+      name: "Marketplace",
+      status: "Error",
+      date: "20.May.2021",
+      progress: 30,
     },
     {
-      "name": "Marketplace",
-      "status": "Inactive",
-      "date": "12.Jul.2021",
-      "progress": 30
-    }
-  ]
+      name: "Marketplace",
+      status: "Inactive",
+      date: "12.Jul.2021",
+      progress: 30,
+    },
+  ];
 
   return (
-    <div className=" mx-auto bg-white shadow-md p-6 rounded-md mt-6">
-      <div className="flex justify-end">
-        <button
-          onClick={() => openModal()}
-          className="bg-blue-500 text-white px-4 py-2 rounded">
-          Add New Item
-        </button>
-      </div>
-
+    <div className=" mx-auto  mt-6">
       <div>
         <ProductListTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
+          openModal={openModal}
         />
       </div>
 
