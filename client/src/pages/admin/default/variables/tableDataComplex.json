@@ -1,6 +1,7 @@
 [
   {
     "name": "Marketplace",
+    "price":12.00,
     "status": "Approved",
     "date": "24.Jan.2021",
     "progress": 30

@@ -3,6 +3,7 @@ import FormModal from "../../components/modal/FormModal";
 import AddProductsModal from "./components/AddProductsModal";
 import ComplexTable from "../admin/default/components/ComplexTable";
 import tableDataComplex from "../admin/default/variables/tableDataComplex.json";
+import ProductListTable from "./components/ProductListTable";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ function Products() {
     setIsModalOpen(false);
   };
 
-   const columnsDataComplex = [
+  const columnsDataComplex = [
     {
       Header: "NAME",
       accessor: "name",
@@ -53,7 +54,7 @@ function Products() {
       </div>
 
       <div>
-        <ComplexTable
+        <ProductListTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
         />
