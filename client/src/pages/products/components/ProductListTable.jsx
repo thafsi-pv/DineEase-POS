@@ -138,7 +138,7 @@ const ProductListTable = (props) => {
                     }
                     return (
                       <td
-                        className="pt-[14px] pb-[18px] sm:text-[14px]"
+                        className="pt-[8px] pb-[8px] sm:text-[14px] max-w-[20px] border-b-[1px]"
                         {...cell.getCellProps()}
                         key={index}>
                         {data}

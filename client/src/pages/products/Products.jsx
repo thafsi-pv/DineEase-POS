@@ -53,49 +53,34 @@ function Products() {
       action: "Active",
     },
     {
-      name: "Marketplace",
+      name: "Appam with Stew",
+      image:
+        "https://akm-img-a-in.tosshub.com/indiatoday/images/story/201604/appam-with-veg-stew-story_647_042216063314.jpg?VersionId=FiSsTFEt00qlFun1WRmCwgeKZU_OZgvu",
       price: 12.0,
       status: "Disable",
       category: "30.Dec.2021",
       progress: 30,
     },
     {
-      name: "Marketplace",
+      name: "Beef Tacos",
+      price: 9.99,
+      image:
+        "https://joyfoodsunshine.com/wp-content/uploads/2022/04/mexian-ground-beef-tacos-recipe-9.jpg",
+      category_name: "Mexican",
       status: "Error",
       date: "20.May.2021",
       progress: 30,
     },
     {
-      name: "Marketplace",
+      name: "Chicken Biryani",
+      price: 12.99,
+      image: "https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg",
+      category: "Rice Dishes",
       status: "Inactive",
       date: "12.Jul.2021",
       progress: 30,
-    },
-    {
-      name: "Kerala Sadya",
-      price: 12.0,
-      status: "Active",
-      category: "Veg",
-      progress: 30,
-    },
-    {
-      name: "Marketplace",
-      status: "Disable",
-      date: "30.Dec.2021",
-      progress: 30,
-    },
-    {
-      name: "Marketplace",
-      status: "Error",
-      date: "20.May.2021",
-      progress: 30,
-    },
-    {
-      name: "Marketplace",
-      status: "Inactive",
-      date: "12.Jul.2021",
-      progress: 30,
-    },
+    }
+    
   ];
 
   return (
@@ -108,7 +93,7 @@ function Products() {
         />
       </div>
 
-      <FormModal isOpen={isModalOpen} onClose={closeModal}>
+      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="60vw">
         {/* Pass your input components or content here */}
         <AddProductsModal />
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
-function FormModal({ isOpen, onClose, children }) {
+function FormModal({ isOpen, onClose, children, modalWidth }) {
   // Function to close the modal
   //   const closeModal = () => {
   //     setIsModalOpen(false);
@@ -21,7 +21,10 @@ function FormModal({ isOpen, onClose, children }) {
                 </a>
               </div>
             </div>
-            <div className="mt-4 max-h-[80vh] overflow-y-auto">{children}</div>
+            <div
+              className={`mt-4 max-h-[80vh] overflow-y-auto w-[${modalWidth}]`}>
+              {children}
+            </div>
           </div>
         </div>
       )}
