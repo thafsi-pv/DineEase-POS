@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import FileInput from "../../../components/fileInput";
 import SwithField from "../../../components/fields/SwitchField";
+import TextField from "../../../components/fields/TextField";
+import InputField from "../../../components/fields/InputField";
 
 function AddProductsModal() {
   const [itemName, setItemName] = useState("");
@@ -62,67 +64,51 @@ function AddProductsModal() {
     <form onSubmit={handleSubmit}>
       <div className="flex columns-2 justify-center w-full gap-3">
         <div className="w-1/2 p-2">
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Item Name:
-            </label>
-            <input
+          <div className="mb-2">
+            <InputField
+              label="Item Name"
+              variant=""
+              id="itemName"
+              extra=""
               type="text"
-              className="w-full border rounded-md py-2 px-3 mt-1"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-              required
+              placeholder="Enter Item Name"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Price:
-            </label>
-            <input
+          <div className="mb-2">
+            <InputField
+              label="Price"
+              variant=""
+              id="itemPrice"
+              extra=""
               type="number"
-              className="w-full border rounded-md py-2 px-3 mt-1"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
+              placeholder="Enter Item Price"
             />
           </div>
-
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Category:
-            </label>
-
-            <DropDownReactSelect />
+            <DropDownReactSelect
+              ph="Select Category"
+              label="Category"
+              id="ddlCategory"
+            />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Cuisine:
-            </label>
-            <select
-              className="w-full border rounded-md py-2 px-3 mt-1"
-              multiple
-              value={selectedCuisine}
-              onChange={handleCuisineChange}>
-              {/* Populate cuisines dynamically */}
-              <option value="cuisine1">Cuisine 1</option>
-              <option value="cuisine2">Cuisine 2</option>
-            </select>
+            <DropDownReactSelect
+              ph="Select Cusine"
+              label="Cusine"
+              id="ddlCusine"
+              isMulti={true}
+            />
           </div>
+         
           <div class="hs-tooltip flex items-center">
-            <div class="flex items-center">
-              <input
-                type="checkbox"
-                id="hs-valid-toggle-switch"
-                class="relative shrink-0 w-[3.25rem] h-7 bg-gray-100 checked:bg-none checked:bg-green-600 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 border border-transparent ring-1 ring-transparent checked:hover:bg-green-600 checked:focus:bg-green-600 focus:border-green-600 focus:ring-green-600 ring-offset-white focus:outline-none appearance-none dark:bg-gray-700 dark:checked:bg-green-600 dark:focus:ring-offset-gray-800
-                before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-green-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-green-200"
-                checked
-              />
-              <label
-                for="hs-valid-toggle-switch"
-                class="text-sm text-gray-500 ml-3 dark:text-gray-400">
-                Valid switch
-              </label>
-            </div>
+            <SwithField
+              color="green"
+              label="Active"
+              desc="Product currently serving or not"
+            />
+          </div>
+          <div class="mt-3">
+            <TextField extra="w-full" color="green" label="Remarks" />
           </div>
         </div>
 
@@ -148,7 +134,6 @@ function AddProductsModal() {
           </div>
 
           <FileInput inputLabel="Select Image" />
-          
         </div>
       </div>
 
