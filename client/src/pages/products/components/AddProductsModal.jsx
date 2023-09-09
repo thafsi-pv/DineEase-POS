@@ -104,7 +104,7 @@ function AddProductsModal() {
             <SwithField
               color="green"
               label="Active"
-              desc="Product currently serving or not"
+              desc="Product is currently serving or not"
             />
           </div>
           <div class="mt-3">
