@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import FileInput from "../../../components/fileInput";
+import SwithField from "../../../components/fields/SwitchField";
 
 function AddProductsModal() {
   const [itemName, setItemName] = useState("");
@@ -147,6 +148,7 @@ function AddProductsModal() {
           </div>
 
           <FileInput inputLabel="Select Image" />
+          
         </div>
       </div>
 
