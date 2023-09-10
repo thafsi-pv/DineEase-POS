@@ -99,7 +99,7 @@ function AddProductsModal() {
               isMulti={true}
             />
           </div>
-         
+
           <div class="hs-tooltip flex items-center">
             <SwithField
               color="green"
@@ -117,6 +117,27 @@ function AddProductsModal() {
             <label className="block text-sm font-medium text-gray-600">
               Portions:
             </label>
+            <div className="mb-2 flex gap-2">
+              <InputField
+                label="Portion"
+                variant=""
+                id="portionTxt"
+                extra="flex-1"
+                type="text"
+                placeholder="Enter Portion"
+              />
+              <InputField
+                label="Price"
+                variant=""
+                id="itemName"
+                extra="flex-1"
+                type="number"
+                min={0}
+                step={0.1}
+                placeholder="Enter Portion Price"
+              />
+            </div>
+
             <button
               className="bg-blue-500 text-white py-1 px-2 rounded-md mr-2"
               onClick={() => setPortions([...portions, ""])}>
@@ -131,6 +152,7 @@ function AddProductsModal() {
                 onChange={(e) => handlePortionChange(e, index)}
               />
             ))}
+            
           </div>
 
           <FileInput inputLabel="Select Image" />

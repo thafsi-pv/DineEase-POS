@@ -14,6 +14,8 @@ function InputField(props) {
     onChange,
     onBlur,
     value,
+    min,
+    step
   } = props;
 
   return (
@@ -32,6 +34,8 @@ function InputField(props) {
         disabled={disabled}
         type={type}
         id={id}
+        min={min}
+        step={step}
         placeholder={placeholder}
         className={` flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
           disabled === true
