@@ -1,9 +1,11 @@
 import React from "react";
 
-function index({ inputLabel }) {
+function index({ inputLabel, id }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-600">
+      <label
+        htmlFor={id}
+        className={`text-sm text-navy-700 dark:text-white ml-3 font-bold `}>
         {inputLabel}
       </label>
       <label for="file-input" class="sr-only">
