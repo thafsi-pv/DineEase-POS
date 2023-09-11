@@ -1,7 +1,7 @@
 import Switch from "../switch";
 
 const SwitchField = (props) => {
-  const { id, label, desc, mt, mb, color } = props;
+  const { id, label, desc, mt, mb, color, onChange } = props;
   return (
     <div className={`flex justify-between ${mt} ${mb} items-center gap-3`}>
       <label
@@ -18,7 +18,7 @@ const SwitchField = (props) => {
         {label}
       </label> */}
       <div>
-        <Switch id={id} color={color} />
+        <Switch id={id} color={color} onChange={onChange} />
       </div>
     </div>
   );
