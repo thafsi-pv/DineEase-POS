@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { genricError } from "../../../utils/genricError";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
+import cuisinList from "../variables/cusineList.json";
 
 function AddProductsModal() {
   const [itemName, setItemName] = useState("");
@@ -108,7 +109,7 @@ function AddProductsModal() {
     <div>
       <form onSubmit={productFormik.handleSubmit}>
         <div className="flex columns-2 justify-center w-full gap-3">
-          <div className="w-1/2 p-2 border-r-2">
+          <div className="w-1/2 p-2 border-r-[1px] border-dashed border-gray-300 ">
             <div className="mb-2">
               <InputField
                 label="Item Name"
@@ -151,8 +152,7 @@ function AddProductsModal() {
                     : "success"
                 }
               />
-              {productFormik.touched.price &&
-              productFormik.errors.price ? (
+              {productFormik.touched.price && productFormik.errors.price ? (
                 <div className="text-red-500 text-xs float-right animate-pulse">
                   {productFormik.errors.price}
                 </div>
@@ -171,6 +171,7 @@ function AddProductsModal() {
                 label="Cuisine"
                 id="ddlCuisine"
                 isMulti={true}
+                data={cuisinList}
               />
             </div>
 

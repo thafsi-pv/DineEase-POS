@@ -34,7 +34,7 @@ function AddPortion({ portions, setPortions }) {
     portionFormik.handleSubmit();
   };
   return (
-    <div className="border p-1 rounded-lg mb-3">
+    <div className="border rounded-tl-none p-1 rounded-lg mb-3">
       <div onClick={addPortion}>
         <div className="mb-4">
           <div className="flex gap-2 w-full">

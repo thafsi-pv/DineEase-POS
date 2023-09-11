@@ -1,0 +1,30 @@
+[
+    {
+      "value": 1,
+      "label": "Indian"
+    },
+    {
+      "value": 2,
+      "label": "Chinese"
+    },
+    {
+      "value": 3,
+      "label": "South Indian"
+    },
+    {
+      "value": 4,
+      "label": "North Indian"
+    },
+    {
+      "value": 5,
+      "label": "Arabic"
+    },
+    {
+      "value": 6,
+      "label": "Italian"
+    },
+    {
+      "value": 7,
+      "label": "Turkish"
+    }
+]

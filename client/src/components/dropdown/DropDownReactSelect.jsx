@@ -7,7 +7,7 @@ const options = [
   { value: "3", label: "Table 3" },
 ];
 
-function DropDownReactSelect({ ph, label, id, variant, isMulti }) {
+function DropDownReactSelect({ ph, label, id, variant, isMulti, data }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   return (
@@ -24,7 +24,7 @@ function DropDownReactSelect({ ph, label, id, variant, isMulti }) {
         placeholder={ph}
         defaultValue={selectedOption}
         onChange={setSelectedOption}
-        options={options}
+        options={data || options}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
