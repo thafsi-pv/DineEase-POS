@@ -7,8 +7,21 @@ const options = [
   { value: "3", label: "Table 3" },
 ];
 
-function DropDownReactSelect({ ph, label, id, variant, isMulti, data }) {
-  const [selectedOption, setSelectedOption] = useState(null);
+function DropDownReactSelect({
+  ph,
+  label,
+  id,
+  variant,
+  isMulti,
+  data,
+  onChange,
+  values,
+}) {
+  // const [selectedOption, setSelectedOption] = useState(null);
+
+  // const handleSelectChange = (option) => {
+  //   setSelectedOption(option);
+  // };
 
   return (
     <div className="App w-full">
@@ -22,8 +35,8 @@ function DropDownReactSelect({ ph, label, id, variant, isMulti, data }) {
       <Select
         isMulti={isMulti}
         placeholder={ph}
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
+        defaultValue={values}
+        onChange={onChange}
         options={data || options}
         styles={{
           control: (baseStyles, state) => ({

@@ -83,7 +83,7 @@ function AddProductsModal() {
       itemName: "",
       price: "",
       category: "",
-      cussine: [],
+      cuisine: [],
       isActive: true,
       remarks: "",
       hasPortions: false,
@@ -103,6 +103,12 @@ function AddProductsModal() {
 
   const handleHasPortionsChange = (e) => {
     productFormik.setFieldValue("hasPortions", e.target.checked);
+  };
+  const handleSelectCategory = (option) => {
+    setSelectedCategory(option);
+  };
+  const handleSelectCuisine = (option) => {
+    selectedCuisine(option);
   };
 
   return (
@@ -163,6 +169,8 @@ function AddProductsModal() {
                 ph="Select Category"
                 label="Category"
                 id="ddlCategory"
+                onChange={handleSelectCategory}
+                values={selectedCategory}
               />
             </div>
             <div className="mb-4">
@@ -172,6 +180,8 @@ function AddProductsModal() {
                 id="ddlCuisine"
                 isMulti={true}
                 data={cuisinList}
+                onChange={handleSelectCuisine}
+                values={selectedCuisine}
               />
             </div>
 
