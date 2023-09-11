@@ -22,6 +22,7 @@ function AddProductsModal() {
   const [portions, setPortions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
+  console.log("🚀 ~ file: AddProductsModal.jsx:25 ~ AddProductsModal ~ selectedCuisine:", selectedCuisine)
   const [isActive, setIsActive] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -108,7 +109,7 @@ function AddProductsModal() {
     setSelectedCategory(option);
   };
   const handleSelectCuisine = (option) => {
-    selectedCuisine(option);
+    setSelectedCuisine(option);
   };
 
   return (
