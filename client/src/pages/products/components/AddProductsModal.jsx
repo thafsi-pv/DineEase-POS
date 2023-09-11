@@ -17,32 +17,10 @@ import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
 
 function AddProductsModal() {
-  const [itemName, setItemName] = useState("");
-  const [price, setPrice] = useState("");
   const [portions, setPortions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
-  console.log("🚀 ~ file: AddProductsModal.jsx:25 ~ AddProductsModal ~ selectedCuisine:", selectedCuisine)
-  const [isActive, setIsActive] = useState(false);
   const [image, setImage] = useState(null);
-
-  const handlePortionChange = (e, index) => {
-    const newPortions = [...portions];
-    newPortions[index] = e.target.value;
-    setPortions(newPortions);
-  };
-
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
-
-  const handleCuisineChange = (e) => {
-    const selectedOptions = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setSelectedCuisine(selectedOptions);
-  };
 
   const handleImageUpload = (e) => {
     // Handle image upload logic here
@@ -50,34 +28,18 @@ function AddProductsModal() {
     setImage(uploadedImage);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Product details submitted:", {
-      itemName,
-      price,
-      portions,
-      selectedCategory,
-      selectedCuisine,
-      isActive,
-      image,
+  const productValidationSchema = Yup.object()
+    .shape({
+      itemName: Yup.string().required("Item name is required"),
+      price: Yup.number().required("Price is required"),
+      // imageUrl: Yup.string().required("Image is required"),
+    })
+    .test("selectedCategory", "Category is required", (value) => {
+      return value === "" || value !== undefined;
+    })
+    .test("selectedCuisine", "Cuisine is required", (value) => {
+      return value.length > 0;
     });
-    // Reset form fields
-    setItemName("");
-    setPrice("");
-    setPortions([]);
-    setSelectedCategory("");
-    setSelectedCuisine([]);
-    setIsActive(false);
-    setImage(null);
-  };
-
-  const productValidationSchema = Yup.object().shape({
-    itemName: Yup.string().required("Item name is required"),
-    price: Yup.number().required("Price is required").min(0),
-    category: Yup.number().required("category is required"),
-    imageUrl: Yup.string().required("Image is required"),
-  });
 
   const productFormik = useFormik({
     initialValues: {
@@ -94,6 +56,18 @@ function AddProductsModal() {
     validationSchema: productValidationSchema,
     onSubmit: (values, { resetForm }) => {
       // Handle form submission and add to the table here
+      const errors = {};
+      productValidationSchema
+        .validate(values, { abortEarly: false })
+        .catch((validationErrors) => {
+          validationErrors.inner.forEach((error) => {
+            errors[error.path] = error.message;
+          });
+        });
+
+      console.log("Validation errors:", errors);
+
+      // Handle form submission and add to the table here
       console.log("ProductSubmitted:", values);
 
       // Add logic to add the data to the table
@@ -106,7 +80,12 @@ function AddProductsModal() {
     productFormik.setFieldValue("hasPortions", e.target.checked);
   };
   const handleSelectCategory = (option) => {
-    setSelectedCategory(option);
+    console.log(
+      "🚀 ~ file: AddProductsModal.jsx:112 ~ handleSelectCategory ~ option:",
+      option
+    );
+    //setSelectedCategory(option);
+    productFormik.handleChange(option);
   };
   const handleSelectCuisine = (option) => {
     setSelectedCuisine(option);
@@ -146,7 +125,7 @@ function AddProductsModal() {
               <InputField
                 label="Price"
                 variant=""
-                id="itemPrice"
+                id="price"
                 extra=""
                 type="number"
                 placeholder="Enter Item Price"
@@ -169,7 +148,7 @@ function AddProductsModal() {
               <DropDownReactSelect
                 ph="Select Category"
                 label="Category"
-                id="ddlCategory"
+                id="category"
                 onChange={handleSelectCategory}
                 values={selectedCategory}
               />

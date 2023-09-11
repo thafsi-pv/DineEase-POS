@@ -33,6 +33,7 @@ function DropDownReactSelect({
         {label}
       </label>
       <Select
+        id={id}
         isMulti={isMulti}
         placeholder={ph}
         defaultValue={values}
