@@ -93,7 +93,7 @@ function Products() {
         />
       </div>
 
-      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="60vw">
+      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
         {/* Pass your input components or content here */}
         <AddProductsModal />
 
