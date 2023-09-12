@@ -80,10 +80,7 @@ function AddProductsModal() {
     productFormik.setFieldValue("hasPortions", e.target.checked);
   };
   const handleSelectCategory = (option) => {
-    console.log(
-      "🚀 ~ file: AddProductsModal.jsx:112 ~ handleSelectCategory ~ option:",
-      option
-    );
+    
     //setSelectedCategory(option);
     productFormik.handleChange(option);
   };
@@ -188,9 +185,9 @@ function AddProductsModal() {
               />
             </div>
             {/* //portion component */}
-            {productFormik.values.hasPortions && (
-              <AddPortion portions={portions} setPortions={setPortions} />
-            )}
+            {/* {productFormik.values.hasPortions && ( */}
+            <AddPortion portions={portions} setPortions={setPortions} />
+            {/* )} */}
             <FileInput inputLabel="Select Image" />
           </div>
         </div>

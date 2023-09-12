@@ -26,7 +26,7 @@ function AddPortion({ portions, setPortions }) {
       setPortions([...portions, values]);
       // Add logic to add the data to the table
       // Then reset the form
-      resetForm();
+      //resetForm();
     },
   });
 
@@ -139,4 +139,4 @@ function AddPortion({ portions, setPortions }) {
   );
 }
 
-export default AddPortion;
+export default React.memo(AddPortion);
