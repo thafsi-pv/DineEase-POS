@@ -15,7 +15,8 @@ function InputField(props) {
     onBlur,
     value,
     min,
-    step
+    step,
+    name,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ function InputField(props) {
         {label}
       </label>
       <input
+        name={name}
         onChange={onChange}
         onBlur={onBlur}
         value={value}

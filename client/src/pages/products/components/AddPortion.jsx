@@ -7,6 +7,7 @@ import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 
 function AddPortion({ portions, setPortions, formi }) {
   const [portion, setPortion] = useState({ portionName: "", price: "" });
+  //const [portions, setPortions] = useState([{}]);
 
   //   const portionsValidationSchema = Yup.object().shape({
   //     portion: Yup.string().required("Portion is required"),
@@ -34,23 +35,40 @@ function AddPortion({ portions, setPortions, formi }) {
 
   const addPortion = () => {
     //portionFormik.handleSubmit();
-    formi.setFieldValue("portions", portion);
+    console.log(
+      "🚀 ~ file: AddPortion.jsx:39 ~ addPortionabc ~ portion:",
+      portion
+    );
+    formi.setFieldValue("portions", [
+      ...formi.values.portions,
+      portion,
+    ]);
+
+    console.log("🚀 ~ file: AddPortion.jsx:9 ~ AddPortion ~ formi:", formi);
   };
 
-  const handlePortionValue = () => {
+  const handlePortionValue = (e) => {
     const { name, value } = e.target;
+    console.log(
+      "🚀 ~ file: AddPortion.jsx:47 ~ handlePortionValue ~ value:",
+      value
+    );
+    console.log(
+      "🚀 ~ file: AddPortion.jsx:47 ~ handlePortionValue ~ name:",
+      name
+    );
     setPortion({ ...portion, [name]: value });
   };
 
   return (
-    <div className="border rounded-tl-none p-1 rounded-lg mb-3">
-      <div onClick={addPortion}>
+    <div className="border p-1 rounded-lg mb-3">
+      <div>
         <div className="mb-4">
           <div className="flex gap-2 w-full">
             <div className="flex flex-col flex-1">
               <InputField
                 type="text"
-                name="portion"
+                name="portionName"
                 label="Portion"
                 // state={
                 //   portionFormik.touched.portion && portionFormik.errors.portion
@@ -97,7 +115,8 @@ function AddPortion({ portions, setPortions, formi }) {
 
           <div className="flex justify-end space-x-2 my-2">
             <button
-              type="submit"
+              onClick={addPortion}
+              type="button"
               className="bg-green-500 text-white py-2 mt-1 space-x-1 px-2 rounded-md flex justify-center items-center">
               <CiCirclePlus /> <span className="text-xs">Add</span>
             </button>
@@ -119,10 +138,10 @@ function AddPortion({ portions, setPortions, formi }) {
             </tr>
           </thead>
           <tbody>
-            {formi?.values?.portion?.map((item) => (
+            {formi?.values?.portions?.map((item) => (
               <tr>
                 <td className="py-2 px-4 border font-semibold">
-                  {item.portion}
+                  {item.portionName}
                 </td>
                 <td className="py-2 px-4 border font-semibold">
                   $ {item.price}
