@@ -5,7 +5,7 @@ import SwitchField from "../../../components/fields/SwitchField";
 import InputField from "../../../components/fields/InputField";
 import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 
-function AddPortion({ portions, setPortions, formi }) {
+function AddPortion({ formi }) {
   const [portion, setPortion] = useState({ portionName: "", price: "" });
   const addPortion = () => {
     formi.setFieldValue("portions", [...formi.values.portions, portion]);

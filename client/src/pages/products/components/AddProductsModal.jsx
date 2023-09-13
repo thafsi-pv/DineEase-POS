@@ -186,11 +186,7 @@ function AddProductsModal() {
             </div>
             {/* //portion component */}
             {productFormik.values.hasPortions && (
-              <AddPortion
-                formi={productFormik}
-                portions={portions}
-                setPortions={setPortions}
-              />
+              <AddPortion formi={productFormik} />
             )}
             <FileInput inputLabel="Select Image" />
           </div>
