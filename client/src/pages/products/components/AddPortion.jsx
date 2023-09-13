@@ -7,34 +7,7 @@ import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 
 function AddPortion({ portions, setPortions, formi }) {
   const [portion, setPortion] = useState({ portionName: "", price: "" });
-  //const [portions, setPortions] = useState([{}]);
-
-  //   const portionsValidationSchema = Yup.object().shape({
-  //     portion: Yup.string().required("Portion is required"),
-  //     price: Yup.number().required("Price is required").min(0),
-  //   });
-  //   const portionFormik = useFormik({
-  //     initialValues: {
-  //       portion: "",
-  //       price: "",
-  //     },
-  //     validationSchema: portionsValidationSchema,
-  //     onSubmit: (values, { resetForm }) => {
-  //       // Handle form submission and add to the table here
-  //       console.log("Submitted:", values);
-  //       console.log(
-  //         "🚀 ~ file: AddProductsModal.jsx:83 ~ AddProductsModal ~ values:",
-  //         values
-  //       );
-  //       setPortions([...portions, values]);
-  //       // Add logic to add the data to the table
-  //       // Then reset the form
-  //       //resetForm();
-  //     },
-  //   });
-
   const addPortion = () => {
-    //portionFormik.handleSubmit();
     formi.setFieldValue("portions", [...formi.values.portions, portion]);
     setPortion({ portionName: "", price: "" });
   };
