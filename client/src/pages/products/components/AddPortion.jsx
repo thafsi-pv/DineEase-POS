@@ -35,28 +35,12 @@ function AddPortion({ portions, setPortions, formi }) {
 
   const addPortion = () => {
     //portionFormik.handleSubmit();
-    console.log(
-      "🚀 ~ file: AddPortion.jsx:39 ~ addPortionabc ~ portion:",
-      portion
-    );
-    formi.setFieldValue("portions", [
-      ...formi.values.portions,
-      portion,
-    ]);
-
-    console.log("🚀 ~ file: AddPortion.jsx:9 ~ AddPortion ~ formi:", formi);
+    formi.setFieldValue("portions", [...formi.values.portions, portion]);
+    setPortion({ portionName: "", price: "" });
   };
 
   const handlePortionValue = (e) => {
     const { name, value } = e.target;
-    console.log(
-      "🚀 ~ file: AddPortion.jsx:47 ~ handlePortionValue ~ value:",
-      value
-    );
-    console.log(
-      "🚀 ~ file: AddPortion.jsx:47 ~ handlePortionValue ~ name:",
-      name
-    );
     setPortion({ ...portion, [name]: value });
   };
 
