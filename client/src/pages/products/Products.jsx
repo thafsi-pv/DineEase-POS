@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormModal from "../../components/modal/FormModal";
 import AddProductsModal from "./components/AddProductsModal";
 
 import ProductListTable from "./components/ProductListTable";
+import axios from "axios";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    handleGetAllProducts();
+  }, []);
+
+  const handleGetAllProducts = async () => {
+    const products=await axios.get()
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
