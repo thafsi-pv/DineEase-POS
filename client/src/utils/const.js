@@ -4,4 +4,4 @@ export const CLOUDINARY_IMAGE_UPLOAD_URL =
 export const PRODUCT_ADD_API = "http://localhost:8080/api/product/create";
 
 export const GET_ALL_ACTIVE_PRODUCT_API =
-  "http://localhost:8080/api/product/getAllProducts";
+  "http://localhost:8080/api/product/getAllActiveProducts";
