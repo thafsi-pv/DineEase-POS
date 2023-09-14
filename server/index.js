@@ -11,6 +11,7 @@ const connectDb = require("./config/db");
 const http = require("http");
 const { verifyToken } = require("./utils/jwt");
 const userModal = require("./model/userModal");
+const productRouter = require("./router/product");
 const server = http.createServer(app);
 
 app.use(cors({ origin: "http://localhost:5173" }));
@@ -24,6 +25,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/payment/", paymentRoutes);
 
 app.use("/api/chat/", chatRouter);
+
+app.use("/api/product", productRouter);
 
 //socket
 
