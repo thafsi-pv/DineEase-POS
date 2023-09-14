@@ -51,7 +51,7 @@ function AddProductsModal() {
     initialValues: {
       itemName: "",
       price: "",
-      category: "",
+      category: {},
       cuisine: [],
       isActive: true,
       remarks: "",
@@ -88,7 +88,7 @@ function AddProductsModal() {
 
   const handleSelectCategory = (option) => {
     //setSelectedCategory(option);
-    productFormik.handleChange(option);
+    productFormik.setFieldValue("category", option);
   };
   const handleSelectCuisine = (option) => {
     setSelectedCuisine(option);
@@ -192,12 +192,15 @@ function AddProductsModal() {
             </div>
             {/* //portion component */}
             {productFormik.values.hasPortions && (
-              <AddPortion formi={productFormik} state={
-                productFormik.touched.portions &&
-                productFormik.errors.portions
-                  ? "error"
-                  : "success"
-              } />
+              <AddPortion
+                formi={productFormik}
+                state={
+                  productFormik.touched.portions &&
+                  productFormik.errors.portions
+                    ? "error"
+                    : "success"
+                }
+              />
             )}
             {productFormik.touched.portions && productFormik.errors.portions ? (
               <div className="text-red-500 text-xs float-right">
