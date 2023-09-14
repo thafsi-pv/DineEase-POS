@@ -28,18 +28,24 @@ function AddProductsModal() {
     setImage(uploadedImage);
   };
 
-  const productValidationSchema = Yup.object()
-    .shape({
-      itemName: Yup.string().required("Item name is required"),
-      price: Yup.number().required("Price is required"),
-      // imageUrl: Yup.string().required("Image is required"),
-    })
-    .test("selectedCategory", "Category is required", (value) => {
-      return value === "" || value !== undefined;
-    })
-    .test("selectedCuisine", "Cuisine is required", (value) => {
-      return value.length > 0;
-    });
+  const productValidationSchema = Yup.object().shape({
+    itemName: Yup.string().required("Item name is required"),
+    price: Yup.number()
+      .required("Price is required")
+      .positive("Price must be a positive number"),
+    hasPortions: Yup.boolean(),
+    portions: Yup.array().when(["hasPortions"], (hasPortions, schema) => {
+      if (hasPortions[0] == true) {
+        return schema.min(1, "At least one portion is required");
+      }
+      return schema;
+    }),
+    category: Yup.string(),
+    cuisine: Yup.array(),
+    isActive: Yup.boolean(),
+    remarks: Yup.string(),
+    imageUrl: Yup.string().required("Slelect item image"),
+  });
 
   const productFormik = useFormik({
     initialValues: {
@@ -188,7 +194,24 @@ function AddProductsModal() {
             {productFormik.values.hasPortions && (
               <AddPortion formi={productFormik} />
             )}
-            <FileInput inputLabel="Select Image" />
+            {productFormik.touched.portions && productFormik.errors.portions ? (
+              <div className="text-red-500 text-sm">
+                {productFormik.errors.portions}
+              </div>
+            ) : null}
+            <FileInput
+              inputLabel="Select Image"
+              state={
+                productFormik.touched.imageUrl && productFormik.errors.imageUrl
+                  ? "error"
+                  : "success"
+              }
+            />
+            {productFormik.touched.imageUrl && productFormik.errors.imageUrl ? (
+              <div className="text-red-500 text-xs float-right">
+                {productFormik.errors.imageUrl}
+              </div>
+            ) : null}
           </div>
         </div>
 

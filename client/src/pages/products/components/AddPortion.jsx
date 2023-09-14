@@ -7,9 +7,17 @@ import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 
 function AddPortion({ formi }) {
   const [portion, setPortion] = useState({ portionName: "", price: "" });
+  const [error, setError] = useState({ portionName: "", price: "" });
+
   const addPortion = () => {
-    formi.setFieldValue("portions", [...formi.values.portions, portion]);
-    setPortion({ portionName: "", price: "" });
+    if (portion.portionName != "" && portion.price != "") {
+      formi.setFieldValue("portions", [...formi.values.portions, portion]);
+      setPortion({ portionName: "", price: "" });
+    } else if (portion.portionName == "") {
+      setError({ ...error, portionName: "Portion Name is required" });
+    } else if (portion.price == "") {
+      setError({ ...error, price: "Price Name is required" });
+    }
   };
 
   const handlePortionValue = (e) => {
@@ -27,11 +35,7 @@ function AddPortion({ formi }) {
                 type="text"
                 name="portionName"
                 label="Portion"
-                // state={
-                //   portionFormik.touched.portion && portionFormik.errors.portion
-                //     ? "error"
-                //     : "success"
-                // }
+                state={error.portionName != "" ? "error" : "success"}
                 id="portion"
                 extra="w-full  rounded-md py-2"
                 placeholder="Enter Portion"
@@ -39,21 +43,17 @@ function AddPortion({ formi }) {
                 // onBlur={portionFormik.handleBlur}
                 value={portion.portionName}
               />
-              {/* {portionFormik.touched.portion && portionFormik.errors.portion ? (
-          <div className="text-red-500 text-sm">
-            {portionFormik.errors.portion}
-          </div>
-        ) : null} */}
+              {error.portionName != "" ? (
+                <div className="text-red-500 text-xs float-right w-full">
+                  {error.portionName}
+                </div>
+              ) : null}
             </div>
             <div className="flex flex-col flex-1">
               <InputField
                 type="number"
                 name="price"
-                // state={
-                //   portionFormik.touched.price && portionFormik.errors.price
-                //     ? "error"
-                //     : "success"
-                // }
+                state={error.price != "" ? "error" : "success"}
                 id="price"
                 label="Price"
                 extra="w-full  rounded-md py-2"
@@ -62,11 +62,9 @@ function AddPortion({ formi }) {
                 // onBlur={portionFormik.handleBlur}
                 value={portion.price}
               />
-              {/* {portionFormik.touched.price && portionFormik.errors.price ? (
-          <div className="text-red-500 text-sm">
-            {portionFormik.errors.price}
-          </div>
-        ) : null} */}
+              {error.price != "" ? (
+                <div className="text-red-500 text-xs">{error.price}</div>
+              ) : null}
             </div>
           </div>
 
