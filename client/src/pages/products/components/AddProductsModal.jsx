@@ -192,10 +192,15 @@ function AddProductsModal() {
             </div>
             {/* //portion component */}
             {productFormik.values.hasPortions && (
-              <AddPortion formi={productFormik} />
+              <AddPortion formi={productFormik} state={
+                productFormik.touched.portions &&
+                productFormik.errors.portions
+                  ? "error"
+                  : "success"
+              } />
             )}
             {productFormik.touched.portions && productFormik.errors.portions ? (
-              <div className="text-red-500 text-sm">
+              <div className="text-red-500 text-xs float-right">
                 {productFormik.errors.portions}
               </div>
             ) : null}

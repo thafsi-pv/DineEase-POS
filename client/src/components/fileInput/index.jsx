@@ -2,7 +2,7 @@ import React from "react";
 
 function index({ inputLabel, id, disabled, state }) {
   return (
-    <div>
+    <div className="mt-3">
       <label
         htmlFor={id}
         className={`text-sm text-navy-700 dark:text-white ml-3 font-bold `}>

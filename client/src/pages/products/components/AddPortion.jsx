@@ -5,7 +5,7 @@ import SwitchField from "../../../components/fields/SwitchField";
 import InputField from "../../../components/fields/InputField";
 import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 
-function AddPortion({ formi }) {
+function AddPortion({ formi, state }) {
   const [portion, setPortion] = useState({ portionName: "", price: "" });
   const [error, setError] = useState({ portionName: "", price: "" });
 
@@ -26,7 +26,10 @@ function AddPortion({ formi }) {
   };
 
   return (
-    <div className="border p-1 rounded-lg mb-3">
+    <div
+      className={`border p-1 rounded-lg  ${
+        state == "error" ? "border-red-500" : ""
+      }`}>
       <div>
         <div className="mb-4">
           <div className="flex gap-2 w-full">
