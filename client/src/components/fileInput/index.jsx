@@ -1,6 +1,6 @@
 import React from "react";
 
-function index({ inputLabel, id, disabled, state }) {
+function index({ inputLabel, id, disabled, state, onChange }) {
   return (
     <div className="mt-3">
       <label
@@ -12,6 +12,7 @@ function index({ inputLabel, id, disabled, state }) {
         Choose file
       </label>
       <input
+        onChange={onChange}
         type="file"
         name="file-input"
         id="file-input"

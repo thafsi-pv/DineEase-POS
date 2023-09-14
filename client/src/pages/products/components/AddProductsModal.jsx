@@ -25,7 +25,11 @@ function AddProductsModal() {
   const handleImageUpload = (e) => {
     // Handle image upload logic here
     const uploadedImage = e.target.files[0];
-    setImage(uploadedImage);
+    console.log(
+      "🚀 ~ file: AddProductsModal.jsx:28 ~ handleImageUpload ~ uploadedImage:",
+      uploadedImage.name
+    );
+    productFormik.setFieldValue("imageUrl", uploadedImage.name);
   };
 
   const productValidationSchema = Yup.object().shape({
@@ -40,11 +44,11 @@ function AddProductsModal() {
       }
       return schema;
     }),
-    category: Yup.string(),
-    cuisine: Yup.array(),
-    isActive: Yup.boolean(),
-    remarks: Yup.string(),
-    imageUrl: Yup.string().required("Slelect item image"),
+    // category: Yup.string(),
+    // cuisine: Yup.array(),
+    // isActive: Yup.boolean(),
+    // remarks: Yup.string(),
+    imageUrl: Yup.string().required("Select item image"),
   });
 
   const productFormik = useFormik({
@@ -61,7 +65,7 @@ function AddProductsModal() {
     },
     validationSchema: productValidationSchema,
     onSubmit: (values, { resetForm }) => {
-      // Handle form submission and add to the table here
+      // // Handle form submission and add to the table here
       const errors = {};
       productValidationSchema
         .validate(values, { abortEarly: false })
@@ -214,6 +218,7 @@ function AddProductsModal() {
                   ? "error"
                   : "success"
               }
+              onChange={handleImageUpload}
             />
             {productFormik.touched.imageUrl && productFormik.errors.imageUrl ? (
               <div className="text-red-500 text-xs float-right">
