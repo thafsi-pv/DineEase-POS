@@ -1,0 +1,1 @@
+export const CLOUDINARY_IMAGE_UPLOAD_URL='https://api.cloudinary.com/v1_1/dm4djc1b1/image/upload'
