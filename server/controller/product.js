@@ -36,4 +36,10 @@ async function addProduct(req, res) {
   }
 }
 
+const getProduct = async (req, res) => {
+  try {
+    productRouter.
+  } catch (error) {}
+};
+
 module.exports = { addProduct };

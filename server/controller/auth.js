@@ -10,7 +10,7 @@ const signUp = async (req, res) => {
     if (isExist) {
       return res
         .status(400)
-        .json({ message: "This email id already registered, use anothe one!" });
+        .json({ message: "This email id already registered, use another one!" });
     }
     const hash = await generateHashPassword(data.password);
     delete data.cpassword;

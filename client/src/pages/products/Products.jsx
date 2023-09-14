@@ -74,13 +74,13 @@ function Products() {
     {
       name: "Chicken Biryani",
       price: 12.99,
-      image: "https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg",
+      image:
+        "https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg",
       category: "Rice Dishes",
       status: "Inactive",
       date: "12.Jul.2021",
       progress: 30,
-    }
-    
+    },
   ];
 
   return (
@@ -95,7 +95,7 @@ function Products() {
 
       <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
         {/* Pass your input components or content here */}
-        <AddProductsModal />
+        <AddProductsModal setIsModalOpen={setIsModalOpen} />
 
         {/* Add more input components or content as needed */}
       </FormModal>

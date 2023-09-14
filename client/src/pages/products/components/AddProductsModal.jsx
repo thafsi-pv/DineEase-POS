@@ -4,20 +4,17 @@ import FileInput from "../../../components/fileInput";
 import SwithField from "../../../components/fields/SwitchField";
 import TextField from "../../../components/fields/TextField";
 import InputField from "../../../components/fields/InputField";
-import Card from "../../../components/card";
-import { AiOutlineMinusCircle } from "react-icons/ai";
-import { IoAddCircleOutline } from "react-icons/io5";
-import { FiCheckCircle } from "react-icons/fi";
-import { CiCirclePlus, CiEdit, CiEraser, CiTrash } from "react-icons/ci";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { genricError } from "../../../utils/genricError";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
 import handleAddMovie from "../../../utils/uploadImage";
+import axios from "axios";
+import { PRODUCT_ADD_API } from "../../../utils/const";
+import { toast } from "react-hot-toast";
 
-function AddProductsModal() {
+function AddProductsModal({ setIsModalOpen }) {
   const [portions, setPortions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
@@ -76,28 +73,27 @@ function AddProductsModal() {
             errors[error.path] = error.message;
           });
         });
-
       console.log("Validation errors:", errors);
-
       const cloudImgUrl = await handleAddMovie(image);
-      console.log(
-        "🚀 ~ file: AddProductsModal.jsx:83 ~ AddProductsModal ~ response:",
-        cloudImgUrl
-      );
-
       if (cloudImgUrl) {
         values.imageUrl = cloudImgUrl;
         values.cuisine = selectedCuisine;
         console.log("ProductSubmitted:", values);
+        const res = await axios.post(PRODUCT_ADD_API, values);
+        console.log(
+          "🚀 ~ file: AddProductsModal.jsx:82 ~ onSubmit: ~ res:",
+          res
+        );
+        if (res.status == 201) {
+          toast.success("Product added successfully 👍🏻");
+          setIsModalOpen(false);
+        }
       }
-
-      // Handle form submission and add to the table here
-
-      // Add logic to add the data to the table
-      // Then reset the form
       resetForm();
     },
   });
+
+  const handleCreateProduct = async (data) => {};
 
   const handleHasPortionsChange = (e) => {
     productFormik.setFieldValue("hasPortions", e.target.checked);
