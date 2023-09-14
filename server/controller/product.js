@@ -36,10 +36,13 @@ async function addProduct(req, res) {
   }
 }
 
-const getProduct = async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
-    productRouter.
-  } catch (error) {}
+    const activeProducts = await Product.find({ isActive: true });
+    res.status(200).json(activeProducts);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching products" });
+  }
 };
 
-module.exports = { addProduct };
+module.exports = { addProduct, getAllProducts };
