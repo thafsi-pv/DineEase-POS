@@ -15,6 +15,7 @@ import { genricError } from "../../../utils/genricError";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
+import handleAddMovie from "../../../utils/uploadImage";
 
 function AddProductsModal() {
   const [portions, setPortions] = useState([]);
@@ -29,6 +30,7 @@ function AddProductsModal() {
       "🚀 ~ file: AddProductsModal.jsx:28 ~ handleImageUpload ~ uploadedImage:",
       uploadedImage.name
     );
+    setImage(uploadedImage);
     productFormik.setFieldValue("imageUrl", uploadedImage.name);
   };
 
@@ -64,7 +66,7 @@ function AddProductsModal() {
       imageUrl: "",
     },
     validationSchema: productValidationSchema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       // // Handle form submission and add to the table here
       const errors = {};
       productValidationSchema
@@ -77,8 +79,19 @@ function AddProductsModal() {
 
       console.log("Validation errors:", errors);
 
+      const cloudImgUrl = await handleAddMovie(image);
+      console.log(
+        "🚀 ~ file: AddProductsModal.jsx:83 ~ AddProductsModal ~ response:",
+        cloudImgUrl
+      );
+
+      if (cloudImgUrl) {
+        values.imageUrl = cloudImgUrl;
+        values.cuisine = selectedCuisine;
+        console.log("ProductSubmitted:", values);
+      }
+
       // Handle form submission and add to the table here
-      console.log("ProductSubmitted:", values);
 
       // Add logic to add the data to the table
       // Then reset the form
