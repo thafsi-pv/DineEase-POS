@@ -1,12 +1,10 @@
 import Switch from "../switch";
 
 const SwitchField = (props) => {
-  const { id, label, desc, mt, mb, color, onChange } = props;
+  const { id, label, desc, mt, mb, color, onChange, value } = props;
   return (
     <div className={`flex justify-between ${mt} ${mb} items-center gap-3`}>
-      <label
-        htmlFor={id}
-        className="hover:cursor-pointer ml-3">
+      <label htmlFor={id} className="hover:cursor-pointer ml-3">
         <h5 className="text-sm font-bold text-navy-700 dark:text-white">
           {label}
         </h5>
@@ -18,7 +16,7 @@ const SwitchField = (props) => {
         {label}
       </label> */}
       <div>
-        <Switch id={id} color={color} onChange={onChange} />
+        <Switch id={id} color={color} onChange={onChange} checked={value} />
       </div>
     </div>
   );

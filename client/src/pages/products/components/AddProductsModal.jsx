@@ -93,10 +93,11 @@ function AddProductsModal({ setIsModalOpen }) {
     },
   });
 
-  const handleCreateProduct = async (data) => {};
-
   const handleHasPortionsChange = (e) => {
     productFormik.setFieldValue("hasPortions", e.target.checked);
+  };
+  const handleIsActiveChange = (e) => {
+    productFormik.setFieldValue("IsActive", e.target.checked);
   };
 
   const handleSelectCategory = (option) => {
@@ -186,6 +187,8 @@ function AddProductsModal({ setIsModalOpen }) {
                 color="green"
                 label="Active"
                 desc="Product is currently serving or not"
+                value={productFormik.values.isActive}
+                onChange={handleIsActiveChange}
               />
             </div>
             <div class="mt-3">
