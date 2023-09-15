@@ -60,7 +60,7 @@ function AddProductsModal({ setIsModalOpen }) {
           "🚀 ~ file: AddProductsModal.jsx:82 ~ onSubmit: ~ res:",
           res
         );
-        if (res.status == 200) {
+        if (res.status == 201) {
           toast.success("Product added successfully 👍🏻");
           setIsModalOpen(false);
         }

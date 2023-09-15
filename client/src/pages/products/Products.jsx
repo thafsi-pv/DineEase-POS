@@ -31,23 +31,23 @@ function Products() {
   const columnsDataComplex = [
     {
       Header: "IMAGE",
-      accessor: "image",
+      accessor: "imageUrl",
     },
     {
       Header: "NAME",
-      accessor: "name",
+      accessor: "itemName",
     },
     {
       Header: "PRICE",
       accessor: "price",
     },
-    {
-      Header: "CATEGORY",
-      accessor: "category",
-    },
+    // {
+    //   Header: "CATEGORY",
+    //   accessor: "category",
+    // },
     {
       Header: "STATUS",
-      accessor: "status",
+      accessor: "isActive",
     },
     {
       Header: "ACTION",
