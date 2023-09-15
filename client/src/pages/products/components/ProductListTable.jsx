@@ -39,7 +39,7 @@ const ProductListTable = (props) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page, // The current page of rows
+    page,
     nextPage,
     previousPage,
     canNextPage,
