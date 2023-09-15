@@ -8,14 +8,16 @@ import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [productList, setProductList] = useState([{}]);
+  console.log("🚀 ~ file: Products.jsx:12 ~ Products ~ productList:", productList)
 
   useEffect(() => {
     handleGetAllProducts();
-  }, []);
+  }, [isModalOpen]);
 
   const handleGetAllProducts = async () => {
     const products = await axios.get(GET_ALL_ACTIVE_PRODUCT_API);
-    console.log("🚀 ~ file: Products.jsx:18 ~ handleGetAllProducts ~ products:", products)
+    setProductList(products?.data);
   };
 
   const openModal = () => {
@@ -99,7 +101,7 @@ function Products() {
       <div>
         <ProductListTable
           columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
+          tableData={productList}
           openModal={openModal}
         />
       </div>

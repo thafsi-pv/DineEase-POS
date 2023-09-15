@@ -5,7 +5,6 @@ import SwithField from "../../../components/fields/SwitchField";
 import TextField from "../../../components/fields/TextField";
 import InputField from "../../../components/fields/InputField";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
@@ -13,42 +12,20 @@ import handleAddMovie from "../../../utils/uploadImage";
 import axios from "axios";
 import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
+import { productValidationSchema } from "../../../utils/validate";
 
 function AddProductsModal({ setIsModalOpen }) {
-  const [portions, setPortions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
 
   const handleImageUpload = (e) => {
-    // Handle image upload logic here
     const uploadedImage = e.target.files[0];
-    console.log(
-      "🚀 ~ file: AddProductsModal.jsx:28 ~ handleImageUpload ~ uploadedImage:",
-      uploadedImage.name
-    );
     setImage(uploadedImage);
     productFormik.setFieldValue("imageUrl", uploadedImage.name);
   };
 
-  const productValidationSchema = Yup.object().shape({
-    itemName: Yup.string().required("Item name is required"),
-    price: Yup.number()
-      .required("Price is required")
-      .positive("Price must be a positive number"),
-    hasPortions: Yup.boolean(),
-    portions: Yup.array().when(["hasPortions"], (hasPortions, schema) => {
-      if (hasPortions[0] == true) {
-        return schema.min(1, "At least one portion is required");
-      }
-      return schema;
-    }),
-    // category: Yup.string(),
-    // cuisine: Yup.array(),
-    // isActive: Yup.boolean(),
-    // remarks: Yup.string(),
-    imageUrl: Yup.string().required("Select item image"),
-  });
+ 
 
   const productFormik = useFormik({
     initialValues: {
@@ -64,16 +41,15 @@ function AddProductsModal({ setIsModalOpen }) {
     },
     validationSchema: productValidationSchema,
     onSubmit: async (values, { resetForm }) => {
-      // // Handle form submission and add to the table here
-      const errors = {};
-      productValidationSchema
-        .validate(values, { abortEarly: false })
-        .catch((validationErrors) => {
-          validationErrors.inner.forEach((error) => {
-            errors[error.path] = error.message;
-          });
-        });
-      console.log("Validation errors:", errors);
+      // const errors = {};
+      // productValidationSchema
+      //   .validate(values, { abortEarly: false })
+      //   .catch((validationErrors) => {
+      //     validationErrors.inner.forEach((error) => {
+      //       errors[error.path] = error.message;
+      //     });
+      //   });
+      // console.log("Validation errors:", errors);
       const cloudImgUrl = await handleAddMovie(image);
       if (cloudImgUrl) {
         values.imageUrl = cloudImgUrl;
@@ -84,7 +60,7 @@ function AddProductsModal({ setIsModalOpen }) {
           "🚀 ~ file: AddProductsModal.jsx:82 ~ onSubmit: ~ res:",
           res
         );
-        if (res.status == 201) {
+        if (res.status == 200) {
           toast.success("Product added successfully 👍🏻");
           setIsModalOpen(false);
         }
@@ -196,8 +172,8 @@ function AddProductsModal({ setIsModalOpen }) {
                 extra="w-full"
                 color="green"
                 label="Remarks"
-                id='remarks'
-                name='remarks'
+                id="remarks"
+                name="remarks"
                 value={productFormik.values.remarks}
                 onChange={productFormik.handleChange}
                 onBlur={productFormik.handleBlur}

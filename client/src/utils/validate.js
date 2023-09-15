@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 export const validate = (values) => {
   const errors = {};
 
@@ -50,3 +52,22 @@ export const validateSignIn = (values) => {
   }
   return errors;
 };
+
+export const productValidationSchema = Yup.object().shape({
+  itemName: Yup.string().required("Item name is required"),
+  price: Yup.number()
+    .required("Price is required")
+    .positive("Price must be a positive number"),
+  hasPortions: Yup.boolean(),
+  portions: Yup.array().when(["hasPortions"], (hasPortions, schema) => {
+    if (hasPortions[0] == true) {
+      return schema.min(1, "At least one portion is required");
+    }
+    return schema;
+  }),
+  // category: Yup.string(),
+  // cuisine: Yup.array(),
+  // isActive: Yup.boolean(),
+  // remarks: Yup.string(),
+  imageUrl: Yup.string().required("Select item image"),
+});
