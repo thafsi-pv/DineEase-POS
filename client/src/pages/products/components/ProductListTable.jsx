@@ -8,7 +8,12 @@ import {
 import Card from "../../../components/card";
 import CardMenu from "../../../components/card/CardMenu";
 import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
-import { CiEdit, CiTrash } from "react-icons/ci";
+import {
+  CiCircleChevLeft,
+  CiCircleChevRight,
+  CiEdit,
+  CiTrash,
+} from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
 import { getRandomDarkColor } from "../../../utils/utils";
@@ -43,7 +48,7 @@ const ProductListTable = (props) => {
     state: { pageIndex, pageSize },
     prepareRow,
   } = tableInstance;
-  initialState.pageSize = 5;
+  initialState.pageSize = 6;
 
   const handleEdit = (id) => {
     console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
@@ -175,19 +180,33 @@ const ProductListTable = (props) => {
         </table>
       </div>
       {/* Pagination controls */}
-      <div className="mt-4 flex justify-end">
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+      <div className="mt-4 flex justify-end space-x-2">
+        <a
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+          href="#"
+          className={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white${
+            !canPreviousPage ? "opacity-50 cursor-not-allowed" : ""
+          }`}>
           Previous
-        </button>
-        <span>
+          <CiCircleChevLeft className="w-3.5 h-3.5 ml-2" />
+        </a>
+        <span className="flex items-center text-gray-800">
           Page{" "}
-          <strong>
+          <strong className="mx-2">
             {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
+          </strong>
         </span>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        <a
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+          href="#"
+          class={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white${
+            !canNextPage ? "opacity-50 cursor-not-allowed" : ""
+          }`}>
           Next
-        </button>
+          <CiCircleChevRight className="w-3.5 h-3.5 ml-2" />
+        </a>
       </div>
     </Card>
   );
