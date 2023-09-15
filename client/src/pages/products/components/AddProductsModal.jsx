@@ -192,7 +192,14 @@ function AddProductsModal({ setIsModalOpen }) {
               />
             </div>
             <div class="mt-3">
-              <TextField extra="w-full" color="green" label="Remarks" />
+              <TextField
+                extra="w-full"
+                color="green"
+                label="Remarks"
+                value={productFormik.values.remarks}
+                onChange={productFormik.handleChange}
+                onBlur={productFormik.handleBlur}
+              />
             </div>
           </div>
 
