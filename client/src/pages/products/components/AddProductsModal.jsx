@@ -196,6 +196,8 @@ function AddProductsModal({ setIsModalOpen }) {
                 extra="w-full"
                 color="green"
                 label="Remarks"
+                id='remarks'
+                name='remarks'
                 value={productFormik.values.remarks}
                 onChange={productFormik.handleChange}
                 onBlur={productFormik.handleBlur}
