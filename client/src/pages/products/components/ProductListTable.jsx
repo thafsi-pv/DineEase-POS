@@ -30,14 +30,25 @@ const ProductListTable = (props) => {
   );
 
   const {
+    initialState,
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    page, // The current page of rows
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state: { pageIndex, pageSize },
     prepareRow,
-    initialState,
   } = tableInstance;
-  initialState.pageSize = 6;
+  initialState.pageSize = 5;
+
+  const handleEdit = (id) => {
+    console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
+  };
+
   return (
     <Card extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto"}>
       <div class="relative flex items-center justify-between pt-4">
@@ -61,7 +72,7 @@ const ProductListTable = (props) => {
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     key={index}
-                    className="border-b border-gray-200 pr-28 pb-[10px] text-start dark:!border-navy-700">
+                    className="border-b border-gray-200 pr-7 pb-[10px] text-start dark:!border-navy-700">
                     <p className="text-xs tracking-wide text-gray-600">
                       {column.render("Header")}
                     </p>
@@ -117,7 +128,7 @@ const ProductListTable = (props) => {
                       );
                     } else if (cell.column.Header === "CUISINE") {
                       data = (
-                        <p className="text-sm font-bold text-navy-700 dark:text-white">
+                        <p className="text-sm font-bold text-navy-700 dark:text-white my-2">
                           {cell?.value?.map((cuisine) => (
                             <Badge
                               label={cuisine.label}
@@ -138,18 +149,19 @@ const ProductListTable = (props) => {
                           <button onClick={() => handleView(value)}>
                             <PiEyeLight className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
-                          <button onClick={() => handleEdit(value)}>
+                          <button
+                            onClick={() => handleEdit(cell.row.original._id)}>
                             <CiEdit className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
                           <button onClick={() => handleDelete(value)}>
-                            <CiTrash className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
+                            <CiTrash className="h-7 w-7 text-red-500 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
                         </div>
                       );
                     }
                     return (
                       <td
-                        className="pt-[8px] pb-[8px] sm:text-[14px] max-w-[20px] border-b-[1px]"
+                        className="pt-[8px] pb-[8px] sm:text-[14px] max-w-[20px] border-b-[1px] border-dotted"
                         {...cell.getCellProps()}
                         key={index}>
                         {data}
@@ -161,6 +173,21 @@ const ProductListTable = (props) => {
             })}
           </tbody>
         </table>
+      </div>
+      {/* Pagination controls */}
+      <div className="mt-4 flex justify-end">
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        <span>
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
       </div>
     </Card>
   );

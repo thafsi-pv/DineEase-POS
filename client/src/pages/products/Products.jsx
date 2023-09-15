@@ -35,32 +35,39 @@ function Products() {
     {
       Header: "NAME",
       accessor: "itemName",
+      width: 'w-1/12'
     },
     {
       Header: "IMAGE",
       accessor: "imageUrl",
+      width:'w-1/12'
     },
     {
       Header: "PRICE",
       accessor: "price",
+      width:'w-1/12'
     },
     {
       Header: "CATEGORY",
       accessor: "category",
+      width:'w-1/12'
      
     },
     {
       Header: "CUISINE",
       accessor: "cuisine",
+      width:'w-2/12'
      
     },
     {
       Header: "STATUS",
       accessor: "isActive",
+      width:'w-1/12'
     },
     {
       Header: "ACTION",
       accessor: "action",
+      width:'w-1/12'
     },
   ];
 
