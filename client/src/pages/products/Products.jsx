@@ -9,7 +9,10 @@ import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productList, setProductList] = useState([{}]);
-  console.log("🚀 ~ file: Products.jsx:12 ~ Products ~ productList:", productList)
+  console.log(
+    "🚀 ~ file: Products.jsx:12 ~ Products ~ productList:",
+    productList
+  );
 
   useEffect(() => {
     handleGetAllProducts();
@@ -30,21 +33,22 @@ function Products() {
 
   const columnsDataComplex = [
     {
-      Header: "IMAGE",
-      accessor: "imageUrl",
-    },
-    {
       Header: "NAME",
       accessor: "itemName",
+    },
+    {
+      Header: "IMAGE",
+      accessor: "imageUrl",
     },
     {
       Header: "PRICE",
       accessor: "price",
     },
-    // {
-    //   Header: "CATEGORY",
-    //   accessor: "category",
-    // },
+    {
+      Header: "CATEGORY",
+      accessor: "category",
+     
+    },
     {
       Header: "STATUS",
       accessor: "isActive",

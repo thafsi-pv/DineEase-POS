@@ -8,9 +8,11 @@ import {
 import Card from "../../../components/card";
 import CardMenu from "../../../components/card/CardMenu";
 import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
+import { CiEdit, CiTrash } from "react-icons/ci";
+import { PiEyeLight } from "react-icons/pi";
 
 const ProductListTable = (props) => {
-  const { columnsData, tableData,openModal } = props;
+  const { columnsData, tableData, openModal } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -33,12 +35,11 @@ const ProductListTable = (props) => {
     prepareRow,
     initialState,
   } = tableInstance;
-  initialState.pageSize = 5;
+  initialState.pageSize = 6;
   return (
     <Card extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto"}>
       <div class="relative flex items-center justify-between pt-4">
-        <div class="text-xl font-bold text-navy-700 dark:text-white flex-grow">
-        </div>
+        <div class="text-xl font-bold text-navy-700 dark:text-white flex-grow"></div>
         <div className="flex justify-end p-6">
           <button
             onClick={() => openModal()}
@@ -49,7 +50,7 @@ const ProductListTable = (props) => {
         <CardMenu />
       </div>
 
-      <div class="mt-8 overflow-x-scroll xl:overflow-hidden">
+      <div class="mt-8 overflow-x-scroll xl:overflow-scroll">
         <table {...getTableProps()} className="w-full">
           <thead>
             {headerGroups.map((headerGroup, index) => (
@@ -93,7 +94,7 @@ const ProductListTable = (props) => {
                             ) : null}
                           </div>
                           <p className="text-sm font-bold text-navy-700 dark:text-white">
-                            {cell.value==true?'Active':'Inactive'}
+                            {cell.value == true ? "Active" : "Inactive"}
                           </p>
                         </div>
                       );
@@ -109,7 +110,8 @@ const ProductListTable = (props) => {
                     } else if (cell.column.Header === "CATEGORY") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          {cell.value}
+                          {console.log("category cell" + cell?.value?.label)}
+                          {cell?.value?.label}
                         </p>
                       );
                     } else if (cell.column.Header === "PRICE") {
@@ -120,19 +122,16 @@ const ProductListTable = (props) => {
                       );
                     } else if (cell.column.Header === "ACTION") {
                       data = (
-                        <div className="flex items-center gap-2">
-                          <div className={`rounded-full text-xl`}>
-                            {cell.value === "Active" ? (
-                              <MdCheckCircle className="text-green-500" />
-                            ) : cell.value === "Disable" ? (
-                              <MdCancel className="text-red-500" />
-                            ) : cell.value === "Inactive" ? (
-                              <MdOutlineError className="text-orange-500" />
-                            ) : null}
-                          </div>
-                          <p className="text-sm font-bold text-navy-700 dark:text-white">
-                            {cell.value}
-                          </p>
+                        <div className="space-x-2">
+                          <button onClick={() => handleView(value)}>
+                            <PiEyeLight className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
+                          </button>
+                          <button onClick={() => handleEdit(value)}>
+                            <CiEdit className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
+                          </button>
+                          <button onClick={() => handleDelete(value)}>
+                            <CiTrash className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
+                          </button>
                         </div>
                       );
                     }
