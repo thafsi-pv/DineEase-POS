@@ -10,6 +10,8 @@ import CardMenu from "../../../components/card/CardMenu";
 import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
 import { CiEdit, CiTrash } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
+import Badge from "../../../components/Badge";
+import { getRandomDarkColor } from "../../../utils/utils";
 
 const ProductListTable = (props) => {
   const { columnsData, tableData, openModal } = props;
@@ -102,7 +104,7 @@ const ProductListTable = (props) => {
                       data = (
                         <img
                           src={cell.value}
-                          className="h-14 w-14 rounded-full"
+                          className="h-10 w-10 rounded-full"
                           alt=""
                           srcset=""
                         />
@@ -110,14 +112,24 @@ const ProductListTable = (props) => {
                     } else if (cell.column.Header === "CATEGORY") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          {console.log("category cell" + cell?.value?.label)}
                           {cell?.value?.label}
+                        </p>
+                      );
+                    } else if (cell.column.Header === "CUISINE") {
+                      data = (
+                        <p className="text-sm font-bold text-navy-700 dark:text-white">
+                          {cell?.value?.map((cuisine) => (
+                            <Badge
+                              label={cuisine.label}
+                              color={getRandomDarkColor()}
+                            />
+                          ))}
                         </p>
                       );
                     } else if (cell.column.Header === "PRICE") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          {cell.value}
+                          ₹ {cell.value}
                         </p>
                       );
                     } else if (cell.column.Header === "ACTION") {

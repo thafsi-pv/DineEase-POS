@@ -11,3 +11,9 @@ export const loadScript = (src) => {
     document.body.appendChild(script);
   });
 };
+
+export const getRandomDarkColor = () => {
+  const darkColors = ["red", "green", "yellow", "indigo", "purple", "pink"];
+  const randomIndex = Math.floor(Math.random() * darkColors.length);
+  return darkColors[randomIndex];
+};

@@ -50,6 +50,11 @@ function Products() {
      
     },
     {
+      Header: "CUISINE",
+      accessor: "cuisine",
+     
+    },
+    {
       Header: "STATUS",
       accessor: "isActive",
     },

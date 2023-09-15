@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 const options = [
-  { value: "1", label: "Table 1" },
-  { value: "2", label: "Table 2" },
-  { value: "3", label: "Table 3" },
+  { value: "1", label: "Non-Veg" },
+  { value: "2", label: "Veg" },
+  { value: "3", label: "Sweets and Desserts" },
+  { value: "4", label: "Beverages" },
+  { value: "5", label: "Sandwiches and Burgers" },
+  { value: "6", label: "Coffee and Tea" },
+  { value: "7", label: "Soups" },
+  { value: "8", label: "Appetizers or Starters" },
 ];
 
 function DropDownReactSelect({

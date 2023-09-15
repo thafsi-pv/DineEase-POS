@@ -25,8 +25,6 @@ function AddProductsModal({ setIsModalOpen }) {
     productFormik.setFieldValue("imageUrl", uploadedImage.name);
   };
 
- 
-
   const productFormik = useFormik({
     initialValues: {
       itemName: "",
@@ -56,10 +54,6 @@ function AddProductsModal({ setIsModalOpen }) {
         values.cuisine = selectedCuisine;
         console.log("ProductSubmitted:", values);
         const res = await axios.post(PRODUCT_ADD_API, values);
-        console.log(
-          "🚀 ~ file: AddProductsModal.jsx:82 ~ onSubmit: ~ res:",
-          res
-        );
         if (res.status == 201) {
           toast.success("Product added successfully 👍🏻");
           setIsModalOpen(false);
@@ -73,7 +67,7 @@ function AddProductsModal({ setIsModalOpen }) {
     productFormik.setFieldValue("hasPortions", e.target.checked);
   };
   const handleIsActiveChange = (e) => {
-    productFormik.setFieldValue("IsActive", e.target.checked);
+    productFormik.setFieldValue("isActive", e.target.checked);
   };
 
   const handleSelectCategory = (option) => {
@@ -161,6 +155,8 @@ function AddProductsModal({ setIsModalOpen }) {
             <div class="hs-tooltip flex items-center">
               <SwithField
                 color="green"
+                id="isActive"
+                name="isActive"
                 label="Active"
                 desc="Product is currently serving or not"
                 value={productFormik.values.isActive}
