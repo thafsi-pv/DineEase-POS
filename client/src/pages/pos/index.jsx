@@ -8,7 +8,7 @@ import Card from "../../components/card";
 import { handlePayment } from "../../utils/payment";
 import { BsFillCreditCardFill, BsPrinter } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
-import menu from "../../const/menu.json";
+// import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
 import { useSelector } from "react-redux";
@@ -30,6 +30,7 @@ import { toast } from "react-hot-toast";
 import { loadScript } from "../../utils/utils";
 import usePayment from "../../hooks/usePayment";
 import { motion, AnimatePresence } from "framer-motion";
+import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 
 function index() {
   const printRef = useRef(null);
@@ -39,18 +40,25 @@ function index() {
 
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
-  console.log("🚀 ~ file: index.jsx:40 ~ index ~ cartItems:", cartItems);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [subTotalVal, setsubTotalVal] = useState(0);
   const { paymentProcess } = usePayment(handlePrint);
+  const [menu, setMenu] = useState([]);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
+    getAllProducts();
     return () => {
       document.removeEventListener("keydown", detectKeyDown, true);
     };
   }, []);
+
+  const getAllProducts = async () => {
+    const menu = await axios.get(`${GET_ALL_ACTIVE_PRODUCT_API}?active=true`);
+    setMenu(menu?.data);
+    console.log("🚀 ~ file: index.jsx:58 ~ getAllProducts ~ menu:", menu);
+  };
 
   useEffect(() => {
     const subtot = Math.round(
@@ -62,7 +70,7 @@ function index() {
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
-     
+
       // paymentbutton(subTotalVal);
 
       // Use the callback form of setsubTotalVal to access the latest state
@@ -181,7 +189,7 @@ function index() {
                     </div>
                   </div>
                   <div className="w-full flex flex-wrap  h-full">
-                    {menu.restaurant_items.map((item) => {
+                    {menu?.map((item) => {
                       return (
                         <div
                           key={item.id}
