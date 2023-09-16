@@ -15,7 +15,10 @@ import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
 
 function AddProductsModal({ setIsModalOpen, modalData }) {
-  console.log("🚀 ~ file: AddProductsModal.jsx:18 ~ AddProductsModal ~ modalData:", modalData)
+  console.log(
+    "🚀 ~ file: AddProductsModal.jsx:18 ~ AddProductsModal ~ modalData:",
+    modalData
+  );
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
@@ -138,7 +141,8 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
                 label="Category"
                 id="category"
                 onChange={handleSelectCategory}
-                values={selectedCategory}
+                //values={selectedCategory}
+                values={productFormik.values.category}
               />
             </div>
             <div className="mb-4">
@@ -149,7 +153,8 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
                 isMulti={true}
                 data={cuisinList}
                 onChange={handleSelectCuisine}
-                values={selectedCuisine}
+                //values={selectedCuisine}
+                values={productFormik.values.cuisine}
               />
             </div>
 

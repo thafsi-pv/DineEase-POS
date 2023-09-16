@@ -13,7 +13,7 @@ function Products() {
 
   useEffect(() => {
     handleGetAllProducts();
-  }, [isModalOpen]);
+  }, []);
 
   const handleGetAllProducts = async () => {
     const products = await axios.get(GET_ALL_ACTIVE_PRODUCT_API);

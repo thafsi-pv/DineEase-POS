@@ -54,10 +54,10 @@ const ProductListTable = (props) => {
 
   const handleEdit = async (id) => {
     console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
-    openModal(true);
     var url = `${GET_PRODUCT_BY_ID}?id=${id}`;
     const data = await axios.get(url);
-    setModalData(data?.data[0]);
+    setModalData((prv) => data?.data[0]);
+    openModal(true);
   };
 
   return (
