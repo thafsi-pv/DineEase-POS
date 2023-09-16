@@ -47,11 +47,12 @@ const getAllProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
   try {
-    
+    const _id = req.query.id;
     const product = await Product.find({ _id });
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ error: "Error fetching products" });
   }
 };
 
-module.exports = { addProduct, getAllProducts };
+module.exports = { addProduct, getAllProducts, getProductById };
