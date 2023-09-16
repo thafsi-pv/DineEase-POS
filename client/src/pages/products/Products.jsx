@@ -9,10 +9,7 @@ import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productList, setProductList] = useState([{}]);
-  console.log(
-    "🚀 ~ file: Products.jsx:12 ~ Products ~ productList:",
-    productList
-  );
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     handleGetAllProducts();
@@ -35,39 +32,37 @@ function Products() {
     {
       Header: "NAME",
       accessor: "itemName",
-      width: 'w-1/12'
+      width: "w-1/12",
     },
     {
       Header: "IMAGE",
       accessor: "imageUrl",
-      width:'w-1/12'
+      width: "w-1/12",
     },
     {
       Header: "PRICE",
       accessor: "price",
-      width:'w-1/12'
+      width: "w-1/12",
     },
     {
       Header: "CATEGORY",
       accessor: "category",
-      width:'w-1/12'
-     
+      width: "w-1/12",
     },
     {
       Header: "CUISINE",
       accessor: "cuisine",
-      width:'w-2/12'
-     
+      width: "w-2/12",
     },
     {
       Header: "STATUS",
       accessor: "isActive",
-      width:'w-1/12'
+      width: "w-1/12",
     },
     {
       Header: "ACTION",
       accessor: "action",
-      width:'w-1/12'
+      width: "w-1/12",
     },
   ];
 
@@ -119,12 +114,16 @@ function Products() {
           columnsData={columnsDataComplex}
           tableData={productList}
           openModal={openModal}
+          setModalData={setModalData}
         />
       </div>
 
       <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
         {/* Pass your input components or content here */}
-        <AddProductsModal setIsModalOpen={setIsModalOpen} />
+        <AddProductsModal
+          setIsModalOpen={setIsModalOpen}
+          modalData={modalData}
+        />
 
         {/* Add more input components or content as needed */}
       </FormModal>

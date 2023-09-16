@@ -14,7 +14,8 @@ import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
 
-function AddProductsModal({ setIsModalOpen }) {
+function AddProductsModal({ setIsModalOpen, modalData }) {
+  console.log("🚀 ~ file: AddProductsModal.jsx:18 ~ AddProductsModal ~ modalData:", modalData)
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
@@ -26,7 +27,7 @@ function AddProductsModal({ setIsModalOpen }) {
   };
 
   const productFormik = useFormik({
-    initialValues: {
+    initialValues: modalData || {
       itemName: "",
       price: "",
       category: {},

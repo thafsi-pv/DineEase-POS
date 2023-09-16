@@ -17,9 +17,11 @@ import {
 import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
 import { getRandomDarkColor } from "../../../utils/utils";
+import axios from "axios";
+import { GET_PRODUCT_BY_ID } from "../../../utils/const";
 
 const ProductListTable = (props) => {
-  const { columnsData, tableData, openModal } = props;
+  const { columnsData, tableData, openModal, setModalData } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -50,9 +52,12 @@ const ProductListTable = (props) => {
   } = tableInstance;
   initialState.pageSize = 6;
 
-  const handleEdit = (id) => {
+  const handleEdit = async (id) => {
     console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
     openModal(true);
+    var url = `${GET_PRODUCT_BY_ID}?id=${id}`;
+    const data = await axios.get(url);
+    setModalData(data?.data[0]);
   };
 
   return (
