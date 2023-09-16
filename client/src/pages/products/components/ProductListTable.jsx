@@ -52,6 +52,7 @@ const ProductListTable = (props) => {
 
   const handleEdit = (id) => {
     console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
+    openModal(true);
   };
 
   return (
