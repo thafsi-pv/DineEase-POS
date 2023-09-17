@@ -17,11 +17,11 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
 
   const handleAddItem = (i) => {
     const obj = {
-      name: item.name,
-      portion: i.name,
+      itemName: item.itemName,
+      portion: i.itemName,
       quantity: quantity,
-      unitRate: i.rate,
-      totalRate: quantity * i.rate,
+      unitRate: i.price,
+      totalRate: quantity * i.price,
     };
     dispath(addToCart(obj));
     toast.success("Item added to list 👍🏻");
@@ -60,11 +60,11 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
           <div className="w-full h-96 rounded-3xl">
             <img
               className="object-cover h-full w-full max-w-md rounded-l-3xl"
-              src={item.image_url}
+              src={item.imageUrl}
               alt=""
             />
             <div className="relative bottom-[72px] rounded-bl-3xl text-white w-full text-center bg-gradient-to-t  from-[#000000c8]">
-              <p className="relative p-5 text-2xl font-bold">{item.name}</p>
+              <p className="relative p-5 text-2xl font-bold">{item.itemName}</p>
             </div>
           </div>
           <div className="p-6">
@@ -83,7 +83,7 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
                   {item.portions.map((item) => (
                     <tr key={item.id}>
                       <td className="py-2 px-4 border font-semibold">
-                        {item.name}
+                        {item.portionName}
                       </td>
                       <td className="py-2 px-4 border">
                         <div className="flex items-center space-x-2">
@@ -103,7 +103,7 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
                         </div>
                       </td>
                       <td className="py-2 px-4 border font-semibold">
-                        {item.rate}
+                        {item.price}
                       </td>
                       <td className="py-2 px-4 border">
                         <button
