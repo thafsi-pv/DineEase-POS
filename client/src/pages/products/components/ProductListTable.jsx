@@ -62,8 +62,8 @@ const ProductListTable = (props) => {
 
   return (
     <Card extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto"}>
-      <div class="relative flex items-center justify-between pt-4">
-        <div class="text-xl font-bold text-navy-700 dark:text-white flex-grow"></div>
+      <div className="relative flex items-center justify-between pt-4">
+        <div className="text-xl font-bold text-navy-700 dark:text-white flex-grow"></div>
         <div className="flex justify-end p-6">
           <button
             onClick={() => openModal()}
@@ -74,7 +74,7 @@ const ProductListTable = (props) => {
         <CardMenu />
       </div>
 
-      <div class="mt-8 overflow-x-scroll xl:overflow-scroll">
+      <div className="mt-8 overflow-x-scroll xl:overflow-scroll">
         <table {...getTableProps()} className="w-full">
           <thead>
             {headerGroups.map((headerGroup, index) => (
@@ -140,8 +140,8 @@ const ProductListTable = (props) => {
                     } else if (cell.column.Header === "CUISINE") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white my-2">
-                          {cell?.value?.map((cuisine) => (
-                            <Badge
+                          {cell?.value?.map((cuisine,idex) => (
+                            <Badge key={index+cuisine.label}
                               label={cuisine.label}
                               color={getRandomDarkColor()}
                             />
@@ -207,7 +207,7 @@ const ProductListTable = (props) => {
           onClick={() => nextPage()}
           disabled={!canNextPage}
           href="#"
-          class={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white${
+          className={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white${
             !canNextPage ? "opacity-50 cursor-not-allowed" : ""
           }`}>
           Next

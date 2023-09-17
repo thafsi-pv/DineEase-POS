@@ -8,7 +8,7 @@ function index({ inputLabel, id, disabled, state, onChange }) {
         className={`text-sm text-navy-700 dark:text-white ml-3 font-bold `}>
         {inputLabel}
       </label>
-      <label for="file-input" class="sr-only">
+      <label  class="sr-only">
         Choose file
       </label>
       <input
