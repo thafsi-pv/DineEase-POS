@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 function FormModal({ isOpen, onClose, children, modalWidth }) {
-  console.log("🚀 ~ file: FormModal.jsx:6 ~ FormModal ~ modalWidth:", modalWidth)
   const modalVariants = {
     hidden: { opacity: 0, y: "-100%" }, // Slide down and fade out
     visible: { opacity: 1, y: "0%" }, // Slide up and fade in
