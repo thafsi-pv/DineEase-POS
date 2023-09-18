@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 async function addProduct(req, res) {
   try {
     const {
+      _id,
       itemName,
       price,
       category,
@@ -16,20 +17,38 @@ async function addProduct(req, res) {
     } = req.body;
     console.log("🚀 ~ file: product.js:17 ~ addProduct ~ req.body:", req.body);
 
-    const newProduct = new Product({
-      itemName,
-      price,
-      category,
-      cuisine,
-      isActive,
-      remarks,
-      hasPortions,
-      portions,
-      imageUrl,
-    });
+    const savedProduct = "";
 
-    const savedProduct = await newProduct.save();
-
+    if (_id) {
+      console.log("🚀 ~ file: product.js:34 ~ addProduct ~ _id:", _id);
+      const updateData = {
+        itemName,
+        price,
+        category,
+        cuisine,
+        isActive,
+        remarks,
+        hasPortions,
+        portions,
+        imageUrl,
+      };
+      savedProduct = await Product.findByIdAndUpdate(_id, updateData, {
+        new: true,
+      });
+    } else {
+      const newProduct = new Product({
+        itemName,
+        price,
+        category,
+        cuisine,
+        isActive,
+        remarks,
+        hasPortions,
+        portions,
+        imageUrl,
+      });
+      savedProduct = await newProduct.save();
+    }
     res.status(201).json(savedProduct);
   } catch (error) {
     res.status(500).json({ error: "Error adding the product" });

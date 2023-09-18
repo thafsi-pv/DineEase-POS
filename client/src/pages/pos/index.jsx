@@ -176,7 +176,7 @@ function index() {
             <div className=" row-span-5">
               <Card extra={"w-full h-full sm:overflow-auto p-6"}>
                 {/*product list div */}
-                <div className=" overflow-y-scroll">
+                <div className=" overflow-y-scroll h-full">
                   <div className="w-full gap-2 flex sticky top-0 z-10 bg-white dark:!bg-navy-900  pb-3 rounded-xl">
                     <div className="flex w-full">
                       <DropDownReactSelect ph="Select Table" />
@@ -188,7 +188,7 @@ function index() {
                       <DropDownReactSelect ph="Select Customer" />
                     </div>
                   </div>
-                  <div className="w-full flex flex-wrap  h-full">
+                  <div className="w-full flex flex-wrap  ">
                     {menu?.map((item) => {
                       return (
                         <div

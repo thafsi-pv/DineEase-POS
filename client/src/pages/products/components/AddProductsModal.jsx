@@ -52,16 +52,17 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
       //     });
       //   });
       // console.log("Validation errors:", errors);
-      const cloudImgUrl = await handleAddMovie(image);
-      if (cloudImgUrl) {
+
+      if (image) {
+        const cloudImgUrl = await handleAddMovie(image);
         values.imageUrl = cloudImgUrl;
-        values.cuisine = selectedCuisine;
-        console.log("ProductSubmitted:", values);
-        const res = await axios.post(PRODUCT_ADD_API, values);
-        if (res.status == 201) {
-          toast.success("Product added successfully 👍🏻");
-          setIsModalOpen(false);
-        }
+      }
+      //values.cuisine = selectedCuisine;
+      console.log("ProductSubmitted:", values);
+      const res = await axios.post(PRODUCT_ADD_API, values);
+      if (res.status == 201) {
+        toast.success("Product added successfully 👍🏻");
+        setIsModalOpen(false);
       }
       resetForm();
     },
