@@ -17,7 +17,7 @@ async function addProduct(req, res) {
     } = req.body;
     console.log("🚀 ~ file: product.js:17 ~ addProduct ~ req.body:", req.body);
 
-    const savedProduct = "";
+    let savedProduct = "";
 
     if (_id) {
       console.log("🚀 ~ file: product.js:34 ~ addProduct ~ _id:", _id);

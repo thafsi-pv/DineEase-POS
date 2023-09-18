@@ -15,10 +15,6 @@ import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
 
 function AddProductsModal({ setIsModalOpen, modalData }) {
-  console.log(
-    "🚀 ~ file: AddProductsModal.jsx:18 ~ AddProductsModal ~ modalData:",
-    modalData
-  );
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
@@ -159,7 +155,7 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
               />
             </div>
 
-            <div class="hs-tooltip flex items-center">
+            <div className="hs-tooltip flex items-center">
               <SwithField
                 color="green"
                 id="isActive"
@@ -170,7 +166,7 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
                 onChange={handleIsActiveChange}
               />
             </div>
-            <div class="mt-3">
+            <div className="mt-3">
               <TextField
                 extra="w-full"
                 color="green"
@@ -185,7 +181,7 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
           </div>
 
           <div className="w-1/2">
-            <div class="hs-tooltip flex items-center">
+            <div className="hs-tooltip flex items-center">
               <SwitchField
                 color="green"
                 label="Has Portions"
