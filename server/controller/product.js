@@ -83,4 +83,14 @@ const getProductById = async (req, res) => {
   }
 };
 
+const deleteProductById = async (req, res) => {
+  try {
+    const _id = req.query.id;
+    const data = await Product.findByIdAndDelete({ _id });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting products" });
+  }
+};
+
 module.exports = { addProduct, getAllProducts, getProductById };

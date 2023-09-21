@@ -66,8 +66,6 @@ function Products() {
     },
   ];
 
- 
-
   return (
     <div className=" mx-auto  mt-6">
       <div>
@@ -84,6 +82,8 @@ function Products() {
         <AddProductsModal
           setIsModalOpen={setIsModalOpen}
           modalData={modalData}
+          productList={productList}
+          setProductList={setProductList}
         />
 
         {/* Add more input components or content as needed */}
@@ -93,7 +93,6 @@ function Products() {
 }
 
 export default Products;
-
 
 // const tableDataComplex = [
 //   {

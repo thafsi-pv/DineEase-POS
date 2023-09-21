@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import FileInput from "../../../components/fileInput";
 import SwithField from "../../../components/fields/SwitchField";
@@ -14,10 +14,16 @@ import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
 
-function AddProductsModal({ setIsModalOpen, modalData }) {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCuisine, setSelectedCuisine] = useState([]);
+function AddProductsModal({
+  setIsModalOpen,
+  modalData,
+  productList,
+  setProductList,
+}) {
+  // const [selectedCategory, setSelectedCategory] = useState("");
+  // const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
+  const productFormRef = useRef(null);
 
   const handleImageUpload = (e) => {
     const uploadedImage = e.target.files[0];
@@ -49,15 +55,28 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
       //   });
       // console.log("Validation errors:", errors);
 
-      if (image) {
-        const cloudImgUrl = await handleAddMovie(image);
-        values.imageUrl = cloudImgUrl;
-      }
-      //values.cuisine = selectedCuisine;
-      console.log("ProductSubmitted:", values);
-      const res = await axios.post(PRODUCT_ADD_API, values);
-      if (res.status == 201) {
-        toast.success("Product added successfully 👍🏻");
+      try {
+        if (image) {
+          const cloudImgUrl = await handleAddMovie(image);
+          values.imageUrl = cloudImgUrl;
+        }
+        //values.cuisine = selectedCuisine;
+        console.log("ProductSubmitted:", values);
+        const res = await axios.post(PRODUCT_ADD_API, values);
+        if (res.status == 201) {
+          if (values._id) {
+            var newList = productList.map((item) =>
+              item._id == values._id ? res?.data : item
+            );
+            setProductList(newList);
+            toast.success("Product updated successfully 👍🏻");
+            return true;
+          }
+          toast.success("Product added successfully 👍🏻");
+        }
+      } catch (error) {
+        toast.error("Something went wrong, please try again! 😞");
+      } finally {
         setIsModalOpen(false);
       }
       resetForm();
@@ -79,9 +98,14 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
     setSelectedCuisine(option);
   };
 
+  const handleResetForm = () => {
+    console.log('kkk')
+    productFormik.resetForm;
+  };
+
   return (
     <div>
-      <form onSubmit={productFormik.handleSubmit}>
+      <form onSubmit={productFormik.handleSubmit} ref={productFormRef}>
         <div className="flex columns-2 justify-center w-full gap-3">
           <div className="w-1/2 p-2 border-r-[1px] border-dashed border-gray-300 ">
             <div className="mb-2">
@@ -226,7 +250,8 @@ function AddProductsModal({ setIsModalOpen, modalData }) {
 
         <div className="mt-3 float-right flex gap-2">
           <button
-            type="submit"
+            type="button"
+            onClick={handleResetForm}
             className="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
             Cancel
           </button>
