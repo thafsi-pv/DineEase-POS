@@ -5,6 +5,7 @@ import AddProductsModal from "./components/AddProductsModal";
 import ProductListTable from "./components/ProductListTable";
 import axios from "axios";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
+import ViewProductsModal from "./components/ViewProductsModal";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,15 +79,15 @@ function Products() {
       </div>
 
       <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
-        {/* Pass your input components or content here */}
         <AddProductsModal
           setIsModalOpen={setIsModalOpen}
           modalData={modalData}
           productList={productList}
           setProductList={setProductList}
         />
-
-        {/* Add more input components or content as needed */}
+      </FormModal>
+      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
+        <ViewProductsModal />
       </FormModal>
     </div>
   );
