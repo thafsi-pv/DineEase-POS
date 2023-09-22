@@ -21,7 +21,8 @@ import axios from "axios";
 import { GET_PRODUCT_BY_ID } from "../../../utils/const";
 
 const ProductListTable = (props) => {
-  const { columnsData, tableData, openModal, setModalData } = props;
+  const { columnsData, tableData, openModal, setModalData, setViewProduct } =
+    props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -58,6 +59,9 @@ const ProductListTable = (props) => {
     const data = await axios.get(url);
     setModalData((prv) => data?.data[0]);
     openModal(true);
+  };
+  const handleView = async (id) => {
+    setViewProduct(true);
   };
 
   return (
@@ -140,8 +144,9 @@ const ProductListTable = (props) => {
                     } else if (cell.column.Header === "CUISINE") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white my-2">
-                          {cell?.value?.map((cuisine,idex) => (
-                            <Badge key={index+cuisine.label}
+                          {cell?.value?.map((cuisine, idex) => (
+                            <Badge
+                              key={index + cuisine.label}
                               label={cuisine.label}
                               color={getRandomDarkColor()}
                             />
@@ -157,7 +162,8 @@ const ProductListTable = (props) => {
                     } else if (cell.column.Header === "ACTION") {
                       data = (
                         <div className="space-x-2">
-                          <button onClick={() => handleView(value)}>
+                          <button
+                            onClick={() => handleView(cell.row.original._id)}>
                             <PiEyeLight className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
                           <button

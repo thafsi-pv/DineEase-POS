@@ -9,6 +9,7 @@ import ViewProductsModal from "./components/ViewProductsModal";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewProduct, setViewProduct] = useState(false);
   const [productList, setProductList] = useState([{}]);
   const [modalData, setModalData] = useState(null);
 
@@ -27,6 +28,7 @@ function Products() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setViewProduct(false);
   };
 
   const columnsDataComplex = [
@@ -75,6 +77,7 @@ function Products() {
           tableData={productList}
           openModal={openModal}
           setModalData={setModalData}
+          setViewProduct={setViewProduct}
         />
       </div>
 
@@ -86,7 +89,7 @@ function Products() {
           setProductList={setProductList}
         />
       </FormModal>
-      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
+      <FormModal isOpen={viewProduct} onClose={closeModal} modalWidth="70vw">
         <ViewProductsModal />
       </FormModal>
     </div>

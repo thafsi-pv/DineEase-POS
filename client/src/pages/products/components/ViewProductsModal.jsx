@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 function ViewProductsModal() {
-  return (
-    <div>ViewProductsModal</div>
-  )
+  const [productDetails, setProductDetails] = useState();
+
+  useEffect(() => {
+    getProductDetailsById();
+  }, []);
+
+  const getProductDetailsById=async()=>{
+    const details=await axios.get()
+  }
+
+  return <div>ViewProductsModal</div>;
 }
 
-export default ViewProductsModal
+export default ViewProductsModal;
