@@ -9,7 +9,7 @@ import ViewProductsModal from "./components/ViewProductsModal";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [viewProduct, setViewProduct] = useState(false);
+  const [viewProduct, setViewProduct] = useState({ show: false, id: 0 });
   const [productList, setProductList] = useState([{}]);
   const [modalData, setModalData] = useState(null);
 
@@ -89,8 +89,11 @@ function Products() {
           setProductList={setProductList}
         />
       </FormModal>
-      <FormModal isOpen={viewProduct} onClose={closeModal} modalWidth="70vw">
-        <ViewProductsModal />
+      <FormModal
+        isOpen={viewProduct.show}
+        onClose={closeModal}
+        modalWidth="70vw">
+        <ViewProductsModal id={viewProduct.id} />
       </FormModal>
     </div>
   );

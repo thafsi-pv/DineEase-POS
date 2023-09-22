@@ -61,7 +61,7 @@ const ProductListTable = (props) => {
     openModal(true);
   };
   const handleView = async (id) => {
-    setViewProduct(true);
+    setViewProduct((prev) => ({ ...prev, show: true, id }));
   };
 
   return (
