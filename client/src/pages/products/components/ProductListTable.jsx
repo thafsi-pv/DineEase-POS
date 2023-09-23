@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   useGlobalFilter,
   usePagination,
@@ -18,11 +18,23 @@ import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
 import { getRandomDarkColor } from "../../../utils/utils";
 import axios from "axios";
-import { GET_PRODUCT_BY_ID } from "../../../utils/const";
+import { DELETE_PRODUCT_BY_ID, GET_PRODUCT_BY_ID } from "../../../utils/const";
+import FormModal from "../../../components/modal/FormModal";
+import ViewProductsModal from "./ViewProductsModal";
+import DeleteModal from "./DeleteModal";
+import { toast } from "react-hot-toast";
+import deleteImg from "../../../assets/img/profile/clip-1738.png";
 
 const ProductListTable = (props) => {
-  const { columnsData, tableData, openModal, setModalData, setViewProduct } =
-    props;
+  const {
+    columnsData,
+    tableData,
+    openModal,
+    setModalData,
+    setViewProduct,
+    setProductList,
+  } = props;
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -59,7 +71,6 @@ const ProductListTable = (props) => {
   };
 
   const handleEdit = async (id) => {
-    console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
     var url = `${GET_PRODUCT_BY_ID}?id=${id}`;
     const data = await axios.get(url);
     setModalData((prv) => data?.data[0]);
@@ -67,6 +78,52 @@ const ProductListTable = (props) => {
   };
   const handleView = async (id) => {
     setViewProduct((prev) => ({ ...prev, show: true, id }));
+  };
+
+  const handleDelete = async (id) => {
+    toast.custom((t) => (
+      <div
+        className={`${
+          t.visible ? "animate-enter" : "animate-leave"
+        } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}>
+        <div className="flex-1 w-0 p-4">
+          <div className="flex items-start">
+            <div className="flex-shrink-0 pt-0.5">
+              <img className="h-10 w-10 bg-contain" src={deleteImg} alt="" />
+            </div>
+            <div className="ml-3 flex-1">
+              <p className="text-sm font-medium text-gray-900">Delete item</p>
+              <p className="mt-1 text-sm text-gray-500">
+                Do you want to delete this item?
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex border-l border-gray-200">
+          <button
+            onClick={() => deleteItem(id, t.id)}
+            className="w-full border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            Yes
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            No
+          </button>
+        </div>
+      </div>
+    ));
+
+    // setDeleteModal(true);
+  };
+
+  const deleteItem = async (id, tid) => {
+    toast.dismiss(tid);
+    console.log("🚀 ~ file: ProductListTable.jsx:124 ~ deleteItem ~ tid:", tid);
+    var url = `${DELETE_PRODUCT_BY_ID}?id=${id}`;
+    const data = await axios.delete(url);
+    const newList = tableData.filter((item) => item._id != id);
+    setProductList(newList);
   };
 
   return (
@@ -175,7 +232,8 @@ const ProductListTable = (props) => {
                             onClick={() => handleEdit(cell.row.original._id)}>
                             <CiEdit className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
-                          <button onClick={() => handleDelete(value)}>
+                          <button
+                            onClick={() => handleDelete(cell.row.original._id)}>
                             <CiTrash className="h-7 w-7 text-red-500 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
                         </div>
@@ -225,6 +283,9 @@ const ProductListTable = (props) => {
           <CiCircleChevRight className="w-3.5 h-3.5 ml-2" />
         </a>
       </div>
+      <FormModal isOpen={deleteModal} onClose={""} modalWidth="20vw">
+        <DeleteModal id={1} />
+      </FormModal>
     </Card>
   );
 };

@@ -75,6 +75,7 @@ function Products() {
         <ProductListTable
           columnsData={columnsDataComplex}
           tableData={productList}
+          setProductList={setProductList}
           openModal={openModal}
           setModalData={setModalData}
           setViewProduct={setViewProduct}

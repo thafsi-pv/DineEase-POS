@@ -71,6 +71,8 @@ function AddProductsModal({
             setProductList(newList);
             toast.success("Product updated successfully 👍🏻");
             return true;
+          } else {
+            setProductList((prev) => [res?.data, ...prev]);
           }
           toast.success("Product added successfully 👍🏻");
         }
@@ -94,7 +96,7 @@ function AddProductsModal({
   const handleSelectCategory = (option) => {
     productFormik.setFieldValue("category", option);
   };
-  
+
   const handleSelectCuisine = (option) => {
     productFormik.setFieldValue("cuisine", option);
   };

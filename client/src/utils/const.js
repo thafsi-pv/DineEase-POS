@@ -8,3 +8,6 @@ export const GET_ALL_ACTIVE_PRODUCT_API =
 
 export const GET_PRODUCT_BY_ID =
   "http://localhost:8080/api/product/getProductById";
+
+export const DELETE_PRODUCT_BY_ID =
+  "http://localhost:8080/api/product/deleteProductById";
