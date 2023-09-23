@@ -18,7 +18,7 @@ function Badge({ label, color }) {
 
   return (
     <span
-      className={`text-xs font-medium mr-2 px-2.5 py-0.5 rounded border ${
+      className={`text-xs font-medium mr-2 px-2.5 py-0.5 rounded border mb-1 ${
         selectedColorClass
       } border-${color}-400 dark:bg-gray-700 dark:text-${color}-400 dark:border-${color}-400`}
     >

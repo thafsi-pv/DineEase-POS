@@ -143,7 +143,7 @@ const ProductListTable = (props) => {
                       );
                     } else if (cell.column.Header === "CUISINE") {
                       data = (
-                        <p className="text-sm font-bold text-navy-700 dark:text-white my-2">
+                        <p className="text-sm font-bold text-navy-700 dark:text-white my-2 flex flex-wrap">
                           {cell?.value?.map((cuisine, idex) => (
                             <Badge
                               key={index + cuisine.label}

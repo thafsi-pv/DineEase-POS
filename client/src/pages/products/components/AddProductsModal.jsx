@@ -86,20 +86,20 @@ function AddProductsModal({
   const handleHasPortionsChange = (e) => {
     productFormik.setFieldValue("hasPortions", e.target.checked);
   };
+
   const handleIsActiveChange = (e) => {
     productFormik.setFieldValue("isActive", e.target.checked);
   };
 
   const handleSelectCategory = (option) => {
-    //setSelectedCategory(option);
     productFormik.setFieldValue("category", option);
   };
+  
   const handleSelectCuisine = (option) => {
-    setSelectedCuisine(option);
+    productFormik.setFieldValue("cuisine", option);
   };
 
   const handleResetForm = () => {
-    console.log('kkk')
     productFormik.resetForm;
   };
 
