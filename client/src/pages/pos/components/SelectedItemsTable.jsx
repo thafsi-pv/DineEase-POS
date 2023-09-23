@@ -9,6 +9,7 @@ import { alterItemQuantity } from "../../../redux/cartSlice";
 import { CiTrash } from "react-icons/ci";
 
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
+  console.log("🚀 ~ file: SelectedItemsTable.jsx:12 ~ SelectedItemsTable ~ cartItems:", cartItems)
   const dispath = useDispatch();
 
   const handleItemAlterQuantity = (index, type) => {
@@ -66,7 +67,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                   <div className="flex items-center gap-2 py-2">
                     <Checkbox />
                     <p className="text-sm font-bold text-navy-700 dark:text-white">
-                      {item.name}
+                      {item.itemName}
                     </p>
                   </div>
                   <td className="text-center">
