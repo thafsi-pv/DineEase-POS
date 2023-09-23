@@ -53,6 +53,11 @@ const ProductListTable = (props) => {
   } = tableInstance;
   initialState.pageSize = 6;
 
+  const handleAddNewItem = () => {
+    openModal();
+    setModalData(null);
+  };
+
   const handleEdit = async (id) => {
     console.log("🚀 ~ file: ProductListTable.jsx:43 ~ handleEdit ~ id:", id);
     var url = `${GET_PRODUCT_BY_ID}?id=${id}`;
@@ -70,7 +75,7 @@ const ProductListTable = (props) => {
         <div className="text-xl font-bold text-navy-700 dark:text-white flex-grow"></div>
         <div className="flex justify-end p-6">
           <button
-            onClick={() => openModal()}
+            onClick={handleAddNewItem}
             className="bg-blue-500 text-white px-4 py-2 rounded">
             Add New Item
           </button>
