@@ -70,7 +70,7 @@ function InvoicePrint1({ printRef }) {
               <tr className=" border-b" key={item.id}>
                 <td className="flex items-center gap-2">
                   <p className="text-[10px] text-navy-700 dark:text-white">
-                    {item.name}
+                    {item.itemName}
                     <span className="text-[8px]"> ({item.portion})</span>
                   </p>
                 </td>
