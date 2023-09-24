@@ -20,6 +20,7 @@ import usePayment from "../../hooks/usePayment";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 import { addToCart } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
+import SummarySection from "./components/SummarySection";
 
 function index() {
   const dispath = useDispatch();
@@ -168,52 +169,10 @@ function index() {
               />
             </div>
             <div className="">
-              {/*summary div */}
-              <Card extra={"w-full h-full sm:overflow-auto p-6 pt-2"}>
-                <header className="relative flex items-center justify-between pt-4">
-                  <div className="text-xl font-bold text-navy-700 dark:text-white w-full text-right">
-                    <table className="w-full p-3 pb-3">
-                      <tr className="text-sm">
-                        <td>
-                          <p>Discount:</p>
-                        </td>
-                        <td>00.00</td>
-                      </tr>
-                      <tr className="text-sm">
-                        <td>
-                          <p>Total Tax:</p>
-                        </td>
-                        <td>12.50</td>
-                      </tr>
-                      <tfoot className="border-t">
-                        <tr>
-                          <td>Total Payable:</td>
-                          <td>Total: {subTotalVal}</td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                </header>
-                <div className="flex justify-center w-full gap-2 pt-3">
-                  <div className="flex-1">
-                    <button
-                      onClick={handlePrint}
-                      className="bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2">
-                      <FaRupeeSign />
-                      Cash
-                      <p className="text-xs text-gray-300">Ctrl+c</p>
-                    </button>
-                  </div>
-                  <div className="flex-1">
-                    <button
-                      className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-2 px-4 rounded-full w-full flex justify-center items-center gap-2"
-                      onClick={() => paymentProcess(subTotalVal)}>
-                      <BsFillCreditCardFill /> <p>Card</p>
-                      <p className="text-xs text-gray-300">Ctrl+b</p>
-                    </button>
-                  </div>
-                </div>
-              </Card>
+              <SummarySection
+                paymentProcess={paymentProcess}
+                subTotalVal={subTotalVal}
+              />
             </div>
           </div>
         </div>
