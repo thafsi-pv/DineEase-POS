@@ -11,7 +11,7 @@ import { FaRupeeSign } from "react-icons/fa";
 // import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsBoxSeam } from "react-icons/bs";
 import { TfiHandStop } from "react-icons/tfi";
 import { MdOutlineLoyalty } from "react-icons/md";
@@ -31,8 +31,10 @@ import { loadScript } from "../../utils/utils";
 import usePayment from "../../hooks/usePayment";
 import { motion, AnimatePresence } from "framer-motion";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
+import { addToCart } from "../../redux/cartSlice";
 
 function index() {
+  const dispath = useDispatch();
   const printRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
@@ -86,9 +88,30 @@ function index() {
   };
 
   const openModal = (item) => {
-    setIsModalOpen(true);
-    setModalItem(item);
-    document.body.classList.add("modal-open"); // Add className to body
+    console.log("🚀 ~ file: index.jsx:89 ~ openModal ~ item:", item);
+
+    if (item.hasPortions) {
+      setIsModalOpen(true);
+      setModalItem(item);
+      document.body.classList.add("modal-open"); // Add className to body
+      return true;
+    }
+    const obj = {
+      itemName: item.itemName,
+      portion: "",
+      quantity: 1,
+      unitRate: item.price,
+      totalRate: 1 * item.price,
+    };
+    dispath(addToCart(obj));
+    toast.success("Item added to list 👍🏻");
+    if (selectedItemListRef && selectedItemListRef.current) {
+      selectedItemListRef.current.scrollTo({
+        top: selectedItemListRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    closeModal();
   };
 
   const closeModal = () => {
