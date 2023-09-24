@@ -16,7 +16,6 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
   const dispath = useDispatch();
 
   const handleAddItem = (i) => {
-    console.log("🚀 ~ file: Modal.jsx:19 ~ handleAddItem ~ i:", i)
     const obj = {
       itemName: item.itemName,
       portion: i.portionName,
