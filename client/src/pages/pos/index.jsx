@@ -12,26 +12,15 @@ import { FaRupeeSign } from "react-icons/fa";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
 import { useDispatch, useSelector } from "react-redux";
-import { BsBoxSeam } from "react-icons/bs";
-import { TfiHandStop } from "react-icons/tfi";
-import { MdOutlineLoyalty } from "react-icons/md";
-import {
-  CiCalculator1,
-  CiDiscount1,
-  CiUser,
-  CiCircleRemove,
-  CiPercent,
-  CiLock,
-} from "react-icons/ci";
 import InvoicePrint1 from "./printFormats/InvoicePrint1";
 import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { loadScript } from "../../utils/utils";
 import usePayment from "../../hooks/usePayment";
 import { motion, AnimatePresence } from "framer-motion";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 import { addToCart } from "../../redux/cartSlice";
+import BottomMenu from "./components/BottomMenu";
 
 function index() {
   const dispath = useDispatch();
@@ -127,70 +116,6 @@ function index() {
     );
   };
 
-  const subTotal = () => {};
-
-  // const paymentbutton = async (payableAmount) => {
-  //   setPayAmount(payableAmount);
-  //   console.log("🚀 ~ file: index.jsx:105 ~ paymentbutton ~ subTotalVal:", payableAmount)
-  //   paymentProcess(payableAmount);
-
-  //   //   const res = await loadScript(
-  //   //     "https://checkout.razorpay.com/v1/checkout.js"
-  //   //   );
-
-  //   //   if (!res) {
-  //   //     toast.error("Razorpay SDK failed to load. Are you online?");
-  //   //     return;
-  //   //   }
-  //   //   // const res = await handlePayment(subtot);
-  //   //   if (payableAmount == 0) {
-  //   //     return toast.error("Total payable amount is 0");
-  //   //   }
-
-  //   //   const initPayment = (data) => {
-  //   //     const options = {
-  //   //       key: import.meta.env.VITE_RAZORPAY_KEY,
-  //   //       amount: data.amount,
-  //   //       currency: data.currency,
-  //   //       name: data.name,
-  //   //       description: "Test Transaction",
-  //   //       image:
-  //   //         "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
-  //   //       order_id: data.id,
-  //   //       handler: async (response) => {
-  //   //         try {
-  //   //           const verifyUrl = "http://localhost:8080/api/payment/verify";
-  //   //           const { data } = await axios.post(verifyUrl, response);
-  //   //           console.log("verify", data);
-  //   //           handlePrint();
-  //   //           toast.success("payment completed Successfully ✅");
-  //   //         } catch (error) {
-  //   //           console.log(error);
-  //   //         }
-  //   //       },
-  //   //       theme: {
-  //   //         color: "#3399cc",
-  //   //       },
-  //   //     };
-  //   //     const rzp1 = new window.Razorpay(options);
-  //   //     rzp1.open();
-  //   //   };
-
-  //   //   const handlePayment = async () => {
-  //   //     try {
-  //   //       const orderUrl = "http://localhost:8080/api/payment/orders";
-  //   //       const { data } = await axios.post(orderUrl, { amount: payableAmount });
-  //   //       data.data.name = "DineEase POS";
-  //   //       const res = await initPayment(data.data);
-  //   //       return res;
-  //   //     } catch (error) {
-  //   //       console.log(error);
-  //   //       throw error; // Rethrow the error to propagate it further
-  //   //     }
-  //   //   };
-  //   //   handlePayment();
-  // };
-
   return (
     <div className="w-full h-[85vh]  overflow-hidden py-5">
       <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
@@ -231,60 +156,7 @@ function index() {
               </Card>
             </div>
             <div className=" row-span-1">
-              <Card extra={"w-full h-full p-3 pt-4"}>
-                <div className="flex flex-row-reverse w-full gap-3 items-center align-middle">
-                  <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <CiCircleRemove className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Close</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+c</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <CiLock className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Screen Lock</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+l</p>
-                  </div>
-                  <div
-                    className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer"
-                    onClick={handlePrint}>
-                    <BsPrinter className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">KOT</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+k</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <TfiHandStop className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Hold</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+h</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <CiCalculator1
-                      className="h-10 w-10"
-                      onClick={openCalculator}
-                    />
-                    <p className="p-0 m-0 text-xs">Calculator</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+x</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <CiDiscount1 className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Discount</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+d</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <CiUser className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Add Customer</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+r</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <BsBoxSeam className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Add Product</p>
-                    <p className="p-0 m-0 text-[9px]">Ctlr+p</p>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-                    <MdOutlineLoyalty className="h-10 w-10" />
-                    <p className="p-0 m-0 text-xs">Loayalty Card</p>
-                    <p className="m-0 text-[9px]">Ctlr+l</p>
-                  </div>
-                </div>
-              </Card>
+              <BottomMenu print={handlePrint} />
             </div>
           </div>
         </div>
@@ -318,19 +190,7 @@ function index() {
                       <tfoot className="border-t">
                         <tr>
                           <td>Total Payable:</td>
-                          <td>
-                            <AnimatePresence wait>
-                              <motion.span
-                                key={subTotalVal}
-                                className="text-xl font-semibold"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 1 }}>
-                                Total: {subTotalVal}
-                              </motion.span>
-                            </AnimatePresence>
-                          </td>
+                          <td>Total: {subTotalVal}</td>
                         </tr>
                       </tfoot>
                     </table>
