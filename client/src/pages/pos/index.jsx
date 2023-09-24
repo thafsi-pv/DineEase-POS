@@ -17,7 +17,6 @@ import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import usePayment from "../../hooks/usePayment";
-import { motion, AnimatePresence } from "framer-motion";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 import { addToCart } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
@@ -76,9 +75,7 @@ function index() {
     }
   };
 
-  const openModal = (item) => {
-    console.log("🚀 ~ file: index.jsx:89 ~ openModal ~ item:", item);
-
+  const handleAddItem = (item) => {
     if (item.hasPortions) {
       setIsModalOpen(true);
       setModalItem(item);
@@ -86,6 +83,7 @@ function index() {
       return true;
     }
     const obj = {
+      id: item._id,
       itemName: item.itemName,
       portion: "",
       quantity: 1,
@@ -142,7 +140,7 @@ function index() {
                         <div
                           key={item.id}
                           className="w-1/6 p-2 cursor-pointer"
-                          onClick={() => openModal(item)}>
+                          onClick={() => handleAddItem(item)}>
                           <ImageCard item={item} />
                         </div>
                       );

@@ -8,15 +8,26 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      console.log("🚀 ~ file: cartSlice.js:11 ~ action:", action)
       let newItem = {
+        id: action.payload.id,
         itemName: action.payload.itemName,
         quantity: action.payload.quantity,
         portion: action.payload.portion,
         unitRate: action.payload.unitRate,
         totalRate: action.payload.totalRate,
       };
-      state.push(newItem);
+      const existingItemIdex = state.findIndex(
+        (item) => item.id === newItem.id && item.portion == newItem.portion
+      );
+      if (existingItemIdex !== -1) {
+        state[existingItemIdex].quantity += newItem.quantity;
+        state[existingItemIdex].totalRate = Math.round(
+          parseFloat(state[existingItemIdex].quantity) *
+            parseFloat(state[existingItemIdex].unitRate)
+        ).toFixed(2);
+      } else {
+        state.push(newItem);
+      }
     },
     alterItemQuantity: (state, action) => {
       const { index, type } = action.payload;

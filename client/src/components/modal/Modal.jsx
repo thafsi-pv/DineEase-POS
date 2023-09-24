@@ -17,6 +17,7 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
 
   const handleAddItem = (i) => {
     const obj = {
+      id: item._id,
       itemName: item.itemName,
       portion: i.portionName,
       quantity: quantity,
