@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../../components/card";
 import { BsFillCreditCardFill } from "react-icons/bs";
+import PaymentModal from "./PaymentModal";
 
-function SummarySection({ paymentProcess, subTotalVal }) {
+function SummarySection({ subTotalVal, handlePrint }) {
+  const [showModal, setShowModal] = useState(false);
   return (
     <Card extra={"w-full h-full sm:overflow-auto p-6 pt-2"}>
       <header className="relative flex items-center justify-between pt-4">
@@ -33,13 +35,13 @@ function SummarySection({ paymentProcess, subTotalVal }) {
         <div className="flex-1">
           <button
             className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-3 px-4 rounded-full w-full flex justify-center items-center gap-2"
-            onClick={() => paymentProcess(subTotalVal)}>
+            onClick={() => setShowModal(true)}>
             <BsFillCreditCardFill /> <p className="text-lg">Pay</p>
             <p className="text-xs text-gray-300">Ctrl+b</p>
           </button>
         </div>
       </div>
-      
+      <PaymentModal handlePrint={handlePrint} showModal={showModal} />
     </Card>
   );
 }

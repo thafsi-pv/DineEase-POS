@@ -5,8 +5,11 @@ import { BsFillCreditCardFill } from "react-icons/bs";
 import usePayment from "../../../hooks/usePayment";
 import FormModal from "../../../components/modal/FormModal";
 
-function PaymentModal() {
+function PaymentModal({ handlePrint, showModal }) {
   const { paymentProcess } = usePayment(handlePrint);
+//   if (!showModal) {
+//     return null;
+//   }
   return (
     <FormModal>
       <Card>

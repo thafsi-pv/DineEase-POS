@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ImageCard from "./components/ImageCard";
 import DropDownReactSelect from "../../components/dropdown/DropDownReactSelect";
-import CheckTable from "../admin/default/components/CheckTable";
-import { columnsDataCheck } from "../admin/default/variables/columnsData";
-import tableDataCheck from "../admin/tables/variables/tableDataCheck.json";
 import Card from "../../components/card";
-import { handlePayment } from "../../utils/payment";
-import { BsFillCreditCardFill, BsPrinter } from "react-icons/bs";
-import { FaRupeeSign } from "react-icons/fa";
 // import menu from "../../const/menu.json";
 import Modal from "../../components/modal/Modal";
 import SelectedItemsTable from "./components/SelectedItemsTable";
@@ -61,10 +55,6 @@ function index() {
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
-
-      // paymentbutton(subTotalVal);
-
-      // Use the callback form of setsubTotalVal to access the latest state
       setsubTotalVal((prevSubTotal) => {
         paymentProcess(prevSubTotal);
         return prevSubTotal;
@@ -146,10 +136,6 @@ function index() {
                         </div>
                       );
                     })}
-
-                    {/* <div className="w-1/6 p-2">
-                <ImageCard />
-              </div> */}
                   </div>
                 </div>
               </Card>
@@ -172,6 +158,7 @@ function index() {
               <SummarySection
                 paymentProcess={paymentProcess}
                 subTotalVal={subTotalVal}
+                handlePrint={handlePrint}
               />
             </div>
           </div>
