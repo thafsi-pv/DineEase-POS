@@ -10,24 +10,39 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   return (
     <FormModal isOpen={showModal} modalWidth="530px" onClose={onClose}>
       <Card>
-        <div className="mx-auto">
-          <div className="flex flex-col  w-full border m-3 rounded-lg">
-            <div className="flex justify-between space-x-3 px-2">
-              <p className="font-semibold text-sm">Customer Name</p> <span className="font-semibold text-sm">Walk in customer</span>
+        <div className="">
+          <div className="flex flex-col border mx-10 rounded-lg">
+            <div className="flex justify-between space-x-3 px-2 py-1 border-b ">
+              <p className="font-semibold text-sm">Customer Name</p>{" "}
+              <span className="font-semibold text-sm">Walk in customer</span>
             </div>
-            <div className="flex justify-between space-x-3 px-2">
-              <p className="font-semibold text-sm">Total Items</p> <span className="font-semibold text-sm">15</span>
+            <div className="flex justify-between space-x-3 px-2 py-1 border-b">
+              <p className="font-semibold text-sm">Total Items</p>{" "}
+              <span className="font-semibold text-sm">15</span>
             </div>
-            <div className="flex justify-between space-x-3 px-2">
-              <p className="font-semibold text-sm">Total Tax</p> <span className="font-semibold text-sm">15.40</span>
+            <div className="flex justify-between space-x-3 px-2 py-1  border-b">
+              <p className="font-semibold text-sm">Total Tax</p>{" "}
+              <span className="font-semibold text-sm">12.50</span>
             </div>
-            <div className="flex justify-between space-x-3 px-2">
-              <p className="font-semibold">Discount</p> <span className="font-semibold text-sm">00.00</span>
+            <div className="flex justify-between space-x-3 px-2 py-1">
+              <p className="font-semibold">Discount</p>{" "}
+              <span className="font-semibold text-sm">00.00</span>
             </div>
             <hr />
-            <div className="flex justify-between space-x-3 bg-gray-300 px-2">
+            <div className="flex justify-between space-x-3 bg-gray-300 px-2 rounded-b-lg">
               <p className="text-lg font-semibold">Total Payable Amount</p>
               <span className="text-lg font-semibold">{subTotalVal}</span>
+            </div>
+          </div>
+          <div>
+            <div>
+                <label htmlFor="">Cash</label>
+              <input
+                type="number"
+                className="rounded-lg  p-1 font-bold text-sm border text-center"
+                value={""}
+              />
+              <label htmlFor="">Change</label>
             </div>
           </div>
         </div>

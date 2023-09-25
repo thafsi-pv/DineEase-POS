@@ -97,14 +97,6 @@ function index() {
     document.body.classList.remove("modal-open"); // Remove className from body
   };
 
-  const openCalculator = () => {
-    // Open the system calculator on macOS
-    window.open(
-      "x-apple.systempreferences:com.apple.preference.security?Calc",
-      "_blank"
-    );
-  };
-
   return (
     <div className="w-full h-[85vh]  overflow-hidden py-5">
       <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
