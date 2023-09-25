@@ -4,14 +4,15 @@ import { FaRupeeSign } from "react-icons/fa";
 import { BsFillCreditCardFill } from "react-icons/bs";
 import usePayment from "../../../hooks/usePayment";
 import FormModal from "../../../components/modal/FormModal";
+import InputField from "../../../components/fields/InputField";
 
 function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const { paymentProcess } = usePayment(handlePrint);
   return (
     <FormModal isOpen={showModal} modalWidth="530px" onClose={onClose}>
       <Card>
-        <div className="">
-          <div className="flex flex-col border mx-10 rounded-lg">
+        <div className="mx-10">
+          <div className="flex flex-col border rounded-lg mb-3">
             <div className="flex justify-between space-x-3 px-2 py-1 border-b ">
               <p className="font-semibold text-sm">Customer Name</p>{" "}
               <span className="font-semibold text-sm">Walk in customer</span>
@@ -30,19 +31,13 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
             </div>
             <hr />
             <div className="flex justify-between space-x-3 bg-gray-300 px-2 rounded-b-lg">
-              <p className="text-lg font-semibold">Total Payable Amount</p>
+              <p className="text-lg font-semibold">To Pay</p>
               <span className="text-lg font-semibold">{subTotalVal}</span>
             </div>
           </div>
           <div>
             <div>
-                <label htmlFor="">Cash</label>
-              <input
-                type="number"
-                className="rounded-lg  p-1 font-bold text-sm border text-center"
-                value={""}
-              />
-              <label htmlFor="">Change</label>
+              <InputField label='Cash' placeholder='Enter Amount' />
             </div>
           </div>
         </div>
