@@ -6,7 +6,8 @@ import usePayment from "../../../hooks/usePayment";
 import FormModal from "../../../components/modal/FormModal";
 import InputField from "../../../components/fields/InputField";
 import InvoicePrint1 from "../printFormats/InvoicePrint1";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { BiArrowBack } from "react-icons/bi";
 
 function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const { paymentProcess } = usePayment(handlePrint);
@@ -16,6 +17,11 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const handleCashPayment = () => {
     setPaymentMode(1);
     setCashBtnTxt(`Pay ${subTotalVal}`);
+  };
+
+  const handleBack = () => {
+    setPaymentMode(0);
+    setCashBtnTxt(`Cash`);
   };
 
   const fadeInVariants = {
@@ -29,8 +35,14 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
       modalWidth="730px"
       onClose={onClose}
       bg={"bg-gradient-to-r from-white to-green-500"}>
-      <div className="flex justify-between h-full bg-none">
+      <div className="flex justify-between min-h-[300px] bg-none">
         <div className="h-full w-1/2">
+          {paymentMode != 0 && (
+            <BiArrowBack
+              className="h-5 w-5 cursor-pointer hover:text-green-500"
+              onClick={handleBack}
+            />
+          )}
           <InvoicePrint1 showSummary={false} />
         </div>
         <div className="pl-2 h-full  border-l w-1/2">
@@ -43,9 +55,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                 </span>
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1  ">
-                <p className="font-semibold text-xs text-gray-800">
-                Items
-                </p>
+                <p className="font-semibold text-xs text-gray-800">Items</p>
                 <span className="font-semibold text-sm text-gray-800">15</span>
               </div>
             </div>
@@ -76,27 +86,30 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                 </span>
               </div>
             </div>
-            {paymentMode == 1 && (
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={fadeInVariants}
-                transition={{ duration: 1 }} // Adjust the duration as needed
-              >
-                <div>
-                  <div>
-                    <InputField label="Cash" placeholder="Enter Amount" />
-                  </div>
-                  <div className="my-4">
-                    <span className="text-base font-semibold">
-                      Change:10.00
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {paymentMode == 1 && (
+                <motion.div
+                  key="animation-div"
+                  initial={{ x: "100%" }} // Starting position (right side)
+                  animate={{ x: 0 }} // Ending position (center of the screen)
+                  exit={{ x: "150%" }} // Exit animation (back to the right side)
+                  transition={{ type: "spring", stiffness: 120, damping: 10 }} // Animation settings
+                >
+                  <form>
+                    <div>
+                      <InputField label="Cash" placeholder="Enter Amount" />
+                    </div>
+                    <div className="">
+                      <span className="text-base font-semibold">
+                        Change:10.00
+                      </span>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          <div className="flex justify-center w-full gap-2 pt-3 border-t border-green-500">
+          <div className="flex justify-center w-full gap-2 mt-10 pt-3 border-t border-green-500">
             <div className="flex-1">
               <button
                 onClick={handleCashPayment}
