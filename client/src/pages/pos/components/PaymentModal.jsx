@@ -8,7 +8,9 @@ import InputField from "../../../components/fields/InputField";
 import InvoicePrint1 from "../printFormats/InvoicePrint1";
 import { AnimatePresence, motion } from "framer-motion";
 import { BiArrowBack } from "react-icons/bi";
+import { useFormik } from "formik";
 
+var change = "";
 function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const { paymentProcess } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
@@ -27,6 +29,30 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const fadeInVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  };
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (parseFloat(values.amount) < subTotalVal || values.amount == "") {
+      errors.amount = "Must be greater than or equal to subtotal";
+    }
+
+    return errors;
+  };
+  const formik = useFormik({
+    initialValues: {
+      amount: 0,
+    },
+    validate,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const handleAmountChange = (e) => {
+    change = e.target.value - subTotalVal;
+    formik.handleChange(e);
   };
 
   return (
@@ -61,19 +87,19 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
             </div>
             <div className="flex flex-col border rounded-lg mb-3 ">
               <div className="flex justify-between space-x-3 px-2 py-1  ">
-                <p className="font-semibold text-xs text-gray-800">Sub Total</p>{" "}
+                <p className="font-semibold text-xs text-gray-800">Sub Total</p>
                 <span className="font-semibold text-sm text-gray-800">
                   {subTotalVal}
                 </span>
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1  ">
-                <p className="font-semibold text-xs text-gray-800">Total Tax</p>{" "}
+                <p className="font-semibold text-xs text-gray-800">Total Tax</p>
                 <span className="font-semibold text-sm text-gray-800">
                   12.50
                 </span>
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1">
-                <p className="font-semibold text-xs text-gray-800">Discount</p>{" "}
+                <p className="font-semibold text-xs text-gray-800">Discount</p>
                 <span className="font-semibold text-sm text-gray-800">
                   00.00
                 </span>
@@ -95,13 +121,35 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                   exit={{ x: "150%" }} // Exit animation (back to the right side)
                   transition={{ type: "spring", stiffness: 120, damping: 10 }} // Animation settings
                 >
-                  <form>
+                  <form onSubmit={formik.handleSubmit}>
                     <div>
-                      <InputField label="Cash" placeholder="Enter Amount" />
+                      <InputField
+                        min={0}
+                        type="number"
+                        label="Cash"
+                        id="amount"
+                        state={
+                          formik.touched.amount && formik.errors.amount
+                            ? "error"
+                            : null
+                        }
+                        onChange={handleAmountChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.amount}
+                        placeholder="Enter Amount"
+                      />
                     </div>
-                    <div className="">
-                      <span className="text-base font-semibold">
-                        Change:10.00
+                    {formik.touched.amount && formik.errors.amount ? (
+                      <div className="font-thin float-right text-xs text-red-500">
+                        {formik.errors.amount}
+                      </div>
+                    ) : null}
+                    <div className="flex justify-start space-x-3 px-2 my-4 items-center ">
+                      <p className="font-semibold text-lg text-white">
+                        Change:
+                      </p>
+                      <span className="font-semibold text-lg text-white">
+                        {change}
                       </span>
                     </div>
                   </form>
@@ -112,7 +160,10 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
           <div className="flex justify-center w-full gap-2 mt-10 pt-3 border-t border-green-500">
             <div className="flex-1">
               <button
-                onClick={handleCashPayment}
+                type="submit"
+                onClick={
+                  paymentMode == 0 ? handleCashPayment : formik.handleSubmit
+                }
                 className="bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2">
                 <FaRupeeSign />
                 {cashBtnTxt}
