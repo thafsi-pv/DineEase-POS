@@ -62,6 +62,7 @@ function SummarySection({ subTotalVal, handlePrint }) {
         handlePrint={handlePrint}
         showModal={showModal}
         onClose={handleCloseModal}
+        subTotalVal={subTotalVal}
       />
     </div>
   );
