@@ -2,7 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
-function FormModal({ isOpen, onClose, children, modalWidth }) {
+function FormModal({ isOpen, onClose, children, modalWidth,bg='bg-white' }) {
   const modalVariants = {
     hidden: { opacity: 0, y: "-100%" }, // Slide down and fade out
     visible: { opacity: 1, y: "0%" }, // Slide up and fade in
@@ -23,7 +23,7 @@ function FormModal({ isOpen, onClose, children, modalWidth }) {
             variants={modalVariants}>
             <div className="inset-0 bg-black opacity-50"></div>
             <div
-              className={`relative z-10 bg-white p-6 rounded-3xl shadow-md`}
+              className={`relative z-10 ${bg} p-6 rounded-3xl shadow-md`}
               style={{ width: modalWidth }}>
               <div className="flex justify-end">
                 <div className="relative -top-8 -right-8 h-fit bg-white rounded-full shadow-lg">

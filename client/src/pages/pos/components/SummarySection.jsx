@@ -40,7 +40,7 @@ function SummarySection({ subTotalVal, handlePrint }) {
               </tr>
               <tfoot className="border-t">
                 <tr>
-                  <td>Total Payable:</td>
+                  <td>To Pay:</td>
                   <td>{subTotalVal}</td>
                 </tr>
               </tfoot>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-function InvoicePrint1({ printRef }) {
+function InvoicePrint1({ printRef, showSummary = true }) {
   const cartItems = useSelector((store) => store.cart);
 
   const totalItems = () => {
@@ -14,7 +14,7 @@ function InvoicePrint1({ printRef }) {
   };
 
   return (
-    <div className="bg-white p-6 print-page" ref={printRef}>
+    <div className=" p-6 print-page" ref={printRef}>
       <div className="flex justify-between">
         <div className="flex items-center space-x-4">
           <img
@@ -41,7 +41,7 @@ function InvoicePrint1({ printRef }) {
 
       <div className="mt-6">
         <table className="w-full" variant="simple" color="gray-500" mb="24px">
-          <thead className="sticky top-0 bg-white z-10 w-full">
+          <thead className="sticky top-0  z-10 w-full">
             <tr className="">
               <th className="border-b border-gray-200  pb-[3px]  dark:!border-navy-700 w-40p">
                 <div className="text-[10px] font-bold tracking-wide text-gray-600 lg:text-[10px] w-full">
@@ -91,36 +91,38 @@ function InvoicePrint1({ printRef }) {
         </table>
       </div>
 
-      <div className="mt-6 flex justify-end  text-[8px] font-semibold">
-        <table>
-          <tr>
-            <td>Total Items</td>
-            <td className="text-right">{totalItems()}</td>
-          </tr>
-          <tr>
-            <td>Total Discount</td>
-            <td className="text-right">00.00</td>
-          </tr>
-          <tr>
-            <td>Total Tax</td>
-            <td className="text-right">00.00</td>
-          </tr>
-          <tr>
-            <td>Total Amount</td>
-            <td className="text-right">{subTotal()}</td>
-          </tr>
-          <tr>
-            <td>Loyalty Points Earned</td>
-            <td className="text-right">50</td>
-          </tr>
-        </table>
+      {showSummary && (
+        <div className="mt-6 flex justify-end  text-[8px] font-semibold">
+          <table>
+            <tr>
+              <td>Total Items</td>
+              <td className="text-right">{totalItems()}</td>
+            </tr>
+            <tr>
+              <td>Total Discount</td>
+              <td className="text-right">00.00</td>
+            </tr>
+            <tr>
+              <td>Total Tax</td>
+              <td className="text-right">00.00</td>
+            </tr>
+            <tr>
+              <td>Total Amount</td>
+              <td className="text-right">{subTotal()}</td>
+            </tr>
+            <tr>
+              <td>Loyalty Points Earned</td>
+              <td className="text-right">50</td>
+            </tr>
+          </table>
 
-        {/* <p>:</p>
+          {/* <p>:</p>
         <p>Total :00.000</p>
         <p>Total Tax:00.000</p>
         <p>Total Amount: ${subTotal()}</p>
         <p>Loyalty Points Earned: 50</p> */}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
