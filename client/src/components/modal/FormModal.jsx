@@ -23,7 +23,8 @@ function FormModal({ isOpen, onClose, children, modalWidth }) {
             variants={modalVariants}>
             <div className="inset-0 bg-black opacity-50"></div>
             <div
-              className={`relative z-10 bg-white p-6 rounded-3xl shadow-md w-[70vw]  w-[${modalWidth}]`}>
+              className={`relative z-10 bg-white p-6 rounded-3xl shadow-md`}
+              style={{ width: modalWidth }}>
               <div className="flex justify-end">
                 <div className="relative -top-8 -right-8 h-fit bg-white rounded-full shadow-lg">
                   <a href="#" onClick={onClose}>
