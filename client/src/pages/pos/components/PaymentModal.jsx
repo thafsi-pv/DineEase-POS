@@ -11,9 +11,11 @@ import { motion } from "framer-motion";
 function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
   const { paymentProcess } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
+  const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
 
   const handleCashPayment = () => {
     setPaymentMode(1);
+    setCashBtnTxt(`Pay ${subTotalVal}`);
   };
 
   const fadeInVariants = {
@@ -42,7 +44,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1  ">
                 <p className="font-semibold text-xs text-gray-800">
-                  Total Items
+                Items
                 </p>
                 <span className="font-semibold text-sm text-gray-800">15</span>
               </div>
@@ -67,7 +69,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between space-x-3  px-2 rounded-b-lg">
+              <div className="flex justify-between space-x-3 bg-gray-900 bg-opacity-20 px-2 rounded-b-lg">
                 <p className="text-lg font-semibold text-white">To Pay</p>
                 <span className="text-lg font-semibold text-white">
                   {subTotalVal}
@@ -100,18 +102,20 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                 onClick={handleCashPayment}
                 className="bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2">
                 <FaRupeeSign />
-                Cash
+                {cashBtnTxt}
                 <p className="text-xs text-gray-300">Ctrl+c</p>
               </button>
             </div>
-            <div className="flex-1">
-              <button
-                className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2"
-                onClick={() => paymentProcess(subTotalVal)}>
-                <BsFillCreditCardFill /> <p>Card</p>
-                <p className="text-xs text-gray-300">Ctrl+b</p>
-              </button>
-            </div>
+            {paymentMode !== 1 && (
+              <div className="flex-1">
+                <button
+                  className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2"
+                  onClick={() => paymentProcess(subTotalVal)}>
+                  <BsFillCreditCardFill /> <p>Card</p>
+                  <p className="text-xs text-gray-300">Ctrl+b</p>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

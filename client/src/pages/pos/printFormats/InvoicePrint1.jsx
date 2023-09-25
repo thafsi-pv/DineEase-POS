@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { convertToWords } from "../../../utils/utils";
 
 function InvoicePrint1({ printRef, showSummary = true }) {
   const cartItems = useSelector((store) => store.cart);
@@ -90,7 +91,12 @@ function InvoicePrint1({ printRef, showSummary = true }) {
           </tbody>
         </table>
       </div>
-
+      {showSummary && (
+        <div className="mt-3">
+          <p className="text-[7px]">Amount in words:</p>
+          <p className="text-[8px]">{convertToWords(subTotal())}</p>
+        </div>
+      )}
       {showSummary && (
         <div className="mt-6 flex justify-end  text-[8px] font-semibold">
           <table>
