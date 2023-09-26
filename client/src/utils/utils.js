@@ -76,10 +76,10 @@ export const convertToWords = (num) => {
     }
 
     const filteredParts = parts.filter((part) => part !== "");
-    
-    if (filteredParts.length > 0) {
-      filteredParts.push("Only");
-    }
+
+    // if (filteredParts.length > 0) {
+    //   filteredParts.push("Only");
+    // }
 
     return filteredParts.join(" ");
   }
@@ -108,4 +108,3 @@ export const convertToWords = (num) => {
   // Capitalize only the first letter of the entire result
   return result.charAt(0).toUpperCase() + result.slice(1).trim();
 };
-

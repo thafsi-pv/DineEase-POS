@@ -94,7 +94,7 @@ function InvoicePrint1({ printRef, showSummary = true }) {
       {showSummary && (
         <div className="mt-3">
           <p className="text-[7px]">Amount in words:</p>
-          <p className="text-[8px]">{convertToWords(subTotal())}</p>
+          <p className="text-[8px]">{convertToWords(subTotal())} Only</p>
         </div>
       )}
       {showSummary && (
