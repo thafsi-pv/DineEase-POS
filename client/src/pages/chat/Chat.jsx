@@ -12,7 +12,7 @@ import { BsFillEmojiSmileFill } from "react-icons/bs";
 let data = JSON.parse(localStorage.getItem("DEPOS"));
 let myUserName = data?.email;
 const token = data?.DET;
-const socket = io(`http://localhost:8080/?token=${token}`);
+// const socket = io(`http://localhost:8080/?token=${token}`);
 const sound = new Howl({
   src: [incomingNotificationSound],
 });
@@ -27,20 +27,20 @@ function chat() {
   const [messages, setMessages] = useState([]);
   const [showEmoji, setshowEmoji] = useState(false);
 
-  useEffect(() => {
-    socket.emit("login", myUserName);
-    socket.on("userList", (list) => {
-      setUserList(list);
-    });
+  // useEffect(() => {
+  //   socket.emit("login", myUserName);
+  //   socket.on("userList", (list) => {
+  //     setUserList(list);
+  //   });
 
-    socket.on("private message", ({ sender, message }) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: sender, message: message },
-      ]);
-      sound.play();
-    });
-  }, []);
+  //   socket.on("private message", ({ sender, message }) => {
+  //     setMessages((prevMessages) => [
+  //       ...prevMessages,
+  //       { sender: sender, message: message },
+  //     ]);
+  //     sound.play();
+  //   });
+  // }, []);
 
   const handleSendMessage = () => {
     if (selectedRecipient && message) {
