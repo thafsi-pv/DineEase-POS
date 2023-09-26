@@ -22,7 +22,7 @@ const Navbar = (props) => {
   useEffect(() => {
     var storedData = localStorage.getItem("DEPOS");
     var retrievedObject = JSON.parse(storedData);
-    setMail(retrievedObject.email);
+    setMail(retrievedObject?.email);
   }, []);
 
   return (
