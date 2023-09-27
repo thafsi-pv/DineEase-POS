@@ -16,6 +16,10 @@ import AddProductsModal from "../../products/components/AddProductsModal";
 function BottomMenu({ print }) {
   const [addProductModal, setAddProductModal] = useState(false);
 
+  const closeModal = () => {
+    setAddProductModal(false);
+    //document.body.classList.remove("modal-open"); // Remove className from body
+  };
   const openCalculator = () => {
     // Open the system calculator on macOS
     window.open(
