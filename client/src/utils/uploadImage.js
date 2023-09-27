@@ -13,7 +13,7 @@ const handleAddMovie = async (img) => {
   const response = await fetch(CLOUDINARY_IMAGE_UPLOAD_URL, config);
   const responseData = await response.json();
   console.log("🚀 ~ file: uploadImage.js:15 ~ handleAddMovie ~ responseData:", responseData)
-  return responseData.url({ secure: true });
+  return responseData.secure_url;
 };
 
 export default handleAddMovie;
