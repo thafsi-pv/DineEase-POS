@@ -12,17 +12,17 @@ import SignUp from "./pages/auth/SignUp.jsx";
 const App = () => {
   return (
     <>
-      {/* <LockScreen> */}
-      <Provider store={store}>
-        <Routes>
-          <Route path="admin/*" element={<AdminLayout />} />
-          <Route path="/" element={<Navigate to="/admin" replace />} />
-          <Route path="/auth/sign-in" element={<SignIn />} />
-          <Route path="/auth/sign-up" element={<SignUp />} />
-        </Routes>
-        <Toaster position="top-center" reverseOrder={false} />
-      </Provider>
-      {/* </LockScreen> */}
+      <LockScreen>
+        <Provider store={store}>
+          <Routes>
+            <Route path="admin/*" element={<AdminLayout />} />
+            <Route path="/" element={<Navigate to="/admin" replace />} />
+            <Route path="/auth/sign-in" element={<SignIn />} />
+            <Route path="/auth/sign-up" element={<SignUp />} />
+          </Routes>
+          <Toaster position="top-center" reverseOrder={false} />
+        </Provider>
+      </LockScreen>
     </>
     // <AdminLayout />
   );

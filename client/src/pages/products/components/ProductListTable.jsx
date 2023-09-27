@@ -119,7 +119,6 @@ const ProductListTable = (props) => {
 
   const deleteItem = async (id, tid) => {
     toast.dismiss(tid);
-    console.log("🚀 ~ file: ProductListTable.jsx:124 ~ deleteItem ~ tid:", tid);
     var url = `${DELETE_PRODUCT_BY_ID}?id=${id}`;
     const data = await axios.delete(url);
     const newList = tableData.filter((item) => item._id != id);

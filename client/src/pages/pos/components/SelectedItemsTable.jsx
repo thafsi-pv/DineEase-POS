@@ -6,10 +6,13 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { alterItemQuantity } from "../../../redux/cartSlice";
-import { CiTrash } from "react-icons/ci";
+import { CiShoppingCart, CiTrash } from "react-icons/ci";
 
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
-  console.log("🚀 ~ file: SelectedItemsTable.jsx:12 ~ SelectedItemsTable ~ cartItems:", cartItems)
+  console.log(
+    "🚀 ~ file: SelectedItemsTable.jsx:12 ~ SelectedItemsTable ~ cartItems:",
+    cartItems
+  );
   const dispath = useDispatch();
 
   const handleItemAlterQuantity = (index, type) => {
@@ -22,7 +25,8 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
       <Card extra={"w-full h-full px-6"}>
         <header className="relative flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
-            Selected Items
+            <CiShoppingCart />
+            Cart Items
           </div>
 
           <CardMenu />
@@ -98,7 +102,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                     </p>
                   </td>
                   <td className="flex justify-end">
-                    <CiTrash className="hover:text-red-500 cursor-pointer"/>
+                    <CiTrash className="hover:text-red-500 cursor-pointer" />
                   </td>
                 </tr>
               ))}
