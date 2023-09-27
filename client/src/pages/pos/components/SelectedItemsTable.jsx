@@ -29,7 +29,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
         </header>
 
         <div
-          className="mt-8  h-full overflow-y-scroll pb-16"
+          className="mt-8  h-full overflow-y-auto pb-16"
           ref={selectedItemListRef}>
           <table className="w-full" variant="simple" color="gray-500" mb="24px">
             <thead className="sticky top-0 bg-white z-10 w-full">

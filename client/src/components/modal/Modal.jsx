@@ -69,7 +69,7 @@ const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
             </div>
           </div>
           <div className="p-6">
-            <div className="w-full max-h-full overflow-y-scroll">
+            <div className="w-full max-h-full overflow-y-auto">
               <p className="font-semibold pb-2">Select required portion</p>
               <table className="w-full bg-gray-50 dark:!bg-navy-700 border  rounded-lg overflow-hidden">
                 <thead className="bg-gray-200 dark:!bg-gray-700">
