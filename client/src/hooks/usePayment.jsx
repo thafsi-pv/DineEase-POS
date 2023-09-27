@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { loadScript } from "../utils/utils";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { ORDER_PAYMENT, VERIFY_PAYMENT } from "../utils/const";
 
 function usePayment(callback) {
   const [payAmount, setPayAmount] = useState();
@@ -32,7 +33,7 @@ function usePayment(callback) {
         order_id: data.id,
         handler: async (response) => {
           try {
-            const verifyUrl = "http://localhost:8080/api/payment/verify";
+            const verifyUrl = VERIFY_PAYMENT;
             const { data } = await axios.post(verifyUrl, response);
             console.log("verify", data);
             callback();
@@ -51,7 +52,7 @@ function usePayment(callback) {
 
     const handlePayment = async () => {
       try {
-        const orderUrl = "http://localhost:8080/api/payment/orders";
+        const orderUrl = ORDER_PAYMENT;
         const { data } = await axios.post(orderUrl, { amount: payableAmount });
         data.data.name = "DineEase POS";
         const res = await initPayment(data.data);
