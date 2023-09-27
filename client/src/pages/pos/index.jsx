@@ -30,6 +30,7 @@ function index() {
   const [subTotalVal, setsubTotalVal] = useState(0);
   const { paymentProcess } = usePayment(handlePrint);
   const [menu, setMenu] = useState([]);
+  const [addProductModal, setAddProductModal] = useState(false);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
@@ -62,6 +63,10 @@ function index() {
     if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       handlePrint();
+    }
+    if (e.key === "p" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      setAddProductModal(true);
     }
   };
 
@@ -132,7 +137,11 @@ function index() {
               </Card>
             </div>
             <div className=" row-span-1">
-              <BottomMenu print={handlePrint}  />
+              <BottomMenu
+                print={handlePrint}
+                addProductModal={addProductModal}
+                setAddProductModal={setAddProductModal}
+              />
             </div>
           </div>
         </div>
@@ -165,7 +174,6 @@ function index() {
       <div className="hidden">
         <InvoicePrint1 printRef={printRef} />
       </div>
-     
     </div>
   );
 }

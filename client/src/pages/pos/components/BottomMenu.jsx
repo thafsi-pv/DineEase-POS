@@ -13,9 +13,7 @@ import { MdOutlineLoyalty } from "react-icons/md";
 import FormModal from "../../../components/modal/FormModal";
 import AddProductsModal from "../../products/components/AddProductsModal";
 
-function BottomMenu({ print }) {
-  const [addProductModal, setAddProductModal] = useState(false);
-
+function BottomMenu({ print, setAddProductModal, addProductModal }) {
   const closeModal = () => {
     setAddProductModal(false);
     //document.body.classList.remove("modal-open"); // Remove className from body

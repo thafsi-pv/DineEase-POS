@@ -21,8 +21,6 @@ function AddProductsModal({
   setProductList,
   fromPos,
 }) {
-  // const [selectedCategory, setSelectedCategory] = useState("");
-  // const [selectedCuisine, setSelectedCuisine] = useState([]);
   const [image, setImage] = useState(null);
   const productFormRef = useRef(null);
 
