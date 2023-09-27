@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../../components/card";
-import { CiCalculator1, CiCircleRemove, CiDiscount1, CiLock, CiUser } from "react-icons/ci";
+import {
+  CiCalculator1,
+  CiCircleRemove,
+  CiDiscount1,
+  CiLock,
+  CiUser,
+} from "react-icons/ci";
 import { BsBoxSeam, BsPrinter } from "react-icons/bs";
 import { TfiHandStop } from "react-icons/tfi";
 import { MdOutlineLoyalty } from "react-icons/md";
+import FormModal from "../../../components/modal/FormModal";
+import AddProductsModal from "../../products/components/AddProductsModal";
 
 function BottomMenu({ print }) {
+  const [addProductModal, setAddProductModal] = useState(false);
+
   const openCalculator = () => {
     // Open the system calculator on macOS
     window.open(
@@ -55,7 +65,10 @@ function BottomMenu({ print }) {
             <p className="p-0 m-0 text-[9px]">Ctlr+r</p>
           </div>
           <div className=" flex flex-col justify-center items-center  hover:bg-gray-200 p-1 rounded-xl text-gray-400 hover:text-gray-800 cursor-pointer">
-            <BsBoxSeam className="h-10 w-10" />
+            <BsBoxSeam
+              className="h-10 w-10"
+              onClick={() => setAddProductModal(true)}
+            />
             <p className="p-0 m-0 text-xs">Add Product</p>
             <p className="p-0 m-0 text-[9px]">Ctlr+p</p>
           </div>
@@ -66,6 +79,12 @@ function BottomMenu({ print }) {
           </div>
         </div>
       </Card>
+      <FormModal
+        isOpen={addProductModal}
+        onClose={closeModal}
+        modalWidth="70vw">
+        <AddProductsModal setIsModalOpen={setAddProductModal} />
+      </FormModal>
     </>
   );
 }

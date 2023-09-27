@@ -42,7 +42,6 @@ function index() {
   const getAllProducts = async () => {
     const menu = await axios.get(`${GET_ALL_ACTIVE_PRODUCT_API}?active=true`);
     setMenu(menu?.data);
-    console.log("🚀 ~ file: index.jsx:58 ~ getAllProducts ~ menu:", menu);
   };
 
   useEffect(() => {
@@ -133,7 +132,7 @@ function index() {
               </Card>
             </div>
             <div className=" row-span-1">
-              <BottomMenu print={handlePrint} />
+              <BottomMenu print={handlePrint}  />
             </div>
           </div>
         </div>
@@ -166,6 +165,7 @@ function index() {
       <div className="hidden">
         <InvoicePrint1 printRef={printRef} />
       </div>
+     
     </div>
   );
 }
