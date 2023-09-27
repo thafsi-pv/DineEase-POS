@@ -140,7 +140,7 @@ const ProductListTable = (props) => {
         <CardMenu />
       </div>
 
-      <div className="mt-8 overflow-x-scroll xl:overflow-scroll">
+      <div className="mt-8 overflow-x-auto xl:overflow-auto">
         <table {...getTableProps()} className="w-full">
           <thead>
             {headerGroups.map((headerGroup, index) => (
