@@ -9,6 +9,7 @@ import { validate } from "../../utils/validate";
 import axios from "axios";
 import { genricError } from "../../utils/genricError";
 import { toast } from "react-hot-toast";
+import { SIGN_UP_API } from "../../utils/const";
 
 function SignUp() {
   const navigate = useNavigate(null);
@@ -24,9 +25,7 @@ function SignUp() {
     validate,
     onSubmit: async (values) => {
       try {
-        console.log("🚀 ~ file: SignUp.jsx:56 ~ SignUp ~ values:", values);
-        const signUpUrl = "http://localhost:8080/api/auth/signUp";
-        const response = await axios.post(signUpUrl, values);
+        const response = await axios.post(SIGN_UP_API, values);
         if ((response.status = 200)) {
           toast.success("Successfully registered, SignIn now 🤝");
           navigate("/auth/sign-in");
