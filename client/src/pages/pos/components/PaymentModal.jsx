@@ -119,7 +119,8 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                   initial={{ x: "100%" }} // Starting position (right side)
                   animate={{ x: 0 }} // Ending position (center of the screen)
                   exit={{ x: "116%" }} // Exit animation (back to the right side)
-                  transition={{ type: "spring", stiffness: 120, damping: 20 }} // Animation settings
+                  transition={{ type: "spring", stiffness: 120, damping: 20 }}
+                  className="overflow-hidden" // Animation settings
                 >
                   <form onSubmit={formik.handleSubmit}>
                     <div>
