@@ -146,10 +146,10 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                       </div>
                     ) : null}
                     <div className="flex justify-start space-x-3 px-2 my-4 items-center ">
-                      <p className="font-semibold text-lg text-white">
+                      <p className="font-semibold text-lg text-black">
                         Change:
                       </p>
-                      <span className="font-semibold text-lg text-white">
+                      <span className="font-semibold text-lg text-black">
                         {change}
                       </span>
                     </div>
