@@ -19,6 +19,7 @@ function AddProductsModal({
   modalData,
   productList,
   setProductList,
+  fromPos,
 }) {
   // const [selectedCategory, setSelectedCategory] = useState("");
   // const [selectedCuisine, setSelectedCuisine] = useState([]);
@@ -64,15 +65,17 @@ function AddProductsModal({
         console.log("ProductSubmitted:", values);
         const res = await axios.post(PRODUCT_ADD_API, values);
         if (res.status == 201) {
-          if (values._id) {
-            var newList = productList.map((item) =>
-              item._id == values._id ? res?.data : item
-            );
-            setProductList(newList);
-            toast.success("Product updated successfully 👍🏻");
-            return true;
-          } else {
-            setProductList((prev) => [res?.data, ...prev]);
+          if (!fromPos) {
+            if (values._id) {
+              var newList = productList.map((item) =>
+                item._id == values._id ? res?.data : item
+              );
+              setProductList(newList);
+              toast.success("Product updated successfully 👍🏻");
+              return true;
+            } else {
+              setProductList((prev) => [res?.data, ...prev]);
+            }
           }
           toast.success("Product added successfully 👍🏻");
         }

@@ -87,7 +87,7 @@ function BottomMenu({ print }) {
         isOpen={addProductModal}
         onClose={closeModal}
         modalWidth="70vw">
-        <AddProductsModal setIsModalOpen={setAddProductModal} />
+        <AddProductsModal setIsModalOpen={setAddProductModal} fromPos={true} />
       </FormModal>
     </>
   );
