@@ -46,6 +46,10 @@ function index() {
   };
 
   useEffect(() => {
+    getAllProducts();
+  }, [addProductModal]);
+
+  useEffect(() => {
     const subtot = Math.round(
       cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
     ).toFixed(2);
