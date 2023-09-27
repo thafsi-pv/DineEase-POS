@@ -14,7 +14,7 @@ const userModal = require("./model/userModal");
 const productRouter = require("./router/product");
 const server = http.createServer(app);
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "*" }));
 dotenv.config();
 app.use(express.json());
 // app.use(cors());
@@ -32,7 +32,7 @@ app.use("/api/product", productRouter);
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
