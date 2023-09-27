@@ -46,23 +46,11 @@ function AddProductsModal({
     },
     validationSchema: productValidationSchema,
     onSubmit: async (values, { resetForm }) => {
-      // const errors = {};
-      // productValidationSchema
-      //   .validate(values, { abortEarly: false })
-      //   .catch((validationErrors) => {
-      //     validationErrors.inner.forEach((error) => {
-      //       errors[error.path] = error.message;
-      //     });
-      //   });
-      // console.log("Validation errors:", errors);
-
       try {
         if (image) {
           const cloudImgUrl = await handleAddMovie(image);
           values.imageUrl = cloudImgUrl;
         }
-        //values.cuisine = selectedCuisine;
-        console.log("ProductSubmitted:", values);
         const res = await axios.post(PRODUCT_ADD_API, values);
         if (res.status == 201) {
           if (!fromPos) {
