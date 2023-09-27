@@ -61,7 +61,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
       modalWidth="730px"
       onClose={onClose}
       bg={"bg-gradient-to-r from-white to-green-500"}>
-      <div className="flex justify-between min-h-[300px] bg-none">
+      <div className="flex justify-between min-h-[300px] bg-none overflow-x-hidden">
         <div className="h-full w-1/2">
           {paymentMode != 0 && (
             <BiArrowBack
@@ -120,7 +120,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
                   animate={{ x: 0 }} // Ending position (center of the screen)
                   exit={{ x: "116%" }} // Exit animation (back to the right side)
                   transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                  className="overflow-hidden" // Animation settings
+                  className="overflow-none" // Animation settings
                 >
                   <form onSubmit={formik.handleSubmit}>
                     <div>
