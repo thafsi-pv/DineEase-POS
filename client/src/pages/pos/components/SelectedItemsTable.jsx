@@ -26,16 +26,16 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
     <div className="h-full">
       <Card extra={"w-full h-full px-6"}>
         <header className="relative flex items-center justify-between pt-4">
-          <div className="text-lg font-bold text-navy-700 dark:text-white flex items-center">
-            <BsCart2 className="text-xl"/>
-             Cart
-          </div>
           <div>
             <div className="flex w-full">
-              <DropDownReactSelect label='Select Customer' ph="Select Customer" />
+              <DropDownReactSelect ph="Select Customer" />
             </div>
           </div>
-          <CardMenu />
+          <div className="text-lg font-bold text-navy-700 dark:text-white flex items-center space-x-2">
+            <BsCart2 className="text-xl" />
+            Cart
+            <CardMenu opt1='Clear Cart' opt2='Discount' opt3='Hold' opt4='Products' />
+          </div>
         </header>
 
         <div
