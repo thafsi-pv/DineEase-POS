@@ -15,6 +15,7 @@ import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
 import { addToCart } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
+import CategoriesTab from "./components/CategoriesTab";
 
 function index() {
   const dispath = useDispatch();
@@ -114,15 +115,16 @@ function index() {
               <Card extra={"w-full h-full sm:overflow-auto p-6"}>
                 {/*product list div */}
                 <div className=" overflow-y-auto h-full">
-                  <div className="w-full gap-2 flex sticky top-0 z-10 bg-white dark:!bg-navy-900  pb-3 rounded-xl">
-                    <div className="flex w-full">
+                  <div className="w-full overflow-auto gap-2 flex sticky top-0 z-10 bg-white dark:!bg-navy-900  pb-3 rounded-xl">
+                    {/* <div className="flex w-full">
                       <DropDownReactSelect ph="Select Table" />
                     </div>
                     <div className="flex w-full">
                       <DropDownReactSelect ph="Select Category" />
-                    </div>
-                    
+                    </div> */}
+                    <CategoriesTab />
                   </div>
+
                   <div className="w-full flex flex-wrap  ">
                     {menu?.map((item) => {
                       return (

@@ -6,7 +6,7 @@ function ImageCard({ item }) {
     <Card extra="!bg-gray-200">
       {/* task header */}
       <div className="relative text-center flex flex-row justify-between ">
-        <div className="flex  flex-col w-full bg-gray-500 rounded-2xl md:h-24 xl:h-32 lg:h-28">
+        <div className="flex  flex-col w-full bg-gray-500 rounded-2xl md:h-24 xl:h-28 lg:h-28">
           {/* <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-100 dark:bg-white/5">
           <MdCheckCircle className="h-6 w-6 text-brand-500 dark:text-white" />
         </div> */}

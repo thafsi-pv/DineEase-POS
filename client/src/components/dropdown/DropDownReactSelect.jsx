@@ -40,10 +40,11 @@ function DropDownReactSelect({
         </label>
       )}
       <Select
+        clearable={true}
         id={id}
         isMulti={isMulti}
         placeholder={ph}
-        defaultValue={values}
+        defaultValue={values || "Select"}
         onChange={onChange}
         options={data || options}
         menuPlacement="auto"
@@ -55,6 +56,7 @@ function DropDownReactSelect({
             textColor: "text-white",
             borderRadius: "10px",
             padding: "3px",
+            minWidth: "200px",
           }),
         }}
       />
