@@ -121,9 +121,7 @@ function index() {
                     <div className="flex w-full">
                       <DropDownReactSelect ph="Select Category" />
                     </div>
-                    <div className="flex w-full">
-                      <DropDownReactSelect ph="Select Customer" />
-                    </div>
+                    
                   </div>
                   <div className="w-full flex flex-wrap  ">
                     {menu?.map((item) => {

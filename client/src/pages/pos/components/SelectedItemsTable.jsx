@@ -7,6 +7,8 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { alterItemQuantity } from "../../../redux/cartSlice";
 import { CiShoppingCart, CiTrash } from "react-icons/ci";
+import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
+import { BsCart2 } from "react-icons/bs";
 
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
   console.log(
@@ -24,11 +26,15 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
     <div className="h-full">
       <Card extra={"w-full h-full px-6"}>
         <header className="relative flex items-center justify-between pt-4">
-          <div className="text-xl font-bold text-navy-700 dark:text-white">
-            <CiShoppingCart />
-            Cart Items
+          <div className="text-lg font-bold text-navy-700 dark:text-white flex items-center">
+            <BsCart2 className="text-xl"/>
+             Cart
           </div>
-
+          <div>
+            <div className="flex w-full">
+              <DropDownReactSelect label='Select Customer' ph="Select Customer" />
+            </div>
+          </div>
           <CardMenu />
         </header>
 
@@ -36,7 +42,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
           className="mt-8  h-full overflow-y-auto pb-16"
           ref={selectedItemListRef}>
           <table className="w-full" variant="simple" color="gray-500" mb="24px">
-            <thead className="sticky top-0 bg-white z-10 w-full">
+            <thead className="sticky top-0 z-0 bg-white  w-full">
               <tr className="">
                 <th className="border-b border-gray-200  pb-[10px]  dark:!border-navy-700 w-50p">
                   <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs w-full">

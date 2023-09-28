@@ -44,6 +44,7 @@ function DropDownReactSelect({
         defaultValue={values}
         onChange={onChange}
         options={data || options}
+        menuPlacement="auto"
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
