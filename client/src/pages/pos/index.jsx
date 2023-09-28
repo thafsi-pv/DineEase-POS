@@ -123,6 +123,7 @@ function index() {
                       <DropDownReactSelect ph="Select Category" />
                     </div> */}
                     <CategoriesTab />
+                  
                   </div>
 
                   <div className="w-full flex flex-wrap  ">
