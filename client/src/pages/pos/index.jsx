@@ -35,7 +35,7 @@ function index() {
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
-    getAllProducts();
+    //getAllProducts();
     return () => {
       document.removeEventListener("keydown", detectKeyDown, true);
     };
@@ -122,8 +122,8 @@ function index() {
                     <div className="flex w-full">
                       <DropDownReactSelect ph="Select Category" />
                     </div> */}
-                    <div className="grid grid-cols-5 col-span-3 overflow-auto">
-                      <CategoriesTab />
+                    <div className="grid grid-cols-5 overflow-auto">
+                      <CategoriesTab setMenu={setMenu} getAllProducts={getAllProducts} />
                     </div>
                   </div>
 

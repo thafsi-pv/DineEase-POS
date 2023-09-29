@@ -93,9 +93,23 @@ const deleteProductById = async (req, res) => {
   }
 };
 
+const getProductByCategory = async (req, res) => {
+  try {
+    const category = req.query.category;
+    const data = await Product.find({
+      "category.value": category,
+      isActive: true,
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Error while fetching data" });
+  }
+};
+
 module.exports = {
   addProduct,
   getAllProducts,
   getProductById,
   deleteProductById,
+  getProductByCategory,
 };
