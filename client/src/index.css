@@ -82,29 +82,5 @@ body {
   overflow: hidden;
 }
 
-/* Define the scrollbar track (background) */
-::-webkit-scrollbar {
-  width: 12px; /* Adjust the width as needed */
-}
 
-/* Define the scrollbar thumb (the draggable part) */
-::-webkit-scrollbar-thumb {
-  background: #c0c0c0; /* Change the background color */
-  border-radius: 6px; /* Round the corners of the thumb */
-}
-
-/* Define the scrollbar track on hover */
-::-webkit-scrollbar-track:hover {
-  background: #d0d0d0; /* Change the background color on hover */
-}
-
-/* Define the scrollbar thumb on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0; /* Change the background color of the thumb on hover */
-}
-
-/* Define the scrollbar corner (between vertical and horizontal scrollbars) */
-::-webkit-scrollbar-corner {
-  background: transparent; /* Change the background color if needed */
-}
 

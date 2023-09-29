@@ -111,7 +111,7 @@ function index() {
       <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
         <div className="w-full h-full  col-span-3 row-span-6">
           <div className="h-full grid grid-rows-6 gap-4">
-            <div className=" row-span-5">
+            <div className="row-span-5">
               <Card extra={"w-full h-full sm:overflow-auto p-6"}>
                 {/*product list div */}
                 <div className=" overflow-y-auto h-full">
@@ -122,8 +122,9 @@ function index() {
                     <div className="flex w-full">
                       <DropDownReactSelect ph="Select Category" />
                     </div> */}
-                    <CategoriesTab />
-                  
+                    <div className="grid grid-cols-5 col-span-3 overflow-auto">
+                      <CategoriesTab />
+                    </div>
                   </div>
 
                   <div className="w-full flex flex-wrap  ">
