@@ -26,6 +26,7 @@ import {
 import ListTable from "./pages/table/ListTable";
 import Chat from "./pages/chat/Chat";
 import Products from "./pages/products/Products";
+import Customers from "./pages/customers/Customers";
 
 const routes = [
   {
@@ -62,6 +63,13 @@ const routes = [
     path: "product",
     icon: <IoFastFood className="h-6 w-6" />,
     component: <Products />,
+  },
+  {
+    name: "Customer",
+    layout: "/admin",
+    path: "customer",
+    icon: <IoFastFood className="h-6 w-6" />,
+    component: <Customers />,
   },
   {
     name: "Chat",

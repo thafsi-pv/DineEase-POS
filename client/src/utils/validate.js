@@ -71,3 +71,10 @@ export const productValidationSchema = Yup.object().shape({
   // remarks: Yup.string(),
   imageUrl: Yup.string().required("Select item image"),
 });
+
+export const customerValidationSchema = Yup.object().shape({
+  firstName: Yup.string().required("First name is required"),
+  mobile: Yup.number()
+    .required("Mobile is required")
+    .positive("Price must be a positive number"),
+});
