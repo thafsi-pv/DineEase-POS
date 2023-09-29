@@ -12,12 +12,12 @@ const http = require("http");
 const { verifyToken } = require("./utils/jwt");
 const userModal = require("./model/userModal");
 const productRouter = require("./router/product");
+const customerRouter = require("./router/customer");
 const server = http.createServer(app);
 
 app.use(cors({ origin: "*" }));
 dotenv.config();
 app.use(express.json());
-// app.use(cors());
 connectDb();
 
 app.use("/api/auth", authRouter);
@@ -28,8 +28,9 @@ app.use("/api/chat/", chatRouter);
 
 app.use("/api/product", productRouter);
 
-//socket
+app.use("/api/customer", customerRouter);
 
+//socket
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
