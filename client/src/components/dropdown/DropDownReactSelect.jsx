@@ -22,6 +22,7 @@ function DropDownReactSelect({
   onChange,
   values,
 }) {
+  console.log("🚀 ~ file: DropDownReactSelect.jsx:25 ~ defautl values:", values)
   // const [selectedOption, setSelectedOption] = useState(null);
 
   // const handleSelectChange = (option) => {
@@ -40,7 +41,8 @@ function DropDownReactSelect({
         </label>
       )}
       <Select
-        clearable={true}
+        isClearable
+        isSearchable
         id={id}
         isMulti={isMulti}
         placeholder={ph}
@@ -56,7 +58,7 @@ function DropDownReactSelect({
             textColor: "text-white",
             borderRadius: "10px",
             padding: "3px",
-            minWidth: "200px",
+            minWidth: "250px",
           }),
         }}
       />

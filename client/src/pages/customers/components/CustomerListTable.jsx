@@ -218,10 +218,14 @@ const CustomerListTable = (props) => {
                             onClick={() => handleEdit(cell.row.original._id)}>
                             <CiEdit className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
                           </button>
-                          <button
-                            onClick={() => handleDelete(cell.row.original._id)}>
-                            <CiTrash className="h-7 w-7 text-red-500 hover:bg-gray-300 hover:rounded-full p-1" />
-                          </button>
+                          {!row.original.isDefault && (
+                            <button
+                              onClick={() =>
+                                handleDelete(cell.row.original._id)
+                              }>
+                              <CiTrash className="h-7 w-7 text-red-500 hover:bg-gray-300 hover:rounded-full p-1" />
+                            </button>
+                          )}
                         </div>
                       );
                     }

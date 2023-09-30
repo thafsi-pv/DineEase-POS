@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardMenu from "../../../components/card/CardMenu";
 import Card from "../../../components/card";
 import Checkbox from "../../../components/checkbox";
@@ -9,17 +9,35 @@ import { alterItemQuantity } from "../../../redux/cartSlice";
 import { CiShoppingCart, CiTrash } from "react-icons/ci";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import { BsCart2 } from "react-icons/bs";
+import axios from "axios";
+import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../../utils/const";
+import { renameKeys } from "../../../utils/utils";
 
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
-  console.log(
-    "🚀 ~ file: SelectedItemsTable.jsx:12 ~ SelectedItemsTable ~ cartItems:",
-    cartItems
-  );
+  const [customerList, setCustomerList] = useState(null);
+  const [defaultValue, setDefaultValue] = useState(null);
   const dispath = useDispatch();
+  useEffect(() => {
+    getAllCustomers();
+  }, []);
 
   const handleItemAlterQuantity = (index, type) => {
     const data = { index, type };
     dispath(alterItemQuantity(data));
+  };
+
+  const keyMappings = {
+    _id: "value",
+    firstName: "label",
+  };
+
+  const getAllCustomers = async () => {
+    const data = await axios.get(
+      GET_ALL_ACTIVE_CUSTOMER_API + "?active=" + true
+    );
+    const newArray = data?.data.map((item) => renameKeys(item, keyMappings));
+    setCustomerList(newArray);
+    setDefaultValue(newArray?.find((item) => item.isDefault == true));
   };
 
   return (
@@ -27,15 +45,15 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
       <Card extra={"w-full h-full px-6"}>
         <header className="relative flex items-center justify-between pt-4">
           <div>
-            <div className="flex w-full">
-              <DropDownReactSelect
-                ph="Select Customer"
-                values={{
-                  label: "Walk In Customer",
-                  value: "Walk In Customer",
-                }}
-              />
-            </div>
+            {defaultValue && customerList && (
+              <div className="flex w-full">
+                <DropDownReactSelect
+                  ph="Select Customer"
+                  values={defaultValue}
+                  data={customerList}
+                />
+              </div>
+            )}
           </div>
           <div className="text-lg font-bold text-navy-700 dark:text-white flex items-center space-x-2">
             <BsCart2 className="text-xl" />
