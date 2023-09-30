@@ -108,3 +108,28 @@ export const convertToWords = (num) => {
   // Capitalize only the first letter of the entire result
   return result.charAt(0).toUpperCase() + result.slice(1).trim();
 };
+
+export const formatMobileNumber = (mobileNumber) => {
+  console.log(
+    "🚀 ~ file: utils.js:113 ~ formatMobileNumber ~ mobileNumber:",
+    mobileNumber
+  );
+  if (mobileNumber) {
+    // Remove any non-digit characters from the input
+    const cleanedNumber = mobileNumber.toString().replace(/\D/g, "");
+
+    // Check if the cleaned number has exactly 10 digits
+    if (cleanedNumber.length === 10) {
+      // Use the .replace() method to add spaces to the formatted number
+      const formattedNumber = cleanedNumber.replace(
+        /(\d{4})(\d{3})(\d{3})/,
+        "$1 $2 $3"
+      );
+
+      return formattedNumber;
+    } else {
+      // If the number doesn't have 10 digits, return it as is
+      return mobileNumber;
+    }
+  }
+};

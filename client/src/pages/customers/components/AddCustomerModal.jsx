@@ -7,7 +7,7 @@ import InputField from "../../../components/fields/InputField";
 import { useFormik } from "formik";
 
 import axios from "axios";
-import { PRODUCT_ADD_API } from "../../../utils/const";
+import { CUSTOMER_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { customerValidationSchema } from "../../../utils/validate";
 
@@ -16,16 +16,8 @@ function AddCustomerModal({
   modalData,
   customerList,
   setCustomerList,
-  fromPos,
 }) {
-  const [image, setImage] = useState(null);
   const customerFormRef = useRef(null);
-
-  const handleImageUpload = (e) => {
-    const uploadedImage = e.target.files[0];
-    setImage(uploadedImage);
-    customerFormik.setFieldValue("imageUrl", uploadedImage.name);
-  };
 
   const customerFormik = useFormik({
     initialValues: modalData || {
@@ -40,7 +32,8 @@ function AddCustomerModal({
     validationSchema: customerValidationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await axios.post(PRODUCT_ADD_API, values);
+        const res = await axios.post(CUSTOMER_ADD_API, values);
+        console.log("🚀 ~ file: AddCustomerModal.jsx:36 ~ onSubmit: ~ res:", res)
         if (res.status == 201) {
           if (values._id) {
             var newList = customerList.map((item) =>
@@ -66,6 +59,9 @@ function AddCustomerModal({
   const handleIsActiveChange = (e) => {
     customerFormik.setFieldValue("isActive", e.target.checked);
   };
+  const handleLoyaltyCardChange = (e) => {
+    customerFormik.setFieldValue("loyaltyCard", e.target.checked);
+  };
 
   const handleResetForm = () => {
     customerFormik.resetForm;
@@ -75,79 +71,110 @@ function AddCustomerModal({
     <div>
       <form onSubmit={customerFormik.handleSubmit} ref={customerFormRef}>
         <div className="flex columns-2 justify-center w-full gap-3">
-          <div className="w-1/2 p-2 border-r-[1px] border-dashed border-gray-300 ">
-            <div className="mb-2">
-              <InputField
-                label="First Name"
-                variant=""
-                id="firstName"
-                extra=""
-                type="text"
-                placeholder="Enter First Name"
-                onChange={customerFormik.handleChange}
-                onBlur={customerFormik.handleBlur}
-                value={customerFormik.values.firstName}
-                state={
-                  customerFormik.touched.firstName &&
-                  customerFormik.errors.firstName
-                    ? "error"
-                    : "success"
-                }
-              />
-              {customerFormik.touched.firstName &&
-              customerFormik.errors.firstName ? (
-                <div className="text-red-500 text-xs float-right animate-pulse">
-                  {customerFormik.errors.firstName}
-                </div>
-              ) : null}
+          <div className="w-full p-2 border-gray-300 ">
+            <div className="flex w-full gap-2">
+              <div className="mb-2 flex-1">
+                <InputField
+                  label="First Name"
+                  variant=""
+                  id="firstName"
+                  extra=""
+                  type="text"
+                  placeholder="Enter First Name"
+                  onChange={customerFormik.handleChange}
+                  onBlur={customerFormik.handleBlur}
+                  value={customerFormik.values.firstName}
+                  state={
+                    customerFormik.touched.firstName &&
+                    customerFormik.errors.firstName
+                      ? "error"
+                      : "success"
+                  }
+                />
+                {customerFormik.touched.firstName &&
+                customerFormik.errors.firstName ? (
+                  <div className="text-red-500 text-xs float-right animate-pulse">
+                    {customerFormik.errors.firstName}
+                  </div>
+                ) : null}
+              </div>
+              <div className="mb-2 flex-1">
+                <InputField
+                  label="Last Name"
+                  variant=""
+                  id="lastName"
+                  extra=""
+                  type="text"
+                  placeholder="Enter Last Name"
+                  onChange={customerFormik.handleChange}
+                  onBlur={customerFormik.handleBlur}
+                  value={customerFormik.values.lastName}
+                />
+              </div>
             </div>
-            <div className="mb-2">
-              <InputField
-                label="Last Name"
-                variant=""
-                id="lastName"
-                extra=""
-                type="text"
-                placeholder="Enter Last Name"
-                onChange={customerFormik.handleChange}
-                onBlur={customerFormik.handleBlur}
-                value={customerFormik.values.lastName}
-              />
+            <div className="flex gap-2">
+              <div className="mb-2 flex-1">
+                <InputField
+                  label="Mobile"
+                  variant=""
+                  id="mobile"
+                  extra=""
+                  type="number"
+                  placeholder="Enter Item Mobile"
+                  onChange={customerFormik.handleChange}
+                  onBlur={customerFormik.handleBlur}
+                  value={customerFormik.values.mobile}
+                  state={
+                    customerFormik.touched.mobile &&
+                    customerFormik.errors.mobile
+                      ? "error"
+                      : "success"
+                  }
+                />
+                {customerFormik.touched.mobile &&
+                customerFormik.errors.mobile ? (
+                  <div className="text-red-500 text-xs float-right animate-pulse">
+                    {customerFormik.errors.mobile}
+                  </div>
+                ) : null}
+              </div>
+              <div className="mb-2 flex-1">
+                <InputField
+                  label="Email"
+                  variant=""
+                  id="email"
+                  extra=""
+                  type="text"
+                  placeholder="Enter Email"
+                  onChange={customerFormik.handleChange}
+                  onBlur={customerFormik.handleBlur}
+                  value={customerFormik.values.email}
+                />
+              </div>
             </div>
-            <div className="mb-2">
-              <InputField
-                label="Mobile"
-                variant=""
-                id="mobile"
-                extra=""
-                type="number"
-                placeholder="Enter Item Mobile"
-                onChange={customerFormik.handleChange}
-                onBlur={customerFormik.handleBlur}
-                value={customerFormik.values.mobile}
-                state={
-                  customerFormik.touched.mobile && customerFormik.errors.mobile
-                    ? "error"
-                    : "success"
-                }
-              />
-              {customerFormik.touched.mobile && customerFormik.errors.mobile ? (
-                <div className="text-red-500 text-xs float-right animate-pulse">
-                  {customerFormik.errors.mobile}
-                </div>
-              ) : null}
-            </div>
-
-            <div className="hs-tooltip flex items-center">
-              <SwithField
-                color="green"
-                id="isActive"
-                name="isActive"
-                label="Active"
-                desc="Customer is currently serving or not"
-                value={customerFormik.values.isActive}
-                onChange={handleIsActiveChange}
-              />
+            <div className="flex">
+              <div className="hs-tooltip flex items-center flex-1">
+                <SwithField
+                  color="green"
+                  id="isActive"
+                  name="isActive"
+                  label="Active"
+                  desc="Customer is currently active or not"
+                  value={customerFormik.values.isActive}
+                  onChange={handleIsActiveChange}
+                />
+              </div>
+              <div className="hs-tooltip flex items-center flex-1">
+                <SwithField
+                  color="green"
+                  id="loyaltyCard"
+                  name="loyaltyCard"
+                  label="Loyalty Card"
+                  desc="Customer is eligible for loyalty program"
+                  value={customerFormik.values.loyaltyCard}
+                  onChange={handleLoyaltyCardChange}
+                />
+              </div>
             </div>
             <div className="mt-3">
               <TextField
@@ -156,6 +183,7 @@ function AddCustomerModal({
                 label="Address"
                 id="address"
                 name="address"
+                rows={5}
                 value={customerFormik.values.address}
                 onChange={customerFormik.handleChange}
                 onBlur={customerFormik.handleBlur}

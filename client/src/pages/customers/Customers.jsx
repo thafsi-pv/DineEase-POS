@@ -52,11 +52,11 @@ function Customers() {
       accessor: "email",
       width: "w-1/12",
     },
-    {
-      Header: "LOYALTYPOINT",
-      accessor: "loyaltyPoint",
-      width: "w-2/12",
-    },
+    // {
+    //   Header: "LOYALTYPOINT",
+    //   accessor: "loyaltyPoint",
+    //   width: "w-2/12",
+    // },
     {
       Header: "STATUS",
       accessor: "isActive",
@@ -82,7 +82,7 @@ function Customers() {
         />
       </div>
 
-      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="70vw">
+      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="50vw">
         <AddCustomerModal
           setIsModalOpen={setIsModalOpen}
           modalData={modalData}

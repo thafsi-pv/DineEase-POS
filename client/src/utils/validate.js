@@ -74,7 +74,5 @@ export const productValidationSchema = Yup.object().shape({
 
 export const customerValidationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
-  mobile: Yup.number()
-    .required("Mobile is required")
-    .positive("Price must be a positive number"),
+  mobile: Yup.string().matches(/^[0-9]{10}$/, "Invalid mobile number").required(),
 });

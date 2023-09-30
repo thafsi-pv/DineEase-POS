@@ -31,7 +31,7 @@
 // export const CUSTOMER_ADD_API = "http://localhost:8080/api/customer/create";
 
 // export const GET_ALL_ACTIVE_CUSTOMER_API =
-//   "http://localhost:8080/api/customer/getAllActiveCustomer";
+//   "http://localhost:8080/api/customer/getAllActiveCustomers";
 
 // export const GET_CUSTOMER_BY_ID =
 //   "http://localhost:8080/api/customer/getCustomerById";
@@ -75,7 +75,7 @@ export const GET_PRODUCT_BY_CATEGORY_API =
 export const CUSTOMER_ADD_API = "https://dine-ease-api.onrender.com/api/customer/create";
 
 export const GET_ALL_ACTIVE_CUSTOMER_API =
-  "https://dine-ease-api.onrender.com/api/customer/getAllActiveCustomer";
+  "https://dine-ease-api.onrender.com/api/customer/getAllActiveCustomers";
 
 export const GET_CUSTOMER_BY_ID =
   "https://dine-ease-api.onrender.com/api/customer/getCustomerById";

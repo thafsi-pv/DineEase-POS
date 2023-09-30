@@ -16,13 +16,16 @@ import {
 } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
-import { getRandomDarkColor } from "../../../utils/utils";
 import axios from "axios";
-import { DELETE_CUSTOMER_BY_ID, GET_CUSTOMER_BY_ID } from "../../../utils/const";
+import {
+  DELETE_CUSTOMER_BY_ID,
+  GET_CUSTOMER_BY_ID,
+} from "../../../utils/const";
 import FormModal from "../../../components/modal/FormModal";
 import DeleteModal from "./DeleteModal";
 import { toast } from "react-hot-toast";
 import deleteImg from "../../../assets/img/profile/clip-1738.png";
+import { formatMobileNumber } from "../../../utils/utils";
 
 const CustomerListTable = (props) => {
   const {
@@ -186,37 +189,22 @@ const CustomerListTable = (props) => {
                           </p>
                         </div>
                       );
-                    } else if (cell.column.Header === "IMAGE") {
-                      data = (
-                        <img
-                          src={cell.value}
-                          className="h-10 w-10 rounded-full"
-                          alt=""
-                          srcset=""
-                        />
-                      );
-                    } else if (cell.column.Header === "CATEGORY") {
+                    } else if (cell.column.Header === "LASTNAME") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          {cell?.value?.label}
+                          {cell.value}
                         </p>
                       );
-                    } else if (cell.column.Header === "CUISINE") {
+                    } else if (cell.column.Header === "EMAIL") {
                       data = (
-                        <p className="text-sm font-bold text-navy-700 dark:text-white my-2 flex flex-wrap">
-                          {cell?.value?.map((cuisine, idex) => (
-                            <Badge
-                              key={index + cuisine.label}
-                              label={cuisine.label}
-                              color={getRandomDarkColor()}
-                            />
-                          ))}
+                        <p className="text-sm font-bold text-navy-700 dark:text-white">
+                          {cell?.value}
                         </p>
                       );
                     } else if (cell.column.Header === "MOBILE") {
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          ₹ {cell.value}
+                          {formatMobileNumber(cell?.value)}
                         </p>
                       );
                     } else if (cell.column.Header === "ACTION") {
