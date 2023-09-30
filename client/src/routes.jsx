@@ -27,6 +27,7 @@ import ListTable from "./pages/table/ListTable";
 import Chat from "./pages/chat/Chat";
 import Products from "./pages/products/Products";
 import Customers from "./pages/customers/Customers";
+import { FiUsers } from "react-icons/fi";
 
 const routes = [
   {
@@ -43,12 +44,19 @@ const routes = [
     icon: <MdPointOfSale className="h-6 w-6" />,
     component: <POS />,
   },
+  // {
+  //   name: "Tables",
+  //   layout: "/admin",
+  //   path: "tables",
+  //   icon: <GiTable className="h-6 w-6" />,
+  //   component: <ListTable />,
+  // },
   {
-    name: "Tables",
+    name: "Customer",
     layout: "/admin",
-    path: "tables",
-    icon: <GiTable className="h-6 w-6" />,
-    component: <ListTable />,
+    path: "customer",
+    icon: <FiUsers className="h-6 w-6" />,
+    component: <Customers />,
   },
   {
     name: "Category",
@@ -64,13 +72,7 @@ const routes = [
     icon: <IoFastFood className="h-6 w-6" />,
     component: <Products />,
   },
-  {
-    name: "Customer",
-    layout: "/admin",
-    path: "customer",
-    icon: <IoFastFood className="h-6 w-6" />,
-    component: <Customers />,
-  },
+ 
   {
     name: "Chat",
     layout: "/admin",
