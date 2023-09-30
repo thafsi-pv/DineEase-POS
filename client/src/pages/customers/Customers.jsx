@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import FormModal from "../../components/modal/FormModal";
 import AddCustomerModal from "./components/AddCustomerModal";
+import VIewCustomerModal from "./components/ViewCustomerModal";
 
 import CustomerListTable from "./components/CustomerListTable";
 import axios from "axios";
 import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../utils/const";
-import ViewCustomerModal from "./components/ViewCustomerModal";
 
 function Customers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -94,7 +94,7 @@ function Customers() {
         isOpen={viewCustomer.show}
         onClose={closeModal}
         modalWidth="70vw">
-        <ViewCustomerModal id={viewCustomer.id} />
+        <VIewCustomerModal id={viewCustomer.id} />
       </FormModal>
     </div>
   );
