@@ -11,15 +11,25 @@ import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelec
 import { BsCart2 } from "react-icons/bs";
 import axios from "axios";
 import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../../utils/const";
-import { renameKeys } from "../../../utils/utils";
+import { keyMappings, renameKeys } from "../../../utils/utils";
+import CreatableReactSelect from "../../../components/dropdown/CreatableReactSelect";
+import AddCustomerModal from "../../customers/components/AddCustomerModal";
+import FormModal from "../../../components/modal/FormModal";
 
+var modalData = {};
 function SelectedItemsTable({ cartItems, selectedItemListRef }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [customerList, setCustomerList] = useState(null);
   const [defaultValue, setDefaultValue] = useState(null);
   const dispath = useDispatch();
+  let setDefault = false;
   useEffect(() => {
-    getAllCustomers();
+    getAllCustomers((setDefault = true));
   }, []);
+
+  // useEffect(() => {
+  //   getAllCustomers((setDefault = false));
+  // }, [isModalOpen]);
 
   useEffect(() => {
     dispath(selectCustomer(defaultValue));
@@ -30,22 +40,35 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
     dispath(alterItemQuantity(data));
   };
 
-  const keyMappings = {
-    _id: "value",
-    firstName: "label",
-  };
-
-  const getAllCustomers = async () => {
+  const getAllCustomers = async (setDefault) => {
     const data = await axios.get(
       GET_ALL_ACTIVE_CUSTOMER_API + "?active=" + true
     );
     const newArray = data?.data.map((item) => renameKeys(item, keyMappings));
     setCustomerList(newArray);
-    setDefaultValue(newArray?.find((item) => item.isDefault == true));
+    if (setDefault) {
+      setDefaultValue(newArray?.find((item) => item.isDefault == true));
+    }
   };
 
   const handleCustomerChange = (selectedOption) => {
     dispath(selectCustomer(selectedOption));
+  };
+
+  const handleCreateOption = (option) => {
+    modalData = {
+      firstName: option,
+      lastName: "",
+      email: "",
+      mobile: "",
+      isActive: true,
+      loyaltyCard: true,
+      address: "",
+    };
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -55,10 +78,17 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
           <div>
             {defaultValue && customerList && (
               <div className="flex w-full">
-                <DropDownReactSelect
+                {/* <DropDownReactSelect
                   ph="Select Customer"
                   values={defaultValue}
                   data={customerList}
+                  onChange={handleCustomerChange}
+                /> */}
+                <CreatableReactSelect
+                  ph="Select Customer"
+                  values={defaultValue}
+                  data={customerList}
+                  onCreateOption={handleCreateOption}
                   onChange={handleCustomerChange}
                 />
               </div>
@@ -154,6 +184,14 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
           </table>
         </div>
       </Card>
+      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="50vw">
+        <AddCustomerModal
+          setIsModalOpen={setIsModalOpen}
+          modalData={modalData}
+          fromPos={true}
+          customerDDSet={setDefaultValue}
+        />
+      </FormModal>
     </div>
   );
 }

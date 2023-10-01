@@ -9,7 +9,6 @@ import { toast } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Modal = ({ isOpen, onClose, item, selectedItemListRef }) => {
-  console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ item:", item);
   const [quantity, setQuantity] = useState(1);
   if (!isOpen) return null;
 

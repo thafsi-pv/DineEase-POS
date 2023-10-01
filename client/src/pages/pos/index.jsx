@@ -26,7 +26,6 @@ function index() {
 
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
-  console.log("🚀 ~ file: index.jsx:29 ~ index ~ cartItems:", cartItems)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [subTotalVal, setsubTotalVal] = useState(0);

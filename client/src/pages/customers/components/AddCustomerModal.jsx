@@ -10,14 +10,20 @@ import axios from "axios";
 import { CUSTOMER_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { customerValidationSchema } from "../../../utils/validate";
+import { useDispatch } from "react-redux";
+import { keyMappings, renameKeys } from "../../../utils/utils";
+import { selectCustomer } from "../../../redux/cartSlice";
 
 function AddCustomerModal({
   setIsModalOpen,
   modalData,
   customerList,
   setCustomerList,
+  fromPos,
+  customerDDSet,
 }) {
   const customerFormRef = useRef(null);
+  const dispatch = useDispatch();
 
   const customerFormik = useFormik({
     initialValues: modalData || {
@@ -33,17 +39,22 @@ function AddCustomerModal({
     onSubmit: async (values, { resetForm }) => {
       try {
         const res = await axios.post(CUSTOMER_ADD_API, values);
-        console.log("🚀 ~ file: AddCustomerModal.jsx:36 ~ onSubmit: ~ res:", res)
         if (res.status == 201) {
-          if (values._id) {
-            var newList = customerList.map((item) =>
-              item._id == values._id ? res?.data : item
-            );
-            setCustomerList(newList);
-            toast.success("Customer updated successfully 👍🏻");
-            return true;
+          if (!fromPos) {
+            if (values._id) {
+              var newList = customerList.map((item) =>
+                item._id == values._id ? res?.data : item
+              );
+              setCustomerList(newList);
+              toast.success("Customer updated successfully 👍🏻");
+              return true;
+            } else {
+              setCustomerList((prev) => [res?.data, ...prev]);
+            }
           } else {
-            setCustomerList((prev) => [res?.data, ...prev]);
+            const newArray = renameKeys(res?.data, keyMappings);
+            // dispatch(selectCustomer(newArray));
+            customerDDSet(newArray);
           }
           toast.success("Customer added successfully 👍🏻");
         }

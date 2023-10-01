@@ -141,3 +141,8 @@ export const renameKeys = (obj, newKeys) => {
   });
   return Object.assign({}, ...keyValues);
 };
+
+export const keyMappings = {
+  _id: "value",
+  firstName: "label",
+};
