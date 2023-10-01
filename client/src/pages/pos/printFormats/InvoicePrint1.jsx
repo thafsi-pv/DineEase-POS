@@ -6,11 +6,11 @@ function InvoicePrint1({ printRef, showSummary = true }) {
   const cartItems = useSelector((store) => store.cart);
 
   const totalItems = () => {
-    return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    return cartItems.cart.reduce((acc, item) => acc + item.quantity, 0);
   };
   const subTotal = () => {
     return Math.round(
-      cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
+      cartItems.cart.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
     ).toFixed(2);
   };
 
@@ -67,7 +67,7 @@ function InvoicePrint1({ printRef, showSummary = true }) {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item, index) => (
+            {cartItems.cart.map((item, index) => (
               <tr className=" border-b" key={item.id}>
                 <td className="flex items-center gap-2">
                   <p className="text-[10px] text-navy-700 dark:text-white">

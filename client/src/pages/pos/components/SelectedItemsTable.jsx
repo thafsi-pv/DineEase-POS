@@ -5,7 +5,7 @@ import Checkbox from "../../../components/checkbox";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { alterItemQuantity } from "../../../redux/cartSlice";
+import { alterItemQuantity, selectCustomer } from "../../../redux/cartSlice";
 import { CiShoppingCart, CiTrash } from "react-icons/ci";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import { BsCart2 } from "react-icons/bs";
@@ -40,6 +40,10 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
     setDefaultValue(newArray?.find((item) => item.isDefault == true));
   };
 
+  const handleCustomerChange = (selectedOption) => {
+    dispath(selectCustomer(selectedOption));
+  };
+
   return (
     <div className="h-full">
       <Card extra={"w-full h-full px-6"}>
@@ -51,6 +55,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                   ph="Select Customer"
                   values={defaultValue}
                   data={customerList}
+                  onChange={handleCustomerChange}
                 />
               </div>
             )}

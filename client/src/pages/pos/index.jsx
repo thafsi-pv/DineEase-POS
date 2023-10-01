@@ -26,6 +26,7 @@ function index() {
 
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
+  console.log("🚀 ~ file: index.jsx:29 ~ index ~ cartItems:", cartItems)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [subTotalVal, setsubTotalVal] = useState(0);
@@ -52,7 +53,7 @@ function index() {
 
   useEffect(() => {
     const subtot = Math.round(
-      cartItems.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
+      cartItems.cart.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
     ).toFixed(2);
     setsubTotalVal(subtot);
   }, [cartItems]);
@@ -156,7 +157,7 @@ function index() {
           <div className="grid grid-rows-6 h-full gap-4">
             <div className="overflow-y-auto row-span-6 ">
               <SelectedItemsTable
-                cartItems={cartItems}
+                cartItems={cartItems.cart}
                 selectedItemListRef={selectedItemListRef}
               />
             </div>
