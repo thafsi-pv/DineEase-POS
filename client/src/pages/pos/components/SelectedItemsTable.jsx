@@ -21,6 +21,10 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
     getAllCustomers();
   }, []);
 
+  useEffect(() => {
+    dispath(selectCustomer(defaultValue));
+  }, [defaultValue]);
+
   const handleItemAlterQuantity = (index, type) => {
     const data = { index, type };
     dispath(alterItemQuantity(data));

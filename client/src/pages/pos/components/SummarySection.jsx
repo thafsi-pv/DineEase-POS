@@ -4,15 +4,25 @@ import { BsFillCreditCardFill } from "react-icons/bs";
 import PaymentModal from "./PaymentModal";
 import FormModal from "../../../components/modal/FormModal";
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function SummarySection({ subTotalVal, handlePrint }) {
   const [showModal, setShowModal] = useState(false);
+  const selectedCustomer = useSelector((store) => store.cart.customer);
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
   const handleStartPayment = () => {
+    console.log(
+      "🚀 ~ file: SummarySection.jsx:18 ~ handleStartPayment ~ cartItems:",
+      selectedCustomer
+    );
+    if (selectedCustomer == {} || selectedCustomer == null) {
+      toast.error("Select a customer.😒");
+      return true;
+    }
     if (subTotalVal > 0) {
       setShowModal(true);
     } else {
@@ -63,6 +73,7 @@ function SummarySection({ subTotalVal, handlePrint }) {
         showModal={showModal}
         onClose={handleCloseModal}
         subTotalVal={subTotalVal}
+        selectedCustomer={selectedCustomer}
       />
     </div>
   );

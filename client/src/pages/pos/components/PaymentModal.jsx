@@ -11,7 +11,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { useFormik } from "formik";
 
 var change = "";
-function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
+function PaymentModal({ handlePrint, showModal, onClose, subTotalVal,selectedCustomer }) {
   const { paymentProcess } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
   const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
@@ -77,7 +77,7 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal }) {
               <div className="flex justify-between space-x-3 px-2 py-1 items-center ">
                 <p className="font-semibold text-xs text-gray-800">Customer</p>{" "}
                 <span className="font-semibold text-sm text-gray-800">
-                  Walk in customer
+                {selectedCustomer?.label}
                 </span>
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1  ">
