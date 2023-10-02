@@ -65,7 +65,9 @@ function index() {
   }, [cartItems]);
 
   useEffect(() => {
-    handlePrint();
+    if (orderNumber) {
+      handlePrint();
+    }
   }, [orderNumber]);
 
   const detectKeyDown = (e) => {
