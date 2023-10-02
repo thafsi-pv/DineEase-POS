@@ -2,15 +2,15 @@ import React from "react";
 import CreatableSelect from "react-select/creatable";
 
 const options = [
-    { value: "1", label: "Non-Veg" },
-    { value: "2", label: "Veg" },
-    { value: "3", label: "Sweets and Desserts" },
-    { value: "4", label: "Beverages" },
-    { value: "5", label: "Sandwiches and Burgers" },
-    { value: "6", label: "Coffee and Tea" },
-    { value: "7", label: "Soups" },
-    { value: "8", label: "Appetizers or Starters" },
-  ];
+  { value: "1", label: "Non-Veg" },
+  { value: "2", label: "Veg" },
+  { value: "3", label: "Sweets and Desserts" },
+  { value: "4", label: "Beverages" },
+  { value: "5", label: "Sandwiches and Burgers" },
+  { value: "6", label: "Coffee and Tea" },
+  { value: "7", label: "Soups" },
+  { value: "8", label: "Appetizers or Starters" },
+];
 function CreatableReactSelect({
   ph,
   label,
@@ -20,7 +20,8 @@ function CreatableReactSelect({
   data,
   onChange,
   values,
-  onCreateOption
+  onCreateOption,
+  creatableRef
 }) {
   return (
     <div className="App w-full">
@@ -34,6 +35,7 @@ function CreatableReactSelect({
         </label>
       )}
       <CreatableSelect
+        ref={creatableRef}
         isClearable
         isSearchable
         id={id}

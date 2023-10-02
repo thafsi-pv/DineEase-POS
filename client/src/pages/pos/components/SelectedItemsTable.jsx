@@ -17,8 +17,13 @@ import AddCustomerModal from "../../customers/components/AddCustomerModal";
 import FormModal from "../../../components/modal/FormModal";
 
 var modalData = {};
-function SelectedItemsTable({ cartItems, selectedItemListRef }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function SelectedItemsTable({
+  cartItems,
+  selectedItemListRef,
+  CustomerSelectRef,
+  setAddCustomerModal,
+  addCustomerModal,
+}) {
   const [customerList, setCustomerList] = useState(null);
   const [defaultValue, setDefaultValue] = useState(null);
   const dispath = useDispatch();
@@ -65,10 +70,10 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
       loyaltyCard: true,
       address: "",
     };
-    setIsModalOpen(true);
+    setAddCustomerModal(true);
   };
   const closeModal = () => {
-    setIsModalOpen(false);
+    setAddCustomerModal(false);
   };
 
   return (
@@ -85,6 +90,7 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
                   onChange={handleCustomerChange}
                 /> */}
                 <CreatableReactSelect
+                  creatableRef={CustomerSelectRef}
                   ph="Select Customer"
                   values={defaultValue}
                   data={customerList}
@@ -184,9 +190,9 @@ function SelectedItemsTable({ cartItems, selectedItemListRef }) {
           </table>
         </div>
       </Card>
-      <FormModal isOpen={isModalOpen} onClose={closeModal} modalWidth="50vw">
+      <FormModal isOpen={addCustomerModal} onClose={closeModal} modalWidth="50vw">
         <AddCustomerModal
-          setIsModalOpen={setIsModalOpen}
+          setIsModalOpen={setAddCustomerModal}
           modalData={modalData}
           fromPos={true}
           customerDDSet={setDefaultValue}

@@ -16,6 +16,7 @@ import { addToCart } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
 import CategoriesTab from "./components/CategoriesTab";
+import { motion } from "framer-motion";
 
 function index() {
   const dispath = useDispatch();
@@ -24,6 +25,7 @@ function index() {
     content: () => printRef.current,
   });
 
+  const CustomerSelectRef = useRef(null);
   const selectedItemListRef = useRef(null);
   const cartItems = useSelector((store) => store.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +34,7 @@ function index() {
   const { paymentProcess } = usePayment(handlePrint);
   const [menu, setMenu] = useState([]);
   const [addProductModal, setAddProductModal] = useState(false);
+  const [addCustomerModal, setAddCustomerModal] = useState(false);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
@@ -52,7 +55,10 @@ function index() {
 
   useEffect(() => {
     const subtot = Math.round(
-      cartItems.cart.reduce((acc, item) => acc + item.unitRate * item.quantity, 0)
+      cartItems.cart.reduce(
+        (acc, item) => acc + item.unitRate * item.quantity,
+        0
+      )
     ).toFixed(2);
     setsubTotalVal(subtot);
   }, [cartItems]);
@@ -72,6 +78,10 @@ function index() {
     if (e.key === "p" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       setAddProductModal(true);
+    }
+    if (e.key === "r" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      setAddCustomerModal(true);
     }
   };
 
@@ -123,19 +133,26 @@ function index() {
                       <DropDownReactSelect ph="Select Category" />
                     </div> */}
                     <div className="grid grid-cols-5 overflow-auto">
-                      <CategoriesTab setMenu={setMenu} getAllProducts={getAllProducts} />
+                      <CategoriesTab
+                        setMenu={setMenu}
+                        getAllProducts={getAllProducts}
+                      />
                     </div>
                   </div>
 
                   <div className="w-full flex flex-wrap  ">
                     {menu?.map((item) => {
                       return (
-                        <div
+                        <motion.div
+                          initial={{ y: 10, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -10, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
                           key={item.id}
                           className="w-1/6 p-2 cursor-pointer"
                           onClick={() => handleAddItem(item)}>
                           <ImageCard item={item} />
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -158,6 +175,9 @@ function index() {
               <SelectedItemsTable
                 cartItems={cartItems.cart}
                 selectedItemListRef={selectedItemListRef}
+                CustomerSelectRef={CustomerSelectRef}
+                setAddCustomerModal={setAddCustomerModal}
+                addCustomerModal={addCustomerModal}
               />
             </div>
             <div className="">
@@ -165,6 +185,7 @@ function index() {
                 paymentProcess={paymentProcess}
                 subTotalVal={subTotalVal}
                 handlePrint={handlePrint}
+                CustomerSelectRef={CustomerSelectRef}
               />
             </div>
           </div>
