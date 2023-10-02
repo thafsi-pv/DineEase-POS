@@ -5,7 +5,7 @@ import axios from "axios";
 import { ORDER_PAYMENT, VERIFY_PAYMENT } from "../utils/const";
 
 function usePayment(callback) {
-  const [payAmount, setPayAmount] = useState();
+  // const [payAmount, setPayAmount] = useState();
   const [paymentId, setPaymentId] = useState();
 
   const paymentProcess = async (payableAmount) => {
@@ -30,7 +30,7 @@ function usePayment(callback) {
         name: data.name,
         description: "Test Transaction",
         image:
-          "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
+          "https://blog.resellerspanel.com/wp-content/uploads/2011/05/tld-de.png",
         order_id: data.id,
         handler: async (response) => {
           try {
