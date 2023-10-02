@@ -6,7 +6,7 @@ import FormModal from "../../../components/modal/FormModal";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-function SummarySection({ subTotalVal, handlePrint, CustomerSelectRef }) {
+function SummarySection({ subTotalVal, handlePrint, CustomerSelectRef,setOrderNumber }) {
   const [showModal, setShowModal] = useState(false);
   const selectedCustomer = useSelector((store) => store.cart.customer);
 
@@ -75,6 +75,7 @@ function SummarySection({ subTotalVal, handlePrint, CustomerSelectRef }) {
         onClose={handleCloseModal}
         subTotalVal={subTotalVal}
         selectedCustomer={selectedCustomer}
+        setOrderNumber={setOrderNumber}
       />
     </div>
   );

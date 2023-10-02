@@ -35,6 +35,7 @@ function index() {
   const [menu, setMenu] = useState([]);
   const [addProductModal, setAddProductModal] = useState(false);
   const [addCustomerModal, setAddCustomerModal] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(null);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
@@ -62,6 +63,10 @@ function index() {
     ).toFixed(2);
     setsubTotalVal(subtot);
   }, [cartItems]);
+
+  useEffect(() => {
+    handlePrint();
+  }, [orderNumber]);
 
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
@@ -186,6 +191,7 @@ function index() {
                 subTotalVal={subTotalVal}
                 handlePrint={handlePrint}
                 CustomerSelectRef={CustomerSelectRef}
+                setOrderNumber={setOrderNumber}
               />
             </div>
           </div>
@@ -199,7 +205,7 @@ function index() {
         selectedItemListRef={selectedItemListRef}
       />
       <div className="hidden">
-        <InvoicePrint1 printRef={printRef} />
+        <InvoicePrint1 printRef={printRef} orderNumber={orderNumber} />
       </div>
     </div>
   );

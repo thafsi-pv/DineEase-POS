@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema(
   {
     orderNumber: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
     },
     customer: {
@@ -18,6 +18,10 @@ const orderSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
           rquired: true,
+        },
+        portion: {
+          type: String,
+          // required: true,
         },
         quantity: {
           type: Number,
@@ -74,6 +78,7 @@ orderSchema.statics.generateOrderNumber = async function () {
 orderSchema.pre("save", async function (next) {
   if (!this.orderNumber) {
     this.orderNumber = await this.constructor.generateOrderNumber();
+    console.log("🚀 ~ file: orderModal.js:81 ~ this.orderNumber:", this.orderNumber)
   }
   next();
 });

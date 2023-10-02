@@ -9,9 +9,22 @@ import InvoicePrint1 from "../printFormats/InvoicePrint1";
 import { AnimatePresence, motion } from "framer-motion";
 import { BiArrowBack } from "react-icons/bi";
 import { useFormik } from "formik";
+import axios from "axios";
+import { ORDER_CREATE_API } from "../../../utils/const";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 var change = "";
-function PaymentModal({ handlePrint, showModal, onClose, subTotalVal,selectedCustomer }) {
+function PaymentModal({
+  handlePrint,
+  showModal,
+  onClose,
+  subTotalVal,
+  selectedCustomer,
+  setOrderNumber,
+}) {
+  const cartItems = useSelector((store) => store.cart);
+  console.log("🚀 ~ file: PaymentModal.jsx:25 ~ cartItems:", cartItems);
   const { paymentProcess } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
   const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
@@ -40,20 +53,63 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal,selectedCus
 
     return errors;
   };
+
   const formik = useFormik({
     initialValues: {
       amount: 0,
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      createPayment(values);
     },
   });
+
+  const createPayment = async (data) => {
+    const productList = cartItems?.cart.map((item) => {
+      return {
+        product: item.id,
+        portion: item.portion,
+        quantity: item.quantity,
+        price: item.totalRate,
+      };
+    });
+    const currentDateTime = new Date();
+    const pay = {
+      customer: selectedCustomer.value,
+      items: productList,
+      totalAmount: subTotalVal,
+      totalTax: 12.4,
+      paymentType: "1",
+      transactionId: "asdsd231",
+      orderDate: currentDateTime.toLocaleString(),
+      status: "Completed",
+    };
+    const response = await axios.post(ORDER_CREATE_API, pay);
+    if (response.status == 200) {
+      setOrderNumber(() => response?.data?.orderNumber);
+     // handlePrint();
+      toast.success("Order Created Successfully ✌🏻");
+      onClose();
+    }
+  };
 
   const handleAmountChange = (e) => {
     change = e.target.value - subTotalVal;
     formik.handleChange(e);
   };
+
+  const totalItems = () => {
+    return cartItems.cart.reduce((acc, item) => acc + item.quantity, 0);
+  };
+  // const subTotal = () => {
+  //   return Math.round(
+  //     cartItems.cart.reduce(
+  //       (acc, item) => acc + item.unitRate * item.quantity,
+  //       0
+  //     )
+  //   ).toFixed(2);
+  // };
 
   return (
     <FormModal
@@ -77,12 +133,14 @@ function PaymentModal({ handlePrint, showModal, onClose, subTotalVal,selectedCus
               <div className="flex justify-between space-x-3 px-2 py-1 items-center ">
                 <p className="font-semibold text-xs text-gray-800">Customer</p>{" "}
                 <span className="font-semibold text-sm text-gray-800">
-                {selectedCustomer?.label}
+                  {selectedCustomer?.label}
                 </span>
               </div>
               <div className="flex justify-between space-x-3 px-2 py-1  ">
                 <p className="font-semibold text-xs text-gray-800">Items</p>
-                <span className="font-semibold text-sm text-gray-800">15</span>
+                <span className="font-semibold text-sm text-gray-800">
+                  {totalItems()}
+                </span>
               </div>
             </div>
             <div className="flex flex-col border rounded-lg mb-3 ">

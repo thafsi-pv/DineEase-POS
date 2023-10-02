@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { convertToWords } from "../../../utils/utils";
 
-function InvoicePrint1({ printRef, showSummary = true }) {
+function InvoicePrint1({ printRef, showSummary = true,orderNumber }) {
   const cartItems = useSelector((store) => store.cart);
 
   const totalItems = () => {
@@ -36,7 +36,7 @@ function InvoicePrint1({ printRef, showSummary = true }) {
         </div>
         <div className="flex flex-col-reverse justify-stretch items-baseline text-right text-[8px]">
           <p>Date: August 13, 2023</p>
-          <p>Ref No: 123456</p>
+          <p>Ref No: {orderNumber}</p>
         </div>
       </div>
 
