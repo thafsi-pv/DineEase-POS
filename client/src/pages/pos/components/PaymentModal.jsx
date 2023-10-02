@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../../components/card";
 import { FaRupeeSign } from "react-icons/fa";
 import { BsFillCreditCardFill } from "react-icons/bs";
@@ -25,7 +25,7 @@ function PaymentModal({
 }) {
   const cartItems = useSelector((store) => store.cart);
   console.log("🚀 ~ file: PaymentModal.jsx:25 ~ cartItems:", cartItems);
-  const { paymentProcess } = usePayment(handlePrint);
+  const { paymentProcess, paymentId } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
   const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
 
@@ -33,6 +33,13 @@ function PaymentModal({
     setPaymentMode(1);
     setCashBtnTxt(`Pay ${subTotalVal}`);
   };
+
+  useEffect(() => {
+    if (paymentId) {
+      console.log("🚀 ~ file: PaymentModal.jsx:39 ~ useEffect ~ paymentId:", paymentId)
+      createPayment();
+    }
+  }, [paymentId]);
 
   const handleBack = () => {
     setPaymentMode(0);
@@ -65,7 +72,7 @@ function PaymentModal({
     },
   });
 
-  const createPayment = async (data) => {
+  const createPayment = async () => {
     const productList = cartItems?.cart.map((item) => {
       return {
         product: item.id,
@@ -80,15 +87,15 @@ function PaymentModal({
       items: productList,
       totalAmount: subTotalVal,
       totalTax: 12.4,
-      paymentType: "1",
-      transactionId: "asdsd231",
+      paymentType: paymentMode.toString(),
+      transactionId: paymentId,
       orderDate: currentDateTime.toLocaleString(),
       status: "Completed",
     };
     const response = await axios.post(ORDER_CREATE_API, pay);
     if (response.status == 200) {
       setOrderNumber(() => response?.data?.orderNumber);
-     // handlePrint();
+      // handlePrint();
       toast.success("Order Created Successfully ✌🏻");
       onClose();
     }

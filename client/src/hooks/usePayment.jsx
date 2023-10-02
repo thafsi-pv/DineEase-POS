@@ -6,6 +6,7 @@ import { ORDER_PAYMENT, VERIFY_PAYMENT } from "../utils/const";
 
 function usePayment(callback) {
   const [payAmount, setPayAmount] = useState();
+  const [paymentId, setPaymentId] = useState();
 
   const paymentProcess = async (payableAmount) => {
     const res = await loadScript(
@@ -35,9 +36,10 @@ function usePayment(callback) {
           try {
             const verifyUrl = VERIFY_PAYMENT;
             const { data } = await axios.post(verifyUrl, response);
-            console.log("verify", data);
+            console.log("verifyyyyy", data);
+            setPaymentId(data.payment_id);
             callback();
-            toast.success("payment completed Successfully ✅");
+            // toast.success("payment completed Successfully ✅");
           } catch (error) {
             console.log(error);
           }
@@ -65,7 +67,7 @@ function usePayment(callback) {
     handlePayment();
   };
 
-  return { paymentProcess };
+  return { paymentProcess, paymentId };
 }
 
 export default usePayment;
