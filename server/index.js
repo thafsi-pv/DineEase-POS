@@ -13,6 +13,7 @@ const { verifyToken } = require("./utils/jwt");
 const userModal = require("./model/userModal");
 const productRouter = require("./router/product");
 const customerRouter = require("./router/customer");
+const orderRouter = require("./router/order");
 const server = http.createServer(app);
 
 app.use(cors({ origin: "*" }));
@@ -29,6 +30,8 @@ app.use("/api/chat/", chatRouter);
 app.use("/api/product", productRouter);
 
 app.use("/api/customer", customerRouter);
+
+app.use("/api/order", orderRouter);
 
 //socket
 const io = require("socket.io")(server, {
