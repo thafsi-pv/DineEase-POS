@@ -49,11 +49,32 @@ export const cartSlice = createSlice({
     selectCustomer: (state, action) => {
       state.customer = action.payload;
     },
+    removeItem: (state, action) => {
+      const index = action.payload;
+      state.cart.splice(index, 1);
+    },
+    clearCart: (state, action) => {
+      const clearType = action.payload;
+      if (clearType == "all") {
+        state = { cart: [], customer: {} };
+      }
+      if (clearType == "cart") {
+        state.cart = [];
+      }
+      if (clearType == "customer") {
+        state.customer = {};
+      }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, alterItemQuantity, selectCustomer } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  alterItemQuantity,
+  selectCustomer,
+  clearCart,
+  removeItem,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

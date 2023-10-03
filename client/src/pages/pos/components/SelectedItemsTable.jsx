@@ -5,7 +5,11 @@ import Checkbox from "../../../components/checkbox";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { alterItemQuantity, selectCustomer } from "../../../redux/cartSlice";
+import {
+  alterItemQuantity,
+  removeItem,
+  selectCustomer,
+} from "../../../redux/cartSlice";
 import { CiShoppingCart, CiTrash } from "react-icons/ci";
 import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
 import { BsCart2 } from "react-icons/bs";
@@ -15,6 +19,7 @@ import { keyMappings, renameKeys } from "../../../utils/utils";
 import CreatableReactSelect from "../../../components/dropdown/CreatableReactSelect";
 import AddCustomerModal from "../../customers/components/AddCustomerModal";
 import FormModal from "../../../components/modal/FormModal";
+import { motion, AnimatePresence } from "framer-motion";
 
 var modalData = {};
 function SelectedItemsTable({
@@ -146,51 +151,66 @@ function SelectedItemsTable({
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item, index) => (
-                <tr className="!pb-2 border-b" key={item.id}>
-                  <div className="flex items-center gap-2 py-2">
-                    <Checkbox />
-                    <p className="text-sm font-bold text-navy-700 dark:text-white">
-                      {item.itemName}
-                    </p>
-                  </div>
-                  <td className="text-center">
-                    <p className="text-sm font-bold text-navy-700 dark:text-white">
-                      {item.portion}
-                    </p>
-                  </td>
-                  <td className="py-2 flex justify-center">
-                    <div className="flex items-center space-x-1">
-                      <AiOutlineMinusCircle
-                        className="w-5 h-5 text-gray-600 hover:text-gray-800"
-                        onClick={() => handleItemAlterQuantity(index, "-")}
-                      />
-                      <input
-                        type="number"
-                        className="rounded-lg w-14 p-1 font-bold text-sm border text-center"
-                        value={item.quantity}
-                      />
-                      <IoAddCircleOutline
-                        className="w-5 h-5 text-gray-600 hover:text-gray-800"
-                        onClick={() => handleItemAlterQuantity(index, "+")}
-                      />
+              <AnimatePresence>
+                {cartItems.map((item, index) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    // exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.5 }}
+                    exit={{ x: 1000 }} // Exit to the right of the screen
+                    className="!pb-2 border-b">
+                    <div className="flex items-center gap-2 py-2">
+                      <Checkbox />
+                      <p className="text-sm font-bold text-navy-700 dark:text-white">
+                        {item.itemName}
+                      </p>
                     </div>
-                  </td>
-                  <td className="">
-                    <p className="text-sm font-bold text-right text-navy-700 dark:text-white">
-                      {item.totalRate}
-                    </p>
-                  </td>
-                  <td className="flex justify-end">
-                    <CiTrash className="hover:text-red-500 cursor-pointer" />
-                  </td>
-                </tr>
-              ))}
+                    <td className="text-center">
+                      <p className="text-sm font-bold text-navy-700 dark:text-white">
+                        {item.portion}
+                      </p>
+                    </td>
+                    <td className="py-2 flex justify-center">
+                      <div className="flex items-center space-x-1">
+                        <AiOutlineMinusCircle
+                          className="w-5 h-5 text-gray-600 hover:text-gray-800"
+                          onClick={() => handleItemAlterQuantity(index, "-")}
+                        />
+                        <input
+                          type="number"
+                          className="rounded-lg w-14 p-1 font-bold text-sm border text-center"
+                          value={item.quantity}
+                        />
+                        <IoAddCircleOutline
+                          className="w-5 h-5 text-gray-600 hover:text-gray-800"
+                          onClick={() => handleItemAlterQuantity(index, "+")}
+                        />
+                      </div>
+                    </td>
+                    <td className="">
+                      <p className="text-sm font-bold text-right text-navy-700 dark:text-white">
+                        {item.totalRate}
+                      </p>
+                    </td>
+                    <td className="flex justify-end">
+                      <CiTrash
+                        className="hover:text-red-500 cursor-pointer"
+                        onClick={() => dispath(removeItem(index))}
+                      />
+                    </td>
+                  </motion.tr>
+                ))}
+              </AnimatePresence>
             </tbody>
           </table>
         </div>
       </Card>
-      <FormModal isOpen={addCustomerModal} onClose={closeModal} modalWidth="50vw">
+      <FormModal
+        isOpen={addCustomerModal}
+        onClose={closeModal}
+        modalWidth="50vw">
         <AddCustomerModal
           setIsModalOpen={setAddCustomerModal}
           modalData={modalData}
