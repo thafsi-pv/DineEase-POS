@@ -158,9 +158,9 @@ function SelectedItemsTable({
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     // exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.5 }}
-                    exit={{ x: 1000 }} // Exit to the right of the screen
-                    className="!pb-2 border-b">
+                    transition={{ duration: 0.3 }}
+                    exit={{ x: 500 }} // Exit to the right of the screen
+                    className="!pb-2 border-b overflow-hidden">
                     <div className="flex items-center gap-2 py-2">
                       <Checkbox />
                       <p className="text-sm font-bold text-navy-700 dark:text-white">
