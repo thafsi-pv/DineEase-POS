@@ -157,10 +157,10 @@ function SelectedItemsTable({
                     key={item.id}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    // exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    exit={{ x: 500 }} // Exit to the right of the screen
-                    className="!pb-2 border-b overflow-hidden">
+                    //exit={{ scale: 0, opacity: 0 }}//zoom out animation
+                    className="!pb-2 border-b overflow-x-hidden">
                     <div className="flex items-center gap-2 py-2">
                       <Checkbox />
                       <p className="text-sm font-bold text-navy-700 dark:text-white">
