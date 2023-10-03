@@ -23,7 +23,7 @@ const createOrder = async (req, res) => {
       totalTax: parseFloat(totalTax), // Convert to a numeric value
       paymentType,
       transactionId,
-      orderDate: new Date(orderDate), // Convert to a Date object
+      orderDate: new Date(orderDate).toISOString(), // Convert to a Date object
       status,
     });
 

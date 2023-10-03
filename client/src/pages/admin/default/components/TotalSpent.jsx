@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   MdArrowDropUp,
   MdOutlineCalendarToday,
@@ -10,8 +10,19 @@ import {
   lineChartOptionsTotalSpent,
 } from "../../../../variables/charts";
 import LineChart from "../../../../components/charts/LineChart";
+import { MONTHLY_SALES_DATA_API } from "../../../../utils/const";
+import axios from "axios";
 
 const TotalSpent = () => {
+  useEffect(() => {
+    getTotalSales();
+  }, []);
+
+  const getTotalSales = async () => {
+    const data = await axios.get(MONTHLY_SALES_DATA_API);
+    console.log("🚀 ~ file: TotalSpent.jsx:22 ~ getTotalSales ~ data:", data);
+  };
+
   return (
     <Card extra="!p-[20px] text-center">
       <div className="flex justify-between">

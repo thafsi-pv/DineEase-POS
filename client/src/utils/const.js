@@ -38,6 +38,9 @@ export const DELETE_CUSTOMER_BY_ID =
 //!order
 export const ORDER_CREATE_API = "http://localhost:8080/api/order/create";
 
+//!dashboard
+export const MONTHLY_SALES_DATA_API = "http://localhost:8080/api/dashboard/monthlySales";
+
 //*server
 // export const CLOUDINARY_IMAGE_UPLOAD_URL =
 //   "https://api.cloudinary.com/v1_1/dm4djc1b1/image/upload";
@@ -83,3 +86,7 @@ export const ORDER_CREATE_API = "http://localhost:8080/api/order/create";
  //!order
 // export const ORDER_CREATE_API =
 //   "https://dine-ease-api.onrender.com/api/order/create";
+
+
+//!dashboard
+//export const MONTHLY_SALES_DATA_API = "https://dine-ease-api.onrender.com/api/dashboard/monthlySales";
