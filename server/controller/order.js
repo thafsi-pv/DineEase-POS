@@ -1,3 +1,4 @@
+const Customer = require("../model/customerModal");
 const Order = require("../model/orderModal");
 const { addLoyltyPoint } = require("./loyaltyProgram");
 
@@ -15,12 +16,13 @@ const createOrder = async (req, res) => {
       orderDate,
       status,
     } = req.body;
+    console.log("🚀 ~ file: order.js:19 ~ createOrder ~ req.body:", req.body);
 
     // Create a new order instance
     const newOrder = new Order({
       customer,
       items,
-      totalAmount: parseFloat(totalAmount), 
+      totalAmount: parseFloat(totalAmount),
       totalTax: parseFloat(totalTax),
       paymentType,
       transactionId,
@@ -30,15 +32,24 @@ const createOrder = async (req, res) => {
 
     // Save the new order
     const savedOrder = await newOrder.save();
-    //Save Loyalty transaction
-    const loyaltyPoint = await addLoyltyPoint(
-      savedOrder._id,
-      customer,
-      parseFloat(totalAmount),
-      "credit"
-    );
-    savedOrder.loyaltyPoint = loyaltyPoint;
-    res.status(200).json(savedOrder);
+
+    //select default customer from customers
+    const defaultCustomerId = await Customer.findOne({
+      isDefault: true,
+    }).select("_id");
+    let loyaltyPoint = 0;
+    if (customer != defaultCustomerId) {
+      //Save Loyalty transaction
+      loyaltyPoint = await addLoyltyPoint(
+        savedOrder._id,
+        customer,
+        parseFloat(totalAmount),
+        "credit"
+      );
+    }
+    const obj = savedOrder.toObject(); //convert to plain js object to mutate object
+    obj.loyaltyPoint = loyaltyPoint;
+    res.status(200).json(obj);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

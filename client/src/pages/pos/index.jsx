@@ -12,7 +12,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import usePayment from "../../hooks/usePayment";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
-import { addToCart, clearCart } from "../../redux/cartSlice";
+import { addToCart, clearCart, selectCustomer } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
 import CategoriesTab from "./components/CategoriesTab";
@@ -35,7 +35,11 @@ function index() {
   const [menu, setMenu] = useState([]);
   const [addProductModal, setAddProductModal] = useState(false);
   const [addCustomerModal, setAddCustomerModal] = useState(false);
-  const [orderNumber, setOrderNumber] = useState(null);
+  const [orderDetails, setOrderDetails] = useState({
+    orderNumber: "",
+    rewardPoints: 0,
+  });
+  const [defaultValue, setDefaultValue] = useState(null);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
@@ -65,11 +69,12 @@ function index() {
   }, [cartItems]);
 
   useEffect(() => {
-    if (orderNumber) {
+    if (orderDetails.orderNumber != "") {
       handlePrint();
-      dispath(clearCart('all'));
+      dispath(clearCart("all"));
+      dispath(selectCustomer(defaultValue));
     }
-  }, [orderNumber]);
+  }, [orderDetails]);
 
   const detectKeyDown = (e) => {
     if (e.key === "b" && (e.ctrlKey || e.metaKey)) {
@@ -186,6 +191,8 @@ function index() {
                 CustomerSelectRef={CustomerSelectRef}
                 setAddCustomerModal={setAddCustomerModal}
                 addCustomerModal={addCustomerModal}
+                defaultValue={defaultValue}
+                setDefaultValue={setDefaultValue}
               />
             </div>
             <div className="">
@@ -194,7 +201,7 @@ function index() {
                 subTotalVal={subTotalVal}
                 handlePrint={handlePrint}
                 CustomerSelectRef={CustomerSelectRef}
-                setOrderNumber={setOrderNumber}
+                setOrderDetails={setOrderDetails}
               />
             </div>
           </div>
@@ -208,7 +215,7 @@ function index() {
         selectedItemListRef={selectedItemListRef}
       />
       <div className="hidden">
-        <InvoicePrint1 printRef={printRef} orderNumber={orderNumber} />
+        <InvoicePrint1 printRef={printRef} orderDetails={orderDetails} />
       </div>
     </div>
   );

@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { convertToWords } from "../../../utils/utils";
+import { convertToWords, formatedCurrentDate } from "../../../utils/utils";
 
-function InvoicePrint1({ printRef, showSummary = true, orderNumber }) {
+const currentDate = new Date();
+function InvoicePrint1({ printRef, showSummary = true, orderDetails }) {
+  console.log(
+    "🚀 ~ file: InvoicePrint1.jsx:6 ~ InvoicePrint1 ~ orderDetails:",
+    orderDetails
+  );
   const cartItems = useSelector((store) => store.cart);
 
   const totalItems = () => {
@@ -38,9 +43,20 @@ function InvoicePrint1({ printRef, showSummary = true, orderNumber }) {
           </div>
         </div>
         <div className="flex flex-col-reverse justify-stretch items-baseline text-right text-[8px]">
-          <p>Customer: {cartItems?.customer?.label}</p>
-          <p>Date: August 13, 2023</p>
-          {showSummary && <p>Ref No: {orderNumber}</p>}
+          <div className="flex justify-between w-full gap-2">
+            <div>Customer:</div>
+            <div>{cartItems?.customer?.label}</div>
+          </div>
+          <div className="flex justify-between w-full gap-2">
+            <div className="">Date:</div>
+            <div className="">{formatedCurrentDate()}</div>
+          </div>
+          {showSummary && (
+            <div className="flex justify-between w-full gap-2">
+              <div>Ref No:</div>
+              <div>{orderDetails?.orderNumber}</div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -102,35 +118,43 @@ function InvoicePrint1({ printRef, showSummary = true, orderNumber }) {
         </div>
       )}
       {showSummary && (
-        <div className="mt-6 flex justify-end  text-[8px] font-semibold">
-          <table>
-            <tr>
-              <td>Total Items</td>
-              <td className="text-right">{totalItems()}</td>
-            </tr>
-            <tr>
-              <td>Total Discount</td>
-              <td className="text-right">00.00</td>
-            </tr>
-            <tr>
-              <td>Total Tax</td>
-              <td className="text-right">00.00</td>
-            </tr>
-            <tr>
-              <td>Total Amount</td>
-              <td className="text-right">{subTotal()}</td>
-            </tr>
-            <tr>
-              <td>Loyalty Points Earned</td>
-              <td className="text-right">50</td>
-            </tr>
-          </table>
-
-          {/* <p>:</p>
-        <p>Total :00.000</p>
-        <p>Total Tax:00.000</p>
-        <p>Total Amount: ${subTotal()}</p>
-        <p>Loyalty Points Earned: 50</p> */}
+        <div className="mt-6 flex justify-between">
+          <div className="text-[8px] font-semibold">
+            <table>
+              <tr>
+                <td>New Point</td>
+                <td className="text-right">{orderDetails?.rewardPoints}</td>
+              </tr>
+              <tr>
+                <td>Radeem</td>
+                <td className="text-right">00.00</td>
+              </tr>
+              <tr>
+                <td>Balance</td>
+                <td className="text-right">{orderDetails?.rewardPoints}</td>
+              </tr>
+            </table>
+          </div>
+          <div className="justify-end  text-[8px] font-semibold">
+            <table className="w-[100px]">
+              <tr>
+                <td>Total Items</td>
+                <td className="text-right">{totalItems()}</td>
+              </tr>
+              <tr>
+                <td>Total Discount</td>
+                <td className="text-right">00.00</td>
+              </tr>
+              <tr>
+                <td>Total Tax</td>
+                <td className="text-right">00.00</td>
+              </tr>
+              <tr className="border-t">
+                <td>Total Amount</td>
+                <td className="text-right">{subTotal()}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       )}
     </div>

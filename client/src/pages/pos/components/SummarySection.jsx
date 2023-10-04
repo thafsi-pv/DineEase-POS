@@ -10,7 +10,7 @@ function SummarySection({
   subTotalVal,
   handlePrint,
   CustomerSelectRef,
-  setOrderNumber,
+  setOrderDetails,
 }) {
   const [showModal, setShowModal] = useState(false);
   const selectedCustomer = useSelector((store) => store.cart.customer);
@@ -76,7 +76,7 @@ function SummarySection({
         onClose={handleCloseModal}
         subTotalVal={subTotalVal}
         selectedCustomer={selectedCustomer}
-        setOrderNumber={setOrderNumber}
+        setOrderDetails={setOrderDetails}
       />
     </div>
   );

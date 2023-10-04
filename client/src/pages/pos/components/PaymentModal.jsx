@@ -21,7 +21,7 @@ function PaymentModal({
   onClose,
   subTotalVal,
   selectedCustomer,
-  setOrderNumber,
+  setOrderDetails,
 }) {
   const cartItems = useSelector((store) => store.cart);
   console.log("🚀 ~ file: PaymentModal.jsx:25 ~ cartItems:", cartItems);
@@ -36,7 +36,6 @@ function PaymentModal({
 
   useEffect(() => {
     if (paymentId) {
-      
       createPayment();
     }
   }, [paymentId]);
@@ -94,7 +93,14 @@ function PaymentModal({
     };
     const response = await axios.post(ORDER_CREATE_API, pay);
     if (response.status == 200) {
-      setOrderNumber(() => response?.data?.orderNumber);
+      console.log(
+        "🚀 ~ file: PaymentModal.jsx:96 ~ createPayment ~ response:",
+        response
+      );
+      setOrderDetails(() => ({
+        orderNumber: response?.data?.orderNumber,
+        rewardPoints: response?.data?.loyaltyPoint,
+      }));
       // handlePrint();
       toast.success("Order Created Successfully ✌🏻");
       handleCloseModal();

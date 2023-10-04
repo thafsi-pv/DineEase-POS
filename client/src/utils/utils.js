@@ -146,3 +146,27 @@ export const keyMappings = {
   _id: "value",
   firstName: "label",
 };
+
+export const formatedCurrentDate = () => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const currentDate = new Date();
+  const formattedDate = `${
+    months[currentDate.getMonth()]
+  } ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+
+  return formattedDate; // Output: "September 23, 2023" (or the current date)
+};

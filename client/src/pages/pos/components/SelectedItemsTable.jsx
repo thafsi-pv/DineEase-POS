@@ -28,9 +28,11 @@ function SelectedItemsTable({
   CustomerSelectRef,
   setAddCustomerModal,
   addCustomerModal,
+  defaultValue,
+  setDefaultValue,
 }) {
   const [customerList, setCustomerList] = useState(null);
-  const [defaultValue, setDefaultValue] = useState(null);
+  // const [defaultValue, setDefaultValue] = useState(null);
   const dispath = useDispatch();
   let setDefault = false;
   useEffect(() => {
