@@ -12,7 +12,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import usePayment from "../../hooks/usePayment";
 import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCart, clearCart } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
 import CategoriesTab from "./components/CategoriesTab";
@@ -67,6 +67,7 @@ function index() {
   useEffect(() => {
     if (orderNumber) {
       handlePrint();
+      dispath(clearCart('all'));
     }
   }, [orderNumber]);
 

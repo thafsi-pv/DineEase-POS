@@ -6,7 +6,12 @@ import FormModal from "../../../components/modal/FormModal";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-function SummarySection({ subTotalVal, handlePrint, CustomerSelectRef,setOrderNumber }) {
+function SummarySection({
+  subTotalVal,
+  handlePrint,
+  CustomerSelectRef,
+  setOrderNumber,
+}) {
   const [showModal, setShowModal] = useState(false);
   const selectedCustomer = useSelector((store) => store.cart.customer);
 
@@ -15,10 +20,6 @@ function SummarySection({ subTotalVal, handlePrint, CustomerSelectRef,setOrderNu
   };
 
   const handleStartPayment = () => {
-    console.log(
-      "🚀 ~ file: SummarySection.jsx:18 ~ handleStartPayment ~ cartItems:",
-      selectedCustomer
-    );
     if (selectedCustomer == {} || selectedCustomer == null) {
       CustomerSelectRef.current?.focus();
       toast.error("Select a customer.😒");

@@ -36,7 +36,7 @@ function PaymentModal({
 
   useEffect(() => {
     if (paymentId) {
-      console.log("🚀 ~ file: PaymentModal.jsx:39 ~ useEffect ~ paymentId:", paymentId)
+      
       createPayment();
     }
   }, [paymentId]);
@@ -46,15 +46,14 @@ function PaymentModal({
     setCashBtnTxt(`Cash`);
   };
 
-  const fadeInVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
   const validate = (values) => {
     const errors = {};
 
-    if (parseFloat(values.amount) < subTotalVal || values.amount == "") {
+    if (
+      parseFloat(values.amount) < subTotalVal ||
+      values.amount == "" ||
+      values.amount == null
+    ) {
       errors.amount = "Must be greater than or equal to subtotal";
     }
 
@@ -63,12 +62,13 @@ function PaymentModal({
 
   const formik = useFormik({
     initialValues: {
-      amount: 0,
+      amount: null,
     },
     validate,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       // alert(JSON.stringify(values, null, 2));
       createPayment(values);
+      resetForm();
     },
   });
 
@@ -97,7 +97,7 @@ function PaymentModal({
       setOrderNumber(() => response?.data?.orderNumber);
       // handlePrint();
       toast.success("Order Created Successfully ✌🏻");
-      onClose();
+      handleCloseModal();
     }
   };
 
@@ -118,11 +118,16 @@ function PaymentModal({
   //   ).toFixed(2);
   // };
 
+  const handleCloseModal = () => {
+    onClose();
+    handleBack();
+  };
+
   return (
     <FormModal
       isOpen={showModal}
       modalWidth="730px"
-      onClose={onClose}
+      onClose={handleCloseModal}
       bg={"bg-gradient-to-r from-white to-green-500"}>
       <div className="flex justify-between min-h-[300px] bg-none overflow-x-hidden">
         <div className="h-full w-1/2">

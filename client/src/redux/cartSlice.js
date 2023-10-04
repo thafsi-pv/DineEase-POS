@@ -55,8 +55,10 @@ export const cartSlice = createSlice({
     },
     clearCart: (state, action) => {
       const clearType = action.payload;
+      console.log("🚀 ~ file: cartSlice.js:58 ~ clearType:", clearType);
       if (clearType == "all") {
-        state = { cart: [], customer: {} };
+        return initialState;
+        //state = { cart: [], customer: {} };
       }
       if (clearType == "cart") {
         state.cart = [];
