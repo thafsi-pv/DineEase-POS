@@ -1,6 +1,6 @@
 const Customer = require("../model/customerModal");
 const Order = require("../model/orderModal");
-const { addLoyltyPoint } = require("./loyaltyProgram");
+const { addLoyltyPoint, getTotalPoints } = require("./loyaltyProgram");
 
 // Define a controller function to create a new order
 const createOrder = async (req, res) => {
@@ -16,7 +16,6 @@ const createOrder = async (req, res) => {
       orderDate,
       status,
     } = req.body;
-    console.log("🚀 ~ file: order.js:19 ~ createOrder ~ req.body:", req.body);
 
     // Create a new order instance
     const newOrder = new Order({
@@ -38,7 +37,8 @@ const createOrder = async (req, res) => {
       isDefault: true,
     }).select("_id");
     let loyaltyPoint = 0;
-    if (customer != defaultCustomerId) {
+    let totalPoint = 0;
+    if (customer != defaultCustomerId?._id) {
       //Save Loyalty transaction
       loyaltyPoint = await addLoyltyPoint(
         savedOrder._id,
@@ -46,9 +46,15 @@ const createOrder = async (req, res) => {
         parseFloat(totalAmount),
         "credit"
       );
+      totalPoint = await getTotalPoints(customer);
+      console.log(
+        "🚀 ~ file: order.js:55 ~ createOrder ~ totalPoint:",
+        totalPoint
+      );
     }
     const obj = savedOrder.toObject(); //convert to plain js object to mutate object
     obj.loyaltyPoint = loyaltyPoint;
+    obj.totalPoint = totalPoint;
     res.status(200).json(obj);
   } catch (error) {
     console.error(error);

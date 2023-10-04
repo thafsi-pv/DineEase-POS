@@ -9,6 +9,10 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  points: {
+    type: Number,
+    default: 0,
+  },
   type: {
     type: String,
     enum: ["credit", "debit"],
@@ -21,14 +25,10 @@ const transactionSchema = new mongoose.Schema({
 });
 
 const loyaltyProgramSchema = new mongoose.Schema({
-  userId: {
+  customerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Customer",
     required: true,
-  },
-  points: {
-    type: Number,
-    default: 0,
   },
   transactions: [transactionSchema], // Add a field for transaction history
 });
