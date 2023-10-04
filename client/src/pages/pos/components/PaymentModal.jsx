@@ -10,7 +10,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { BiArrowBack } from "react-icons/bi";
 import { useFormik } from "formik";
 import axios from "axios";
-import { ORDER_CREATE_API } from "../../../utils/const";
+import {
+  ORDER_CREATE_API,
+  REWARD_POINT_BYCUSTOMER_ID_API,
+} from "../../../utils/const";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
@@ -23,22 +26,42 @@ function PaymentModal({
   selectedCustomer,
   setOrderDetails,
 }) {
+  console.log(
+    "🚀 ~ file: PaymentModal.jsx:29 ~ selectedCustomer:",
+    selectedCustomer
+  );
   const cartItems = useSelector((store) => store.cart);
   console.log("🚀 ~ file: PaymentModal.jsx:25 ~ cartItems:", cartItems);
   const { paymentProcess, paymentId } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
   const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
+  const [customerRewardPoint, setCustomerRewardPoint] = useState();
 
-  const handleCashPayment = () => {
-    setPaymentMode(1);
-    setCashBtnTxt(`Pay ${subTotalVal}`);
-  };
+  useEffect(() => {
+    getCustomerLoyaltyPoints();
+  }, [showModal]);
 
   useEffect(() => {
     if (paymentId) {
       createPayment();
     }
   }, [paymentId]);
+
+  const getCustomerLoyaltyPoints = async () => {
+    const response = await axios.get(
+      REWARD_POINT_BYCUSTOMER_ID_API + "?customerId=" + selectedCustomer.value
+    );
+    console.log(
+      "🚀 ~ file: PaymentModal.jsx:47 ~ getCustomerLoyaltyPoints ~ response:",
+      response
+    );
+    setCustomerRewardPoint(response?.data[0].totalPoints);
+  };
+
+  const handleCashPayment = () => {
+    setPaymentMode(1);
+    setCashBtnTxt(`Pay ${subTotalVal}`);
+  };
 
   const handleBack = () => {
     setPaymentMode(0);
@@ -230,17 +253,19 @@ function PaymentModal({
                 </motion.div>
               )}
             </AnimatePresence>
-            <div className="flex flex-col mt-4 font-semibold text-xs text-gray-800 gap-2">
-              <div className="flex justify-between items-center">
-                <span>Reward Points:</span>
-                <span>1000.4</span>
-                <button
-                  className="btn bg-green-400 p-2 rounded-md shadow-md hover:bg-green-200"
-                  type="button ">
-                  Redeem
-                </button>
+            {paymentMode == 0 && !selectedCustomer?.isDefault && (
+              <div className="flex flex-col mt-4 font-semibold text-xs text-gray-800 gap-2 bg-green-300 p-2 rounded-md">
+                <div className="flex justify-between items-center">
+                  <span>DE Reward</span>
+                  <span>{customerRewardPoint}</span>
+                  <button
+                    className="btn bg-green-400 p-2 rounded-md shadow-md hover:bg-green-200"
+                    type="button ">
+                    Redeem
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="flex justify-center w-full gap-2 mt-10 pt-3 border-t border-green-500">
             <div className="flex-1 mb-2">

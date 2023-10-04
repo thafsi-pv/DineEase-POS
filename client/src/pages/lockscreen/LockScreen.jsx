@@ -17,7 +17,7 @@ const LockScreen = ({ children }) => {
       // Set the timer again after user activity
       inactivityTimer = setTimeout(() => {
         setIsLocked(true);
-      }, 30000); // 1 minute in milliseconds
+      }, 2000); // 1 minute in milliseconds
     };
 
     // Add event listeners on component mount

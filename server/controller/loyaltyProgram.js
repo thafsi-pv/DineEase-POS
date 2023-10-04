@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const LoyaltyProgram = require("../model/loyaltyModal"); // Import your Mongoose model
+const LoyaltyProgram = require("../model/loyaltyModal");
 
-// Function to save a new transaction
 async function addLoyltyPoint(tranId, customerId, amount, type) {
   try {
     const newPoint = amount * 0.1;
@@ -61,9 +60,9 @@ const getTotalPoints = async (userId) => {
 
 const getTotalPointsByCustomerId = async (req, res) => {
   try {
-    const { customerId } = req.body;
+    const { customerId } = req.query;
     const cusId = new mongoose.Types.ObjectId(customerId);
-    const pipeline = aggregateTotalPointsPipeline(cusId);
+    const pipeline = aggragateTotalPointPipeline(cusId);
     const result = await LoyaltyProgram.aggregate(pipeline);
     res.status(200).json(result);
   } catch (error) {
