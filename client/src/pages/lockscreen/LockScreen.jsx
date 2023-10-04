@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignIn from "../auth/SignIn";
+import LockWindow from "./components/LockWindow";
 
 const LockScreen = ({ children }) => {
   // State to keep track of whether the screen should be locked
@@ -16,7 +17,7 @@ const LockScreen = ({ children }) => {
       // Set the timer again after user activity
       inactivityTimer = setTimeout(() => {
         setIsLocked(true);
-      }, 60000); // 1 minute in milliseconds
+      }, 30000); // 1 minute in milliseconds
     };
 
     // Add event listeners on component mount
@@ -28,7 +29,7 @@ const LockScreen = ({ children }) => {
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
       setIsLocked(true);
-    }, 60000); // 1 minute in milliseconds
+    }, 30000); // 1 minute in milliseconds
 
     // Clean up event listeners on component unmount
     return () => {
@@ -56,7 +57,7 @@ const LockScreen = ({ children }) => {
         //     isFading ? "opacity-100" : "opacity-0"
         //   }`}>
         <div>
-          <SignIn />
+          <LockWindow/>
         </div>
       ) : (
         // Render your main content here

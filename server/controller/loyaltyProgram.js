@@ -30,32 +30,45 @@ async function addLoyltyPoint(tranId, customerId, amount, type) {
   }
 }
 
-const getTotalPoints = async (userId) => {
-  const cusId = new mongoose.Types.ObjectId(userId); // Use 'new' keyword here
-  const pipeline = [
-    {
-      $match: {
-        customerId: cusId, // Use cusId directly here, as it's already an ObjectId
-      },
+const aggragateTotalPointPipeline = (customerId) => [
+  {
+    $match: {
+      customerId: customerId,
     },
-    {
-      $unwind: "$transactions", // Split transactions array into individual documents
+  },
+  {
+    $unwind: "$transactions",
+  },
+  {
+    $match: {
+      "transactions.type": "credit",
     },
-    {
-      $match: {
-        "transactions.type": "credit", // Filter transactions with type = 'credit'
-      },
+  },
+  {
+    $group: {
+      _id: "$customerId",
+      totalPoints: { $sum: "$transactions.points" },
     },
-    {
-      $group: {
-        _id: "$customerId",
-        totalPoints: { $sum: "$transactions.points" }, // Sum the points for each transaction
-      },
-    },
-  ];
+  },
+];
 
+const getTotalPoints = async (userId) => {
+  const cusId = new mongoose.Types.ObjectId(userId);
+  const pipeline = aggragateTotalPointPipeline(cusId);
   const result = await LoyaltyProgram.aggregate(pipeline);
   return result[0].totalPoints;
 };
 
-module.exports = { addLoyltyPoint, getTotalPoints };
+const getTotalPointsByCustomerId = async (req, res) => {
+  try {
+    const { customerId } = req.body;
+    const cusId = new mongoose.Types.ObjectId(customerId);
+    const pipeline = aggregateTotalPointsPipeline(cusId);
+    const result = await LoyaltyProgram.aggregate(pipeline);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+module.exports = { addLoyltyPoint, getTotalPoints, getTotalPointsByCustomerId };

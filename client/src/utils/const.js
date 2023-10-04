@@ -41,7 +41,7 @@
 // //!dashboard
 // export const MONTHLY_SALES_DATA_API = "http://localhost:8080/api/dashboard/monthlySales";
 
-// ////*server
+// *server
 export const CLOUDINARY_IMAGE_UPLOAD_URL =
   "https://api.cloudinary.com/v1_1/dm4djc1b1/image/upload";
 
