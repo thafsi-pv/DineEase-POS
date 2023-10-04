@@ -126,12 +126,12 @@ function InvoicePrint1({ printRef, showSummary = true, orderDetails }) {
                 <td className="text-right">{orderDetails?.rewardPoints}</td>
               </tr>
               <tr>
-                <td>Radeem</td>
+                <td>Redeem</td>
                 <td className="text-right">00.00</td>
               </tr>
               <tr>
                 <td>Balance</td>
-                <td className="text-right">{orderDetails?.rewardPoints}</td>
+                <td className="text-right">{orderDetails?.totalPoints}</td>
               </tr>
             </table>
           </div>

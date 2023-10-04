@@ -38,6 +38,7 @@ function index() {
   const [orderDetails, setOrderDetails] = useState({
     orderNumber: "",
     rewardPoints: 0,
+    totalPoints: 0,
   });
   const [defaultValue, setDefaultValue] = useState(null);
 

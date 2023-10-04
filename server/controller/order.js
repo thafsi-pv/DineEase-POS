@@ -47,10 +47,6 @@ const createOrder = async (req, res) => {
         "credit"
       );
       totalPoint = await getTotalPoints(customer);
-      console.log(
-        "🚀 ~ file: order.js:55 ~ createOrder ~ totalPoint:",
-        totalPoint
-      );
     }
     const obj = savedOrder.toObject(); //convert to plain js object to mutate object
     obj.loyaltyPoint = loyaltyPoint;

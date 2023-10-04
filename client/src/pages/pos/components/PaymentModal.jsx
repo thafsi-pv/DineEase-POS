@@ -93,13 +93,10 @@ function PaymentModal({
     };
     const response = await axios.post(ORDER_CREATE_API, pay);
     if (response.status == 200) {
-      console.log(
-        "🚀 ~ file: PaymentModal.jsx:96 ~ createPayment ~ response:",
-        response
-      );
       setOrderDetails(() => ({
         orderNumber: response?.data?.orderNumber,
         rewardPoints: response?.data?.loyaltyPoint,
+        totalPoints: response?.data?.totalPoint,
       }));
       // handlePrint();
       toast.success("Order Created Successfully ✌🏻");
@@ -233,15 +230,26 @@ function PaymentModal({
                 </motion.div>
               )}
             </AnimatePresence>
+            <div className="flex flex-col mt-4 font-semibold text-xs text-gray-800 gap-2">
+              <div className="flex justify-between items-center">
+                <span>Reward Points:</span>
+                <span>1000.4</span>
+                <button
+                  className="btn bg-green-400 p-2 rounded-md shadow-md hover:bg-green-200"
+                  type="button ">
+                  Redeem
+                </button>
+              </div>
+            </div>
           </div>
           <div className="flex justify-center w-full gap-2 mt-10 pt-3 border-t border-green-500">
-            <div className="flex-1">
+            <div className="flex-1 mb-2">
               <button
                 type="submit"
                 onClick={
                   paymentMode == 0 ? handleCashPayment : formik.handleSubmit
                 }
-                className="bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2">
+                className="shadow-md bg-[#068e77] hover:bg-[#068e77c9] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2">
                 <FaRupeeSign />
                 {cashBtnTxt}
                 <p className="text-xs text-gray-300">Ctrl+c</p>
@@ -250,7 +258,7 @@ function PaymentModal({
             {paymentMode !== 1 && (
               <div className="flex-1">
                 <button
-                  className="bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2"
+                  className="shadow-md bg-[#068e77e5] hover:bg-[#068e77] text-white font-bold py-4 px-4 rounded-full w-full flex justify-center items-center gap-2"
                   onClick={() => paymentProcess(subTotalVal)}>
                   <BsFillCreditCardFill /> <p>Card</p>
                   <p className="text-xs text-gray-300">Ctrl+b</p>
