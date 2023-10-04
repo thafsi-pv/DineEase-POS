@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema({
+  transaction_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
   amount: {
     type: Number,
     required: true,
   },
-  point: { type: Number, required: true },
   type: {
     type: String,
     enum: ["credit", "debit"],
