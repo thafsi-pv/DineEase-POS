@@ -7,7 +7,7 @@ import {
 } from "react-table";
 import Card from "../../../components/card";
 import CardMenu from "../../../components/card/CardMenu";
-import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
+import { MdCancel, MdCheckCircle, MdOutlineError, MdOutlineLoyalty } from "react-icons/md";
 import {
   CiCircleChevLeft,
   CiCircleChevRight,
@@ -210,6 +210,10 @@ const CustomerListTable = (props) => {
                     } else if (cell.column.Header === "ACTION") {
                       data = (
                         <div className="space-x-2">
+                          <button
+                            onClick={() => handleView(cell.row.original._id)}>
+                            <MdOutlineLoyalty className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />
+                          </button>
                           <button
                             onClick={() => handleView(cell.row.original._id)}>
                             <PiEyeLight className="h-7 w-7 hover:bg-gray-300 hover:rounded-full p-1" />

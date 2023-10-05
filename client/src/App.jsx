@@ -8,22 +8,24 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import SignIn from "./pages/auth/SignIn.jsx";
 import SignUp from "./pages/auth/SignUp.jsx";
+import Loader from "./components/loader";
 
 const App = () => {
   return (
     <>
-     <Toaster position="top-center" reverseOrder={false} />
-      <LockScreen>
-        <Provider store={store}>
-          <Routes>
-            <Route path="admin/*" element={<AdminLayout />} />
-            <Route path="/" element={<Navigate to="/admin" replace />} />
-            <Route path="/auth/sign-in" element={<SignIn />} />
-            <Route path="/auth/sign-up" element={<SignUp />} />
-          </Routes>
-         
-        </Provider>
-      </LockScreen>
+      <Provider store={store}>
+        <Loader>
+          <Toaster position="top-center" reverseOrder={false} />
+          <LockScreen>
+            <Routes>
+              <Route path="admin/*" element={<AdminLayout />} />
+              <Route path="/" element={<Navigate to="/admin" replace />} />
+              <Route path="/auth/sign-in" element={<SignIn />} />
+              <Route path="/auth/sign-up" element={<SignUp />} />
+            </Routes>
+          </LockScreen>
+        </Loader>
+      </Provider>
     </>
     // <AdminLayout />
   );

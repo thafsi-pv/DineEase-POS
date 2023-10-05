@@ -10,8 +10,7 @@ import {
   removeItem,
   selectCustomer,
 } from "../../../redux/cartSlice";
-import { CiShoppingCart, CiTrash } from "react-icons/ci";
-import DropDownReactSelect from "../../../components/dropdown/DropDownReactSelect";
+import {  CiTrash } from "react-icons/ci";
 import { BsCart2 } from "react-icons/bs";
 import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../../utils/const";
 import { keyMappings, renameKeys } from "../../../utils/utils";
