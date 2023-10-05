@@ -14,7 +14,7 @@ function LockWindow() {
       <div className="">
         <div className="flex h-screen w-full flex-1">
           <img src={image} alt="" />
-          <div className="absolute flex flex-col h-screen w-full flex-1 justify-center items-center bg-[#000000d1]">
+          <div className="absolute flex flex-col h-screen w-full flex-1 justify-center items-center bg-[#000000d1] bg-opacity-25">
             <div>
               <div className="flex flex-col leading-6">
                 <div className="mt-1 ml-1 font-poppins text-[46px] font-bold uppercase text-gray-300 dark:text-white">

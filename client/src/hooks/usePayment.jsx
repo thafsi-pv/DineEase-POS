@@ -14,7 +14,7 @@ function usePayment(callback) {
     );
 
     if (!res) {
-      toast.error("Razorpay SDK failed to load. Are you online?");
+      toast.error("Failed to load. Are you online?");
       return;
     }
     // const res = await handlePayment(subtot);
