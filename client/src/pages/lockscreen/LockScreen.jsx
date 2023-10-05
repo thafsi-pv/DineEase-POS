@@ -31,7 +31,7 @@ const LockScreen = ({ children }) => {
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
       setIsLocked(true);
-    }, 30000); 
+    }, 30000);
 
     // Clean up event listeners on component unmount
     return () => {
@@ -64,10 +64,6 @@ const LockScreen = ({ children }) => {
     try {
       const data = { password: values.password };
       const response = await axiosInstance.post("/auth/unlock", data);
-      console.log(
-        "🚀 ~ file: LockScreen.jsx:28 ~ verifyUser ~ response:",
-        response
-      );
       if (response.status == 200) {
         setIsLocked(false);
       }
