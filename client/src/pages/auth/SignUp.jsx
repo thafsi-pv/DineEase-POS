@@ -6,10 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import authImg from "../../assets/img/auth/2252808.jpg";
 import { useFormik } from "formik";
 import { validate } from "../../utils/validate";
-import axios from "axios";
 import { genricError } from "../../utils/genricError";
 import { toast } from "react-hot-toast";
 import { SIGN_UP_API } from "../../utils/const";
+import axiosInstance from "../../utils/axiosInterceptor";
 
 function SignUp() {
   const navigate = useNavigate(null);
@@ -25,7 +25,7 @@ function SignUp() {
     validate,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(SIGN_UP_API, values);
+        const response = await axiosInstance.post(SIGN_UP_API, values);
         if ((response.status = 200)) {
           toast.success("Successfully registered, SignIn now 🤝");
           navigate("/auth/sign-in");

@@ -4,8 +4,8 @@ import AddCustomerModal from "./components/AddCustomerModal";
 import VIewCustomerModal from "./components/ViewCustomerModal";
 
 import CustomerListTable from "./components/CustomerListTable";
-import axios from "axios";
 import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../utils/const";
+import axiosInstance from "../../utils/axiosInterceptor";
 
 function Customers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,7 @@ function Customers() {
   }, []);
 
   const handleGetAllCustomers = async () => {
-    const customers = await axios.get(GET_ALL_ACTIVE_CUSTOMER_API);
+    const customers = await axiosInstance.get(GET_ALL_ACTIVE_CUSTOMER_API);
     setCustomerList(customers?.data);
   };
 

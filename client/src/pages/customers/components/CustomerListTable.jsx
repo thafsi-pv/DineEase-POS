@@ -16,7 +16,6 @@ import {
 } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
-import axios from "axios";
 import {
   DELETE_CUSTOMER_BY_ID,
   GET_CUSTOMER_BY_ID,
@@ -26,6 +25,7 @@ import DeleteModal from "./DeleteModal";
 import { toast } from "react-hot-toast";
 import deleteImg from "../../../assets/img/profile/clip-1738.png";
 import { formatMobileNumber } from "../../../utils/utils";
+import axiosInstance from "../../../utils/axiosInterceptor";
 
 const CustomerListTable = (props) => {
   const {
@@ -74,7 +74,7 @@ const CustomerListTable = (props) => {
 
   const handleEdit = async (id) => {
     var url = `${GET_CUSTOMER_BY_ID}?id=${id}`;
-    const data = await axios.get(url);
+    const data = await axiosInstance.get(url);
     setModalData((prv) => data?.data[0]);
     openModal(true);
   };
@@ -122,7 +122,7 @@ const CustomerListTable = (props) => {
   const deleteItem = async (id, tid) => {
     toast.dismiss(tid);
     var url = `${DELETE_CUSTOMER_BY_ID}?id=${id}`;
-    const data = await axios.delete(url);
+    const data = await axiosInstance.delete(url);
     const newList = tableData.filter((item) => item._id != id);
     setCustomerList(newList);
   };

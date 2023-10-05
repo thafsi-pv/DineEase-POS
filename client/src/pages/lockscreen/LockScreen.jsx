@@ -17,13 +17,9 @@ const LockScreen = ({ children }) => {
     // Event listener to detect user activity
     const handleUserActivity = () => {
       clearTimeout(inactivityTimer);
-      //verifyUser();
-      //setIsLocked(false);
-      // Set the timer again after user activity
-
       inactivityTimer = setTimeout(() => {
         setIsLocked(true);
-      }, 2000); // 1 minute in milliseconds
+      }, 30000);
     };
 
     // Add event listeners on component mount
@@ -35,7 +31,7 @@ const LockScreen = ({ children }) => {
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
       setIsLocked(true);
-    }, 2000); // 1 minute in milliseconds
+    }, 30000); 
 
     // Clean up event listeners on component unmount
     return () => {

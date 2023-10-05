@@ -31,7 +31,7 @@ function LockWindow({ formik }) {
               <div className="m-auto flex flex-col justify-center items-center gap-2">
                 <div className="w-30p flex gap-2 justify-center ">
                   <InputField
-                    extra="w-40p animate-pulse text-xl flex-1"
+                    extra="w-40p animate-pulse text-xl flex-1 text-white"
                     placeholder="Enter Password to unlock screen"
                     type="password"
                     variant="auth"

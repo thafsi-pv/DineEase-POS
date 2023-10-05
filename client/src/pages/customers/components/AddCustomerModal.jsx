@@ -5,14 +5,13 @@ import SwithField from "../../../components/fields/SwitchField";
 import TextField from "../../../components/fields/TextField";
 import InputField from "../../../components/fields/InputField";
 import { useFormik } from "formik";
-
-import axios from "axios";
 import { CUSTOMER_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { customerValidationSchema } from "../../../utils/validate";
 import { useDispatch } from "react-redux";
 import { keyMappings, renameKeys } from "../../../utils/utils";
 import { selectCustomer } from "../../../redux/cartSlice";
+import axiosInstance from "../../../utils/axiosInterceptor";
 
 function AddCustomerModal({
   setIsModalOpen,
@@ -38,7 +37,7 @@ function AddCustomerModal({
     validationSchema: customerValidationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await axios.post(CUSTOMER_ADD_API, values);
+        const res = await axiosInstance.post(CUSTOMER_ADD_API, values);
         if (res.status == 201) {
           if (!fromPos) {
             if (values._id) {

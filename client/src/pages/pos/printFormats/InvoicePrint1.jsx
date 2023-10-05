@@ -4,12 +4,7 @@ import { convertToWords, formatedCurrentDate } from "../../../utils/utils";
 
 const currentDate = new Date();
 function InvoicePrint1({ printRef, showSummary = true, orderDetails }) {
-  console.log(
-    "🚀 ~ file: InvoicePrint1.jsx:6 ~ InvoicePrint1 ~ orderDetails:",
-    orderDetails
-  );
   const cartItems = useSelector((store) => store.cart);
-
   const totalItems = () => {
     return cartItems.cart.reduce((acc, item) => acc + item.quantity, 0);
   };

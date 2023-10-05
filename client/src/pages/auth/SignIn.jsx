@@ -8,9 +8,9 @@ import authImg from "../../assets/img/auth/2252808.jpg";
 import { useFormik } from "formik";
 import { validateSignIn } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
-import axios from "axios";
 import { toast } from "react-hot-toast";
 import { SIGN_IN_API } from "../../utils/const";
+import axiosInstance from "../../utils/axiosInterceptor";
 //import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
@@ -24,7 +24,7 @@ export default function SignIn() {
     validate: validateSignIn,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(SIGN_IN_API, values);
+        const response = await axiosInstance.post(SIGN_IN_API, values);
         if ((response.status = 200)) {
           //socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");

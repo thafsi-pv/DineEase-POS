@@ -9,13 +9,13 @@ import InvoicePrint1 from "../printFormats/InvoicePrint1";
 import { AnimatePresence, motion } from "framer-motion";
 import { BiArrowBack } from "react-icons/bi";
 import { useFormik } from "formik";
-import axios from "axios";
 import {
   ORDER_CREATE_API,
   REWARD_POINT_BYCUSTOMER_ID_API,
 } from "../../../utils/const";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import axiosInstance from "../../../utils/axiosInterceptor";
 
 var change = "";
 function PaymentModal({
@@ -48,7 +48,7 @@ function PaymentModal({
   }, [paymentId]);
 
   const getCustomerLoyaltyPoints = async () => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       REWARD_POINT_BYCUSTOMER_ID_API + "?customerId=" + selectedCustomer.value
     );
     console.log(
@@ -114,7 +114,7 @@ function PaymentModal({
       orderDate: currentDateTime.toLocaleString(),
       status: "Completed",
     };
-    const response = await axios.post(ORDER_CREATE_API, pay);
+    const response = await axiosInstance.post(ORDER_CREATE_API, pay);
     if (response.status == 200) {
       setOrderDetails(() => ({
         orderNumber: response?.data?.orderNumber,

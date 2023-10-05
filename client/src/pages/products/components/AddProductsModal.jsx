@@ -9,10 +9,10 @@ import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
 import handleAddMovie from "../../../utils/uploadImage";
-import axios from "axios";
 import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
+import axiosInstance from "../../../utils/axiosInterceptor";
 
 function AddProductsModal({
   setIsModalOpen,
@@ -49,7 +49,7 @@ function AddProductsModal({
           const cloudImgUrl = await handleAddMovie(image);
           values.imageUrl = cloudImgUrl;
         }
-        const res = await axios.post(PRODUCT_ADD_API, values);
+        const res = await axiosInstance.post(PRODUCT_ADD_API, values);
         if (res.status == 201) {
           if (!fromPos) {
             if (values._id) {

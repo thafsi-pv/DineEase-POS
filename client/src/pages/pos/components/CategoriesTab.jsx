@@ -4,7 +4,7 @@ import {
   GET_ALL_ACTIVE_PRODUCT_API,
   GET_PRODUCT_BY_CATEGORY_API,
 } from "../../../utils/const";
-import axios from "axios";
+import axiosInstance from "../../../utils/axiosInterceptor";
 
 function CategoriesTab({ getAllProducts, setMenu }) {
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -18,7 +18,7 @@ function CategoriesTab({ getAllProducts, setMenu }) {
       categoryValue == 0
         ? GET_ALL_ACTIVE_PRODUCT_API + "?active=" + true
         : GET_PRODUCT_BY_CATEGORY_API + "?category=" + categoryValue;
-    const data = await axios.get(url);
+    const data = await axiosInstance.get(url);
     setMenu(data?.data);
     setSelectedCategory(categoryValue);
   };
