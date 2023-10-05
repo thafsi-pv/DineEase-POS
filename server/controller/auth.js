@@ -8,9 +8,9 @@ const signUp = async (req, res) => {
     console.log("🚀 ~ file: auth.js:7 ~ signUp ~ data:", data);
     const isExist = await userModal.findOne({ email: data.email });
     if (isExist) {
-      return res
-        .status(400)
-        .json({ message: "This email id already registered, use another one!" });
+      return res.status(400).json({
+        message: "This email id already registered, use another one!",
+      });
     }
     const hash = await generateHashPassword(data.password);
     delete data.cpassword;
@@ -47,4 +47,16 @@ const signIn = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn };
+const unlockScreen = async (req, res) => {
+  const data = req.body;
+  console.log("🚀 ~ file: auth.js:52 ~ unlockScreen ~ data:", data);
+  const { password } = data;
+  const userId = req.userId;
+  const isUserExist = await userModal.findOne({ _id: userId });
+
+  const validPassword = await comparePassword(password, isUserExist.password);
+  if (!validPassword) res.status(400).json({ message: "Incorrect password" });
+  else res.status(200).json({ message: "Unlocked successfully" });
+};
+
+module.exports = { signUp, signIn, unlockScreen };

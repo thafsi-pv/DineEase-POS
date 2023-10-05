@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SignIn from "../auth/SignIn";
 import LockWindow from "./components/LockWindow";
+import axiosInstance from "../../utils/axiosInterceptor";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-hot-toast";
 
 const LockScreen = ({ children }) => {
   // State to keep track of whether the screen should be locked
@@ -13,11 +17,13 @@ const LockScreen = ({ children }) => {
     // Event listener to detect user activity
     const handleUserActivity = () => {
       clearTimeout(inactivityTimer);
-      setIsLocked(false);
+      //verifyUser();
+      //setIsLocked(false);
       // Set the timer again after user activity
+
       inactivityTimer = setTimeout(() => {
         setIsLocked(true);
-      }, 30000); // 1 minute in milliseconds
+      }, 2000); // 1 minute in milliseconds
     };
 
     // Add event listeners on component mount
@@ -29,7 +35,7 @@ const LockScreen = ({ children }) => {
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
       setIsLocked(true);
-    }, 30000); // 1 minute in milliseconds
+    }, 2000); // 1 minute in milliseconds
 
     // Clean up event listeners on component unmount
     return () => {
@@ -41,24 +47,43 @@ const LockScreen = ({ children }) => {
     };
   }, []);
 
-  const [isFading, setIsFading] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+    },
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .min(8, "Must be 8 characters or more")
+        .required("Required"),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      // alert(JSON.stringify(values, null, 2));
+      //setIsLocked(false);
+      verifyUser(values);
+      resetForm();
+    },
+  });
 
-  useEffect(() => {
-    // After the component mounts, set isFading to true to trigger the fade-in animation.
-    setIsFading(true);
-  }, []);
+  const verifyUser = async (values) => {
+    try {
+      const data = { password: values.password };
+      const response = await axiosInstance.post("/auth/unlock", data);
+      console.log(
+        "🚀 ~ file: LockScreen.jsx:28 ~ verifyUser ~ response:",
+        response
+      );
+      if (response.status == 200) {
+        setIsLocked(false);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <div>
       {isLocked ? (
-        // Render your lock screen here
-        // <div
-        //   className={`h-screen w-screen !z-[99] absolute flex justify-center items-center p-4 bg-blue-500 text-white font-bold transition-opacity overflow-hidden ${
-        //     isFading ? "opacity-100" : "opacity-0"
-        //   }`}>
-        <div>
-          <LockWindow/>
-        </div>
+        <LockWindow formik={formik} />
       ) : (
         // Render your main content here
         <> {children}</>

@@ -6,7 +6,15 @@ exports.checkAuth = (req, res, next) => {
     if (!token) {
       return res.status(400).json({ message: "Access Denied!" });
     }
-    const verifyToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+    //split token
+    const tokenParts = token.split(" ");
+    if (tokenParts.length != 2 && tokenParts[0] !== "Bearer") {
+      return res.status(400).json({ message: "Invalid token format" });
+    }
+
+    const authToken = tokenParts[1];
+    const verifyToken = jwt.verify(authToken, process.env.JWT_SECRET_KEY);
     req.userId = verifyToken._id;
     next();
   } catch (error) {

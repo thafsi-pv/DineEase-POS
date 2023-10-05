@@ -12,6 +12,7 @@ import SignUp from "./pages/auth/SignUp.jsx";
 const App = () => {
   return (
     <>
+     <Toaster position="top-center" reverseOrder={false} />
       <LockScreen>
         <Provider store={store}>
           <Routes>
@@ -20,7 +21,7 @@ const App = () => {
             <Route path="/auth/sign-in" element={<SignIn />} />
             <Route path="/auth/sign-up" element={<SignUp />} />
           </Routes>
-          <Toaster position="top-center" reverseOrder={false} />
+         
         </Provider>
       </LockScreen>
     </>

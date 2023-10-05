@@ -21,13 +21,15 @@ function InputField(props) {
 
   return (
     <div className={`${extra}`}>
-      <label
-        htmlFor={id}
-        className={`text-sm text-navy-700 dark:text-white ${
-          variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
-        }`}>
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className={`text-sm text-navy-700 dark:text-white ${
+            variant === "auth" ? "ml-1.5 font-medium" : "ml-3 font-bold"
+          }`}>
+          {label}
+        </label>
+      )}
       <input
         name={name}
         onChange={onChange}
@@ -39,7 +41,7 @@ function InputField(props) {
         min={min}
         step={step}
         placeholder={placeholder}
-        className={` flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
+        className={` text-white flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 outline-none ${
           disabled === true
             ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
             : state === "error"

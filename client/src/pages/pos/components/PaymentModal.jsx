@@ -254,7 +254,7 @@ function PaymentModal({
               )}
             </AnimatePresence>
             {paymentMode == 0 && !selectedCustomer?.isDefault && (
-              <div className="flex flex-col mt-4 font-semibold text-xs text-gray-800 gap-2 bg-green-300 p-2 rounded-md">
+              <div className="flex flex-col mt-4 font-semibold text-xs text-gray-800 gap-2 bg-green-300  p-2 rounded-md">
                 <div className="flex justify-between items-center">
                   <span>DE Reward</span>
                   <span>{customerRewardPoint}</span>
