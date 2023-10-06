@@ -8,7 +8,7 @@ import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 import MainDashboard from "./pages/admin/default";
 import POS from "./pages/pos";
 // import NFTMarketplace from "views/admin/marketplace";
-// import Profile from "views/admin/profile";
+import Profile from "./pages/admin/profile";
 // import DataTables from "views/admin/tables";
 // import RTLDefault from "views/rtl/default";
 
@@ -95,13 +95,13 @@ const routes = [
   //   path: "data-tables",
   //   component: <DataTables />,
   // },
-  // {
-  //   name: "Profile",
-  //   layout: "/admin",
-  //   path: "profile",
-  //   icon: <MdPerson className="h-6 w-6" />,
-  //   component: <Profile />,
-  // },
+  {
+    name: "Profile",
+    layout: "/admin",
+    path: "profile",
+    icon: <MdPerson className="h-6 w-6" />,
+    component: <Profile />,
+  },
   {
     name: "Sign In",
     layout: "/auth",

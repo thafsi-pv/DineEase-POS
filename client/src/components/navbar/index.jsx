@@ -197,11 +197,13 @@ const Navbar = (props) => {
               <div className="h-px w-full bg-gray-200 dark:bg-white/20 " />
 
               <div className="flex flex-col p-4">
-                <a
-                  href=" "
-                  className="text-sm text-gray-800 dark:text-white hover:dark:text-white">
-                  Profile Settings
-                </a>
+                <Link to={"/admin/profile"}>
+                  <a
+                    href=" "
+                    className="text-sm text-gray-800 dark:text-white hover:dark:text-white">
+                    Profile Settings
+                  </a>
+                </Link>
                 <a
                   href=" "
                   className="mt-3 text-sm text-gray-800 dark:text-white hover:dark:text-white">
