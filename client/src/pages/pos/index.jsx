@@ -17,7 +17,7 @@ import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
 import CategoriesTab from "./components/CategoriesTab";
 import { motion } from "framer-motion";
-import axiosInstance from "../../utils/axiosInterceptor";
+import axiosInstance2 from "../../utils/axiosInterceptor2";
 
 function index() {
   const dispath = useDispatch();
@@ -52,7 +52,7 @@ function index() {
   }, []);
 
   const getAllProducts = async () => {
-    const menu = await axiosInstance.get(`${GET_ALL_ACTIVE_PRODUCT_API}?active=true`);
+    const menu = await axiosInstance2.get(`${GET_ALL_ACTIVE_PRODUCT_API}?active=true`);
     setMenu(menu?.data);
   };
 

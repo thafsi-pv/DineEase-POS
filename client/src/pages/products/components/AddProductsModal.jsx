@@ -12,7 +12,7 @@ import handleAddMovie from "../../../utils/uploadImage";
 import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 function AddProductsModal({
   setIsModalOpen,
@@ -49,7 +49,7 @@ function AddProductsModal({
           const cloudImgUrl = await handleAddMovie(image);
           values.imageUrl = cloudImgUrl;
         }
-        const res = await axiosInstance.post(PRODUCT_ADD_API, values);
+        const res = await axiosInstance2.post(PRODUCT_ADD_API, values);
         if (res.status == 201) {
           if (!fromPos) {
             if (values._id) {

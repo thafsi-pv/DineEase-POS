@@ -10,7 +10,7 @@ import { validateSignIn } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
 import { toast } from "react-hot-toast";
 import { SIGN_IN_API } from "../../utils/const";
-import axiosInstance from "../../utils/axiosInterceptor";
+import axiosInstance2 from "../../utils/axiosInterceptor2";
 //import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
@@ -24,7 +24,7 @@ export default function SignIn() {
     validate: validateSignIn,
     onSubmit: async (values) => {
       try {
-        const response = await axiosInstance.post(SIGN_IN_API, values);
+        const response = await axiosInstance2.post(SIGN_IN_API, values);
         if ((response.status = 200)) {
           //socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");

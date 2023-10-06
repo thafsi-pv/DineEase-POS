@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_CUSTOMER_BY_ID } from "../../../utils/const";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 function ViewCustomersModal({ id }) {
   const [customerDetails, setCustomerDetails] = useState();
@@ -11,7 +11,7 @@ function ViewCustomersModal({ id }) {
 
   const getCustomerDetailsById = async () => {
     var url = `${GET_CUSTOMER_BY_ID}?id=${id}`;
-    const details = await axiosInstance.get(url);
+    const details = await axiosInstance2.get(url);
     setCustomerDetails(details?.data[0]);
   };
 

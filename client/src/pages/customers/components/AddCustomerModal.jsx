@@ -10,8 +10,7 @@ import { toast } from "react-hot-toast";
 import { customerValidationSchema } from "../../../utils/validate";
 import { useDispatch } from "react-redux";
 import { keyMappings, renameKeys } from "../../../utils/utils";
-import { selectCustomer } from "../../../redux/cartSlice";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 function AddCustomerModal({
   setIsModalOpen,
@@ -37,7 +36,7 @@ function AddCustomerModal({
     validationSchema: customerValidationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await axiosInstance.post(CUSTOMER_ADD_API, values);
+        const res = await axiosInstance2.post(CUSTOMER_ADD_API, values);
         if (res.status == 201) {
           if (!fromPos) {
             if (values._id) {

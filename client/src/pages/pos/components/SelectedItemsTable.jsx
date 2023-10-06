@@ -18,7 +18,7 @@ import CreatableReactSelect from "../../../components/dropdown/CreatableReactSel
 import AddCustomerModal from "../../customers/components/AddCustomerModal";
 import FormModal from "../../../components/modal/FormModal";
 import { motion, AnimatePresence } from "framer-motion";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 var modalData = {};
 function SelectedItemsTable({
@@ -52,7 +52,7 @@ function SelectedItemsTable({
   };
 
   const getAllCustomers = async (setDefault) => {
-    const data = await axiosInstance.get(
+    const data = await axiosInstance2.get(
       GET_ALL_ACTIVE_CUSTOMER_API + "?active=" + true
     );
     const newArray = data?.data.map((item) => renameKeys(item, keyMappings));

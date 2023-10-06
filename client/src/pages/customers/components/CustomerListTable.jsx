@@ -25,7 +25,7 @@ import DeleteModal from "./DeleteModal";
 import { toast } from "react-hot-toast";
 import deleteImg from "../../../assets/img/profile/clip-1738.png";
 import { formatMobileNumber } from "../../../utils/utils";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 const CustomerListTable = (props) => {
   const {
@@ -74,7 +74,7 @@ const CustomerListTable = (props) => {
 
   const handleEdit = async (id) => {
     var url = `${GET_CUSTOMER_BY_ID}?id=${id}`;
-    const data = await axiosInstance.get(url);
+    const data = await axiosInstance2.get(url);
     setModalData((prv) => data?.data[0]);
     openModal(true);
   };

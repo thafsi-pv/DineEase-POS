@@ -15,7 +15,7 @@ import {
 } from "../../../utils/const";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import axiosInstance from "../../../utils/axiosInterceptor";
+import axiosInstance2 from "../../../utils/axiosInterceptor2";
 
 var change = "";
 function PaymentModal({
@@ -48,7 +48,7 @@ function PaymentModal({
   }, [paymentId]);
 
   const getCustomerLoyaltyPoints = async () => {
-    const response = await axiosInstance.get(
+    const response = await axiosInstance2.get(
       REWARD_POINT_BYCUSTOMER_ID_API + "?customerId=" + selectedCustomer.value
     );
     console.log(
@@ -114,7 +114,7 @@ function PaymentModal({
       orderDate: currentDateTime.toLocaleString(),
       status: "Completed",
     };
-    const response = await axiosInstance.post(ORDER_CREATE_API, pay);
+    const response = await axiosInstance2.post(ORDER_CREATE_API, pay);
     if (response.status == 200) {
       setOrderDetails(() => ({
         orderNumber: response?.data?.orderNumber,

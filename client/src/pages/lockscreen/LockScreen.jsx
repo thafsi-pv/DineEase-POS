@@ -4,7 +4,7 @@ import LockWindow from "./components/LockWindow";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
-import axiosInstance from "../../utils/axiosInterceptor";
+import axiosInstance2 from "../../utils/axiosInterceptor2";
 
 const LockScreen = ({ children }) => {
   // State to keep track of whether the screen should be locked
@@ -63,7 +63,7 @@ const LockScreen = ({ children }) => {
   const verifyUser = async (values) => {
     try {
       const data = { password: values.password };
-      const response = await axiosInstance.post("/auth/unlock", data);
+      const response = await axiosInstance2.post("/auth/unlock", data);
       if (response.status == 200) {
         setIsLocked(false);
       }
