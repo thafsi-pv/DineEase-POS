@@ -22,7 +22,9 @@ export const SIGN_IN_API = "/auth/signIn";
 
 export const SIGN_UP_API = "/auth/signUp";
 
-export const UPDATE_PROFILE_API = "/auth/updateProfile";
+export const UPDATE_PROFILE_API = "/user/updateProfile";
+
+export const GET_PROFILE_API = "/user/getUserData";
 
 export const GET_PRODUCT_BY_CATEGORY_API = "/product/getProductByCategory";
 

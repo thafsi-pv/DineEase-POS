@@ -16,6 +16,7 @@ const customerRouter = require("./router/customer");
 const orderRouter = require("./router/order");
 const dashboardRouter = require("./router/dashboard");
 const loyaltyRouter = require("./router/loyaltyProgram");
+const userRouter = require("./router/user");
 const server = http.createServer(app);
 
 app.use(cors({ origin: "*" }));
@@ -38,6 +39,8 @@ app.use("/api/order", orderRouter);
 app.use("/api/dashboard", dashboardRouter);
 
 app.use("/api/loyalty", loyaltyRouter);
+
+app.use("/api/user", userRouter);
 
 //socket
 const io = require("socket.io")(server, {
