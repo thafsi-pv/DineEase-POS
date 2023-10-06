@@ -1,5 +1,5 @@
-export const baseUrl = "http://localhost:8080/api";
-// export const baseUrl='https://dine-ease-api.onrender.com/api'
+//export const baseUrl = "http://localhost:8080/api";
+export const baseUrl='https://dine-ease-api.onrender.com/api'
 
 // export const CLOUDINARY_IMAGE_UPLOAD_URL =
 //   "https://api.cloudinary.com/v1_1/dm4djc1b1/image/upload";
