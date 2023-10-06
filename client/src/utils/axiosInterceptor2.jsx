@@ -27,7 +27,7 @@ axiosInstance2.interceptors.response.use(
     return response;
   },
   (error) => {
-    store.dispatch(hideLoader);
+    store.dispatch(hideLoader());
     return Promise.reject(error);
   }
 );

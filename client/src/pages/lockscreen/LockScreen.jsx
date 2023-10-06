@@ -7,14 +7,9 @@ import { toast } from "react-hot-toast";
 import axiosInstance2 from "../../utils/axiosInterceptor2";
 
 const LockScreen = ({ children }) => {
-  // State to keep track of whether the screen should be locked
   const [isLocked, setIsLocked] = useState(false);
-  console.log("🚀 ~ file: LockScreen.jsx:6 ~ LockScreen ~ isLocked:", isLocked);
-
   useEffect(() => {
     let inactivityTimer;
-
-    // Event listener to detect user activity
     const handleUserActivity = () => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
@@ -53,8 +48,6 @@ const LockScreen = ({ children }) => {
         .required("Required"),
     }),
     onSubmit: (values, { resetForm }) => {
-      // alert(JSON.stringify(values, null, 2));
-      //setIsLocked(false);
       verifyUser(values);
       resetForm();
     },
@@ -73,14 +66,7 @@ const LockScreen = ({ children }) => {
   };
 
   return (
-    <div>
-      {isLocked ? (
-        <LockWindow formik={formik} />
-      ) : (
-        // Render your main content here
-        <> {children}</>
-      )}
-    </div>
+    <div>{isLocked ? <LockWindow formik={formik} /> : <> {children}</>}</div>
   );
 };
 

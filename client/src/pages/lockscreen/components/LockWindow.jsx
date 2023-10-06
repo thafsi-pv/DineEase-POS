@@ -17,7 +17,10 @@ function LockWindow({ formik }) {
       transition={{ duration: 1 }}>
       <div className="">
         <div className="flex h-screen w-full flex-1">
-          <img src={image} alt="" className="bg-cover w-full" />
+          {/* <img src={image} alt="" className="bg-contain w-full" /> */}
+          <div className="relative w-full aspect-w-16 aspect-h-9">
+            <img src={image} alt="" className="object-cover w-full h-full" />
+          </div>
           <div className="absolute flex flex-col h-screen w-full flex-1 justify-center items-center bg-[#000000d1] bg-opacity-25 ">
             <div className="mb-7 absolute top-10 left-10">
               <div className="flex flex-col leading-4">
