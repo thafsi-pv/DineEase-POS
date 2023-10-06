@@ -49,7 +49,6 @@ const signIn = async (req, res) => {
 
 const unlockScreen = async (req, res) => {
   const data = req.body;
-  console.log("🚀 ~ file: auth.js:52 ~ unlockScreen ~ data:", data);
   const { password } = data;
   const userId = req.userId;
   const isUserExist = await userModal.findOne({ _id: userId });
@@ -59,4 +58,26 @@ const unlockScreen = async (req, res) => {
   else res.status(200).json({ message: "Unlocked successfully" });
 };
 
-module.exports = { signUp, signIn, unlockScreen };
+const updateProfile = async (req, res) => {
+  try {
+    const data = req.body;
+    console.log("🚀 ~ file: auth.js:64 ~ updateProfile ~ data:", data);
+    const userId = req.userId;
+    //const isUserExist = await userModal.findOne({ _id: userId });
+
+    const updatedUser = await userModal.findByIdAndUpdate(userId, data, {
+      new: true,
+      runValidators: true,
+    });
+    console.log(
+      "🚀 ~ file: auth.js:71 ~ updateProfile ~ updatedUser:",
+      updatedUser
+    );
+
+    res.json({ message: "done" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { signUp, signIn, unlockScreen, updateProfile };

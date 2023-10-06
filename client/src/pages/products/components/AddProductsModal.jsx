@@ -8,11 +8,11 @@ import { useFormik } from "formik";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
-import handleAddMovie from "../../../utils/uploadImage";
 import { PRODUCT_ADD_API } from "../../../utils/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
 import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import handleUploadImage from "../../../utils/uploadImage";
 
 function AddProductsModal({
   setIsModalOpen,
@@ -46,7 +46,7 @@ function AddProductsModal({
     onSubmit: async (values, { resetForm }) => {
       try {
         if (image) {
-          const cloudImgUrl = await handleAddMovie(image);
+          const cloudImgUrl = await handleUploadImage(image);
           values.imageUrl = cloudImgUrl;
         }
         const res = await axiosInstance2.post(PRODUCT_ADD_API, values);

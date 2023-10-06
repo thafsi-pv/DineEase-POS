@@ -1,5 +1,5 @@
-export const baseUrl = "http://localhost:8080/api";
-//export const baseUrl='https://dine-ease-api.onrender.com/api'
+//export const baseUrl = "http://localhost:8080/api";
+export const baseUrl='https://dine-ease-api.onrender.com/api'
 
 
 // *server
@@ -21,6 +21,8 @@ export const ORDER_PAYMENT = `${baseUrl}/payment/orders`;
 export const SIGN_IN_API = "/auth/signIn";
 
 export const SIGN_UP_API = "/auth/signUp";
+
+export const UPDATE_PROFILE_API = "/auth/updateProfile";
 
 export const GET_PRODUCT_BY_CATEGORY_API = "/product/getProductByCategory";
 

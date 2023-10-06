@@ -74,9 +74,10 @@ export const productValidationSchema = Yup.object().shape({
 
 export const customerValidationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
-  mobile: Yup.string().matches(/^[0-9]{10}$/, "Invalid mobile number").required(),
+  mobile: Yup.string()
+    .matches(/^[0-9]{10}$/, "Invalid mobile number")
+    .required(),
 });
-
 
 export const validateProfile = (values) => {
   const errors = {};
@@ -107,3 +108,20 @@ export const validateProfile = (values) => {
 
   return errors;
 };
+
+export const validateProfileSchema = Yup.object().shape({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  mobile: Yup.number()
+    .required("Mobile is required")
+    .positive("Price must be a positive number"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  // Define other fields as optional
+  alternateNo: Yup.number(),
+  dob: Yup.date(),
+  address: Yup.string(),
+  imageUrl: Yup.string(),
+});
+

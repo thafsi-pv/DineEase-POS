@@ -1,6 +1,6 @@
 import { CLOUDINARY_IMAGE_UPLOAD_URL } from "./const";
 
-const handleAddMovie = async (img) => {
+const handleUploadImage = async (img) => {
   var data = new FormData();
   data.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
   data.append("file", img);
@@ -15,4 +15,4 @@ const handleAddMovie = async (img) => {
   return responseData.secure_url;
 };
 
-export default handleAddMovie;
+export default handleUploadImage;
