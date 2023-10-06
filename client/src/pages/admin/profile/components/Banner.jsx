@@ -2,6 +2,8 @@ import React from "react";
 import avatar from "../../../../assets/img/avatars/avatar11.png";
 import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
+import Upload from "./Upload";
+import FileInput from '../../../../components/fileInput'
 
 const Banner = () => {
   return (
@@ -9,9 +11,8 @@ const Banner = () => {
       {/* Background and profile */}
       <div
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
-        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
+        style={{ backgroundImage: `url(${banner})` }}>
+        <div className="absolute -bottom-12 flex h-[117px] w-[117px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
           <img className="h-full w-full rounded-full" src={avatar} alt="" />
         </div>
       </div>
@@ -41,6 +42,9 @@ const Banner = () => {
             434
           </p>
           <p className="text-sm font-normal text-gray-600">Following</p>
+        </div>
+        <div className="z-0 col-span-5 lg:!mb-0">
+         <F>
         </div>
       </div>
     </Card>
