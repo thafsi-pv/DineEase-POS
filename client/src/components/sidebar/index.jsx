@@ -17,7 +17,8 @@ const Sidebar = () => {
     <div
       className={`${
         open ? "w-64" : "w-16" // Adjust the width of the sidebar based on the open state
-      } duration-175 linear fixed h-screen !z-50 flex flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 rounded-md mb-10 items-center`}>
+      } duration-175 linear fixed h-screen !z-[49] flex flex-col bg-white pb-10 shadow-2xl shadow-white/5 
+      transition-all dark:!bg-navy-800 dark:text-white  rounded-md mb-10 items-center`}>
       {/* Hamburger menu icon */}
       <span
         className="absolute top-4  block cursor-pointer "

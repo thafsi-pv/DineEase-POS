@@ -1,16 +1,23 @@
 import React from "react";
 
-function index({ inputLabel, id, disabled, state, onChange }) {
+function index({
+  inputLabel,
+  id,
+  disabled,
+  state,
+  onChange,
+  margint = "mt-3",
+}) {
   return (
-    <div className="mt-3">
-      <label
-        htmlFor={id}
-        className={`text-sm text-navy-700 dark:text-white ml-3 font-bold `}>
-        {inputLabel}
-      </label>
-      <label  class="sr-only">
-        Choose file
-      </label>
+    <div className={margint}>
+      {inputLabel && (
+        <label
+          htmlFor={id}
+          className={`text-sm text-navy-700 dark:text-white ml-3 font-bold `}>
+          {inputLabel}
+        </label>
+      )}
+      <label class="sr-only">Choose file</label>
       <input
         onChange={onChange}
         type="file"

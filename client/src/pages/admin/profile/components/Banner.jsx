@@ -3,7 +3,7 @@ import avatar from "../../../../assets/img/avatars/avatar11.png";
 import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
 import Upload from "./Upload";
-import FileInput from '../../../../components/fileInput'
+import General from "./General";
 
 const Banner = () => {
   return (
@@ -27,25 +27,10 @@ const Banner = () => {
 
       {/* Post followers */}
       <div className="mt-6 mb-3 flex gap-4 md:!gap-14">
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-2xl font-bold text-navy-700 dark:text-white">17</p>
-          <p className="text-sm font-normal text-gray-600">Posts</p>
+        <div className="z-0 col-span-5 lg:!mb-0 flex flex-col justify-center">
+          <General />
         </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-2xl font-bold text-navy-700 dark:text-white">
-            9.7K
-          </p>
-          <p className="text-sm font-normal text-gray-600">Followers</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-2xl font-bold text-navy-700 dark:text-white">
-            434
-          </p>
-          <p className="text-sm font-normal text-gray-600">Following</p>
-        </div>
-        <div className="z-0 col-span-5 lg:!mb-0">
-         <F>
-        </div>
+        <div></div>
       </div>
     </Card>
   );

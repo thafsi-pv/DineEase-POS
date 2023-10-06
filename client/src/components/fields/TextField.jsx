@@ -2,15 +2,28 @@
 import React from "react";
 
 function InputField(props) {
-  const { label, id, extra, placeholder, cols, rows, state, disabled,value,onChange } = props;
+  const {
+    label,
+    id,
+    extra,
+    placeholder,
+    cols,
+    rows,
+    state,
+    disabled,
+    value,
+    onChange,
+  } = props;
 
   return (
     <div className={`${extra}`}>
-      <label
-        htmlFor={id}
-        className="ml-3 mb-2 text-sm font-bold text-navy-700 dark:text-white">
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="ml-3 mb-2 text-sm font-bold text-navy-700 dark:text-white">
+          {label}
+        </label>
+      )}
       <div>
         <textarea
           cols={cols}
