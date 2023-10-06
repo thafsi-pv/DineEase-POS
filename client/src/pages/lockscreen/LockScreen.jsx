@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SignIn from "../auth/SignIn";
 import LockWindow from "./components/LockWindow";
-import axiosInstance from "../../utils/axiosInterceptor";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
+import axiosInstance from "../../utils/axiosInterceptor";
 
 const LockScreen = ({ children }) => {
   // State to keep track of whether the screen should be locked

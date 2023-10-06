@@ -7,10 +7,10 @@ export const loaderSlice = createSlice({
   initialState,
   reducers: {
     showLoader: (state, action) => {
-      state = true;
+      return true;
     },
     hideLoader: (state, action) => {
-      state = false;
+      return false;
     },
   },
 });
