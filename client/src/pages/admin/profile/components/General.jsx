@@ -1,10 +1,8 @@
-import Card from "../../../../components/card";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FileInput from "../../../../components/fileInput";
 import TextInput from "../../../../components/fields/InputField";
 import TextField from "../../../../components/fields/TextField";
-import { Formik, useFormik } from "formik";
-import MiniCalendar from "../../../../components/calendar/MiniCalendar";
+import { useFormik } from "formik";
 import { validateProfileSchema } from "../../../../utils/validate";
 import Calendar from "react-calendar";
 import { UPDATE_PROFILE_API } from "../../../../utils/const";
@@ -13,7 +11,6 @@ import handleUploadImage from "../../../../utils/uploadImage";
 import { genricError } from "../../../../utils/genricError";
 import DropDownReactSelect from "../../../../components/dropdown/DropDownReactSelect";
 import genderList from "../variables/gender.json";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { toast } from "react-hot-toast";
 
 const General = ({ user, setUser }) => {
@@ -53,7 +50,7 @@ const General = ({ user, setUser }) => {
             email: response?.data.email,
             mobile: response?.data.mobile,
             alternateNo: response?.data.alternateNo,
-            dob: response?.data.dob,
+            dob: response?.data.dob || new Date(),
             address: response?.data.address,
             imageUrl: response?.data.imageUrl,
             gender: response?.data.gender,
