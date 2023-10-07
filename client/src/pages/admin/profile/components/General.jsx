@@ -13,15 +13,11 @@ import handleUploadImage from "../../../../utils/uploadImage";
 import { genricError } from "../../../../utils/genricError";
 import DropDownReactSelect from "../../../../components/dropdown/DropDownReactSelect";
 import genderList from "../variables/gender.json";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const General = ({ user }) => {
-  console.log("🚀 ~ file: General.jsx:15 ~ General ~ user:", user);
-  const [value, onChange] = useState(new Date());
-  const [userData, setUserData] = useState(null);
-  // useEffect(() => {
-  //   profileformik.values = user;
-  //   //setUserData(user);
-  // }, [userData]);
+  console.log("🚀 ~ file: General.jsx:19 ~ General ~ user:", user)
+  const [image, setImage] = useState(null);
 
   const profileformik = useFormik({
     initialValues: user || {
@@ -30,7 +26,7 @@ const General = ({ user }) => {
       email: "",
       mobile: "",
       alternateNo: "",
-      gender: [],
+      gender: "",
       dob: "",
       address: "",
       imageUrl: "",
@@ -38,16 +34,13 @@ const General = ({ user }) => {
     enableReinitialize: true,
     validationSchema: validateProfileSchema,
     onSubmit: async (values) => {
+      console.log("🚀 ~ file: General.jsx:36 ~ onSubmit: ~ values:", values);
       try {
         if (image) {
           const cloudImgUrl = await handleUploadImage(image);
           values.imageUrl = cloudImgUrl;
         }
         const response = await axiosInstance2.post(UPDATE_PROFILE_API, values);
-        console.log(
-          "🚀 ~ file: General.jsx:29 ~ onSubmit: ~ response:",
-          response
-        );
         if ((response.status = 200)) {
           toast.success("Profile updated successfully 🤝");
         }
@@ -56,22 +49,23 @@ const General = ({ user }) => {
       }
     },
   });
-  console.log(
-    "🚀 ~ file: General.jsx:39 ~ General ~ profileformik:",
-    profileformik
-  );
-
-  const [image, setImage] = useState(null);
 
   const handleGenderChange = (option) => {
     profileformik.setFieldValue("gender", option);
+  };
+  const handleDobChange = (dob) => {
+    profileformik.setFieldValue("dob", dob);
   };
 
   const handleImageUpload = (e) => {
     const uploadedImage = e.target.files[0];
     setImage(uploadedImage);
-    productFormik.setFieldValue("imageUrl", uploadedImage.name);
+    // profileformik.setFieldValue("imageUrl", uploadedImage.name);
   };
+  console.log(
+    "🚀 ~ file: General.jsx:181 ~ General ~ profileformik.values.gender:",
+    profileformik.values.gender
+  );
 
   return (
     <div className="mt-2 mb-8 w-full">
@@ -195,11 +189,6 @@ const General = ({ user }) => {
             <TextInput
               extra="w-full"
               variant="auth"
-              // state={
-              //   profileformik.touched.alternateNo && profileformik.errors.alternateNo
-              //     ? "error"
-              //     : ""
-              // }
               placeholder="Alternate Contact Number"
               id="alternateNo"
               type="number"
@@ -215,9 +204,6 @@ const General = ({ user }) => {
             <TextField
               extra="w-full"
               variant="auth"
-              // state={
-              //   profileformik.touched.address && profileformik.errors.address ? "error" : ""
-              // }
               placeholder="Address"
               id="address"
               type="text"
@@ -230,7 +216,14 @@ const General = ({ user }) => {
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600">DOB</p>
             {/* <MiniCalendar /> */}
-            <Calendar onChange={onChange} value={value} />
+            {profileformik?.values?.dob && (
+              <Calendar
+                onChange={handleDobChange}
+                value={profileformik.values.dob}
+                maxDate={new Date()}
+                tileClassName=""
+              />
+            )}
           </div>
 
           {/* <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">

@@ -112,9 +112,9 @@ export const validateProfile = (values) => {
 export const validateProfileSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
-  mobile: Yup.number()
+  mobile: Yup.string() // Change to string type
     .required("Mobile is required")
-    .positive("Price must be a positive number"),
+    .matches(/^[0-9]+$/, "Mobile must contain only digits"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -123,5 +123,8 @@ export const validateProfileSchema = Yup.object().shape({
   dob: Yup.date(),
   address: Yup.string(),
   imageUrl: Yup.string(),
+  gender: Yup.object().shape({
+    label: Yup.string(), // Optional
+    value: Yup.string(), // Optional
+  }),
 });
-

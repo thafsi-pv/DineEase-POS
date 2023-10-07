@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema(
     dob: { type: Date },
     alternateNo: { type: Number },
     imageUrl: { type: String },
+    gender: { type: Object, default: {} },
   },
   { timestamps: true, strict: false }
 );

@@ -22,13 +22,6 @@ function DropDownReactSelect({
   onChange,
   values,
 }) {
-  console.log("🚀 ~ file: DropDownReactSelect.jsx:25 ~ defautl values:", values)
-  // const [selectedOption, setSelectedOption] = useState(null);
-
-  // const handleSelectChange = (option) => {
-  //   setSelectedOption(option);
-  // };
-
   return (
     <div className="App w-full">
       {label && (

@@ -9,6 +9,7 @@ import { GET_PROFILE_API } from "../../../../utils/const";
 
 const Banner = () => {
   const [user, setUser] = useState(null);
+  console.log("🚀 ~ file: Banner.jsx:12 ~ Banner ~ user:", user);
   useEffect(() => {
     getUserData();
   }, []);
@@ -16,7 +17,7 @@ const Banner = () => {
   const getUserData = async () => {
     const data = await axiosInstance2.get(GET_PROFILE_API);
     console.log("🚀 ~ file: Banner.jsx:18 ~ getUserData ~ data:", data);
-    setUser((prev) => ({
+    setUser({
       firstName: data?.data[0].firstName,
       lastName: data?.data[0].lastName,
       email: data?.data[0].email,
@@ -25,7 +26,8 @@ const Banner = () => {
       dob: data?.data[0].dob,
       address: data?.data[0].address,
       imageUrl: data?.data[0].imageUrl,
-    }));
+      gender: data?.data[0].gender,
+    });
   };
 
   return (
