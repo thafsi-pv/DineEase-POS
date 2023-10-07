@@ -41,6 +41,9 @@ const signIn = async (req, res) => {
       message: "Login success",
       accesstoken,
       email: isUserExist.email,
+      firstName: isUserExist.firstName,
+      lastName: isUserExist.lastName,
+      imageUrl: isUserExist.imageUrl,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -57,7 +60,5 @@ const unlockScreen = async (req, res) => {
   if (!validPassword) res.status(400).json({ message: "Incorrect password" });
   else res.status(200).json({ message: "Unlocked successfully" });
 };
-
-
 
 module.exports = { signUp, signIn, unlockScreen };

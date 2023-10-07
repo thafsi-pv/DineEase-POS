@@ -1,5 +1,5 @@
-//export const baseUrl = "http://localhost:8080/api";
-export const baseUrl='https://dine-ease-api.onrender.com/api'
+export const baseUrl = "http://localhost:8080/api";
+//export const baseUrl='https://dine-ease-api.onrender.com/api'
 
 
 // *server

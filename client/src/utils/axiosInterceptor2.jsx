@@ -1,6 +1,6 @@
 // axiosInterceptor.js
 import axios from "axios";
-import { store } from "../redux/store";
+import store from "../redux/store";
 import { showLoader, hideLoader } from "../redux/loaderSlice";
 import { baseUrl } from "./const";
 
