@@ -26,11 +26,15 @@ const updateProfile = async (req, res) => {
 const getUserData = async (req, res) => {
   try {
     const userId = req.userId;
+    console.log("🚀 ~ file: user.js:29 ~ getUserData ~ userId:", userId)
     const userData = await userModal.find({ _id: userId });
+    console.log("🚀 ~ file: user.js:30 ~ getUserData ~ userData:", userData)
     res.status(200).json(userData);
   } catch (error) {
-    res.status(400).json(error);
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 module.exports = { updateProfile, getUserData };

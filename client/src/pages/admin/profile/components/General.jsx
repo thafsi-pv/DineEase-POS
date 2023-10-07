@@ -1,5 +1,5 @@
 import Card from "../../../../components/card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FileInput from "../../../../components/fileInput";
 import TextInput from "../../../../components/fields/InputField";
 import TextField from "../../../../components/fields/TextField";
@@ -10,20 +10,32 @@ import Calendar from "react-calendar";
 import { UPDATE_PROFILE_API } from "../../../../utils/const";
 import axiosInstance2 from "../../../../utils/axiosInterceptor2";
 import handleUploadImage from "../../../../utils/uploadImage";
+import { genricError } from "../../../../utils/genricError";
+import DropDownReactSelect from "../../../../components/dropdown/DropDownReactSelect";
+import genderList from "../variables/gender.json";
 
-const General = () => {
+const General = ({ user }) => {
+  console.log("🚀 ~ file: General.jsx:15 ~ General ~ user:", user);
   const [value, onChange] = useState(new Date());
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
+  const [userData, setUserData] = useState(null);
+  // useEffect(() => {
+  //   profileformik.values = user;
+  //   //setUserData(user);
+  // }, [userData]);
+
+  const profileformik = useFormik({
+    initialValues: user || {
+      firstName: "iio",
       lastName: "",
       email: "",
       mobile: "",
       alternateNo: "",
+      gender: [],
       dob: "",
-      address: false,
+      address: "",
       imageUrl: "",
     },
+    enableReinitialize: true,
     validationSchema: validateProfileSchema,
     onSubmit: async (values) => {
       try {
@@ -37,17 +49,23 @@ const General = () => {
           response
         );
         if ((response.status = 200)) {
-          toast.success("Successfully registered, SignIn now 🤝");
-          navigate("/auth/sign-in");
+          toast.success("Profile updated successfully 🤝");
         }
       } catch (error) {
         genricError(error);
       }
     },
   });
-  console.log("🚀 ~ file: General.jsx:39 ~ General ~ formik:", formik);
+  console.log(
+    "🚀 ~ file: General.jsx:39 ~ General ~ profileformik:",
+    profileformik
+  );
 
   const [image, setImage] = useState(null);
+
+  const handleGenderChange = (option) => {
+    profileformik.setFieldValue("gender", option);
+  };
 
   const handleImageUpload = (e) => {
     const uploadedImage = e.target.files[0];
@@ -58,7 +76,7 @@ const General = () => {
   return (
     <div className="mt-2 mb-8 w-full">
       {/* Cards */}
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={profileformik.handleSubmit}>
         <div className="grid grid-cols-2 gap-4 px-2">
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600">First Name</p>
@@ -66,21 +84,23 @@ const General = () => {
               extra="w-full"
               variant="auth"
               state={
-                formik.touched.firstName && formik.errors.firstName
+                profileformik.touched.firstName &&
+                profileformik.errors.firstName
                   ? "error"
                   : ""
               }
               placeholder="First Name"
               id="firstName"
               type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.firstName}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.firstName}
             />
-            {formik.touched.firstName && formik.errors.firstName ? (
+            {profileformik.touched.firstName &&
+            profileformik.errors.firstName ? (
               <div>
                 <span className="text-red-500 text-xs">
-                  {formik.errors.firstName}
+                  {profileformik.errors.firstName}
                 </span>
               </div>
             ) : null}
@@ -91,19 +111,21 @@ const General = () => {
               extra="w-full"
               variant="auth"
               state={
-                formik.touched.lastName && formik.errors.lastName ? "error" : ""
+                profileformik.touched.lastName && profileformik.errors.lastName
+                  ? "error"
+                  : ""
               }
               placeholder="Last Name"
               id="lastName"
               type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.lastName}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.lastName}
             />
-            {formik.touched.lastName && formik.errors.lastName ? (
+            {profileformik.touched.lastName && profileformik.errors.lastName ? (
               <div>
                 <span className="text-red-500 text-xs">
-                  {formik.errors.lastName}
+                  {profileformik.errors.lastName}
                 </span>
               </div>
             ) : null}
@@ -113,18 +135,22 @@ const General = () => {
             <TextInput
               extra="w-full"
               variant="auth"
-              state={formik.touched.email && formik.errors.email ? "error" : ""}
+              state={
+                profileformik.touched.email && profileformik.errors.email
+                  ? "error"
+                  : ""
+              }
               placeholder="Email"
               id="email"
               type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.email}
             />
-            {formik.touched.email && formik.errors.email ? (
+            {profileformik.touched.email && profileformik.errors.email ? (
               <div>
                 <span className="text-red-500 text-xs">
-                  {formik.errors.email}
+                  {profileformik.errors.email}
                 </span>
               </div>
             ) : null}
@@ -135,39 +161,51 @@ const General = () => {
               extra="w-full"
               variant="auth"
               state={
-                formik.touched.mobile && formik.errors.mobile ? "error" : ""
+                profileformik.touched.mobile && profileformik.errors.mobile
+                  ? "error"
+                  : ""
               }
               placeholder="Mobile"
               id="mobile"
               type="number"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.mobile}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.mobile}
             />
-            {formik.touched.mobile && formik.errors.mobile ? (
+            {profileformik.touched.mobile && profileformik.errors.mobile ? (
               <div>
                 <span className="text-red-500 text-xs">
-                  {formik.errors.mobile}
+                  {profileformik.errors.mobile}
                 </span>
               </div>
             ) : null}
           </div>
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <p className="text-sm text-gray-600">Gender</p>
+            <DropDownReactSelect
+              data={genderList}
+              ph="Select Gender"
+              id="gender"
+              isMulti={false}
+              onChange={handleGenderChange}
+              values={profileformik.values.gender}
+            />
+            <br />
             <p className="text-sm text-gray-600">Alternate Contact Number</p>
             <TextInput
               extra="w-full"
               variant="auth"
               // state={
-              //   formik.touched.alternateNo && formik.errors.alternateNo
+              //   profileformik.touched.alternateNo && profileformik.errors.alternateNo
               //     ? "error"
               //     : ""
               // }
               placeholder="Alternate Contact Number"
               id="alternateNo"
               type="number"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.alternateNo}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.alternateNo}
             />
             <br />
             <p className="text-sm text-gray-600">Image</p>
@@ -178,21 +216,21 @@ const General = () => {
               extra="w-full"
               variant="auth"
               // state={
-              //   formik.touched.address && formik.errors.address ? "error" : ""
+              //   profileformik.touched.address && profileformik.errors.address ? "error" : ""
               // }
               placeholder="Address"
               id="address"
               type="text"
-              rows={5}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.address}
+              rows={4}
+              onChange={profileformik.handleChange}
+              onBlur={profileformik.handleBlur}
+              value={profileformik.values.address}
             />
           </div>
           <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
             <p className="text-sm text-gray-600">DOB</p>
-            <MiniCalendar />
-            {/* <Calendar onChange={onChange} value={value} /> */}
+            {/* <MiniCalendar /> */}
+            <Calendar onChange={onChange} value={value} />
           </div>
 
           {/* <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
@@ -204,7 +242,7 @@ const General = () => {
           <button
             type="submit"
             className=" bg-green-500 w-full p-4 rounded-lg text-lg font-semibold hover:bg-green-600 shadow-lg text-white">
-            Save
+            Update
           </button>
         </div>
       </form>

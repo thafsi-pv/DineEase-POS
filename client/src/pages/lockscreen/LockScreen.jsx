@@ -14,7 +14,7 @@ const LockScreen = ({ children }) => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
         setIsLocked(true);
-      }, 60000);
+      }, 120000);
     };
 
     // Add event listeners on component mount
@@ -26,7 +26,7 @@ const LockScreen = ({ children }) => {
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
       setIsLocked(true);
-    }, 60000);
+    }, 120000);
 
     // Clean up event listeners on component unmount
     return () => {
