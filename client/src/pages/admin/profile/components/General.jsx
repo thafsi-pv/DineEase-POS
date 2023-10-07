@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import FileInput from "../../../../components/fileInput";
 import TextInput from "../../../../components/fields/InputField";
 import TextField from "../../../../components/fields/TextField";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import MiniCalendar from "../../../../components/calendar/MiniCalendar";
 import { validateProfileSchema } from "../../../../utils/validate";
 import Calendar from "react-calendar";
@@ -14,9 +14,10 @@ import { genricError } from "../../../../utils/genricError";
 import DropDownReactSelect from "../../../../components/dropdown/DropDownReactSelect";
 import genderList from "../variables/gender.json";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { toast } from "react-hot-toast";
 
-const General = ({ user }) => {
-  console.log("🚀 ~ file: General.jsx:19 ~ General ~ user:", user)
+const General = ({ user, setUser }) => {
+  console.log("🚀 ~ file: General.jsx:19 ~ General ~ user:", user);
   const [image, setImage] = useState(null);
 
   const profileformik = useFormik({
@@ -41,7 +42,22 @@ const General = ({ user }) => {
           values.imageUrl = cloudImgUrl;
         }
         const response = await axiosInstance2.post(UPDATE_PROFILE_API, values);
+        console.log(
+          "🚀 ~ file: General.jsx:45 ~ onSubmit: ~ response:",
+          response
+        );
         if ((response.status = 200)) {
+          setUser({
+            firstName: response?.data.firstName,
+            lastName: response?.data.lastName,
+            email: response?.data.email,
+            mobile: response?.data.mobile,
+            alternateNo: response?.data.alternateNo,
+            dob: response?.data.dob,
+            address: response?.data.address,
+            imageUrl: response?.data.imageUrl,
+            gender: response?.data.gender,
+          });
           toast.success("Profile updated successfully 🤝");
         }
       } catch (error) {

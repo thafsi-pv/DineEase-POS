@@ -56,7 +56,7 @@ const Banner = () => {
       {/* Post followers */}
       <div className="mt-6 mb-3 flex gap-4 md:!gap-14">
         <div className="z-0 col-span-5 lg:!mb-0 flex flex-col justify-center">
-          <General user={user} />
+          {user && <General user={user} setUser={setUser} />}
         </div>
         <div></div>
       </div>
