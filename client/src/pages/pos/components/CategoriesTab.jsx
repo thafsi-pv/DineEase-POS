@@ -3,8 +3,8 @@ import categories from "../../../const/categories.json";
 import {
   GET_ALL_ACTIVE_PRODUCT_API,
   GET_PRODUCT_BY_CATEGORY_API,
-} from "../../../utils/const";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+} from "../../../axios/const";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 function CategoriesTab({ getAllProducts, setMenu }) {
   const [selectedCategory, setSelectedCategory] = useState(0);

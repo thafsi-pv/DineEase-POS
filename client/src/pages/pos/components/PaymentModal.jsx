@@ -12,10 +12,10 @@ import { useFormik } from "formik";
 import {
   ORDER_CREATE_API,
   REWARD_POINT_BYCUSTOMER_ID_API,
-} from "../../../utils/const";
+} from "../../../axios/const";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 var change = "";
 function PaymentModal({

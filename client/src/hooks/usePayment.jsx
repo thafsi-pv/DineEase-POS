@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { loadScript } from "../utils/utils";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { ORDER_PAYMENT, VERIFY_PAYMENT } from "../utils/const";
+import { ORDER_PAYMENT, VERIFY_PAYMENT } from "../axios/const";
 
 function usePayment(callback) {
   // const [payAmount, setPayAmount] = useState();

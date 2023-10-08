@@ -4,8 +4,8 @@ import banner from "../../../../assets/img/profile/banner.png";
 import Card from "../../../../components/card";
 import Upload from "./Upload";
 import General from "./General";
-import axiosInstance2 from "../../../../utils/axiosInterceptor2";
-import { GET_PROFILE_API } from "../../../../utils/const";
+import axiosInstance2 from "../../../../axios/axiosInterceptor2";
+import { GET_PROFILE_API } from "../../../../axios/const";
 
 const Banner = () => {
   const [user, setUser] = useState(null);

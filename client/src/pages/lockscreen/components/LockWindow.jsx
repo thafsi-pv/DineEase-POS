@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import InputField from "../../../components/fields/InputField";
 import image from "../../../assets/img/auth/lockScreen2.jpg";
-import profile from "../../../assets/img/avatars/avatar8.png";
 import { motion } from "framer-motion";
 import { CiUnlock } from "react-icons/ci";
 

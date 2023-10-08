@@ -1,4 +1,4 @@
-import { CLOUDINARY_IMAGE_UPLOAD_URL } from "./const";
+import { CLOUDINARY_IMAGE_UPLOAD_URL } from "../axios/const";
 
 const handleUploadImage = async (img) => {
   var data = new FormData();

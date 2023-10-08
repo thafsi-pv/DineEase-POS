@@ -3,10 +3,9 @@ import FormModal from "../../components/modal/FormModal";
 import AddProductsModal from "./components/AddProductsModal";
 
 import ProductListTable from "./components/ProductListTable";
-import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
+import { GET_ALL_ACTIVE_PRODUCT_API } from "../../axios/const";
 import ViewProductsModal from "./components/ViewProductsModal";
-import axiosInstance from "../../utils/axiosInterceptor";
-import axiosInstance2 from "../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../axios/axiosInterceptor2";
 
 function Products() {
   const [isModalOpen, setIsModalOpen] = useState(false);

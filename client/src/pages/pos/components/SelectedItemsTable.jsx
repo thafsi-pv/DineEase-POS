@@ -12,13 +12,13 @@ import {
 } from "../../../redux/cartSlice";
 import {  CiTrash } from "react-icons/ci";
 import { BsCart2 } from "react-icons/bs";
-import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../../utils/const";
+import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../../axios/const";
 import { keyMappings, renameKeys } from "../../../utils/utils";
 import CreatableReactSelect from "../../../components/dropdown/CreatableReactSelect";
 import AddCustomerModal from "../../customers/components/AddCustomerModal";
 import FormModal from "../../../components/modal/FormModal";
 import { motion, AnimatePresence } from "framer-motion";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 var modalData = {};
 function SelectedItemsTable({

@@ -4,7 +4,7 @@ import LockWindow from "./components/LockWindow";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
-import axiosInstance2 from "../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../axios/axiosInterceptor2";
 import { useDispatch, useSelector } from "react-redux";
 import useReduxPersistant from "../../hooks/useReduxPersistant";
 
@@ -13,10 +13,6 @@ const LockScreen = ({ children }) => {
   const dispatch = useDispatch();
   //const persistentData = useSelector((store) => store.persistent);
   const persistentData = getAllField();
-  console.log(
-    "🚀 ~ file: LockScreen.jsx:16 ~ LockScreen ~ persistentData:",
-    persistentData
-  );
   const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {

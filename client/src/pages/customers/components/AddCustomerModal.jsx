@@ -5,12 +5,12 @@ import SwithField from "../../../components/fields/SwitchField";
 import TextField from "../../../components/fields/TextField";
 import InputField from "../../../components/fields/InputField";
 import { useFormik } from "formik";
-import { CUSTOMER_ADD_API } from "../../../utils/const";
+import { CUSTOMER_ADD_API } from "../../../axios/const";
 import { toast } from "react-hot-toast";
 import { customerValidationSchema } from "../../../utils/validate";
 import { useDispatch } from "react-redux";
 import { keyMappings, renameKeys } from "../../../utils/utils";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 function AddCustomerModal({
   setIsModalOpen,

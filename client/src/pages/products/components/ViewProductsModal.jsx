@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { GET_PRODUCT_BY_ID } from "../../../utils/const";
-import axios from "axios";
+import { GET_PRODUCT_BY_ID } from "../../../axios/const";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 function ViewProductsModal({ id }) {
-  console.log(
-    "🚀 ~ file: ViewProductsModal.jsx:4 ~ ViewProductsModal ~ id:",
-    id
-  );
   const [productDetails, setProductDetails] = useState();
-  console.log(
-    "🚀 ~ file: ViewProductsModal.jsx:11 ~ ViewProductsModal ~ productDetails:",
-    productDetails
-  );
 
   useEffect(() => {
     getProductDetailsById();
@@ -19,12 +11,8 @@ function ViewProductsModal({ id }) {
 
   const getProductDetailsById = async () => {
     var url = `${GET_PRODUCT_BY_ID}?id=${id}`;
-    const details = await axios.get(url);
+    const details = await axiosInstance2.get(url);
     setProductDetails(details?.data[0]);
-    console.log(
-      "🚀 ~ file: ViewProductsModal.jsx:16 ~ getProductDetailsById ~ details:",
-      details
-    );
   };
 
   return (
@@ -35,7 +23,6 @@ function ViewProductsModal({ id }) {
           alt={productDetails?.itemName}
           className="w-64 h-64 mx-auto mb-4 rounded-lg"
         />
-
         <h2 className="text-xl font-semibold mb-2">
           {productDetails?.itemName}
         </h2>

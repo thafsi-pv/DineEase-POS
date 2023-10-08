@@ -8,8 +8,8 @@ import { useFormik } from "formik";
 import { validate } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
 import { toast } from "react-hot-toast";
-import { SIGN_UP_API } from "../../utils/const";
-import axiosInstance2 from "../../utils/axiosInterceptor2";
+import { SIGN_UP_API } from "../../axios/const";
+import axiosInstance2 from "../../axios/axiosInterceptor2";
 
 function SignUp() {
   const navigate = useNavigate(null);

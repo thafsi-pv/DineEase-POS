@@ -4,8 +4,8 @@ import AddCustomerModal from "./components/AddCustomerModal";
 import VIewCustomerModal from "./components/ViewCustomerModal";
 
 import CustomerListTable from "./components/CustomerListTable";
-import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../utils/const";
-import axiosInstance2 from "../../utils/axiosInterceptor2";
+import { GET_ALL_ACTIVE_CUSTOMER_API } from "../../axios/const";
+import axiosInstance2 from "../../axios/axiosInterceptor2";
 
 function Customers() {
   const [isModalOpen, setIsModalOpen] = useState(false);

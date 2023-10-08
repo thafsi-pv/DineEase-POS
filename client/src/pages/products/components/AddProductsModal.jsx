@@ -8,10 +8,10 @@ import { useFormik } from "formik";
 import AddPortion from "./AddPortion";
 import SwitchField from "../../../components/fields/SwitchField";
 import cuisinList from "../variables/cusineList.json";
-import { PRODUCT_ADD_API } from "../../../utils/const";
+import { PRODUCT_ADD_API } from "../../../axios/const";
 import { toast } from "react-hot-toast";
 import { productValidationSchema } from "../../../utils/validate";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 import handleUploadImage from "../../../utils/uploadImage";
 
 function AddProductsModal({

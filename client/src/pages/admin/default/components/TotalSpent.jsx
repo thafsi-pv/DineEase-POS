@@ -10,7 +10,7 @@ import {
   lineChartOptionsTotalSpent,
 } from "../../../../variables/charts";
 import LineChart from "../../../../components/charts/LineChart";
-import { MONTHLY_SALES_DATA_API } from "../../../../utils/const";
+import { MONTHLY_SALES_DATA_API } from "../../../../axios/const";
 import axios from "axios";
 
 const TotalSpent = () => {

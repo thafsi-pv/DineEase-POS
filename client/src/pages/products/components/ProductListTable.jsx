@@ -18,14 +18,13 @@ import { PiEyeLight } from "react-icons/pi";
 import Badge from "../../../components/Badge";
 import { getRandomDarkColor } from "../../../utils/utils";
 import axios from "axios";
-import { DELETE_PRODUCT_BY_ID, GET_PRODUCT_BY_ID } from "../../../utils/const";
+import { DELETE_PRODUCT_BY_ID, GET_PRODUCT_BY_ID } from "../../../axios/const";
 import FormModal from "../../../components/modal/FormModal";
 import ViewProductsModal from "./ViewProductsModal";
 import DeleteModal from "./DeleteModal";
 import { toast } from "react-hot-toast";
 import deleteImg from "../../../assets/img/profile/clip-1738.png";
-import axiosInstance from "../../../utils/axiosInterceptor";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 const ProductListTable = (props) => {
   const {

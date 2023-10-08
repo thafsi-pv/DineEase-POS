@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { GET_CUSTOMER_BY_ID } from "../../../utils/const";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import { GET_CUSTOMER_BY_ID } from "../../../axios/const";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 function ViewCustomersModal({ id }) {
   const [customerDetails, setCustomerDetails] = useState();

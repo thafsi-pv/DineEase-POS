@@ -15,17 +15,16 @@ import {
   CiTrash,
 } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
-import Badge from "../../../components/Badge";
 import {
   DELETE_CUSTOMER_BY_ID,
   GET_CUSTOMER_BY_ID,
-} from "../../../utils/const";
+} from "../../../axios/const";
 import FormModal from "../../../components/modal/FormModal";
 import DeleteModal from "./DeleteModal";
 import { toast } from "react-hot-toast";
 import deleteImg from "../../../assets/img/profile/clip-1738.png";
 import { formatMobileNumber } from "../../../utils/utils";
-import axiosInstance2 from "../../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../../axios/axiosInterceptor2";
 
 const CustomerListTable = (props) => {
   const {

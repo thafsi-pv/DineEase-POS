@@ -11,13 +11,13 @@ import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import usePayment from "../../hooks/usePayment";
-import { GET_ALL_ACTIVE_PRODUCT_API } from "../../utils/const";
+import { GET_ALL_ACTIVE_PRODUCT_API } from "../../axios/const";
 import { addToCart, clearCart, selectCustomer } from "../../redux/cartSlice";
 import BottomMenu from "./components/BottomMenu";
 import SummarySection from "./components/SummarySection";
 import CategoriesTab from "./components/CategoriesTab";
 import { motion } from "framer-motion";
-import axiosInstance2 from "../../utils/axiosInterceptor2";
+import axiosInstance2 from "../../axios/axiosInterceptor2";
 
 function index() {
   const dispath = useDispatch();
