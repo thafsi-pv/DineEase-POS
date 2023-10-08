@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setField } from "../redux/persistantDESlice";
 
 function useReduxPersistant() {
   const dispatch = useDispatch();
   //const [data, setData] = useState();
 
   const updateField = (field, value) => {
-    dispatch(setField({ field: field, value: value }));
+    dispatch(setField({ field, value }));
   };
 
   const getField = (field) => {

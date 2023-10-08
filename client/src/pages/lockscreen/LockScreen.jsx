@@ -13,6 +13,10 @@ const LockScreen = ({ children }) => {
   const dispatch = useDispatch();
   //const persistentData = useSelector((store) => store.persistent);
   const persistentData = getAllField();
+  console.log(
+    "🚀 ~ file: LockScreen.jsx:16 ~ LockScreen ~ persistentData:",
+    persistentData
+  );
   const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ const LockScreen = ({ children }) => {
         //setIsLocked(true);
         //dispatch(setField({ field: "isLocked", value: true }));
         updateField("isLocked", true);
-      }, 10000);
+      }, 120000);
     };
 
     // Add event listeners on component mount
@@ -37,7 +41,7 @@ const LockScreen = ({ children }) => {
       //setIsLocked(true);
       //dispatch(setField({ field: "isLocked", value: true }));
       updateField("isLocked", true);
-    }, 10000);
+    }, 120000);
 
     // Clean up event listeners on component unmount
     return () => {
@@ -82,7 +86,7 @@ const LockScreen = ({ children }) => {
 
   return (
     <div>
-      {getField(isLocked) ? (
+      {persistentData.isLocked ? (
         <LockWindow formik={formik} persistentData={persistentData} />
       ) : (
         <> {children}</>

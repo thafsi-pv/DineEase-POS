@@ -12,10 +12,12 @@ import { genricError } from "../../../../utils/genricError";
 import DropDownReactSelect from "../../../../components/dropdown/DropDownReactSelect";
 import genderList from "../variables/gender.json";
 import { toast } from "react-hot-toast";
+import useReduxPersistant from "../../../../hooks/useReduxPersistant";
 
 const General = ({ user, setUser }) => {
   console.log("🚀 ~ file: General.jsx:19 ~ General ~ user:", user);
   const [image, setImage] = useState(null);
+  const { updateField } = useReduxPersistant();
 
   const profileformik = useFormik({
     initialValues: user || {
@@ -56,6 +58,13 @@ const General = ({ user, setUser }) => {
             gender: response?.data.gender,
           });
           toast.success("Profile updated successfully 🤝");
+          //updateField("token", response?.data.accesstoken);
+          updateField(
+            "userName",
+            response?.data.firstName + " " + response?.data.lastName
+          );
+          updateField("userImg", response?.data.imageUrl);
+          updateField("email", response?.data.email);
         }
       } catch (error) {
         genricError(error);
