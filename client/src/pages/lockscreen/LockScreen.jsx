@@ -5,16 +5,25 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
 import axiosInstance2 from "../../utils/axiosInterceptor2";
+import { useDispatch, useSelector } from "react-redux";
+import useReduxPersistant from "../../hooks/useReduxPersistant";
 
 const LockScreen = ({ children }) => {
+  const { updateField, getField, getAllField } = useReduxPersistant();
+  const dispatch = useDispatch();
+  //const persistentData = useSelector((store) => store.persistent);
+  const persistentData = getAllField();
   const [isLocked, setIsLocked] = useState(false);
+
   useEffect(() => {
     let inactivityTimer;
     const handleUserActivity = () => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
-        setIsLocked(true);
-      }, 120000);
+        //setIsLocked(true);
+        //dispatch(setField({ field: "isLocked", value: true }));
+        updateField("isLocked", true);
+      }, 10000);
     };
 
     // Add event listeners on component mount
@@ -25,8 +34,10 @@ const LockScreen = ({ children }) => {
 
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
-      setIsLocked(true);
-    }, 120000);
+      //setIsLocked(true);
+      //dispatch(setField({ field: "isLocked", value: true }));
+      updateField("isLocked", true);
+    }, 10000);
 
     // Clean up event listeners on component unmount
     return () => {
@@ -57,16 +68,26 @@ const LockScreen = ({ children }) => {
     try {
       const data = { password: values.password };
       const response = await axiosInstance2.post("/auth/unlock", data);
+
       if (response.status == 200) {
-        setIsLocked(false);
+        //setIsLocked(false);
+        //dispatch(setField({ field: "isLocked", value: false }));
+        updateField("isLocked", false);
       }
     } catch (error) {
+      console.log("🚀 ~ file: LockScreen.jsx:72 ~ verifyUser ~ error:", error);
       toast.error(error?.response?.data?.message);
     }
   };
 
   return (
-    <div>{isLocked ? <LockWindow formik={formik} /> : <> {children}</>}</div>
+    <div>
+      {getField(isLocked) ? (
+        <LockWindow formik={formik} persistentData={persistentData} />
+      ) : (
+        <> {children}</>
+      )}
+    </div>
   );
 };
 

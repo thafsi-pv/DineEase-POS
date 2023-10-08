@@ -13,11 +13,17 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import avatar from "../../assets/img/avatars/avatar4.png";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
   const [mail, setMail] = useState();
+  const persistentData = useSelector((store) => store.persistent);
+  console.log(
+    "🚀 ~ file: index.jsx:29 ~ useEffect ~ persistentData:",
+    persistentData
+  );
 
   useEffect(() => {
     var storedData = localStorage.getItem("DEPOS");
@@ -181,8 +187,8 @@ const Navbar = (props) => {
           button={
             <img
               className="h-10 w-10 rounded-full"
-              src={avatar}
-              alt="Elon Musk"
+              src={persistentData.userImg}
+              alt={persistentData.userName}
             />
           }
           children={
@@ -190,7 +196,7 @@ const Navbar = (props) => {
               <div className="p-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, {mail}
+                    👋 Hey, {persistentData.userName}
                   </p>{" "}
                 </div>
               </div>
@@ -204,11 +210,11 @@ const Navbar = (props) => {
                     Profile Settings
                   </a>
                 </Link>
-                <a
+                {/* <a
                   href=" "
                   className="mt-3 text-sm text-gray-800 dark:text-white hover:dark:text-white">
                   Newsletter Settings
-                </a>
+                </a> */}
                 <Link to={"/auth/sign-in"}>
                   <a
                     href=" "

@@ -3,6 +3,7 @@ import axios from "axios";
 import store from "../redux/store";
 import { showLoader, hideLoader } from "../redux/loaderSlice";
 import { baseUrl } from "./const";
+import { useSelector } from "react-redux";
 
 const axiosInstance2 = axios.create({
   baseURL: baseUrl,

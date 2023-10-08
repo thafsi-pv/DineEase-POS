@@ -5,7 +5,7 @@ import profile from "../../../assets/img/avatars/avatar8.png";
 import { motion } from "framer-motion";
 import { CiUnlock } from "react-icons/ci";
 
-function LockWindow({ formik }) {
+function LockWindow({ formik, persistentData }) {
   const passwordRef = useRef(null);
 
   return (
@@ -33,8 +33,12 @@ function LockWindow({ formik }) {
               </div>
             </div>
             <div className="flex flex-col items-center gap-2 text-white mb-3">
-              <img src={profile} className="w-32 h-32  rounded-full" alt="" />
-              <p className="font-semibold text-xl">User Name</p>
+              <img
+                src={persistentData.userImg}
+                className="w-32 h-32  rounded-full"
+                alt=""
+              />
+              <p className="font-semibold text-xl">{persistentData.userName}</p>
             </div>
             <form action="" onSubmit={formik.handleSubmit} className="w-full">
               <div className="m-auto flex flex-col justify-center items-center gap-2">

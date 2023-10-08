@@ -13,12 +13,14 @@ import { SIGN_IN_API } from "../../utils/const";
 import axiosInstance2 from "../../utils/axiosInterceptor2";
 import { useSelector, useDispatch } from "react-redux";
 import { setField } from "../../redux/persistantDESlice";
+import useReduxPersistant from "../../hooks/useReduxPersistant";
 //import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate(null);
+  const updateField = useReduxPersistant();
   const signInFormik = useFormik({
     initialValues: {
       email: "",
@@ -28,10 +30,7 @@ export default function SignIn() {
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance2.post(SIGN_IN_API, values);
-        console.log(
-          "🚀 ~ file: SignIn.jsx:31 ~ onSubmit: ~ response:",
-          response
-        );
+
         if ((response.status = 200)) {
           //socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");
@@ -42,18 +41,27 @@ export default function SignIn() {
 
           localStorage.setItem("DEPOS", JSON.stringify(dataToStore));
 
-          dispatch(
-            setField({ field: "token", value: response.data.accesstoken })
+          // dispatch(
+          //   setField({ field: "token", value: response.data.accesstoken })
+          // );
+
+          updateField("token", response?.data.accesstoken);
+          updateField(
+            "userName",
+            response?.data.firstName + " " + response?.data.lastName
           );
-          dispatch(
-            setField({
-              field: "userName",
-              value: response.data.firstName + " " + response.data.lastName,
-            })
-          );
-          dispatch(
-            setField({ field: "userImg", value: response.data.imageUrl })
-          );
+          updateField("userImg", response?.data.imageUrl);
+          updateField("email", response?.data.email);
+
+          // dispatch(
+          //   setField({
+          //     field: "userName",
+          //     value: response.data.firstName + " " + response.data.lastName,
+          //   })
+          // );
+          // dispatch(
+          //   setField({ field: "userImg", value: response.data.imageUrl })
+          // );
 
           navigate("/admin");
         }
