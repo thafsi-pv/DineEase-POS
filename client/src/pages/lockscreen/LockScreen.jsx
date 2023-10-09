@@ -21,7 +21,7 @@ const LockScreen = ({ children }) => {
         if (per?.token != "") {
           updateField("isLocked", true);
         }
-      }, 3000);
+      }, 130000);
     };
 
     // Add event listeners on component mount
@@ -35,7 +35,7 @@ const LockScreen = ({ children }) => {
       if (per?.token != "") {
         updateField("isLocked", true);
       }
-    }, 3000);
+    }, 130000);
 
     // Clean up event listeners on component unmount
     return () => {

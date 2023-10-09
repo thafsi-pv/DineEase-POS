@@ -26,12 +26,7 @@ function PaymentModal({
   selectedCustomer,
   setOrderDetails,
 }) {
-  console.log(
-    "🚀 ~ file: PaymentModal.jsx:29 ~ selectedCustomer:",
-    selectedCustomer
-  );
   const cartItems = useSelector((store) => store.cart);
-  console.log("🚀 ~ file: PaymentModal.jsx:25 ~ cartItems:", cartItems);
   const { paymentProcess, paymentId } = usePayment(handlePrint);
   const [paymentMode, setPaymentMode] = useState(0);
   const [cashBtnTxt, setCashBtnTxt] = useState("Cash");
@@ -50,10 +45,6 @@ function PaymentModal({
   const getCustomerLoyaltyPoints = async () => {
     const response = await axiosInstance2.get(
       REWARD_POINT_BYCUSTOMER_ID_API + "?customerId=" + selectedCustomer.value
-    );
-    console.log(
-      "🚀 ~ file: PaymentModal.jsx:47 ~ getCustomerLoyaltyPoints ~ response:",
-      response
     );
     setCustomerRewardPoint(response?.data[0].totalPoints);
   };
