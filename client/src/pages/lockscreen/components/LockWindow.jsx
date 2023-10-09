@@ -31,17 +31,19 @@ function LockWindow({ formik, persistentData }) {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-2 text-white mb-3">
-              <img
-                src={persistentData.userImg}
-                className="w-32 h-32  rounded-full"
-                alt=""
-              />
+            <div className="flex flex-col items-center gap-2 text-white mb-3 ">
+              <div className=" rounded-full bg-green-500 p-1 shadow-2xl shadow-green-500/80 dark:shadow-lg dark:shadow-green-800/80">
+                <img
+                  src={persistentData.userImg}
+                  className=" w-32 h-32  rounded-full "
+                  alt=""
+                />
+              </div>
               <p className="font-semibold text-xl">{persistentData.userName}</p>
             </div>
             <form action="" onSubmit={formik.handleSubmit} className="w-full">
               <div className="m-auto flex flex-col justify-center items-center gap-2">
-                <div className="sm:50p md:w-30p flex flex-col gap-2 justify-center ">
+                <div className="sm:50p md:w-25p flex flex-col gap-2 justify-center ">
                   <InputField
                     ref={passwordRef}
                     extra="w-full animate-pulse text-xl flex-1 text-white"

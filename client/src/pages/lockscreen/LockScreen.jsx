@@ -23,7 +23,7 @@ const LockScreen = ({ children }) => {
         //setIsLocked(true);
         //dispatch(setField({ field: "isLocked", value: true }));
         updateField("isLocked", true);
-      }, 120000);
+      }, 130000);
     };
 
     // Add event listeners on component mount
@@ -37,7 +37,7 @@ const LockScreen = ({ children }) => {
       //setIsLocked(true);
       //dispatch(setField({ field: "isLocked", value: true }));
       updateField("isLocked", true);
-    }, 120000);
+    }, 130000);
 
     // Clean up event listeners on component unmount
     return () => {
@@ -68,6 +68,7 @@ const LockScreen = ({ children }) => {
     try {
       const data = { password: values.password };
       const response = await axiosInstance2.post("/auth/unlock", data);
+      console.log("🚀 ~ file: LockScreen.jsx:71 ~ verifyUser ~ response:", response)
 
       if (response.status == 200) {
         //setIsLocked(false);
