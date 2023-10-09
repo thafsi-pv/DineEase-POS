@@ -3,9 +3,19 @@ import InputField from "../../../components/fields/InputField";
 import image from "../../../assets/img/auth/lockScreen2.jpg";
 import { motion } from "framer-motion";
 import { CiUnlock } from "react-icons/ci";
+import { IoMdLogOut } from "react-icons/io";
+import useSignOut from "../../../hooks/useSignOut";
+import { useNavigate } from "react-router-dom";
 
 function LockWindow({ formik, persistentData }) {
   const passwordRef = useRef(null);
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/auth/sign-in");
+  };
 
   return (
     <motion.div
@@ -31,6 +41,16 @@ function LockWindow({ formik, persistentData }) {
                 </p>
               </div>
             </div>
+
+            <div className="mb-7 absolute bottom-3 right-10">
+              <div
+                onClick={handleSignOut}
+                className="flex flex-col leading-4 cursor-pointer"
+                title="Sign Out">
+                <IoMdLogOut className="text-gray-500 w-8 h-8 hover:bg-gray-900 hover:rounded-lg p-1" />
+              </div>
+            </div>
+
             <div className="flex flex-col items-center gap-2 text-white mb-3 ">
               <div className=" rounded-full bg-green-500 p-1 shadow-2xl shadow-green-500/80 dark:shadow-lg dark:shadow-green-800/80">
                 <img

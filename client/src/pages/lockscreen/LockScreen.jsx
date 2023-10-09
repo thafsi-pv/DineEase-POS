@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
-import SignIn from "../auth/SignIn";
 import LockWindow from "./components/LockWindow";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
 import axiosInstance2 from "../../axios/axiosInterceptor2";
-import { useDispatch, useSelector } from "react-redux";
 import useReduxPersistant from "../../hooks/useReduxPersistant";
 
 const LockScreen = ({ children }) => {
   const { updateField, getField, getAllField } = useReduxPersistant();
-  const dispatch = useDispatch();
-  //const persistentData = useSelector((store) => store.persistent);
   const persistentData = getAllField();
-  const [isLocked, setIsLocked] = useState(false);
+  const token = getField("token");
 
   useEffect(() => {
     let inactivityTimer;
     const handleUserActivity = () => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
-        //setIsLocked(true);
-        //dispatch(setField({ field: "isLocked", value: true }));
-        updateField("isLocked", true);
-      }, 130000);
+        if (token != "") {
+          updateField("isLocked", true);
+        }
+      }, 3000);
     };
 
     // Add event listeners on component mount
@@ -34,10 +30,10 @@ const LockScreen = ({ children }) => {
 
     // Start the initial timer
     inactivityTimer = setTimeout(() => {
-      //setIsLocked(true);
-      //dispatch(setField({ field: "isLocked", value: true }));
-      updateField("isLocked", true);
-    }, 130000);
+      if (token != null) {
+        updateField("isLocked", true);
+      }
+    }, 3000);
 
     // Clean up event listeners on component unmount
     return () => {
@@ -47,7 +43,7 @@ const LockScreen = ({ children }) => {
       document.removeEventListener("touchstart", handleUserActivity);
       clearTimeout(inactivityTimer);
     };
-  }, []);
+  }, [token]);
 
   const formik = useFormik({
     initialValues: {
@@ -68,11 +64,8 @@ const LockScreen = ({ children }) => {
     try {
       const data = { password: values.password };
       const response = await axiosInstance2.post("/auth/unlock", data);
-      console.log("🚀 ~ file: LockScreen.jsx:71 ~ verifyUser ~ response:", response)
 
       if (response.status == 200) {
-        //setIsLocked(false);
-        //dispatch(setField({ field: "isLocked", value: false }));
         updateField("isLocked", false);
       }
     } catch (error) {

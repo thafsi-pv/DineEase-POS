@@ -29,10 +29,6 @@ export default function SignIn() {
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance2.post(SIGN_IN_API, values);
-        console.log(
-          "🚀 ~ file: SignIn.jsx:32 ~ onSubmit: ~ response:",
-          response
-        );
 
         if ((response.status = 200)) {
           //socket.emit("login", response.data.email);
@@ -43,11 +39,6 @@ export default function SignIn() {
           };
 
           localStorage.setItem("DEPOS", JSON.stringify(dataToStore));
-
-          // dispatch(
-          //   setField({ field: "token", value: response.data.accesstoken })
-          // );
-
           updateField("token", response?.data.accesstoken);
           updateField(
             "userName",
@@ -55,17 +46,6 @@ export default function SignIn() {
           );
           updateField("userImg", response?.data.imageUrl);
           updateField("email", response?.data.email);
-
-          // dispatch(
-          //   setField({
-          //     field: "userName",
-          //     value: response.data.firstName + " " + response.data.lastName,
-          //   })
-          // );
-          // dispatch(
-          //   setField({ field: "userImg", value: response.data.imageUrl })
-          // );
-
           navigate("/admin");
         }
       } catch (error) {
@@ -109,7 +89,11 @@ export default function SignIn() {
                     <p className="mb-9 ml-1 text-base text-gray-600">
                       Enter your email and password to sign in!
                     </p>
-                    <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
+                    <div
+                      className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800"
+                      onClick={() =>
+                        toast.error("feature is currently unavailable!")
+                      }>
                       <div className="rounded-full text-xl">
                         <FcGoogle />
                       </div>

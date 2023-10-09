@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "../../components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import navbarimage from "assets/img/layout/Navbar.png";
 import navbarimage from "../../assets/img/layout/Navbar.png";
 
@@ -14,22 +14,26 @@ import {
 } from "react-icons/io";
 import avatar from "../../assets/img/avatars/avatar4.png";
 import { useSelector } from "react-redux";
+import useSignOut from "../../hooks/useSignOut";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
   const [mail, setMail] = useState();
   const persistentData = useSelector((store) => store.persistent);
-  console.log(
-    "🚀 ~ file: index.jsx:29 ~ useEffect ~ persistentData:",
-    persistentData
-  );
+  const signOut = useSignOut();
+  const navigate = useNavigate();
 
   useEffect(() => {
     var storedData = localStorage.getItem("DEPOS");
     var retrievedObject = JSON.parse(storedData);
     setMail(retrievedObject?.email);
   }, []);
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/auth/sign-in");
+  };
 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
@@ -215,13 +219,14 @@ const Navbar = (props) => {
                   className="mt-3 text-sm text-gray-800 dark:text-white hover:dark:text-white">
                   Newsletter Settings
                 </a> */}
-                <Link to={"/auth/sign-in"}>
-                  <a
-                    href=" "
-                    className="mt-3 text-sm font-medium text-red-500 hover:text-red-500">
-                    Log Out
-                  </a>
-                </Link>
+                {/* <Link to={"/auth/sign-in"}> */}
+                <a
+                  onClick={handleSignOut}
+                  href=" "
+                  className="mt-3 text-sm font-medium text-red-500 hover:text-red-500">
+                  Log Out
+                </a>
+                {/* </Link> */}
               </div>
             </div>
           }

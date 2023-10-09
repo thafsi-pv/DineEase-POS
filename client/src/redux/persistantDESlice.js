@@ -5,7 +5,6 @@ const persistantDESlice = createSlice({
   initialState: { userName: "", token: "", isLocked: false, userImg: "" },
   reducers: {
     setField: (state, action) => {
-      console.log("🚀 ~ file: persistantDESlice.js:8 ~ action:", action);
       try {
         const { field, value } = action.payload;
         state[field] = value;
@@ -13,9 +12,27 @@ const persistantDESlice = createSlice({
         console.log("🚀 ~ file: persistantDESlice.js:13 ~ error:", error);
       }
     },
+    resetField: (state, action) => {
+      try {
+        const { field } = action.payload;
+        state[field] = "";
+      } catch (error) {
+        console.log("🚀 ~ file: persistantDESlice.js:13 ~ error:", error);
+      }
+    },
+    resetAllField: (state) => {
+      try {
+        return initialState;
+      } catch (error) {
+        console.log("🚀 ~ file: persistantDESlice.js:13 ~ error:", error);
+      }
+    },
   },
 });
 
-export const { setField } = persistantDESlice.actions;
+const initialState = { userName: "", token: "", isLocked: false, userImg: "" };
+
+export const { setField, resetField, resetAllField } =
+  persistantDESlice.actions;
 
 export default persistantDESlice.reducer;
