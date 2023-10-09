@@ -9,7 +9,7 @@ export default function Default(props) {
   const { ...rest } = props;
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
-  const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
+  const [currentRoute, setCurrentRoute] = React.useState("Dashboard");
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
@@ -21,7 +21,7 @@ export default function Default(props) {
   }, [location.pathname]);
 
   const getActiveRoute = (routes) => {
-    let activeRoute = "Main Dashboard";
+    let activeRoute = "Dashboard";
     for (let i = 0; i < routes.length; i++) {
       if (
         window.location.href.indexOf(
@@ -59,33 +59,33 @@ export default function Default(props) {
   document.documentElement.dir = "ltr";
   return (
     <div className="flex h-full w-full max-h-screen">
-     <div className="flex-0 w-16 rounded-md p-2 bg-lightPrimary"> <Sidebar open={open} onClose={() => setOpen(false)} /></div>
+      <div className="flex-0 w-16 rounded-md p-2 bg-lightPrimary">
+        {" "}
+        <Sidebar open={open} onClose={() => setOpen(false)} />
+      </div>
       {/* Navbar & Main Content */}
       <div className="h-full  bg-lightPrimary dark:!bg-navy-900 flex-1 ">
         {/* Main Content */}
-        <main
-          className={`mx-[12px] h-full  transition-all md:pr-2 `}
-        >
+        <main className={`mx-[12px] h-full  transition-all md:pr-2 `}>
           {/* Routes */}
           <div className="max-h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
-              logoText={"Horizon UI Tailwind React"}
+              logoText={"DineEase"}
               brandText={currentRoute}
               secondary={getActiveNavbar(routes)}
               {...rest}
             />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[78vh] p-2 md:pr-2">
+            <div className="pt-5s mx-auto mb-auto h-full min-h-[86vh] p-2 md:pr-2">
               <Routes>
                 {getRoutes(routes)}
-
                 <Route
                   path="/"
                   element={<Navigate to="/admin/default" replace />}
                 />
               </Routes>
             </div>
-            <div className="p-3">
+            <div className="p-1">
               <Footer />
             </div>
           </div>

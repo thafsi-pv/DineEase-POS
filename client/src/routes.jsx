@@ -31,7 +31,7 @@ import { FiUsers } from "react-icons/fi";
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Dashboard",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
