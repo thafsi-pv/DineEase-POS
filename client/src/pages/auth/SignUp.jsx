@@ -10,8 +10,10 @@ import { genricError } from "../../utils/genricError";
 import { toast } from "react-hot-toast";
 import { SIGN_UP_API } from "../../axios/const";
 import axiosInstance2 from "../../axios/axiosInterceptor2";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
 
 function SignUp() {
+  useAuthRedirect();
   const navigate = useNavigate(null);
   const formik = useFormik({
     initialValues: {

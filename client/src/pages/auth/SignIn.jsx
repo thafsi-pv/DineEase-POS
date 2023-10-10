@@ -13,10 +13,13 @@ import { SIGN_IN_API } from "../../axios/const";
 import axiosInstance2 from "../../axios/axiosInterceptor2";
 import { useDispatch } from "react-redux";
 import useReduxPersistant from "../../hooks/useReduxPersistant";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
 //import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {
+  useAuthRedirect();
+
   const dispatch = useDispatch();
   const navigate = useNavigate(null);
   const { updateField } = useReduxPersistant();
