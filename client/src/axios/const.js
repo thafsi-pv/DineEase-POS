@@ -1,6 +1,8 @@
 //export const baseUrl = "http://localhost:8080/api";
-export const baseUrl='https://dine-ease-api.onrender.com/api'
+export const baseUrl = "https://dine-ease-api.onrender.com/api";
 
+//export const socketBaseUrl = "http://localhost:8080/";
+export const socketBaseUrl = "https://dine-ease-api.onrender.com/";
 
 export const CLOUDINARY_IMAGE_UPLOAD_URL =
   "https://api.cloudinary.com/v1_1/dm4djc1b1/image/upload";
@@ -43,3 +45,5 @@ export const ORDER_CREATE_API = "/order/create";
 export const MONTHLY_SALES_DATA_API = "/dashboard/monthlySales";
 
 export const REWARD_POINT_BYCUSTOMER_ID_API = "/loyalty/pointsByCustomerId";
+
+export const CREATE_CHAT = `${baseUrl}/chat/create`;

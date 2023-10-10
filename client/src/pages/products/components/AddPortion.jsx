@@ -16,7 +16,7 @@ function AddPortion({ formi, state }) {
     } else if (portion.portionName == "") {
       setError({ ...error, portionName: "Portion Name is required" });
     } else if (portion.price == "") {
-      setError({ ...error, price: "Price Name is required" });
+      setError({ ...error, price: "Price is required" });
     }
   };
 

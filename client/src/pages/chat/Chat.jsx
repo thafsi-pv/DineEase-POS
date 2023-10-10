@@ -9,23 +9,34 @@ import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import chatbg from "../../assets/img/profile/chatbg.png";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
-let data = JSON.parse(localStorage.getItem("DEPOS"));
-let myUserName = data?.email;
-const token = data?.DET;
-const socket = io(`https://dine-ease-api.onrender.com/?token=${token}`);
+import useReduxPersistant from "../../hooks/useReduxPersistant";
+import { CREATE_CHAT, baseUrl, socketBaseUrl } from "../../axios/const";
+//let data = JSON.parse(localStorage.getItem("DEPOS"));
+// let myUserName = data?.email;
+// const token = data?.DET;
+// const socket = io(`https://dine-ease-api.onrender.com/?token=${token}`);
 const sound = new Howl({
   src: [incomingNotificationSound],
 });
+let myUserName = "";
+let socket = "";
 
 function chat() {
+  const { getAllField } = useReduxPersistant();
+  const data = getAllField();
   const chatListRef = useRef(null);
   //const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
-  console.log("🚀 ~ file: Chat.jsx:23 ~ chat ~ userList:", userList);
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [showEmoji, setshowEmoji] = useState(false);
+
+  useEffect(() => {
+    myUserName = data?.email;
+    const token = data?.token;
+    socket = io(`${socketBaseUrl}?token=${token}`);
+  }, [data]);
 
   useEffect(() => {
     socket.emit("login", myUserName);
@@ -68,11 +79,7 @@ function chat() {
   };
 
   const createChat = async (newChat) => {
-    const data = await axios.post(
-      "http://localhost:8080/api/chat/create",
-      newChat
-    );
-    console.log("🚀 ~ file: Chat.jsx:70 ~ createChat ~ data:", data);
+    const data = await axios.post(`${CREATE_CHAT}`, newChat);
   };
 
   useEffect(() => {
@@ -100,11 +107,17 @@ function chat() {
   const getChats = async () => {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
-      console.log("🚀 ~ file: Chat.jsx:103 ~ getChats ~ senderData:", senderData)
+      console.log(
+        "🚀 ~ file: Chat.jsx:103 ~ getChats ~ senderData:",
+        senderData
+      );
       const recipientData = userList.find(
         (user) => user.username == selectedRecipient
       );
-      console.log("🚀 ~ file: Chat.jsx:107 ~ getChats ~ recipientData:", recipientData)
+      console.log(
+        "🚀 ~ file: Chat.jsx:107 ~ getChats ~ recipientData:",
+        recipientData
+      );
       const dt = { sender: senderData.userId, recipient: recipientData.userId };
       const data = await axios.post(
         "http://localhost:8080/api/chat/getChats",
@@ -256,8 +269,10 @@ const ContactList = ({ userList, recipient }) => {
                       src="/src/assets/img/avatars/avatar4.png"
                       alt=""
                     />
-                    <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${user.isOnline?'bg-green-500':'bg-red-500'} bg-green-500 border shadow-lg`}>
-                    </span>
+                    <span
+                      className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${
+                        user.isOnline ? "bg-green-500" : "bg-red-500"
+                      } bg-green-500 border shadow-lg`}></span>
                   </div>
                   <p className="p-2 font-semibold">
                     {user.firstName + " " + user.lastName}
