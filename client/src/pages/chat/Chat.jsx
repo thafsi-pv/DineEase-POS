@@ -27,7 +27,9 @@ function chat() {
   const chatListRef = useRef(null);
   //const [username, setUsername] = useState("");
   const [userList, setUserList] = useState([]);
-  const [selectedRecipient, setSelectedRecipient] = useState("");
+  console.log("🚀 ~ file: Chat.jsx:30 ~ chat ~ userList:", userList);
+  const [selectedRecipient, setSelectedRecipient] = useState();
+  console.log("🚀 ~ file: Chat.jsx:32 ~ chat ~ selectedRecipient:", selectedRecipient)
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [showEmoji, setshowEmoji] = useState(false);
@@ -57,16 +59,20 @@ function chat() {
     if (selectedRecipient && message) {
       socket.emit("private message", {
         sender: myUserName,
-        recipient: selectedRecipient,
+        recipient: selectedRecipient?.userName,
         message,
       });
       setMessages((prevMessages) => [
         ...prevMessages,
-        { sender: myUserName, recipient: selectedRecipient, message: message },
+        {
+          sender: myUserName,
+          recipient: selectedRecipient?.userName,
+          message: message,
+        },
       ]);
       const senderData = userList.find((user) => user.username == myUserName);
       const recipientData = userList.find(
-        (user) => user.username == selectedRecipient
+        (user) => user.username == selectedRecipient?.userName
       );
       const newChat = {
         sender: senderData.userId,
@@ -108,7 +114,7 @@ function chat() {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
       const recipientData = userList.find(
-        (user) => user.username == selectedRecipient
+        (user) => user.username == selectedRecipient?.userName
       );
       const dt = { sender: senderData.userId, recipient: recipientData.userId };
       const data = await axios.post(GET_CHATS, dt);
@@ -131,7 +137,7 @@ function chat() {
 
   const getUserFirstName = () => {
     const user = userList.find((user) => {
-      return user.username == selectedRecipient;
+      return user.username == selectedRecipient?.userName;
     });
     return user.firstName + " " + user.lastName;
   };
@@ -153,7 +159,7 @@ function chat() {
                 <div className="flex items-center gap-2">
                   <img
                     className="w-10 h-10 rounded-full"
-                    src="/src/assets/img/avatars/avatar4.png"
+                    src={selectedRecipient.imgUrl}
                     alt=""
                   />
                   <div className="flex flex-col  align-middle space-y-0">
@@ -247,7 +253,9 @@ const ContactList = ({ userList, recipient }) => {
         <ul>
           {list.map((user) => (
             <li
-              onClick={() => recipient(user.username)}
+              onClick={() =>
+                recipient({ userName: user.username, imgUrl: user.imageUrl })
+              }
               key={user.userId}
               className="cursor-pointer py-2 hover:bg-gray-300 hover:rounded-lg">
               <div className="">
@@ -255,7 +263,7 @@ const ContactList = ({ userList, recipient }) => {
                   <div className="relative">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="/src/assets/img/avatars/avatar4.png"
+                      src={user.imageUrl}
                       alt=""
                     />
                     <span

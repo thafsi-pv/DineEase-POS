@@ -71,6 +71,7 @@ io.on("connection", (socket) => {
         username,
         soketid: socket.id,
         userId: verify._id,
+        userImg: userdata[0].imageUrl,
       };
       connectedUsers.push(user);
     }
@@ -88,6 +89,7 @@ io.on("connection", (socket) => {
           user.userId = verify._id;
           user.isOnline = true;
           user.username = username;
+          user.imageUrl = user.imageUrl;
         }
         return user; // Always return the user object, whether it's updated or not
       });
