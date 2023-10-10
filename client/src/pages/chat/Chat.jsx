@@ -10,7 +10,7 @@ import EmojiPicker from "emoji-picker-react";
 import chatbg from "../../assets/img/profile/chatbg.png";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 import useReduxPersistant from "../../hooks/useReduxPersistant";
-import { CREATE_CHAT, baseUrl, socketBaseUrl } from "../../axios/const";
+import { CREATE_CHAT, GET_CHATS, socketBaseUrl } from "../../axios/const";
 //let data = JSON.parse(localStorage.getItem("DEPOS"));
 // let myUserName = data?.email;
 // const token = data?.DET;
@@ -107,22 +107,11 @@ function chat() {
   const getChats = async () => {
     try {
       const senderData = userList.find((user) => user.username == myUserName);
-      console.log(
-        "🚀 ~ file: Chat.jsx:103 ~ getChats ~ senderData:",
-        senderData
-      );
       const recipientData = userList.find(
         (user) => user.username == selectedRecipient
       );
-      console.log(
-        "🚀 ~ file: Chat.jsx:107 ~ getChats ~ recipientData:",
-        recipientData
-      );
       const dt = { sender: senderData.userId, recipient: recipientData.userId };
-      const data = await axios.post(
-        "http://localhost:8080/api/chat/getChats",
-        dt
-      );
+      const data = await axios.post(GET_CHATS, dt);
 
       const chats = data?.data.map((chat) => ({
         ...chat,

@@ -47,3 +47,4 @@ export const MONTHLY_SALES_DATA_API = "/dashboard/monthlySales";
 export const REWARD_POINT_BYCUSTOMER_ID_API = "/loyalty/pointsByCustomerId";
 
 export const CREATE_CHAT = `${baseUrl}/chat/create`;
+export const GET_CHATS = `${baseUrl}/chat/getChats`;
