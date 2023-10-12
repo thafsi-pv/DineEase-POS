@@ -87,7 +87,9 @@ function InvoicePrint1({ printRef, showSummary = true, orderDetails }) {
                 <td className="flex items-center gap-2">
                   <p className="text-[10px] text-navy-700 dark:text-white">
                     {item.itemName}
-                    <span className="text-[8px]"> ({item.portion})</span>
+                    {item.portion && (
+                      <span className="text-[8px]"> ({item.portion})</span>
+                    )}
                   </p>
                 </td>
                 <td className="">
