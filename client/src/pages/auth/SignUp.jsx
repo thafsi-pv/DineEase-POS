@@ -3,7 +3,7 @@ import Checkbox from "../../components/checkbox";
 import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
 import Footer from "../../components/footer/FooterAuthDefault";
 import { Link, useNavigate } from "react-router-dom";
-import authImg from "../../assets/img/auth/2252808.jpg";
+import authImg from "../../assets/img/auth/posIllustration.png";
 import { useFormik } from "formik";
 import { validate } from "../../utils/validate";
 import { genricError } from "../../utils/genricError";
@@ -45,8 +45,8 @@ function SignUp() {
         <main className={`mx-auto min-h-screen`}>
           <div className="relative flex">
             <div className="mx-auto flex min-h-full w-full flex-col justify-start pt-12 md:max-w-[75%] lg:h-screen lg:max-w-[1013px] lg:px-8 lg:pt-0 xl:h-[100vh] xl:max-w-[1383px] xl:px-0 xl:pl-[70px]">
-              <div className="mb-auto flex flex-col pl-5 pr-5 md:pr-0 md:pl-12 lg:max-w-[48%] lg:pl-0 xl:max-w-full">
-                <div className="mt-14 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
+              <div className="my-auto flex flex-col pl-5 pr-5 justify-around md:pr-0 md:pl-12 lg:max-w-[48%]  xl:max-w-full">
+                <div className="mt-8 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
                   {/* Sign in section */}
                   <div className=" w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
                     <h4 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
@@ -202,9 +202,9 @@ function SignUp() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute right-0 hidden h-full min-h-screen md:block lg:w-[49vw] 2xl:w-[44vw]">
+                <div className="absolute right-0 top-0 hidden h-full min-h-screen md:block lg:w-[49vw] 2xl:w-[44vw] bg-gradient-to-l from-[#0f9887] to-white">
                   <div
-                    className="absolute flex h-full w-full items-end justify-center bg-cover bg-center lg:rounded-bl-[120px] xl:rounded-bl-[200px]"
+                    className="scale-125 absolute flex h-full w-full items-end justify-center bg-contain bg-no-repeat bg-center lg:rounded-bl-[120px] xl:rounded-bl-[200px]"
                     style={{ backgroundImage: `url(${authImg})` }}
                   />
                 </div>
