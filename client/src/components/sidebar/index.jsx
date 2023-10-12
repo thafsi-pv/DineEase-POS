@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu } from "react-icons/hi";
 import Links from "./components/Links";
-import SidebarCard from "./componentsrtl/SidebarCard";
 import routes from "../../routes";
+import { MdLock } from "react-icons/md";
+import useReduxPersistant from "../../hooks/useReduxPersistant";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false); // State to manage the sidebar open/close
-  console.log("🚀 ~ file: index.jsx:9 ~ Sidebar ~ open:", open);
-
-  // Function to toggle the sidebar open/close state
+  const { updateField } = useReduxPersistant();
   const toggleSidebar = () => {
     setOpen(!open);
   };
@@ -23,7 +22,7 @@ const Sidebar = () => {
       <span
         className="absolute top-4  block cursor-pointer "
         onClick={toggleSidebar}>
-        {open ? <HiMenu className="h-6 w-6" /> : <HiMenu className="h-6 w-6"/>}
+        {open ? <HiMenu className="h-6 w-6" /> : <HiMenu className="h-6 w-6" />}
       </span>
 
       {open ? (
@@ -38,7 +37,10 @@ const Sidebar = () => {
           <div className="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white p-0 m-0">
             {/* D<span className="text-green-600 p-0 m-0">E</span>{" "}
             <span className="font-light text-sm p-0 m-0">POS</span> */}
-            <img src="https://blog.resellerspanel.com/wp-content/uploads/2011/05/tld-de.png" alt="" />
+            <img
+              src="https://blog.resellerspanel.com/wp-content/uploads/2011/05/tld-de.png"
+              alt=""
+            />
           </div>
         </div>
       )}
@@ -48,6 +50,22 @@ const Sidebar = () => {
       <ul className="mb-auto pt-1">
         {/* Conditionally render the sidebar content based on the open state */}
         {<Links routes={routes} isOpen={open} />}
+        <div
+          className="relative mb-3 flex hover:cursor-pointer"
+          onClick={() => updateField("isLocked", true)}>
+          <li className="my-[3px] flex cursor-pointer items-center px-4">
+            <span className=" dark:text-white font-medium text-gray-600">
+              {<MdLock className="h-6 w-6" />}
+            </span>
+            {open && (
+              <p
+                className="leading-1 ml-4 flex 
+                           dark:text-white font-medium text-gray-600">
+                Lock Screen
+              </p>
+            )}
+          </li>
+        </div>
       </ul>
       {/* Nav item end */}
     </div>

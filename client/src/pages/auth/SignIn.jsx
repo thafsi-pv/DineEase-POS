@@ -20,7 +20,6 @@ import useAuthRedirect from "../../hooks/useAuthRedirect";
 export default function SignIn() {
   useAuthRedirect();
 
-  const dispatch = useDispatch();
   const navigate = useNavigate(null);
   const { updateField } = useReduxPersistant();
   const signInFormik = useFormik({

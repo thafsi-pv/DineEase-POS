@@ -13,8 +13,8 @@ axiosInstance2.interceptors.request.use(
   (config) => {
     store.dispatch(showLoader(true));
     const deData = JSON.parse(localStorage.getItem("DEPOS"));
-    const authToken = deData.DET;
-    config.headers.Authorization = `Bearer ${authToken}`;
+    const authToken = deData?.DET;
+    if (authToken) config.headers.Authorization = `Bearer ${authToken}`;
     return config;
   },
   (error) => {
