@@ -14,19 +14,23 @@ import axiosInstance2 from "../../axios/axiosInterceptor2";
 import { useDispatch } from "react-redux";
 import useReduxPersistant from "../../hooks/useReduxPersistant";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
+import { useState } from "react";
 //import io from "socket.io-client";
 //const socket = io("http://localhost:8080"); // Replace with your server URL
 
 export default function SignIn() {
   useAuthRedirect();
+  const [demoUser, setDemoUser] = useState();
+  console.log("🚀 ~ file: SignIn.jsx:24 ~ SignIn ~ demoUser:", demoUser);
 
   const navigate = useNavigate(null);
   const { updateField } = useReduxPersistant();
   const signInFormik = useFormik({
-    initialValues: {
+    initialValues: demoUser || {
       email: "",
       password: "",
     },
+    enableReinitialize: true,
     validate: validateSignIn,
     onSubmit: async (values) => {
       try {
@@ -55,6 +59,16 @@ export default function SignIn() {
       }
     },
   });
+
+  const handleDemoUser = (user) => {
+    let userData = {};
+    if (user == 1) {
+      userData = { email: "jo@mail.com", password: "11111111" };
+    } else if (user == 2) {
+      userData = { email: "ja@mail.com", password: "11111111" };
+    }
+    setDemoUser(userData);
+  };
 
   return (
     <div>
@@ -180,6 +194,18 @@ export default function SignIn() {
                           Create an account
                         </a>
                       </Link>
+                    </div>
+                    <div className="flex mt-7 gap-3 justify-between">
+                      <button
+                        className="p-2 bg-gray-100 flex-1 rounded-lg shadow-md hover:bg-gray-300"
+                        onClick={() => handleDemoUser(1)}>
+                        Demo User 1
+                      </button>
+                      <button
+                        className="p-2 bg-gray-100 flex-1 rounded-lg shadow-md hover:bg-gray-300"
+                        onClick={() => handleDemoUser(2)}>
+                        Demo User 2
+                      </button>
                     </div>
                   </div>
                 </div>
