@@ -63,9 +63,9 @@ export default function SignIn() {
   const handleDemoUser = (user) => {
     let userData = {};
     if (user == 1) {
-      userData = { email: "jo@mail.com", password: "11111111" };
+      userData = { email: "jone@mail.com", password: "11111111" };
     } else if (user == 2) {
-      userData = { email: "ja@mail.com", password: "11111111" };
+      userData = { email: "jane@mail.com", password: "11111111" };
     }
     setDemoUser(userData);
   };
