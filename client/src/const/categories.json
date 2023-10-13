@@ -7,5 +7,6 @@
   { "value": "5", "label": "Sandwiches and Burgers" },
   { "value": "6", "label": "Coffee and Tea" },
   { "value": "7", "label": "Soups" },
-  { "value": "8", "label": "Appetizers or Starters" }
+  { "value": "8", "label": "Appetizers or Starters" },
+  { "value": "9", "label": "Fish" }
 ]
