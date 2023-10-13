@@ -37,7 +37,7 @@ export default function SignIn() {
         const response = await axiosInstance2.post(SIGN_IN_API, values);
 
         if ((response.status = 200)) {
-          socket.emit("login", response.data.email);
+          // socket.emit("login", response.data.email);
           toast.success("SignIn successfull, 👍🏻");
           var dataToStore = {
             DET: response.data.accesstoken,

@@ -52,7 +52,9 @@ function index() {
   }, []);
 
   const getAllProducts = async () => {
-    const menu = await axiosInstance2.get(`${GET_ALL_ACTIVE_PRODUCT_API}?active=true`);
+    const menu = await axiosInstance2.get(
+      `${GET_ALL_ACTIVE_PRODUCT_API}?active=true`
+    );
     setMenu(menu?.data);
   };
 
@@ -132,9 +134,10 @@ function index() {
   };
 
   return (
-    <div className="w-full h-[85vh]  overflow-hidden py-5">
-      <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900 ">
-        <div className="w-full h-full  col-span-3 row-span-6">
+    <div className="w-full md:h-[85vh]   py-5 sm:overflow-scroll ">
+      <div className="grid grid-cols-5 grid-rows-6 gap-4 relative h-full  dark:!bg-navy-900">
+        {/* start menu and bottom menu */}
+        <div className="w-full h-full  md:col-span-3 sm:row-span-6 sm:col-span-5">
           <div className="h-full grid grid-rows-6 gap-4">
             <div className="row-span-5">
               <Card extra={"w-full h-full sm:overflow-auto p-6"}>
@@ -183,8 +186,10 @@ function index() {
             </div>
           </div>
         </div>
-        <div className=" col-span-2 row-span-6 h-full">
-          {/*selected items div */}
+        {/* end menu and bottom menu */}
+
+        {/*start selected items and summary */}
+        <div className=" md:col-span-2 md:row-span-6 h-full sm:col-span-5 sm:row-span-3">
           <div className="grid grid-rows-6 h-full gap-4">
             <div className="overflow-y-auto row-span-6 ">
               <SelectedItemsTable
@@ -208,6 +213,7 @@ function index() {
             </div>
           </div>
         </div>
+        {/*start selected items and summary */}
       </div>
       {/* Render the modal component */}
       <Modal
