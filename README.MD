@@ -3,6 +3,25 @@
 
 DineEase-POS is a modern Point of Sale (POS) system designed to streamline your restaurant or cafe operations. With an intuitive user interface and a powerful set of features, DineEase-POS makes managing your business easier than ever.
 
+## Key Features
+
+- **Product Management**: Easily add and manage products on your menu with detailed information, including prices and availability.
+
+- **Payment Gateway Integration**: Seamless integration with Razorpay to accept payments securely and efficiently.
+
+- **Real-time Chat**: Enable chat functionality between registered users, making it easy for staff members to communicate and coordinate.
+
+- **User Status**: Keep track of whether users are online or offline, helping you manage your team more effectively.
+
+- **Lockscreen**: Automatically lock the system after a period of inactivity to enhance security and privacy.
+
+- **Sales Dashboard**: Access a comprehensive dashboard with sales graphs, sales tables, and other relevant data to make informed business decisions.
+
+- **Customizable**: Tailwind CSS is used for styling, allowing for easy customization to match your brand's look and feel.
+
+- **Axios Interceptors**: Utilizing Axios interceptors, DineEase-POS attaches authentication tokens to all API requests, ensuring data security. Additionally, it enables a loader to display during request initiation and hide upon response receipt, enhancing user experience and data protection.
+- 
+- 
 ## Technologies Used
 
 - **Frontend**:
@@ -57,23 +76,7 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 
   - **Socket.io**: A library for enabling real-time chat and user status updates through WebSocket connections.
 
-## Key Features
 
-- **Product Management**: Easily add and manage products on your menu with detailed information, including prices and availability.
-
-- **Payment Gateway Integration**: Seamless integration with Razorpay to accept payments securely and efficiently.
-
-- **Real-time Chat**: Enable chat functionality between registered users, making it easy for staff members to communicate and coordinate.
-
-- **User Status**: Keep track of whether users are online or offline, helping you manage your team more effectively.
-
-- **Lockscreen**: Automatically lock the system after a period of inactivity to enhance security and privacy.
-
-- **Sales Dashboard**: Access a comprehensive dashboard with sales graphs, sales tables, and other relevant data to make informed business decisions.
-
-- **Customizable**: Tailwind CSS is used for styling, allowing for easy customization to match your brand's look and feel.
-
-- **Axios Interceptors**: Utilizing Axios interceptors, DineEase-POS attaches authentication tokens to all API requests, ensuring data security. Additionally, it enables a loader to display during request initiation and hide upon response receipt, enhancing user experience and data protection.
 
 DineEase-POS offers a complete solution for restaurant and cafe owners to manage their operations efficiently and securely.
 
