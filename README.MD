@@ -1,3 +1,6 @@
+Certainly! Here's an updated description for DineEase-POS, including the use of Axios interceptors for token attachment and loader functionality:
+
+---
 
 # DineEase-POS
 
@@ -57,7 +60,6 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 
   - **Socket.io**: A library for enabling real-time chat and user status updates through WebSocket connections.
 
-
 ## Key Features
 
 - **Product Management**: Easily add and manage products on your menu with detailed information, including prices and availability.
@@ -74,3 +76,8 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 
 - **Customizable**: Tailwind CSS is used for styling, allowing for easy customization to match your brand's look and feel.
 
+- **Axios Interceptors**: Utilizing Axios interceptors, DineEase-POS attaches authentication tokens to all API requests, ensuring data security. Additionally, it enables a loader to display during request initiation and hide upon response receipt, enhancing user experience and data protection.
+
+DineEase-POS offers a complete solution for restaurant and cafe owners to manage their operations efficiently and securely.
+
+---
