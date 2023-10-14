@@ -3,6 +3,13 @@
 
 DineEase-POS is a modern Point of Sale (POS) system designed to streamline your restaurant or cafe operations. With an intuitive user interface and a powerful set of features, DineEase-POS makes managing your business easier than ever.
 
+
+##Demo
+Landing Page: https://dineease.vercel.app/
+App Url: https://dine-ease-pos.onrender.com/
+
+
+
 ## Key Features
 
 - **Product Management**: Easily add and manage products on your menu with detailed information, including prices and availability.
