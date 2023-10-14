@@ -17,8 +17,6 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 
 - **Sales Dashboard**: Access a comprehensive dashboard with sales graphs, sales tables, and other relevant data to make informed business decisions.
 
-- **Customizable**: Tailwind CSS is used for styling, allowing for easy customization to match your brand's look and feel.
-
 - **Axios Interceptors**: Utilizing Axios interceptors, DineEase-POS attaches authentication tokens to all API requests, ensuring data security. Additionally, it enables a loader to display during request initiation and hide upon response receipt, enhancing user experience and data protection.
 
 
@@ -30,6 +28,8 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
   - **Redux Toolkit**: A state management library for managing application state and data flow efficiently.
 
   - **Axios**: A promise-based HTTP client for making API requests and handling responses.
+  
+  - **Tailwind CSS**: Tailwind CSS is used for styling.
 
   - **Emoji Picker React**: A library for adding emoji picker functionality to enhance user communication.
 
