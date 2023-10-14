@@ -6,7 +6,7 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 ## Technologies Used
 
 - **Frontend**:
-  - **React (v18.2.0)**: A JavaScript library for building user interfaces. It allows us to create interactive and dynamic frontend components.
+  - **React**: A JavaScript library for building user interfaces. It allows us to create interactive and dynamic frontend components.
 
   - **Redux Toolkit**: A state management library for managing application state and data flow efficiently.
 
