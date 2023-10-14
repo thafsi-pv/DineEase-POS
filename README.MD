@@ -1,6 +1,3 @@
-Certainly! Here's an updated description for DineEase-POS, including the use of Axios interceptors for token attachment and loader functionality:
-
----
 
 # DineEase-POS
 
