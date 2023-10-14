@@ -20,8 +20,8 @@ DineEase-POS is a modern Point of Sale (POS) system designed to streamline your 
 - **Customizable**: Tailwind CSS is used for styling, allowing for easy customization to match your brand's look and feel.
 
 - **Axios Interceptors**: Utilizing Axios interceptors, DineEase-POS attaches authentication tokens to all API requests, ensuring data security. Additionally, it enables a loader to display during request initiation and hide upon response receipt, enhancing user experience and data protection.
-- 
-- 
+
+
 ## Technologies Used
 
 - **Frontend**:
