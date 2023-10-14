@@ -48,7 +48,7 @@ function SummarySection({
                 <td>
                   <p>Total Tax:</p>
                 </td>
-                <td>12.50</td>
+                <td>00.00</td>
               </tr>
               <tfoot className="border-t">
                 <tr>
